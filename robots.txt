@@ -1,53 +1,25 @@
-# ══════════════════════════════════════════════════════════════════════════════
-# EWasteKochi.com — MASTER ROBOTS.TXT
-# ══════════════════════════════════════════════════════════════════════════════
-# Description: This file manages the crawl budget for Kochi's largest e-waste network.
-# Strategy: Allow all search bots full access to 1,753+ high-intent SEO nodes.
-# ══════════════════════════════════════════════════════════════════════════════
+# ==================================================
+# EWasteKochi.com - Global ITAD Search Dominance
+# ==================================================
 
 User-agent: *
 Allow: /
+Allow: /locations/
+Allow: /services/
+Allow: /buyback/
+Allow: /blog/
 
-# Specifically Allow Major Search Engines
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Slurp
-Allow: /
-
-User-agent: DuckDuckBot
-Allow: /
-
-User-agent: Baiduspider
-Allow: /
-
-User-agent: Yandex
-Allow: /
-
-# ── 1. CRAWL BUDGET OPTIMIZATION ──
-# Block non-value pages to prioritize high-intent clusters
+# Block dev debris to protect crawl budget
 Disallow: /automation/
 Disallow: /generator/
 Disallow: /templates/
-Disallow: /private/
-Disallow: /tmp/
+Disallow: /scripts/
 Disallow: *.py
-Disallow: *.csv
-Disallow: *.json
+Disallow: *.log
+Disallow: *.zip
 
-# ── 2. ASSET ACCESS ──
-Allow: /assets/css/
-Allow: /assets/js/
-Allow: /assets/media/
-Allow: /images/
+# Force High-Speed Crawl Rate for local IP
+Crawl-delay: 0
 
-# ── 3. SITEMAP REFERENCE ──
-# This directs all bots to the master 1,700+ page roadmap
+# Master Sitemap (Bypasses natural discovery lag)
 Sitemap: https://ewastekochi.com/sitemap.xml
-
-# ══════════════════════════════════════════════════════════════════════════════
-# End of robots.txt
-# ══════════════════════════════════════════════════════════════════════════════
