@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LM5KP762ST"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LM5KP762ST');
+</script>
+
+
+
+
+
+
+
+<script>
+if (window.location.hostname.startsWith('www.')) {
+    window.location.href = window.location.href.replace('www.', '');
+}
+</script>
+
+<meta charset="UTF-8">
+    <link rel="canonical" href="https://ewastekochi.com/marketplace.html">
+<meta name="viewport"
+    <meta name="robots" content="index, follow"> content="width=device-width, initial-scale=1.0">
+<title>EWasteKochi Marketplace — Buy & Sell Electronics Kochi</title>
+<meta name="description" content="Kerala's certified electronics marketplace. Buy and sell old phones, laptops, MacBooks and more. Every listing verified. NIST 800-88 data wipe on all sold devices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ════════════════════════════════════════════
+   TOKENS — Electric Industrial
+════════════════════════════════════════════ */
+:root {
+  --ink:     #0A0F0C;
+  --ink2:    #111A14;
+  --ink3:    #182118;
+  --panel:   #1C2A1E;
+  --panel2:  #243228;
+  --rim:     rgba(0,230,100,.13);
+  --rim2:    rgba(0,230,100,.28);
+  --g:       #00E664;
+  --g2:      #00C453;
+  --lime:    #C8FF5A;
+  --amber:   #FFBA18;
+  --red:     #FF3D5A;
+  --sky:     #22D3EE;
+  --cream:   #E8F2EA;
+  --soft:    #9BB8A2;
+  --muted:   #4A6852;
+  --head:    'Bebas Neue', sans-serif;
+  --body:    'Outfit', sans-serif;
+  --mono:    'JetBrains Mono', monospace;
+}
+
+/* ════════════════════════════════════════════
+   BASE
+════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { font-size:16px; scroll-behavior:smooth; }
+body {
+  font-family: var(--body);
+  background: var(--ink);
+  color: var(--soft);
+  overflow-x: hidden;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--g); color: var(--ink); }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--g2); border-radius: 3px; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font-family: var(--body); }
+input, select, textarea { font-family: var(--body); }
+
+/* Noise texture overlay */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='https://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none; z-index: 0; opacity: .5;
+}
+
+/* Grid lines */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,230,100,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,230,100,.018) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none; z-index: 0;
+}
+
+/* ════════════════════════════════════════════
+   TOPBAR
+════════════════════════════════════════════ */
+.topbar {
+  background: var(--g);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .5px;
+  padding: 7px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative; z-index: 200;
+}
+.topbar-inner { display: inline-flex; animation: tick 50s linear infinite; }
+.ti { padding: 0 3rem; }
+@keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ════════════════════════════════════════════
+   NAV
+════════════════════════════════════════════ */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10,15,12,.97);
+  border-bottom: 1px solid var(--rim);
+  backdrop-filter: blur(12px);
+}
+.nav-inner {
+  max-width: 1380px; margin: 0 auto;
+  padding: 0 2rem; height: 66px;
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 2rem;
+}
+.logo {
+  font-family: var(--head);
+  font-size: 1.7rem; letter-spacing: 1px;
+  color: var(--cream); line-height: 1;
+  display: flex; align-items: center; gap: .5rem;
+}
+.logo em { color: var(--g); font-style: normal; }
+.logo-tag {
+  font-family: var(--mono); font-size: .55rem;
+  background: var(--g); color: var(--ink);
+  padding: 2px 7px; border-radius: 3px;
+  letter-spacing: .5px; font-weight: 600;
+}
+.nav-links { display: flex; gap: 1.75rem; align-items: center; }
+.nav-links a {
+  font-size: .88rem; font-weight: 500;
+  color: var(--muted); transition: color .2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--cream); }
+.nav-actions { display: flex; gap: .6rem; align-items: center; }
+
+/* ════════════════════════════════════════════
+   BUTTONS
+════════════════════════════════════════════ */
+.btn {
+  display: inline-flex; align-items: center; gap: .45rem;
+  padding: .65rem 1.4rem; border-radius: 6px;
+  font-weight: 700; font-size: .88rem; cursor: pointer;
+  transition: all .2s; border: none; text-decoration: none;
+  white-space: nowrap;
+}
+.btn-primary { background: var(--g); color: var(--ink); }
+.btn-primary:hover { background: var(--lime); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,230,100,.3); }
+.btn-outline { background: transparent; border: 1.5px solid var(--rim2); color: var(--soft); }
+.btn-outline:hover { border-color: var(--g); color: var(--g); }
+.btn-ghost { background: transparent; color: var(--muted); font-size: .85rem; padding: .5rem .9rem; }
+.btn-ghost:hover { color: var(--g); }
+.btn-wa { background: #25D366; color: #fff; }
+.btn-wa:hover { background: #1db854; transform: translateY(-2px); }
+.btn-sm { padding: .45rem 1rem; font-size: .8rem; border-radius: 5px; }
+.btn-danger { background: rgba(255,61,90,.12); border: 1px solid rgba(255,61,90,.3); color: var(--red); }
+.btn-danger:hover { background: rgba(255,61,90,.2); }
+
+/* ════════════════════════════════════════════
+   PAGE HERO
+════════════════════════════════════════════ */
+.page-hero {
+  position: relative; z-index: 1;
+  padding: 4rem 0 3rem;
+  border-bottom: 1px solid var(--rim);
+  overflow: hidden;
+}
+.page-hero::before {
+  content: 'MARKETPLACE';
+  position: absolute; right: -2rem; top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--head);
+  font-size: clamp(8rem, 18vw, 16rem);
+  color: rgba(0,230,100,.03);
+  line-height: 1; pointer-events: none;
+  white-space: nowrap; letter-spacing: 4px;
+  user-select: none;
+}
+.hero-inner {
+  max-width: 1380px; margin: 0 auto; padding: 0 2rem;
+  display: flex; align-items: flex-end;
+  justify-content: space-between; flex-wrap: wrap; gap: 2rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono); font-size: .68rem;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--g); display: flex; align-items: center; gap: .6rem;
+  margin-bottom: .85rem;
+}
+.hero-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--g); }
+.hero-h1 {
+  font-family: var(--head);
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  color: var(--cream); line-height: .95;
+  letter-spacing: 1px; margin-bottom: 1rem;
+}
+.hero-h1 span { color: var(--g); }
+.hero-sub {
+  font-size: 1rem; color: var(--soft);
+  max-width: 520px; line-height: 1.75;
+}
+.hero-stats {
+  display: flex; gap: 2.5rem; flex-wrap: wrap;
+}
+.hstat { text-align: right; }
+.hstat-num {
+  font-family: var(--head); font-size: 2.2rem;
+  color: var(--g); line-height: 1; letter-spacing: 1px;
+}
+.hstat-lbl { font-size: .75rem; color: var(--muted); margin-top: .2rem; font-family: var(--mono); letter-spacing: .5px; }
+
+/* ════════════════════════════════════════════
+   FILTER BAR
+════════════════════════════════════════════ */
+.filter-bar {
+  position: sticky; top: 66px; z-index: 90;
+  background: rgba(10,15,12,.98);
+  border-bottom: 1px solid var(--rim);
+  backdrop-filter: blur(12px);
+}
+.filter-inner {
+  max-width: 1380px; margin: 0 auto; padding: 0 2rem;
+  height: 60px; display: flex; align-items: center;
+  gap: 1rem; flex-wrap: wrap;
+}
+.search-box {
+  display: flex; align-items: center; gap: .6rem;
+  background: var(--ink3); border: 1px solid var(--rim);
+  border-radius: 8px; padding: .5rem 1rem;
+  flex: 1; min-width: 220px; max-width: 340px;
+  transition: border-color .2s;
+}
+.search-box:focus-within { border-color: var(--g2); }
+.search-box input {
+  background: none; border: none; outline: none;
+  color: var(--cream); font-size: .9rem; width: 100%;
+}
+.search-box input::placeholder { color: var(--muted); }
+.search-icon { color: var(--muted); font-size: .9rem; flex-shrink: 0; }
+.filter-pills { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
+.pill {
+  padding: .35rem .9rem; border-radius: 20px;
+  font-size: .78rem; font-weight: 600; cursor: pointer;
+  border: 1.5px solid var(--rim); color: var(--muted);
+  background: transparent; transition: all .2s;
+  font-family: var(--body); white-space: nowrap;
+}
+.pill:hover { border-color: var(--rim2); color: var(--soft); }
+.pill.active { background: var(--g); color: var(--ink); border-color: var(--g); }
+.filter-right { margin-left: auto; display: flex; gap: .5rem; align-items: center; }
+.sort-select {
+  background: var(--ink3); border: 1px solid var(--rim);
+  color: var(--soft); font-size: .8rem; padding: .4rem .8rem;
+  border-radius: 6px; outline: none; cursor: pointer;
+  font-family: var(--body);
+}
+.sort-select option { background: var(--ink2); }
+.view-toggle { display: flex; gap: .25rem; }
+.view-btn {
+  width: 32px; height: 32px; border-radius: 5px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .85rem; background: transparent;
+  border: 1px solid var(--rim); color: var(--muted);
+  cursor: pointer; transition: all .2s;
+}
+.view-btn.active { background: var(--panel); border-color: var(--rim2); color: var(--g); }
+
+/* ════════════════════════════════════════════
+   MAIN LAYOUT
+════════════════════════════════════════════ */
+.main-wrap {
+  max-width: 1380px; margin: 0 auto;
+  padding: 2rem; position: relative; z-index: 1;
+}
+
+/* ════════════════════════════════════════════
+   LISTING GRID
+════════════════════════════════════════════ */
+.listings-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;
+}
+.listings-count {
+  font-family: var(--mono); font-size: .78rem;
+  color: var(--muted); letter-spacing: .5px;
+}
+.listings-count strong { color: var(--cream); }
+
+.listings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+.listings-grid.list-view {
+  grid-template-columns: 1fr;
+}
+
+/* ── LISTING CARD ── */
+.listing-card {
+  background: var(--ink2);
+  border: 1px solid var(--rim);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all .3s;
+  cursor: pointer;
+  position: relative;
+  display: flex; flex-direction: column;
+}
+.listing-card:hover {
+  border-color: var(--rim2);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.6);
+}
+.listing-card.featured {
+  border-color: rgba(0,230,100,.35);
+  box-shadow: 0 0 0 1px rgba(0,230,100,.1);
+}
+
+/* Card image area */
+.card-img {
+  width: 100%; aspect-ratio: 16/10;
+  background: var(--ink3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 4rem; position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.card-img .device-emoji {
+  font-size: 3.5rem;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,.4));
+  transition: transform .3s;
+}
+.listing-card:hover .device-emoji { transform: scale(1.08); }
+
+/* Badges on image */
+.card-badges {
+  position: absolute; top: .75rem; left: .75rem;
+  display: flex; flex-direction: column; gap: .35rem;
+}
+.card-badge {
+  font-family: var(--mono); font-size: .58rem;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: .25rem .65rem; border-radius: 3px;
+  font-weight: 600;
+}
+.badge-sell { background: rgba(0,230,100,.15); color: var(--g); border: 1px solid rgba(0,230,100,.3); }
+.badge-buy  { background: rgba(34,211,238,.12); color: var(--sky); border: 1px solid rgba(34,211,238,.3); }
+.badge-feat { background: var(--amber); color: var(--ink); }
+.badge-verified { background: rgba(0,230,100,.9); color: var(--ink); }
+
+.card-age {
+  position: absolute; top: .75rem; right: .75rem;
+  font-family: var(--mono); font-size: .6rem;
+  color: var(--muted); background: rgba(10,15,12,.8);
+  padding: .2rem .55rem; border-radius: 3px;
+}
+
+/* Card body */
+.card-body { padding: 1.2rem; display: flex; flex-direction: column; flex: 1; }
+.card-category {
+  font-family: var(--mono); font-size: .62rem;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--g); margin-bottom: .45rem;
+}
+.card-title {
+  font-family: var(--body); font-size: 1rem;
+  font-weight: 700; color: var(--cream);
+  line-height: 1.3; margin-bottom: .5rem;
+}
+.card-specs {
+  display: flex; flex-wrap: wrap; gap: .35rem;
+  margin-bottom: .85rem;
+}
+.spec-tag {
+  font-size: .7rem; padding: .2rem .55rem;
+  background: var(--ink3); border: 1px solid var(--rim);
+  border-radius: 3px; color: var(--muted);
+}
+.card-footer {
+  display: flex; align-items: center;
+  justify-content: space-between; margin-top: auto;
+  padding-top: .85rem; border-top: 1px solid var(--rim);
+  flex-wrap: wrap; gap: .5rem;
+}
+.card-price {
+  font-family: var(--head); font-size: 1.6rem;
+  color: var(--g); letter-spacing: .5px; line-height: 1;
+}
+.card-price small {
+  font-family: var(--mono); font-size: .55rem;
+  color: var(--muted); display: block; margin-top: .15rem;
+  letter-spacing: .5px; text-transform: uppercase; font-weight: 400;
+}
+.card-location {
+  font-size: .75rem; color: var(--muted);
+  display: flex; align-items: center; gap: .3rem;
+}
+.card-actions {
+  display: flex; gap: .5rem; margin-top: .85rem; width: 100%;
+}
+.card-actions .btn { flex: 1; justify-content: center; }
+
+/* List view card */
+.listings-grid.list-view .listing-card {
+  flex-direction: row;
+}
+.listings-grid.list-view .card-img {
+  width: 140px; aspect-ratio: unset;
+  flex-shrink: 0;
+}
+.listings-grid.list-view .card-body { flex: 1; }
+.listings-grid.list-view .card-actions { flex-direction: row; }
+
+/* ════════════════════════════════════════════
+   EMPTY STATE
+════════════════════════════════════════════ */
+.empty-state {
+  text-align: center; padding: 5rem 2rem;
+  display: none;
+}
+.empty-state.show { display: block; }
+.empty-icon { font-size: 4rem; margin-bottom: 1rem; opacity: .4; }
+.empty-state h3 { font-family: var(--head); font-size: 2rem; color: var(--cream); margin-bottom: .5rem; }
+.empty-state p { color: var(--muted); }
+
+/* ════════════════════════════════════════════
+   POST LISTING MODAL
+════════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(6,10,8,.85);
+  backdrop-filter: blur(8px);
+  display: none; align-items: center; justify-content: center;
+  padding: 1.5rem;
+  opacity: 0; transition: opacity .3s;
+}
+.modal-overlay.open { display: flex; }
+.modal-overlay.visible { opacity: 1; }
+
+.modal {
+  background: var(--ink2);
+  border: 1px solid var(--rim2);
+  border-radius: 16px;
+  width: 100%; max-width: 600px;
+  max-height: 90vh; overflow-y: auto;
+  position: relative;
+  transform: translateY(20px); transition: transform .3s;
+}
+.modal-overlay.visible .modal { transform: translateY(0); }
+
+.modal-header {
+  padding: 1.75rem 2rem 1rem;
+  border-bottom: 1px solid var(--rim);
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; background: var(--ink2); z-index: 1;
+}
+.modal-title {
+  font-family: var(--head); font-size: 1.8rem;
+  color: var(--cream); letter-spacing: .5px;
+}
+.modal-close {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--ink3); border: 1px solid var(--rim);
+  color: var(--muted); font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .2s;
+}
+.modal-close:hover { border-color: var(--rim2); color: var(--cream); }
+
+.modal-body { padding: 1.75rem 2rem 2rem; }
+
+/* Type selector */
+.type-selector {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: .75rem; margin-bottom: 1.5rem;
+}
+.type-opt {
+  padding: 1.1rem; border-radius: 10px;
+  border: 2px solid var(--rim); cursor: pointer;
+  text-align: center; transition: all .2s;
+  background: var(--ink3);
+}
+.type-opt:hover { border-color: var(--rim2); }
+.type-opt.selected { border-color: var(--g); background: rgba(0,230,100,.06); }
+.type-opt .type-icon { font-size: 2rem; margin-bottom: .4rem; }
+.type-opt .type-label {
+  font-family: var(--head); font-size: 1.2rem;
+  color: var(--cream); letter-spacing: .5px;
+}
+.type-opt .type-desc { font-size: .76rem; color: var(--muted); margin-top: .2rem; }
+
+/* Form fields */
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.field { margin-bottom: 1.1rem; }
+.field label {
+  display: block; font-family: var(--mono);
+  font-size: .65rem; text-transform: uppercase;
+  letter-spacing: 1.5px; color: var(--muted);
+  margin-bottom: .5rem;
+}
+.field input, .field select, .field textarea {
+  width: 100%; padding: .8rem 1rem;
+  background: var(--ink3); border: 1.5px solid var(--rim);
+  border-radius: 8px; color: var(--cream);
+  font-size: .92rem; transition: border-color .2s;
+  outline: none;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--g2);
+}
+.field input::placeholder, .field textarea::placeholder { color: var(--muted); }
+.field select option { background: var(--ink2); }
+.field textarea { resize: vertical; min-height: 88px; }
+
+.price-input-wrap {
+  position: relative;
+}
+.price-input-wrap .rupee {
+  position: absolute; left: 1rem; top: 50%;
+  transform: translateY(-50%);
+  color: var(--g); font-family: var(--head);
+  font-size: 1.1rem; pointer-events: none;
+}
+.price-input-wrap input { padding-left: 2rem; }
+
+/* Condition selector */
+.condition-grid {
+  display: flex; gap: .5rem; flex-wrap: wrap;
+}
+.cond-opt {
+  padding: .4rem 1rem; border-radius: 6px;
+  border: 1.5px solid var(--rim); cursor: pointer;
+  font-size: .8rem; font-weight: 600;
+  background: transparent; color: var(--muted);
+  transition: all .2s; font-family: var(--body);
+}
+.cond-opt:hover { border-color: var(--rim2); color: var(--soft); }
+.cond-opt.selected { background: rgba(0,230,100,.1); border-color: var(--g); color: var(--g); }
+
+/* Image upload */
+.img-upload-area {
+  border: 2px dashed var(--rim2); border-radius: 10px;
+  padding: 2rem; text-align: center; cursor: pointer;
+  transition: all .2s; background: var(--ink3);
+  margin-bottom: 1.1rem;
+}
+.img-upload-area:hover { border-color: var(--g); background: rgba(0,230,100,.03); }
+.upload-icon { font-size: 2rem; margin-bottom: .5rem; color: var(--muted); }
+.upload-text { font-size: .88rem; color: var(--muted); }
+.upload-text strong { color: var(--soft); }
+
+/* Data wipe checkbox */
+.wipe-notice {
+  background: rgba(0,230,100,.06);
+  border: 1px solid rgba(0,230,100,.2);
+  border-radius: 8px; padding: 1rem 1.1rem;
+  display: flex; align-items: flex-start; gap: .85rem;
+  margin-bottom: 1.25rem;
+}
+.wipe-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: .1rem; }
+.wipe-text { font-size: .83rem; color: var(--soft); line-height: 1.6; }
+.wipe-text strong { color: var(--g); }
+
+.modal-footer {
+  display: flex; gap: .75rem; justify-content: flex-end;
+  padding-top: 1.25rem; border-top: 1px solid var(--rim);
+  flex-wrap: wrap;
+}
+.modal-footer .btn { min-width: 120px; justify-content: center; }
+
+/* ════════════════════════════════════════════
+   LISTING DETAIL MODAL
+════════════════════════════════════════════ */
+.detail-modal {
+  max-width: 780px;
+}
+.detail-img {
+  width: 100%; aspect-ratio: 16/8;
+  background: var(--ink3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 8rem; border-radius: 10px;
+  margin-bottom: 1.5rem;
+}
+.detail-header {
+  display: flex; justify-content: space-between;
+  align-items: flex-start; gap: 1rem; flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+.detail-price {
+  font-family: var(--head); font-size: 2.5rem;
+  color: var(--g); letter-spacing: 1px; line-height: 1;
+}
+.detail-price small {
+  display: block; font-family: var(--mono);
+  font-size: .62rem; color: var(--muted); margin-top: .2rem;
+  letter-spacing: .5px; font-weight: 400; text-transform: uppercase;
+}
+.detail-title {
+  font-size: 1.4rem; font-weight: 700; color: var(--cream);
+  line-height: 1.3; margin-bottom: .5rem;
+}
+.detail-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: .6rem; margin-bottom: 1.5rem;
+}
+.detail-row {
+  background: var(--ink3); border: 1px solid var(--rim);
+  border-radius: 8px; padding: .75rem 1rem;
+  display: flex; justify-content: space-between;
+  font-size: .85rem;
+}
+.detail-row .dkey { color: var(--muted); }
+.detail-row .dval { color: var(--cream); font-weight: 600; }
+.seller-info {
+  background: var(--panel); border: 1px solid var(--rim);
+  border-radius: 10px; padding: 1.25rem;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;
+}
+.seller-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--g), var(--g2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; color: var(--ink); font-weight: 800;
+  flex-shrink: 0;
+}
+.seller-meta { flex: 1; }
+.seller-name { font-weight: 700; color: var(--cream); font-size: .95rem; }
+.seller-since { font-size: .75rem; color: var(--muted); margin-top: .1rem; font-family: var(--mono); }
+.seller-contact { display: flex; gap: .6rem; flex-wrap: wrap; }
+
+/* ════════════════════════════════════════════
+   TOAST
+════════════════════════════════════════════ */
+.toast-stack {
+  position: fixed; bottom: 2rem; right: 2rem;
+  display: flex; flex-direction: column; gap: .65rem;
+  z-index: 1000;
+}
+.toast {
+  background: var(--ink2); border: 1px solid var(--rim2);
+  border-radius: 10px; padding: .9rem 1.25rem;
+  display: flex; align-items: center; gap: .75rem;
+  font-size: .88rem; color: var(--cream);
+  box-shadow: 0 8px 32px rgba(0,0,0,.5);
+  animation: toastIn .3s ease;
+  min-width: 280px; max-width: 360px;
+}
+.toast.success { border-color: rgba(0,230,100,.4); }
+.toast.error { border-color: rgba(255,61,90,.4); }
+.toast-icon { font-size: 1.1rem; flex-shrink: 0; }
+@keyframes toastIn { from{transform:translateX(20px);opacity:0} to{transform:translateX(0);opacity:1} }
+
+/* ════════════════════════════════════════════
+   TRUST BAR
+════════════════════════════════════════════ */
+.trust-bar {
+  background: var(--ink3); border-top: 1px solid var(--rim);
+  padding: 1rem 0; margin-top: 3rem;
+}
+.trust-inner {
+  max-width: 1380px; margin: 0 auto; padding: 0 2rem;
+  display: flex; align-items: center; gap: 2.5rem;
+  flex-wrap: wrap; justify-content: center;
+}
+.trust-item {
+  display: flex; align-items: center; gap: .5rem;
+  font-size: .8rem; color: var(--muted);
+  font-family: var(--mono); letter-spacing: .3px;
+}
+.trust-item strong { color: var(--soft); }
+
+/* ════════════════════════════════════════════
+   WA FLOAT
+════════════════════════════════════════════ */
+.wa-float {
+  position: fixed; bottom: 2rem; left: 2rem;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: #25D366; display: flex; align-items: center;
+  justify-content: center; font-size: 1.5rem;
+  box-shadow: 0 4px 20px rgba(37,211,102,.45);
+  z-index: 200; transition: transform .2s;
+  text-decoration: none;
+}
+.wa-float:hover { transform: scale(1.1); }
+
+/* ════════════════════════════════════════════
+   LOAD MORE
+════════════════════════════════════════════ */
+.load-more-wrap { text-align: center; margin: 2rem 0; }
+
+/* ════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════ */
+@media(max-width: 768px) {
+  .nav-links { display: none; }
+  .hero-inner { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .hero-stats { flex-direction: row; }
+  .hstat { text-align: left; }
+  .filter-inner { height: auto; padding: .75rem 1.25rem; }
+  .listings-grid { grid-template-columns: 1fr 1fr; }
+  .field-row { grid-template-columns: 1fr; }
+  .detail-grid { grid-template-columns: 1fr; }
+  .listings-grid.list-view .listing-card { flex-direction: column; }
+  .listings-grid.list-view .card-img { width: 100%; }
+}
+@media(max-width: 480px) {
+  .listings-grid { grid-template-columns: 1fr; }
+  .modal { border-radius: 12px 12px 0 0; }
+  .modal-overlay { align-items: flex-end; padding: 0; }
+}
+
+/* ════════════════════════════════════════════
+   SHIMMER SKELETON
+════════════════════════════════════════════ */
+.skeleton {
+  background: linear-gradient(90deg, var(--ink3) 25%, var(--panel) 50%, var(--ink3) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+/* ════════════════════════════════════════════
+   MISC UTILS
+════════════════════════════════════════════ */
+.divider { height: 1px; background: var(--rim); margin: 1.25rem 0; }
+.text-g { color: var(--g); }
+.text-amber { color: var(--amber); }
+.text-red { color: var(--red); }
+.fw7 { font-weight: 700; }
+.mono { font-family: var(--mono); font-size: .8rem; }
+
+/* ════════════════════════════════════════════
+   VERIFIED BADGE ANIMATION
+════════════════════════════════════════════ */
+.verified-pulse {
+  display: inline-flex; align-items: center; gap: .35rem;
+  font-family: var(--mono); font-size: .65rem;
+  color: var(--g); letter-spacing: .5px;
+}
+.v-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--g); box-shadow: 0 0 6px var(--g);
+  animation: pulse 1.8s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+</style>
+
+    <meta property="og:site_name" content="EWaste Kochi">
+    <meta property="og:title" content="EWasteKochi Marketplace — Buy & Sell Electronics Kochi">
+    <meta property="og:description" content="Kerala's certified electronics marketplace. Buy and sell old phones, laptops, MacBooks and more. Every listing verified. NIST 800-88 data wipe on all sold devices.">
+    <meta property="og:url" content="https://ewastekochi.com/marketplace.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://ewastekochi.com/images/og-main.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="EWasteKochi Marketplace — Buy & Sell Electronics Kochi">
+    <meta name="twitter:description" content="Kerala's certified electronics marketplace. Buy and sell old phones, laptops, MacBooks and more. Every listing verified. NIST 800-88 data wipe on all sold devices.">
+    <meta name="twitter:image" content="https://ewastekochi.com/images/og-main.jpg">
+
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="ti">✓ KSPCB Authorized Marketplace — Every Seller Verified</span>
+    <span class="ti">🔒 NIST 800-88 Data Wipe Included With Every Device Sold</span>
+    <span class="ti">💰 Get 15–20% More Than Cashify — Instant UPI Payment</span>
+    <span class="ti">📍 Serving All of Ernakulam District — Free Pickup 50+ Units</span>
+    <span class="ti">✓ KSPCB Authorized Marketplace — Every Seller Verified</span>
+    <span class="ti">🔒 NIST 800-88 Data Wipe Included With Every Device Sold</span>
+    <span class="ti">💰 Get 15–20% More Than Cashify — Instant UPI Payment</span>
+    <span class="ti">📍 Serving All of Ernakulam District — Free Pickup 50+ Units</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <em>EWaste</em>Kochi
+      <span class="logo-tag">KSPCB CERT.</span>
+    </a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/services/corporate-itad-kochi.html">ITAD</a>
+      <a href="/services/data-destruction-kochi.html">Data Destruction</a>
+      <a href="/marketplace.html" class="active">Marketplace</a>
+      <a href="/blog/">Insights</a>
+      <a href="/contact.html">Contact Experts</a>
+    </div>
+    <div class="nav-actions">
+      <a aria-label="Call EWaste Kochi Experts" href="tel:+919876543210" class="btn btn-ghost btn-sm">📞 Call</a>
+      <button class="btn btn-primary btn-sm" onclick="openPostModal()">+ Post Listing</button>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Kerala's Certified Electronics Exchange</div>
+      <h1 class="hero-h1">BUY &amp; SELL<br><span>ELECTRONICS</span><br>KOCHI</h1>
+      <p class="hero-sub">Kerala's only certified marketplace — every transaction includes professional data wiping. No OLX scams, no data risk. Verified sellers, instant UPI payments.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-num" id="totalListings">0</div>
+        <div class="hstat-lbl">Active Listings</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">5,200+</div>
+        <div class="hstat-lbl">Devices Sold</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">4.9★</div>
+        <div class="hstat-lbl">Seller Rating</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search MacBook, iPhone, ThinkPad..." oninput="filterListings()">
+    </div>
+    <div class="filter-pills">
+      <button class="pill active" onclick="filterByType('all', this)">All</button>
+      <button class="pill" onclick="filterByType('sell', this)">🟢 Selling</button>
+      <button class="pill" onclick="filterByType('buy', this)">🔵 Buying</button>
+      <button class="pill" onclick="filterByCategory('phone', this)">📱 Phones</button>
+      <button class="pill" onclick="filterByCategory('laptop', this)">💻 Laptops</button>
+      <button class="pill" onclick="filterByCategory('tablet', this)">📱 Tablets</button>
+      <button class="pill" onclick="filterByCategory('server', this)">🖥️ Servers</button>
+      <button class="pill" onclick="filterByCategory('other', this)">📦 Other</button>
+    </div>
+    <div class="filter-right">
+      <select class="sort-select" id="sortSelect" onchange="filterListings()">
+        <option value="newest">Newest First</option>
+        <option value="price-low">Price: Low to High</option>
+        <option value="price-high">Price: High to Low</option>
+        <option value="featured">Featured First</option>
+      </select>
+      <div class="view-toggle">
+        <button class="view-btn active" id="gridViewBtn" onclick="setView('grid')" title="Grid view">⊞</button>
+        <button class="view-btn" id="listViewBtn" onclick="setView('list')" title="List view">☰</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-wrap">
+  <div class="listings-header">
+    <div class="listings-count" id="listingsCount">
+      Showing <strong>0</strong> listings
+    </div>
+    <button class="btn btn-primary" onclick="openPostModal()">+ Post Your Listing</button>
+  </div>
+
+  <div class="listings-grid" id="listingsGrid">
+    <!-- Populated by JS -->
+  </div>
+
+  <div class="empty-state" id="emptyState">
+    <div class="empty-icon">📭</div>
+    <h3>No listings found</h3>
+    <p>Try adjusting your filters or be the first to post!</p>
+    <button class="btn btn-primary" style="margin-top:1.5rem;" onclick="openPostModal()">Post First Listing</button>
+  </div>
+
+  <div class="load-more-wrap" id="loadMoreWrap" style="display:none;">
+    <button class="btn btn-outline" onclick="loadMore()">Load More Listings</button>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item"><span class="v-dot"></span> <strong>KSPCB Authorized</strong> — Only certified marketplace in Kerala</div>
+    <div class="trust-item">🔒 <strong>Free NIST 800-88 data wipe</strong> on every sold device</div>
+    <div class="trust-item">💰 <strong>Same-day UPI</strong> payment on all transactions</div>
+    <div class="trust-item">📋 <strong>Certificate of Destruction</strong> with every sale</div>
+    <div class="trust-item">📍 <strong>Serving Ernakulam</strong> — Free pickup 50+ units</div>
+  </div>
+</div>
+
+<!-- WA FLOAT -->
+<a href="https://wa.me/919876543210?text=Hi%2C%20I%20want%20to%20list%20on%20the%20EWasteKochi%20marketplace" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp us">💬</a>
+
+<!-- ═══════════════════════════════
+     POST LISTING MODAL
+═══════════════════════════════ -->
+<div class="modal-overlay" id="postModal" onclick="handleOverlayClick(event, 'postModal')">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">POST LISTING</div>
+      <button class="modal-close" onclick="closeModal('postModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <!-- Type -->
+      <div class="field">
+        <label>Listing Type</label>
+        <div class="type-selector">
+          <div class="type-opt selected" id="typeOptSell" onclick="selectType('sell')">
+            <div class="type-icon">🟢</div>
+            <div class="type-label">SELLING</div>
+            <div class="type-desc">I have a device to sell</div>
+          </div>
+          <div class="type-opt" id="typeOptBuy" onclick="selectType('buy')">
+            <div class="type-icon">🔵</div>
+            <div class="type-label">BUYING</div>
+            <div class="type-desc">I'm looking to buy</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category & Brand -->
+      <div class="field-row">
+        <div class="field">
+          <label>Category</label>
+          <select id="postCategory">
+            <option value="phone">📱 Smartphone</option>
+            <option value="laptop">💻 Laptop</option>
+            <option value="tablet">📱 Tablet</option>
+            <option value="server">🖥️ Server / Rack</option>
+            <option value="desktop">🖥️ Desktop / iMac</option>
+            <option value="other">📦 Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Brand</label>
+          <select id="postBrand">
+            <option>Apple</option>
+            <option>Samsung</option>
+            <option>Dell</option>
+            <option>HP</option>
+            <option>Lenovo</option>
+            <option>ASUS</option>
+            <option>OnePlus</option>
+            <option>Google</option>
+            <option>Sony</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Title -->
+      <div class="field">
+        <label>Device Title</label>
+        <input type="text" id="postTitle" placeholder="e.g. MacBook Pro M1 14-inch 16GB 512GB">
+      </div>
+
+      <!-- Price & Location -->
+      <div class="field-row">
+        <div class="field">
+          <label>Your Price (₹)</label>
+          <div class="price-input-wrap">
+            <span class="rupee">₹</span>
+            <input type="number" id="postPrice" placeholder="45000" min="0">
+          </div>
+        </div>
+        <div class="field">
+          <label>Your Location</label>
+          <select id="postLocation">
+            <option>Kakkanad / Infopark</option>
+            <option>Thrippunithura</option>
+            <option>Edappally</option>
+            <option>Vyttila</option>
+            <option>Kaloor</option>
+            <option>Palarivattom</option>
+            <option>MG Road</option>
+            <option>Ernakulam South</option>
+            <option>Fort Kochi</option>
+            <option>Aluva</option>
+            <option>Angamaly</option>
+            <option>Perumbavoor</option>
+            <option>Muvattupuzha</option>
+            <option>Marine Drive</option>
+            <option>Kadavanthra</option>
+            <option>Other Ernakulam</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Condition -->
+      <div class="field" id="conditionField">
+        <label>Condition</label>
+        <div class="condition-grid">
+          <button class="cond-opt selected" data-cond="Like New" onclick="selectCondition(this)">Like New</button>
+          <button class="cond-opt" data-cond="Excellent" onclick="selectCondition(this)">Excellent</button>
+          <button class="cond-opt" data-cond="Good" onclick="selectCondition(this)">Good</button>
+          <button class="cond-opt" data-cond="Fair" onclick="selectCondition(this)">Fair</button>
+          <button class="cond-opt" data-cond="For Parts" onclick="selectCondition(this)">For Parts</button>
+        </div>
+      </div>
+
+      <!-- Specs -->
+      <div class="field">
+        <label>Key Specs / Details</label>
+        <input type="text" id="postSpecs" placeholder="e.g. 16GB RAM, 512GB SSD, Space Grey, 2022">
+      </div>
+
+      <!-- Description -->
+      <div class="field">
+        <label>Description</label>
+        <textarea id="postDesc" placeholder="Tell buyers about the device's condition, included accessories, reason for selling..."></textarea>
+      </div>
+
+      <!-- Contact -->
+      <div class="field-row">
+        <div class="field">
+          <label>Your Name</label>
+          <input type="text" id="postName" placeholder="Arjun Menon">
+        </div>
+        <div class="field">
+          <label>WhatsApp / Phone</label>
+          <input type="tel" id="postPhone" placeholder="+91 98765 43210">
+        </div>
+      </div>
+
+      <!-- Img upload (cosmetic) -->
+      <div class="img-upload-area" onclick="showToast('📸 Image upload requires backend integration', 'info')">
+        <div class="upload-icon">📷</div>
+        <div class="upload-text"><strong>Add Photos</strong> — drag & drop or click to upload</div>
+        <div class="upload-text" style="margin-top:.3rem; font-size:.75rem;">JPEG, PNG up to 5MB each · Max 6 images</div>
+      </div>
+
+      <!-- Data wipe notice -->
+      <div class="wipe-notice" id="wipeNotice">
+        <div class="wipe-icon">🔒</div>
+        <div class="wipe-text">
+          <strong>Free NIST 800-88 Data Wipe Included.</strong> When your device sells, EWasteKochi provides a complimentary certified data wipe before handover — and issues a Certificate of Data Destruction to both you and the buyer. Protects you from DPDP Act 2023 liability.
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('postModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="submitListing()">🚀 Post Listing</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════
+     DETAIL MODAL
+═══════════════════════════════ -->
+<div class="modal-overlay" id="detailModal" onclick="handleOverlayClick(event, 'detailModal')">
+  <div class="modal detail-modal">
+    <div class="modal-header">
+      <div class="modal-title" id="detailModalTitle">LISTING</div>
+      <button class="modal-close" onclick="closeModal('detailModal')">✕</button>
+    </div>
+    <div class="modal-body" id="detailModalBody">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- TOAST STACK -->
+<div class="toast-stack" id="toastStack"></div>
+
+<script>
+/* ═══════════════════════════════════════════
+   PERSISTENT STORAGE
+═══════════════════════════════════════════ */
+const STORAGE_KEY = 'ewk-marketplace-listings';
+
+async function saveListings(listings) {
+  try {
+    await window.storage.set(STORAGE_KEY, JSON.stringify(listings), true);
+  } catch(e) {
+    localStorage.setItem(STORAGE_KEY + '-local', JSON.stringify(listings));
+  }
+}
+
+async function loadListings() {
+  try {
+    const result = await window.storage.get(STORAGE_KEY, true);
+    if (result && result.value) return JSON.parse(result.value);
+  } catch(e) {}
+  try {
+    const local = localStorage.getItem(STORAGE_KEY + '-local');
+    if (local) return JSON.parse(local);
+  } catch(e) {}
+  return null;
+}
+
+/* ═══════════════════════════════════════════
+   SEED DATA — realistic Kerala market listings
+═══════════════════════════════════════════ */
+const SEED_LISTINGS = [
+  {
+    id: 'EWK001', type: 'sell', category: 'laptop', brand: 'Apple',
+    title: 'MacBook Pro M1 Pro 14" — 16GB / 512GB', price: 62000,
+    location: 'Kakkanad / Infopark', condition: 'Excellent',
+    specs: ['16GB RAM', '512GB SSD', 'Space Grey', '2021'],
+    desc: 'Company-issued MacBook, returned after employment. Excellent condition, minor keyboard wear. Battery health 91%. Comes with original charger and box. Data wiped by EWasteKochi.',
+    name: 'Arun K.', phone: '+91 98XXX XXXXX',
+    emoji: '💻', verified: true, featured: true,
+    posted: Date.now() - 2 * 60 * 60 * 1000
+  },
+  {
+    id: 'EWK002', type: 'sell', category: 'phone', brand: 'Apple',
+    title: 'iPhone 15 Pro — Natural Titanium 256GB', price: 64000,
+    location: 'Edappally', condition: 'Like New',
+    specs: ['256GB', 'Natural Titanium', 'iOS 17'],
+    desc: 'Purchased 4 months ago. Upgrading to Pro Max. Screen protector and case used from day one. Zero scratches. Battery health 100%. Original box and all accessories.',
+    name: 'Meena R.', phone: '+91 97XXX XXXXX',
+    emoji: '📱', verified: true, featured: true,
+    posted: Date.now() - 5 * 60 * 60 * 1000
+  },
+  {
+    id: 'EWK003', type: 'sell', category: 'laptop', brand: 'Dell',
+    title: 'Dell Latitude 7430 — i7 12th Gen / 16GB / 512GB', price: 28000,
+    location: 'Thrippunithura', condition: 'Good',
+    specs: ['i7-1265U', '16GB DDR5', '512GB NVMe', 'Win 11 Pro'],
+    desc: 'Office laptop from IT company refresh. All function keys working, minor lid scratches. Ideal for business use. NIST 800-88 data wipe certificate available.',
+    name: 'Vijay S.', phone: '+91 96XXX XXXXX',
+    emoji: '💻', verified: true, featured: false,
+    posted: Date.now() - 1 * 24 * 60 * 60 * 1000
+  },
+  {
+    id: 'EWK004', type: 'buy', category: 'laptop', brand: 'Apple',
+    title: 'WANTED: MacBook Air M2 — Any Colour', price: 55000,
+    location: 'Vyttila', condition: 'Good',
+    specs: ['M2 chip', '8GB or 16GB', 'Any SSD size'],
+    desc: 'Looking for a MacBook Air M2 in good or better condition. Budget ₹55,000. Will pay UPI immediately after inspection. Prefer Ernakulam area. Can pick up same day.',
+    name: 'Priya N.', phone: '+91 94XXX XXXXX',
+    emoji: '🔍', verified: false, featured: false,
+    posted: Date.now() - 3 * 60 * 60 * 1000
+  },
+  {
+    id: 'EWK005', type: 'sell', category: 'phone', brand: 'Samsung',
+    title: 'Samsung Galaxy S24 Ultra — Titanium Black 256GB', price: 52000,
+    location: 'Palarivattom', condition: 'Excellent',
+    specs: ['256GB', 'Titanium Black', 'S Pen included'],
+    desc: 'Used for 5 months. Always had screen protector and case. S Pen intact with no damage. Camera lenses perfect. Quick sale needed, moving abroad. Negotiable.',
+    name: 'Thomas V.', phone: '+91 89XXX XXXXX',
+    emoji: '📱', verified: true, featured: false,
+    posted: Date.now() - 2 * 24 * 60 * 60 * 1000
+  },
+  {
+    id: 'EWK006', type: 'sell', category: 'laptop', brand: 'Lenovo',
+    title: 'ThinkPad X1 Carbon Gen 9 — i7 / 16GB / 1TB', price: 32000,
+    location: 'Kakkanad / Infopark', condition: 'Good',
+    specs: ['i7-1165G7', '16GB LPDDR4X', '1TB NVMe', 'FHD IPS'],
+    desc: 'Infopark corporate surplus. Keyboard and trackpoint perfect. Used with docking station — very light general wear. Ideal for developers and business users.',
+    name: 'Rohit M.', phone: '+91 91XXX XXXXX',
+    emoji: '💻', verified: true, featured: false,
+    posted: Date.now() - 4 * 24 * 60 * 60 * 1000
+  },
+  {
+    id: 'EWK007', type: 'sell', category: 'tablet', brand: 'Apple',
+    title: 'iPad Pro M1 12.9" — 256GB WiFi + Cellular', price: 38000,
+    location: 'MG Road', condition: 'Excellent',
+    specs: ['M1 chip', '256GB', 'WiFi + LTE', 'Space Grey'],
+    desc: 'Used for 1 year, then switched to MacBook full-time. Comes with Magic Keyboard (1st gen) and Apple Pencil 2nd gen. Total bundle value. Minor case wear only.',
+    name: 'Anjali P.', phone: '+91 95XXX XXXXX',
+    emoji: '📟', verified: true, featured: false,
+    posted: Date.now() - 6 * 60 * 60 * 1000
+  },
+  {
+    id: 'EWK008', type: 'buy', category: 'phone', brand: 'Samsung',
+    title: 'WANTED: Samsung Galaxy S23 or S24 Series', price: 35000,
+    location: 'Ernakulam South', condition: 'Good',
+    specs: ['Any storage', 'Any colour'],
+    desc: 'Looking for Galaxy S23 Ultra, S24 or S24+ in good condition. Budget up to ₹35,000. Ready to pay UPI on the spot after quick inspection. Call anytime.',
+    name: 'Suresh K.', phone: '+91 90XXX XXXXX',
+    emoji: '🔍', verified: false, featured: false,
+    posted: Date.now() - 7 * 60 * 60 * 1000
+  },
+  {
+    id: 'EWK009', type: 'sell', category: 'laptop', brand: 'HP',
+    title: 'HP EliteBook 840 G8 — i5 / 8GB / 256GB', price: 18000,
+    location: 'Angamaly', condition: 'Good',
+    specs: ['i5-1135G7', '8GB DDR4', '256GB SSD', 'Win 11 Pro'],
+    desc: 'Two-year-old office laptop, well maintained. All ports working. Battery holds 4–5 hours. Good for everyday productivity work. Certificate of Destruction available.',
+    name: 'Binu J.', phone: '+91 88XXX XXXXX',
+    emoji: '💻', verified: false, featured: false,
+    posted: Date.now() - 3 * 24 * 60 * 60 * 1000
+  },
+  {
+    id: 'EWK010', type: 'sell', category: 'server', brand: 'Dell',
+    title: 'Dell PowerEdge R640 — Dual Xeon / 128GB / 4TB', price: 45000,
+    location: 'Kakkanad / Infopark', condition: 'Good',
+    specs: ['Dual Xeon Gold', '128GB ECC RAM', '4TB SAS', '2U Rack'],
+    desc: 'Decommissioned from Infopark data centre upgrade. Fully tested, all drives healthy. Includes all drive sleds and rails. Certificate of Destruction on drives. Corporate invoice available.',
+    name: 'IT Assets Team', phone: '+91 98XXX XXXXX',
+    emoji: '🖥️', verified: true, featured: false,
+    posted: Date.now() - 5 * 24 * 60 * 60 * 1000
+  },
+  {
+    id: 'EWK011', type: 'sell', category: 'phone', brand: 'OnePlus',
+    title: 'OnePlus 12 — Silky Black 256GB', price: 28000,
+    location: 'Vyttila', condition: 'Like New',
+    specs: ['256GB', 'Silky Black', '100W charging'],
+    desc: 'Bought 3 months ago, switching to iPhone ecosystem. Box, charger, and case all included. No scratches or issues. Battery health 100%. Open to slight negotiation.',
+    name: 'Arjun T.', phone: '+91 93XXX XXXXX',
+    emoji: '📱', verified: false, featured: false,
+    posted: Date.now() - 8 * 60 * 60 * 1000
+  },
+  {
+    id: 'EWK012', type: 'buy', category: 'laptop', brand: 'Dell',
+    title: 'WANTED: Dell Latitude 5430 or 5440 (Bulk)', price: 15000,
+    location: 'Kakkanad / Infopark', condition: 'Good',
+    specs: ['10+ units preferred', 'i5 or i7', 'Any RAM/SSD'],
+    desc: 'Looking to buy 10–50 units of Dell Latitude 5000 series for office use. Condition should be Good or better. Will pay cash immediately after inspection. Pickup from your location.',
+    name: 'Nexus IT Procurement', phone: '+91 98XXX XXXXX',
+    emoji: '🔍', verified: true, featured: false,
+    posted: Date.now() - 11 * 60 * 60 * 1000
+  }
+];
+
+/* ═══════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════ */
+let allListings = [];
+let displayedCount = 0;
+const PAGE_SIZE = 12;
+let activeType = 'all';
+let activeCategory = 'all';
+let currentType = 'sell';
+let currentCondition = 'Like New';
+
+/* ═══════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════ */
+async function init() {
+  const stored = await loadListings();
+  if (stored && stored.length > 0) {
+    allListings = stored;
+  } else {
+    allListings = [...SEED_LISTINGS];
+    await saveListings(allListings);
+  }
+  filterListings();
+  updateStats();
+}
+
+function updateStats() {
+  document.getElementById('totalListings').textContent = allListings.length;
+}
+
+/* ═══════════════════════════════════════════
+   FILTER & SORT
+═══════════════════════════════════════════ */
+function getFilteredListings() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const sort = document.getElementById('sortSelect').value;
+
+  let filtered = allListings.filter(l => {
+    const matchType = activeType === 'all' || l.type === activeType;
+    const matchCat  = activeCategory === 'all' || l.category === activeCategory;
+    const matchQ    = !q ||
+      l.title.toLowerCase().includes(q) ||
+      l.brand.toLowerCase().includes(q) ||
+      l.location.toLowerCase().includes(q) ||
+      l.desc.toLowerCase().includes(q) ||
+      (l.specs || []).join(' ').toLowerCase().includes(q);
+    return matchType && matchCat && matchQ;
+  });
+
+  filtered.sort((a, b) => {
+    if (sort === 'price-low') return a.price - b.price;
+    if (sort === 'price-high') return b.price - a.price;
+    if (sort === 'featured') return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
+    return b.posted - a.posted; // newest
+  });
+
+  return filtered;
+}
+
+function filterListings() {
+  displayedCount = 0;
+  renderListings();
+}
+
+function filterByType(type, el) {
+  activeType = type;
+  document.querySelectorAll('.filter-pills .pill').forEach(p => {
+    if (['all','sell','buy'].includes(p.onclick?.toString()?.match(/filterByType\('(\w+)'/)?.[1])) {
+      p.classList.remove('active');
+    }
+  });
+  el.classList.add('active');
+  filterListings();
+}
+
+function filterByCategory(cat, el) {
+  // Toggle category
+  if (activeCategory === cat) {
+    activeCategory = 'all';
+    el.classList.remove('active');
+  } else {
+    document.querySelectorAll('.filter-pills .pill').forEach(p => {
+      const match = p.onclick?.toString()?.match(/filterByCategory\('(\w+)'/);
+      if (match) p.classList.remove('active');
+    });
+    activeCategory = cat;
+    el.classList.add('active');
+  }
+  filterListings();
+}
+
+function setView(view) {
+  const grid = document.getElementById('listingsGrid');
+  document.getElementById('gridViewBtn').classList.toggle('active', view === 'grid');
+  document.getElementById('listViewBtn').classList.toggle('active', view === 'list');
+  if (view === 'list') {
+    grid.classList.add('list-view');
+  } else {
+    grid.classList.remove('list-view');
+  }
+}
+
+/* ═══════════════════════════════════════════
+   RENDER
+═══════════════════════════════════════════ */
+function renderListings() {
+  const grid = document.getElementById('listingsGrid');
+  const filtered = getFilteredListings();
+  const toShow = filtered.slice(0, displayedCount + PAGE_SIZE);
+  displayedCount = toShow.length;
+
+  document.getElementById('emptyState').classList.toggle('show', filtered.length === 0);
+  document.getElementById('loadMoreWrap').style.display =
+    filtered.length > displayedCount ? 'block' : 'none';
+
+  grid.innerHTML = toShow.map(listing => renderCard(listing)).join('');
+
+  document.getElementById('listingsCount').innerHTML =
+    `Showing <strong>${toShow.length}</strong> of <strong>${filtered.length}</strong> listing${filtered.length !== 1 ? 's' : ''}`;
+}
+
+function loadMore() {
+  renderListings();
+}
+
+function timeAgo(ts) {
+  const diff = Date.now() - ts;
+  const m = Math.floor(diff / 60000);
+  const h = Math.floor(diff / 3600000);
+  const d = Math.floor(diff / 86400000);
+  if (m < 2) return 'just now';
+  if (m < 60) return `${m}m ago`;
+  if (h < 24) return `${h}h ago`;
+  return `${d}d ago`;
+}
+
+function renderCard(l) {
+  const specs = (l.specs || []).slice(0,3).map(s => `<span class="spec-tag">${s}</span>`).join('');
+  const typeBadge = l.type === 'sell'
+    ? '<span class="card-badge badge-sell">SELLING</span>'
+    : '<span class="card-badge badge-buy">BUYING</span>';
+  const featBadge = l.featured ? '<span class="card-badge badge-feat">FEATURED</span>' : '';
+  const verBadge  = l.verified ? '<span class="card-badge badge-verified">✓ VERIFIED</span>' : '';
+  const priceLabel = l.type === 'buy' ? 'Budget' : 'Price';
+
+  return `
+  <div class="listing-card ${l.featured ? 'featured' : ''}" onclick="openDetail('${l.id}')">
+    <div class="card-img">
+      <div class="device-emoji">${l.emoji || '📱'}</div>
+      <div class="card-badges">${typeBadge}${featBadge}</div>
+      <div class="card-age">${timeAgo(l.posted)}</div>
+    </div>
+    <div class="card-body">
+      <div class="card-category">${getCategoryLabel(l.category)} · ${l.brand}</div>
+      <div class="card-title">${l.title}</div>
+      <div class="card-specs">${specs}</div>
+      <div class="card-footer">
+        <div>
+          <div class="card-price">
+            ₹${Number(l.price).toLocaleString('en-IN')}
+            <small>${priceLabel} ${l.condition !== 'N/A' ? '· ' + l.condition : ''}</small>
+          </div>
+        </div>
+        <div class="card-location">📍 ${l.location}</div>
+      </div>
+      <div class="card-actions">
+        <a aria-label="Chat with EWaste Kochi on WhatsApp" href="https://wa.me/919876543210?text=Hi%2C%20I%20saw%20listing%20${l.id}%20on%20EWasteKochi%20Marketplace%3A%20${encodeURIComponent(l.title)}"
+           class="btn btn-wa btn-sm" target="_blank" rel="noopener" onclick="event.stopPropagation()">💬 WhatsApp</a>
+        <button class="btn btn-outline btn-sm" onclick="event.stopPropagation(); openDetail('${l.id}')">View Details</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function getCategoryLabel(cat) {
+  const m = { phone:'Smartphone', laptop:'Laptop', tablet:'Tablet', server:'Server', desktop:'Desktop', other:'Other' };
+  return m[cat] || cat;
+}
+
+/* ═══════════════════════════════════════════
+   DETAIL MODAL
+═══════════════════════════════════════════ */
+function openDetail(id) {
+  const l = allListings.find(x => x.id === id);
+  if (!l) return;
+
+  document.getElementById('detailModalTitle').textContent = l.type === 'sell' ? 'SELLING' : 'WANTED';
+
+  const priceLabel = l.type === 'buy' ? 'Budget' : 'Asking Price';
+  const specs = (l.specs || []).map(s => `<span class="spec-tag" style="font-size:.8rem;padding:.3rem .75rem;">${s}</span>`).join('');
+  const initials = l.name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+
+  document.getElementById('detailModalBody').innerHTML = `
+    <div class="detail-img">${l.emoji || '📱'}</div>
+    <div class="detail-header">
+      <div>
+        <div style="display:flex;gap:.5rem;margin-bottom:.6rem;flex-wrap:wrap;">
+          ${l.type === 'sell' ? '<span class="card-badge badge-sell">SELLING</span>' : '<span class="card-badge badge-buy">BUYING</span>'}
+          ${l.verified ? '<span class="card-badge badge-verified">✓ VERIFIED</span>' : ''}
+          ${l.featured ? '<span class="card-badge badge-feat">FEATURED</span>' : ''}
+        </div>
+        <div class="detail-title">${l.title}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem;">${specs}</div>
+      </div>
+      <div class="detail-price">
+        ₹${Number(l.price).toLocaleString('en-IN')}
+        <small>${priceLabel}</small>
+      </div>
+    </div>
+    <div class="detail-grid">
+      <div class="detail-row"><span class="dkey">Category</span><span class="dval">${getCategoryLabel(l.category)}</span></div>
+      <div class="detail-row"><span class="dkey">Brand</span><span class="dval">${l.brand}</span></div>
+      <div class="detail-row"><span class="dkey">Condition</span><span class="dval">${l.condition}</span></div>
+      <div class="detail-row"><span class="dkey">Location</span><span class="dval">${l.location}</span></div>
+      <div class="detail-row"><span class="dkey">Listing ID</span><span class="dval" style="font-family:var(--mono);font-size:.78rem;">${l.id}</span></div>
+      <div class="detail-row"><span class="dkey">Posted</span><span class="dval">${timeAgo(l.posted)}</span></div>
+    </div>
+    <div style="margin-bottom:1.5rem;">
+      <div style="font-family:var(--mono);font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:.65rem;">Description</div>
+      <p style="font-size:.92rem;color:var(--soft);line-height:1.8;">${l.desc}</p>
+    </div>
+    <div class="seller-info">
+      <div style="display:flex;align-items:center;gap:.85rem;">
+        <div class="seller-avatar">${initials}</div>
+        <div class="seller-meta">
+          <div class="seller-name">${l.name} ${l.verified ? '<span style="color:var(--g);font-size:.75rem;">✓ Verified</span>' : ''}</div>
+          <div class="seller-since">Posted ${timeAgo(l.posted)} · EWasteKochi Marketplace</div>
+        </div>
+      </div>
+      <div class="seller-contact">
+        <a aria-label="Chat with EWaste Kochi on WhatsApp" href="https://wa.me/919876543210?text=Hi%2C%20I%27m%20interested%20in%20listing%20${l.id}%3A%20${encodeURIComponent(l.title)}"
+           class="btn btn-wa btn-sm" target="_blank" rel="noopener">💬 WhatsApp</a>
+        <a aria-label="Call EWaste Kochi Experts" href="tel:+919876543210" class="btn btn-outline btn-sm">📞 Call</a>
+      </div>
+    </div>
+    ${l.type === 'sell' ? `
+    <div class="wipe-notice">
+      <div class="wipe-icon">🔒</div>
+      <div class="wipe-text">
+        <strong>Free NIST 800-88 Data Wipe Included.</strong> Before this device changes hands, EWasteKochi provides a complimentary certified data destruction service. A Certificate of Data Destruction is issued to both buyer and seller — protecting you from DPDP Act 2023 liability.
+      </div>
+    </div>` : ''}
+    <div class="modal-footer" style="padding-top:0;border:none;justify-content:stretch;">
+      <a aria-label="Chat with EWaste Kochi on WhatsApp" href="https://wa.me/919876543210?text=Hi%2C%20I%27m%20interested%20in%20listing%20${l.id}%3A%20${encodeURIComponent(l.title)}%20at%20₹${l.price}"
+         class="btn btn-wa" target="_blank" rel="noopener" style="flex:1;justify-content:center;">💬 Contact via WhatsApp</a>
+      <a aria-label="Call EWaste Kochi Experts" href="tel:+919876543210" class="btn btn-outline" style="flex:1;justify-content:center;">📞 Call EWasteKochi</a>
+    </div>
+  `;
+
+  openModal('detailModal');
+}
+
+/* ═══════════════════════════════════════════
+   POST LISTING
+═══════════════════════════════════════════ */
+function selectType(type) {
+  currentType = type;
+  document.getElementById('typeOptSell').classList.toggle('selected', type === 'sell');
+  document.getElementById('typeOptBuy').classList.toggle('selected', type === 'buy');
+  document.getElementById('conditionField').style.display = type === 'sell' ? '' : 'none';
+  document.getElementById('wipeNotice').style.display = type === 'sell' ? '' : 'none';
+}
+
+function selectCondition(el) {
+  document.querySelectorAll('.cond-opt').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  currentCondition = el.dataset.cond;
+}
+
+async function submitListing() {
+  const title    = document.getElementById('postTitle').value.trim();
+  const price    = document.getElementById('postPrice').value;
+  const name     = document.getElementById('postName').value.trim();
+  const phone    = document.getElementById('postPhone').value.trim();
+  const category = document.getElementById('postCategory').value;
+  const brand    = document.getElementById('postBrand').value;
+  const location = document.getElementById('postLocation').value;
+  const specs    = document.getElementById('postSpecs').value.trim();
+  const desc     = document.getElementById('postDesc').value.trim();
+
+  if (!title) return showToast('❌ Please enter a device title', 'error');
+  if (!price || isNaN(price) || Number(price) <= 0) return showToast('❌ Please enter a valid price', 'error');
+  if (!name)  return showToast('❌ Please enter your name', 'error');
+  if (!phone) return showToast('❌ Please enter your phone / WhatsApp', 'error');
+
+  const EMOJI_MAP = { phone:'📱', laptop:'💻', tablet:'📟', server:'🖥️', desktop:'🖥️', other:'📦' };
+  const newId = 'EWK' + String(Date.now()).slice(-6);
+
+  const listing = {
+    id: newId,
+    type: currentType,
+    category,
+    brand,
+    title,
+    price: Number(price),
+    location,
+    condition: currentType === 'sell' ? currentCondition : 'N/A',
+    specs: specs ? specs.split(',').map(s => s.trim()).filter(Boolean) : [],
+    desc: desc || 'No description provided.',
+    name,
+    phone,
+    emoji: EMOJI_MAP[category] || '📦',
+    verified: false,
+    featured: false,
+    posted: Date.now()
+  };
+
+  allListings.unshift(listing);
+  await saveListings(allListings);
+
+  closeModal('postModal');
+  resetForm();
+  filterListings();
+  updateStats();
+  showToast('✅ Listing posted! EWasteKochi will verify within 2 hours.', 'success');
+}
+
+function resetForm() {
+  ['postTitle','postPrice','postName','postPhone','postSpecs','postDesc']
+    .forEach(id => { document.getElementById(id).value = ''; });
+  selectType('sell');
+  document.querySelectorAll('.cond-opt').forEach((b,i) => b.classList.toggle('selected', i === 0));
+  currentCondition = 'Like New';
+}
+
+/* ═══════════════════════════════════════════
+   MODAL HELPERS
+═══════════════════════════════════════════ */
+function openModal(id) {
+  const el = document.getElementById(id);
+  el.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  requestAnimationFrame(() => el.classList.add('visible'));
+}
+
+function closeModal(id) {
+  const el = document.getElementById(id);
+  el.classList.remove('visible');
+  setTimeout(() => {
+    el.classList.remove('open');
+    document.body.style.overflow = '';
+  }, 300);
+}
+
+function openPostModal() { openModal('postModal'); }
+
+function handleOverlayClick(e, id) {
+  if (e.target === document.getElementById(id)) closeModal(id);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeModal('postModal');
+    closeModal('detailModal');
+  }
+});
+
+/* ═══════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════ */
+function showToast(msg, type = 'success') {
+  const stack = document.getElementById('toastStack');
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.innerHTML = `<span class="toast-icon">${type === 'error' ? '❌' : type === 'info' ? 'ℹ️' : '✅'}</span><span>${msg}</span>`;
+  stack.appendChild(el);
+  setTimeout(() => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateX(20px)';
+    el.style.transition = 'all .3s';
+    setTimeout(() => el.remove(), 300);
+  }, 3500);
+}
+
+/* ═══════════════════════════════════════════
+   BOOT
+═══════════════════════════════════════════ */
+init();
+</script>
+</body>
+</html>

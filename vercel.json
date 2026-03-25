@@ -1,7 +1,15 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": true,
-  "github": {
-    "silent": true
-  }
+    "redirects": [
+        {
+            "source": "/:path*",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "www.ewastekochi.com"
+                }
+            ],
+            "destination": "https://ewastekochi.com/:path*",
+            "permanent": true
+        }
+    ]
 }

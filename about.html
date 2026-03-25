@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LM5KP762ST"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LM5KP762ST');
+</script>
+
+
+
+
+
+
+
+<script>
+if (window.location.hostname.startsWith('www.')) {
+    window.location.href = window.location.href.replace('www.', '');
+}
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    <meta name="robots" content="index, follow"> content="width=device-width, initial-scale=1.0">
+  <title>About EwasteKochi | Certified ITAD & E-Waste Recycling Kochi</title>
+  <meta name="description" content="About EwasteKochi: Kerala's #1 e-waste recycling expert. 500+ businesses served, free pickup across Ernakulam & Kakkanad. NIST 800-88 certified data destruction.">
+  <link rel="canonical" href="https://ewastekochi.com/about.html">
+  
+  <!-- SEO & Trust Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #0A0F0C;
+      --bg2: #111A14;
+      --surface: #182118;
+      --border: rgba(0,230,100,.13);
+      --green: #00E664;
+      --green2: #00C463;
+      --white: #E8F2EA;
+      --text: #9BB8A2;
+      --muted: #5A7A62;
+      --font-head: 'Bebas Neue', sans-serif;
+      --font-body: 'Outfit', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Grid Overlay */
+    body::after {
+      content: ''; position: fixed; inset: 0;
+      background-image: linear-gradient(rgba(0,230,100,.015) 1px, transparent 1px), linear-gradient(90deg, rgba(0,230,100,.015) 1px, transparent 1px);
+      background-size: 40px 40px; pointer-events: none; z-index: 0;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+    
+    /* Navigation */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,15,12,0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      height: 70px; display: flex; align-items: center;
+    }
+    .nav-inner { width: 100%; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-family: var(--font-head); font-size: 1.5rem; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .logo-box { width: 30px; height: 30px; background: var(--green); border-radius: 6px; }
+
+    /* Hero */
+    .hero { padding: 120px 0 80px; text-align: center; }
+    .hero h1 { font-family: var(--font-head); font-size: clamp(3.5rem, 10vw, 7rem); color: var(--white); line-height: 0.9; margin-bottom: 24px; }
+    .hero h1 span { color: var(--green); }
+    .hero p { font-size: 1.25rem; max-width: 750px; margin: 0 auto; color: var(--text); }
+
+    /* Trust Box */
+    .trust-box {
+      background: rgba(0,230,100,0.1); border: 1px solid var(--green);
+      padding: 30px; border-radius: 20px; text-align: center;
+      margin: 40px 0; color: var(--green); font-family: var(--font-mono);
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;
+    }
+    .trust-box span { font-weight: 700; }
+
+    /* Content Sections */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin: 60px 0; }
+    .card { background: var(--bg2); border: 1px solid var(--border); padding: 40px; border-radius: 24px; }
+    .card h2 { font-family: var(--font-head); font-size: 2.5rem; color: var(--white); margin-bottom: 20px; letter-spacing: 1px; }
+    .card h3 { color: var(--green); font-family: var(--font-mono); font-size: 0.9rem; margin-bottom: 12px; }
+
+    /* Process Footer */
+    .process-steps { margin-top: 60px; border-top: 1px solid var(--border); padding-top: 60px; }
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .step { position: relative; padding-top: 20px; }
+    .step::before { content: ''; position: absolute; top: 0; left: 0; width: 40px; height: 4px; background: var(--green); }
+    .step-num { font-family: var(--font-head); font-size: 1.5rem; color: var(--white); }
+
+    /* CTA */
+    .cta {
+      background: var(--green); color: var(--bg); padding: 80px 40px; border-radius: 32px;
+      text-align: center; margin: 80px 0;
+    }
+    .cta h2 { font-family: var(--font-head); font-size: 4rem; margin-bottom: 20px; line-height: 1; }
+    .btn-dark {
+      display: inline-block; padding: 20px 40px; background: var(--bg); color: var(--white);
+      border-radius: 14px; text-decoration: none; font-weight: 800; font-family: var(--font-body);
+      margin-top: 20px; transition: transform 0.2s;
+    }
+    .btn-dark:hover { transform: scale(1.05); }
+
+    @media (max-width: 768px) {
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .hero h1 { font-size: 4rem; }
+    }
+  </style>
+
+  <!-- Google Schema Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "EwasteKochi",
+    "description": "Kerala's #1 Certified ITAD & E-Waste Recycling Company.",
+    "url": "https://ewastekochi.com",
+    "telephone": "+917500555454",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "710a Hill Palace Rd",
+      "addressLocality": "Thrippunithura",
+      "addressRegion": "Kerala",
+      "postalCode": "682301",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 9.9935,
+      "longitude": 76.4711
+    },
+    "openingHours": "Mo-Sa 09:00-18:00"
+  }
+  </script>
+
+    <meta property="og:site_name" content="EWaste Kochi">
+    <meta property="og:title" content="About EwasteKochi | Certified ITAD & E-Waste Recycling Kochi">
+    <meta property="og:description" content="About EwasteKochi: Kerala's #1 e-waste recycling expert. 500+ businesses served, free pickup across Ernakulam & Kakkanad. NIST 800-88 certified data destruction.">
+    <meta property="og:url" content="https://ewastekochi.com/about.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://ewastekochi.com/images/og-main.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About EwasteKochi | Certified ITAD & E-Waste Recycling Kochi">
+    <meta name="twitter:description" content="About EwasteKochi: Kerala's #1 e-waste recycling expert. 500+ businesses served, free pickup across Ernakulam & Kakkanad. NIST 800-88 certified data destruction.">
+    <meta name="twitter:image" content="https://ewastekochi.com/images/og-main.jpg">
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-box"></div>
+      EWASTE KOCHI
+    </a>
+    <div style="font-family: var(--font-mono); font-size: 0.7rem; opacity: 0.6;">AUTORIZED BY KSPCB</div>
+  </div>
+</nav>
+
+<div class="container">
+  <header class="hero">
+    <div style="text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem; color: var(--green); margin-bottom: 10px; font-weight: 700;">// ABOUT THE AUTHORITY</div>
+    <h1>ABOUT <span>EWASTEKOCHI</span></h1>
+    <p>EwasteKochi is Kochi's certified technical partner for <strong>certified e-waste recycling</strong> and secure <strong>ITAD services</strong>. We bridge the gap between corporate compliance and environmental responsibility.</p>
+  </header>
+
+  <div class="trust-box">
+    <span>✔️ 500+ CORPORATE CLIENTS</span>
+    <span>✔️ NIST 800-88 COMPLIANT</span>
+    <span>✔️ KSPCB AUTHORIZED</span>
+    <span>✔️ DOORSTEP PICKUP KERALA</span>
+  </div>
+
+  <section class="grid">
+    <div class="card">
+      <h3>01 / OUR MISSION</h3>
+      <h2>Certified E-Waste Experts</h2>
+      <p>Since 2018, we have evolved from a local collector to the region's most trusted <strong>IT Asset Disposition (ITAD) Kochi</strong> specialist. Our facility in <strong>Thrippunithura</strong> is equipped with industrial-grade data destruction hardware.</p>
+    </div>
+    <div class="card">
+      <h3>02 / OUR FOOTPRINT</h3>
+      <h2>Serving Kakkanad & Beyond</h2>
+      <p>Strategically located to serve <strong>Infopark</strong> and <strong>SmartCity</strong>, we provide <strong>doorstep e-waste pickup Kakkanad</strong> and Edappally within 24 hours. We manage the entire lifecycle of retired electronics for Kerala's leading tech hubs.</p>
+    </div>
+  </section>
+
+  <section class="card" style="margin-bottom: 60px;">
+    <h3>03 / WHY US</h3>
+    <h2>Why Kochi's Best Choose EwasteKochi</h2>
+    <div class="grid" style="grid-template-columns: 1fr 1fr; margin: 20px 0; gap: 30px;">
+      <div>
+        <h4 style="color: var(--white); margin-bottom: 10px;">Security First</h4>
+        <p>We implement NIST 800-88 forensic-grade wiping. Unlike scrap dealers, we provide a full chain of custody.</p>
+      </div>
+      <div>
+        <h4 style="color: var(--white); margin-bottom: 10px;">Legal Compliance</h4>
+        <p>100% aligned with E-Waste Management Rules & DPDP Act 2023. Our Certificate of Destruction satisfies every audit.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="process-steps">
+    <h2 style="font-family: var(--font-head); font-size: 3rem; color: var(--white); margin-bottom: 40px;">Our Certified Process</h2>
+    <div class="process-grid">
+      <div class="step">
+        <div class="step-num">01 / PICKUP</div>
+        <p>Secure logistics from your doorstep in Kakkanad or Edappally.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02 / AUDIT</div>
+        <p>Detailed serial-number tracking of every IT asset.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03 / WIPE</div>
+        <p>Forensic data destruction (Software & Physical Shredding).</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04 / RECYCLE</div>
+        <p>100% eco-friendly processing of raw materials.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta">
+    <h2>NEED CERTIFIED<br>DISPOSAL?</h2>
+    <p>Contact Kochi's highest-rated ITAD team for a free compliance quote today.</p>
+    <a href="contact.html" class="btn-dark">GET A FREE QUOTE</a>
+  </div>
+</div>
+
+<footer style="padding: 60px 0; text-align: center; border-top: 1px solid var(--border); opacity: 0.4; font-size: 0.8rem;">
+  &copy; 2024 EwasteKochi. Thrippunithura, Kerala. Specialized in Data Destruction Infopark.
+
+ <div class="share-bar" style="margin-top:40px; border-top:1px solid var(--border); padding-top:24px; text-align:center;">
+  <div style="font-size:0.85rem; color:var(--muted); margin-bottom:12px;">Share this Knowledge Hub</div>
+  <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+   <a href="https://www.facebook.com/sharer/sharer.php?u=https://ewastekochi.com/about.html" target="_blank" class="btn btn-outline" style="padding:8px 16px; font-size:0.8rem;">Facebook</a>
+   <a href="https://twitter.com/intent/tweet?url=https://ewastekochi.com/about.html&text=Kochi Most Trusted ITAD & E-Waste Recycler" target="_blank" class="btn btn-outline" style="padding:8px 16px; font-size:0.8rem;">X (Twitter)</a>
+   <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://ewastekochi.com/about.html" target="_blank" class="btn btn-outline" style="padding:8px 16px; font-size:0.8rem;">LinkedIn</a>
+   <a href="https://api.whatsapp.com/send?text=Check out EWaste Kochi - Certified ITAD & E-Waste Recycling Kochi: https://ewastekochi.com/about.html" target="_blank" class="btn btn-outline" style="padding:8px 16px; font-size:0.8rem;">WhatsApp</a>
+  </div>
+ </div>
+
+</footer>
+
+</body>
+</html>
