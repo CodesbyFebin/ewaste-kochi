@@ -31,16 +31,16 @@ const relatedServices = service.relatedServices
 const relevantTestimonials = testimonials.slice(0, 3);
 
 const breadcrumbs = [
-  { name: 'Home', url: 'https://ewastekochi.in/' },
-  { name: 'Services', url: 'https://ewastekochi.in/services' },
-  { name: service.name, url: `https://ewastekochi.in/services/${service.slug}` },
+  { name: 'Home', url: 'https://ewastekochi.com/' },
+  { name: 'Services', url: 'https://ewastekochi.com/services' },
+  { name: service.name, url: `https://ewastekochi.com/services/${service.slug}` },
 ];
 
 const serviceSchema = {
   '@type': 'Service',
   name: service.name,
   serviceType: service.name,
-  provider: { '@id': 'https://ewastekochi.in/#organization' },
+  provider: { '@id': 'https://ewastekochi.com/#organization' },
   areaServed: { '@type': 'State', name: 'Kerala' },
   description: service.longDescription || service.description,
   ...(service.priceSchema && {

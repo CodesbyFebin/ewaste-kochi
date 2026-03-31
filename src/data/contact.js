@@ -10,8 +10,8 @@ export const contact = {
   phoneLink: 'tel:+917500555454',
 
   // ⚠️ REPLACE: Use your real email
-  email: 'info@ewastekochi.in',
-  emailLink: 'mailto:info@ewastekochi.in',
+  email: 'info@ewastekochi.com',
+  emailLink: 'mailto:info@ewastekochi.com',
 
   // WhatsApp — same number as phone (no dashes, no +)
   whatsappNumber: '917500555454',

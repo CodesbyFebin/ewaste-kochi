@@ -20,9 +20,9 @@ const category = blogCategories.find(c => c.id === blog.category);
 const relatedFaqs = faqs.filter(f => f.category === blog.category).slice(0, 5);
 
 const breadcrumbs = [
-  { name: 'Home', url: 'https://ewastekochi.in/' },
-  { name: 'Blog', url: 'https://ewastekochi.in/blog' },
-  { name: blog.title, url: `https://ewastekochi.in/blog/${blog.slug}` },
+  { name: 'Home', url: 'https://ewastekochi.com/' },
+  { name: 'Blog', url: 'https://ewastekochi.com/blog' },
+  { name: blog.title, url: `https://ewastekochi.com/blog/${blog.slug}` },
 ];
 
 const blogSchema = {
@@ -31,7 +31,7 @@ const blogSchema = {
   "description": blog.excerpt,
   "author": { "@type": "Organization", "name": "EWaste Kochi" },
   "datePublished": blog.date,
-  "mainEntityOfPage": { "@type": "WebPage", "@id": `https://ewastekochi.in/blog/${blog.slug}` }
+  "mainEntityOfPage": { "@type": "WebPage", "@id": `https://ewastekochi.com/blog/${blog.slug}` }
 };
 ---
 

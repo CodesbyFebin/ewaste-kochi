@@ -36,10 +36,10 @@ const relatedServices = service.relatedServices
   : services.filter(s => s.slug !== service.slug).slice(0, 3);
 
 const breadcrumbs = [
-  { name: 'Home', url: 'https://ewastekochi.in/' },
-  { name: 'Locations', url: 'https://ewastekochi.in/locations' },
-  { name: location.name, url: `https://ewastekochi.in/locations/${location.slug}` },
-  { name: service.shortName, url: `https://ewastekochi.in/locations/${location.slug}/${service.slug}` },
+  { name: 'Home', url: 'https://ewastekochi.com/' },
+  { name: 'Locations', url: 'https://ewastekochi.com/locations' },
+  { name: location.name, url: `https://ewastekochi.com/locations/${location.slug}` },
+  { name: service.shortName, url: `https://ewastekochi.com/locations/${location.slug}/${service.slug}` },
 ];
 
 const pageTitle = `${service.shortName} in ${location.name} | Certified & Free Pickup | EWaste Kochi`;
@@ -49,7 +49,7 @@ const combinedSchema = {
   "@type": "Service",
   "name": `${service.name} in ${location.name}`,
   "serviceType": service.name,
-  "provider": { "@id": "https://ewastekochi.in/#organization" },
+  "provider": { "@id": "https://ewastekochi.com/#organization" },
   "areaServed": {
     "@type": "City",
     "name": location.name,

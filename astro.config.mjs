@@ -5,7 +5,7 @@ import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://ewastekochi.in',
+  site: 'https://ewastekochi.com',
   output: 'server',
   adapter: cloudflare(),
   integrations: [
@@ -15,14 +15,14 @@ export default defineConfig({
       lastmod: new Date(),
       customPages: [
         // Pillar pages get highest priority
-        'https://ewastekochi.in/services/e-waste-recycling-kochi',
-        'https://ewastekochi.in/services/itad-kochi',
-        'https://ewastekochi.in/services/data-destruction-kochi',
-        'https://ewastekochi.in/services/hard-drive-shredding-kochi',
-        'https://ewastekochi.in/services/laptop-buyback-kochi',
-        'https://ewastekochi.in/services/battery-recycling-kochi',
-        'https://ewastekochi.in/services/server-recycling-kochi',
-        'https://ewastekochi.in/services/mobile-recycling-kochi',
+        'https://ewastekochi.com/services/e-waste-recycling-kochi',
+        'https://ewastekochi.com/services/itad-kochi',
+        'https://ewastekochi.com/services/data-destruction-kochi',
+        'https://ewastekochi.com/services/hard-drive-shredding-kochi',
+        'https://ewastekochi.com/services/laptop-buyback-kochi',
+        'https://ewastekochi.com/services/battery-recycling-kochi',
+        'https://ewastekochi.com/services/server-recycling-kochi',
+        'https://ewastekochi.com/services/mobile-recycling-kochi',
       ],
     }),
     tailwind({
@@ -39,7 +39,7 @@ export default defineConfig({
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'ewastekochi.in',
+        hostname: 'ewastekochi.com',
       },
     ],
   },
