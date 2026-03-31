@@ -1,0 +1,215 @@
+---
+// src/pages/contact.astro — Premium Contact Page with Logic-Ready Form
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { contact } from '../data/contact.js';
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.in/' },
+  { name: 'Contact Us', url: 'https://ewastekochi.in/contact' },
+];
+
+const pageTitle = "Contact EWaste Kochi | Book Certified E-Waste Pickup 24/7";
+const pageDesc = "Need certified e-waste recycling or ITAD in Kochi? Contact us 24/7 for a free quote and bulk pickup. KSPCB authorized, NIST/DoD data destruction guaranteed.";
+
+const contactSchema = {
+  "@type": "ContactPage",
+  "name": pageTitle,
+  "description": pageDesc,
+  "mainEntity": {
+    "@id": "https://ewastekochi.in/#organization"
+  }
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  schema={contactSchema}
+  breadcrumbs={breadcrumbs}
+>
+  <Navbar currentPath="/contact" />
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb-nav">
+    <div class="wrap">
+      <ol class="breadcrumb">
+        {breadcrumbs.map((crumb, i) => (
+          <li>
+            <a href={crumb.url}>{crumb.name}</a>
+            {i < breadcrumbs.length - 1 && <span class="bc-sep">›</span>}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </nav>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="contact-left">
+          <p class="sec-eyebrow">Get in Touch</p>
+          <h1 class="sec-title">Fast Pickup. <br/><em>24/7 Response.</em></h1>
+          <p class="sec-desc">
+            We handle e-waste disposal and data destruction for Kochi's leading IT companies, banks, and hospitals. 
+            Fill out the form below or use our direct channels for an immediate response.
+          </p>
+
+          <div class="direct-channels">
+            <a href={contact.phoneLink} class="chan-box">
+              <div class="chan-icon">📞</div>
+              <div class="chan-info">
+                <strong>Call Anytime</strong>
+                <span>{contact.phoneDisplay}</span>
+              </div>
+            </a>
+            <a href={contact.whatsappMessage} class="chan-box wa-box">
+              <div class="chan-icon">💬</div>
+              <div class="chan-info">
+                <strong>WhatsApp Now</strong>
+                <span>Instant Response</span>
+              </div>
+            </a>
+            <a href={contact.emailLink} class="chan-box">
+              <div class="chan-icon">✉️</div>
+              <div class="chan-info">
+                <strong>Email Support</strong>
+                <span>{contact.email}</span>
+              </div>
+            </a>
+          </div>
+
+          <div class="office-box">
+            <h4>📍 Our Headquarters</h4>
+            <address>
+              {contact.address.full} <br/>
+              District: Ernakulam, Kerala
+            </address>
+            <a href={contact.address.mapLink} target="_blank" class="map-link">View on Google Maps →</a>
+          </div>
+        </div>
+
+        <div class="form-container">
+          <form class="lead-form" id="contact-form">
+            <div class="f-group">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" name="name" placeholder="Enter your name" required />
+            </div>
+
+            <div class="f-row">
+              <div class="f-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" placeholder="email@company.com" required />
+              </div>
+              <div class="f-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="address-phone" name="phone" placeholder="+91" required />
+              </div>
+            </div>
+
+            <div class="f-group">
+              <label for="service">Service Needed</label>
+              <select id="service" name="service">
+                <option value="pickup">ITAD & Bulk Pickup</option>
+                <option value="destruction">Data Destruction (NIST/DoD)</option>
+                <option value="buyback">Laptop/Device Buyback</option>
+                <option value="epr">EPR & Compliance Consulting</option>
+                <option value="Other">Other Query</option>
+              </select>
+            </div>
+
+            <div class="f-group">
+              <label for="location">Your Location (in Kochi/Kerala)</label>
+              <input type="text" id="location" name="location" placeholder="e.g. Infopark, Kakkanad" />
+            </div>
+
+            <div class="f-group">
+              <label for="details">Project Details / Device List</label>
+              <textarea id="details" name="details" rows="4" placeholder="e.g. 50+ laptops, 5 servers for recycling"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block" id="submit-btn">
+              Get Your Free Quote Now →
+            </button>
+            <p class="form-disclaimer">Privacy Policy: We never share your data. Certified destruction only.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ for Contact -->
+  <section class="section-alt">
+    <div class="wrap">
+      <div class="text-center">
+        <h2 class="sec-title">Common Questions</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <h4>How fast is the pickup?</h4>
+          <p>For locations like Infopark and Smart City, we offer same-day collection for corporate clients. All other areas in Ernakulam usually take 24 hours.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Is certification provided?</h4>
+          <p>Yes. Every single job is backed by a legally valid Certificate of Destruction (CoD) and an Environmental Impact Certificate.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .breadcrumb-nav { background: var(--surface); padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .breadcrumb { display: flex; gap: 8px; list-style: none; font-size: 0.8rem; color: var(--muted); }
+  .bc-sep { margin-left: 8px; opacity: 0.3; }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .sec-desc { color: var(--text); margin-bottom: 40px; font-size: 1.1rem; }
+  
+  .direct-channels { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 40px; }
+  .chan-box { display: flex; align-items: center; gap: 15px; background: var(--card); border: 1px solid var(--border); padding: 20px; border-radius: 12px; transition: border-color 0.3s; }
+  .chan-box:hover { border-color: var(--green); }
+  .chan-icon { font-size: 1.5rem; background: rgba(0,232,150,0.1); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 10px; }
+  .chan-info strong { display: block; color: var(--white); font-size: 0.8rem; text-transform: uppercase; margin-bottom: 3px; }
+  .chan-info span { font-size: 1rem; color: var(--text); font-weight: 700; }
+  .wa-box:hover { border-color: #25D366; }
+  .wa-box .chan-icon { background: rgba(37,211,102,0.1); }
+  .wa-box span { color: #25D366; }
+
+  .office-box { padding: 30px; border: 1px solid var(--border2); border-radius: 12px; position: relative; overflow: hidden; }
+  .office-box h4 { margin-bottom: 10px; color: var(--white); }
+  .office-box address { color: var(--text); font-style: normal; margin-bottom: 15px; line-height: 1.6; }
+  .map-link { color: var(--green); font-weight: 600; font-size: 0.85rem; }
+
+  /* Form Styling */
+  .form-container { background: var(--card); border: 1px solid var(--border2); padding: 40px; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+  .lead-form { display: flex; flex-direction: column; gap: 20px; }
+  .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .f-group { display: flex; flex-direction: column; gap: 8px; }
+  .f-group label { font-size: 0.8rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  
+  .f-group input, .f-group select, .f-group textarea { 
+    background: var(--surface); color: var(--white); border: 1px solid var(--border); padding: 14px; border-radius: 10px; font-family: inherit; font-size: 1rem; transition: border-color 0.3s;
+  }
+  .f-group input:focus, .f-group select:focus, .f-group textarea:focus { 
+    border-color: var(--green); outline: none; 
+  }
+  
+  .btn-block { width: 100%; justify-content: center; padding: 18px; font-size: 1rem; }
+  .form-disclaimer { font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 10px; }
+
+  .faq-list { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+  .faq-item h4 { color: var(--white); margin-bottom: 10px; }
+  .faq-item p { font-size: 0.9rem; color: var(--text); line-height: 1.6; }
+
+  @media (max-width: 1024px) {
+    .contact-grid { grid-template-columns: 1fr; gap: 60px; }
+  }
+  @media (max-width: 768px) {
+    .f-row { grid-template-columns: 1fr; }
+    .faq-list { grid-template-columns: 1fr; }
+  }
+</style>

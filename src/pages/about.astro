@@ -1,0 +1,108 @@
+---
+// src/pages/about.astro — The Story of Kochi's Authority in E-Waste
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { contact } from '../data/contact.js';
+import { generateTopicFaqs } from '../data/faqs.js';
+
+const pageTitle = "About EWaste Kochi | KSPCB Authorized | Kerala's Elite ITAD Partner";
+const pageDesc = "Learn about the mission, certifications, and facility behind Kochi's #1 e-waste recycler. From 2018 to the DPDP Act 2023, we define excellence in Kerala's circular economy.";
+
+const faqs = generateTopicFaqs("EWaste Kochi Certification");
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.in/' },
+  { name: 'About Us', url: 'https://ewastekochi.in/about' },
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  faqs={faqs}
+  breadcrumbs={breadcrumbs}
+>
+  <Navbar currentPath="/about" />
+
+  <section class="section pillar-hero">
+    <div class="wrap">
+      <p class="sec-eyebrow">The Mission</p>
+      <h1 class="sec-title">The <em>Authority</em> in <br/>Kerala's E-Waste</h1>
+      <p class="sec-sub">Establishing a zero-landfill future through certified technology and corporate integrity.</p>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="wrap">
+      <div class="pillar-content">
+        <article class="kw-cluster">
+          <div class="kw-header"><span>01</span> <h2>Our Kerala Heritage</h2></div>
+          <p>Founded in 2018, EWaste Kochi began with a single mission: to provide <a href="/locations">all 30 Kochi pillars</a> with a certified alternative to dumping electronics. Today, we are the region's total authority.</p>
+        </article>
+
+        <article class="kw-cluster">
+          <div class="kw-header"><span>02</span> <h2>KSPCB Authorization #KL/EW/628</h2></div>
+          <p>Certification is our backbone. We handle <a href="/ewaste">every e-waste stream</a> under strict Kerala State Pollution Control Board guidelines, ensuring your business stays audit-proof.</p>
+        </article>
+
+        <article class="kw-cluster">
+          <div class="kw-header"><span>03</span> <h2>Advanced ITAD Infrastructure</h2></div>
+          <p>Managed by specialists from the <a href="/itad">ITAD industry</a>, we implement the highest security standards for data-bearing devices collected from Trivandrum to Kozhikode.</p>
+        </article>
+      </div>
+
+      <!-- Massive 50 FAQ about Company -->
+      <div class="massive-faq-container">
+        <h2 class="sub-h text-center">50 FAQs about Our Certifications & Mission</h2>
+        <div class="faq-grid-3">
+          {faqs.map(f => (
+            <div class="faq-card">
+              <h4>Q: {f.q}</h4>
+              <p>A: {f.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="pillar-cta">
+        <div class="p-cta-box about-box">
+          <h2>Ready to Partner with Kochi's #1?</h2>
+          <p>Contact our compliance team for bulk <a href="/itad">ITAD</a> or <a href="/recycling">Recycling</a> projects.</p>
+          <div class="p-cta-btns">
+            <a href="/contact" class="btn btn-primary btn-lg">Online Inquiry →</a>
+            <a href={contact.phoneLink} class="btn btn-outline btn-lg">📞 Contact HQ</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .pillar-hero { padding: 120px 0 60px; text-align: center; background: radial-gradient(circle at 10% 20%, rgba(0,232,150,0.06), transparent); }
+  .pillar-content { margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 80px; }
+  .kw-cluster { background: var(--card); border: 1px solid var(--border); padding: 40px; border-radius: 24px; transition: 0.3s; }
+  .kw-header { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 15px; }
+  .kw-header span { font-size: 0.8rem; font-weight: 800; color: var(--green); background: rgba(0,232,150,0.1); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0; }
+  .kw-header h2 { font-size: 1.25rem; color: var(--white); line-height: 1.2; margin-top: 5px; }
+  .kw-cluster p { font-size: 0.95rem; line-height: 1.7; color: var(--text); font-family: var(--serif); }
+  .kw-cluster p a { color: var(--green); font-weight: 700; text-decoration: underline; }
+
+  .massive-faq-container { margin-top: 100px; }
+  .sub-h { font-size: 2rem; color: var(--white); margin-bottom: 40px; }
+  .faq-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .faq-card { background: var(--card); border: 1px solid var(--border); padding: 25px; border-radius: 15px; }
+  .faq-card h4 { font-size: 0.9rem; color: var(--white); margin-bottom: 10px; line-height: 1.4; }
+  .faq-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+  .about-box { background: linear-gradient(135deg, #0A1410, #050908); border-color: rgba(0,232,150,0.1); border: 1px solid var(--border2); padding: 60px; border-radius: 30px; margin-top: 80px; text-align: center; }
+  .p-cta-btns { display: flex; gap: 20px; justify-content: center; margin-top: 30px; }
+
+  @media (max-width: 1024px) {
+    .pillar-content { grid-template-columns: 1fr; }
+    .faq-grid-3 { grid-template-columns: 1fr 1fr; }
+  }
+</style>

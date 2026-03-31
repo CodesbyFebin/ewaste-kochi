@@ -1,0 +1,95 @@
+---
+// src/pages/blog/index.astro — Multi-Pillar Blog Directory
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { blogCategories, getRecentBlogs } from '../../data/blogs.js';
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.in/' },
+  { name: 'Blog', url: 'https://ewastekochi.in/blog' },
+];
+
+const pageTitle = "E-Waste & ITAD Knowledge Base | Expert Insights | EWaste Kochi";
+const pageDesc = "Expert articles on corporate ITAD, data security, e-waste laws, and environmental sustainability in Kochi and Kerala. Browse our 20 pillar categories.";
+
+const recentBlogs = getRecentBlogs(12);
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  breadcrumbs={breadcrumbs}
+>
+  <Navbar currentPath="/blog" />
+
+  <section class="section blog-hero">
+    <div class="wrap">
+      <div class="text-center">
+        <p class="sec-eyebrow">Insights & Strategy</p>
+        <h1 class="sec-title">The <em>Knowledge</em> Base</h1>
+        <p class="sec-sub">Expert insights into the future of ITAD, certified recycling, and data privacy in India's digital economy.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="wrap">
+      <div class="blog-index-layout">
+        <!-- Categories Grid -->
+        <div class="categories-grid">
+           <h2>20 Content Pillars</h2>
+           <div class="pillar-row">
+              {blogCategories.map(cat => (
+                <a href={`/blog/category/${cat.id}`} class="cat-pill">{cat.name}</a>
+              ))}
+           </div>
+        </div>
+
+        <!-- Recent Posts -->
+        <div class="recent-posts">
+           <h2>Latest Insights</h2>
+           <div class="posts-grid">
+              {recentBlogs.map(blog => (
+                <article class="blog-card">
+                  <div class="bc-meta">{blog.category.toUpperCase()} · {blog.date}</div>
+                  <h3><a href={`/blog/${blog.slug}`}>{blog.title}</a></h3>
+                  <p>{blog.excerpt}</p>
+                  <a href={`/blog/${blog.slug}`} class="bc-link">Read Full Article →</a>
+                </article>
+              ))}
+           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .blog-hero { padding: 100px 0 60px; background: radial-gradient(circle at 10% 20%, rgba(0,232,150,0.05), transparent); }
+  .categories-grid { margin-bottom: 60px; }
+  .categories-grid h2 { font-size: 0.8rem; text-transform: uppercase; margin-bottom: 25px; color: var(--muted); border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+  .pillar-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .cat-pill { padding: 10px 18px; background: var(--card); border: 1px solid var(--border); border-radius: 50px; font-size: 0.85rem; font-weight: 700; color: var(--text); transition: 0.3s; }
+  .cat-pill:hover { border-color: var(--green); color: var(--green); background: var(--card2); }
+
+  .recent-posts { margin-top: 80px; }
+  .recent-posts h2 { font-size: 1.5rem; color: var(--white); margin-bottom: 30px; border-bottom: 1px solid var(--border2); padding-bottom: 15px; }
+  .posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+  .blog-card { background: var(--card); border: 1px solid var(--border2); padding: 30px; border-radius: 20px; transition: 0.3s; }
+  .blog-card:hover { transform: translateY(-5px); border-color: var(--green3); }
+  .bc-meta { font-size: 0.7rem; font-weight: 700; color: var(--green); letter-spacing: 0.1em; margin-bottom: 12px; }
+  .blog-card h3 { font-size: 1.1rem; color: var(--white); margin-bottom: 12px; line-height: 1.4; }
+  .blog-card h3 a:hover { color: var(--green); }
+  .blog-card p { font-size: 0.85rem; color: var(--text); line-height: 1.6; margin-bottom: 20px; opacity: 0.8; }
+  .bc-link { font-size: 0.8rem; font-weight: 700; color: var(--green); }
+
+  @media (max-width: 1024px) {
+    .posts-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    .posts-grid { grid-template-columns: 1fr; }
+  }
+</style>

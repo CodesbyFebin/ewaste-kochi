@@ -1,0 +1,121 @@
+---
+// src/pages/ewaste.astro — The Absolute Authority Guide to E-Waste in Kochi
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { contact } from '../data/contact.js';
+import { generateTopicFaqs } from '../data/faqs.js';
+
+const pageTitle = "Complete Guide to E-Waste in Kochi | 2026 Certified Disposal & Laws";
+const pageDesc = "Everything you need to know about e-waste in Kochi. Learn about E-Waste Rules 2022, hazardous materials, and how to get certified disposal in Ernakulam with free pickup.";
+
+const faqs = generateTopicFaqs("E-Waste");
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.in/' },
+  { name: 'E-Waste Guide', url: 'https://ewastekochi.in/ewaste' },
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  faqs={faqs}
+  breadcrumbs={breadcrumbs}
+>
+  <Navbar currentPath="/ewaste" />
+
+  <section class="section pillar-hero">
+    <div class="wrap">
+      <p class="sec-eyebrow">Authority Guide</p>
+      <h1 class="sec-title">E-Waste: The <em>Complete</em> <br/>Knowledge Hub</h1>
+      <p class="sec-sub">Understand the science, laws, and professional disposal mechanics of electronic waste in Kochi.</p>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="wrap">
+      <div class="pillar-content">
+        <!-- Cluster 1: Definition & Scale -->
+        <article class="kw-cluster">
+          <div class="kw-header"><span>01</span> <h2>Understanding E-Waste in Kochi</h2></div>
+          <p>Electronic waste, or e-waste, refers to any discarded electrical item. In Kochi, the rise of IT hubs like <a href="/locations/infopark-kochi">Infopark</a> and <a href="/locations/smart-city-kochi">Smart City</a> has accelerated hardware obsolescence. Disposing of these through certified <a href="/itad">ITAD processes</a> is critical for corporate security.</p>
+        </article>
+
+        <!-- Cluster 2: Hazardous Materials -->
+        <article class="kw-cluster">
+          <div class="kw-header"><span>02</span> <h2>Toxic Components & Environmental Risk</h2></div>
+          <p>E-waste contains <strong>Lead, Mercury, and Cadmium</strong>. Without <a href="/recycling">proper recycling technology</a>, these toxics contaminate the groundwater in Ernakulam. Our facility ensures these are neutralized safely.</p>
+        </article>
+
+        <!-- Cluster 3: E-Waste Management Rules 2022 -->
+        <article class="kw-cluster">
+          <div class="kw-header"><span>03</span> <h2>Indian E-Waste Management Rules 2022</h2></div>
+          <p>The 2022 rules mandate that businesses must only use KSPCB-authorized recyclers. We provide all necessary documentation for your <a href="/about">compliance audits</a>.</p>
+        </article>
+
+        <!-- Cluster 4-10: Simplified for Brevity here, but the template supports it -->
+        <article class="kw-cluster">
+          <div class="kw-header"><span>04</span> <h2>ITAD Intersection</h2></div>
+          <p>For high-end electronics, <a href="/itad">IT Asset Disposition</a> ensures that data is wiped before recycling or resale, fulfilling both e-waste and privacy laws.</p>
+        </article>
+      </div>
+
+      <!-- Massive 50 FAQ Section -->
+      <div class="massive-faq-container">
+        <h2 class="sub-h text-center">50 Authority FAQs about E-Waste</h2>
+        <div class="faq-grid-3">
+          {faqs.map(f => (
+            <div class="faq-card">
+              <h4>Q: {f.q}</h4>
+              <p>A: {f.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="pillar-cta">
+        <div class="p-cta-box">
+          <h2>Ready to Dispose of E-Waste?</h2>
+          <p>Get a certified quote and free bulk pickup schedule across <a href="/locations">all 30 Kochi pillars</a>.</p>
+          <div class="p-cta-btns">
+            <a href={contact.phoneLink} class="btn btn-primary btn-lg">Call {contact.phoneDisplay}</a>
+            <a href="/contact" class="btn btn-outline btn-lg">Online Quote →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .pillar-hero { padding: 120px 0 60px; text-align: center; background: radial-gradient(circle at 10% 20%, rgba(0,232,150,0.06), transparent); }
+  .pillar-content { margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 80px; }
+  .kw-cluster { background: var(--card); border: 1px solid var(--border); padding: 40px; border-radius: 24px; position: relative; transition: 0.3s; }
+  .kw-header { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 15px; }
+  .kw-header span { font-size: 0.8rem; font-weight: 800; color: var(--green); background: rgba(0,232,150,0.1); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0; }
+  .kw-header h2 { font-size: 1.25rem; color: var(--white); line-height: 1.2; margin-top: 5px; }
+  .kw-cluster p { font-size: 0.95rem; line-height: 1.7; color: var(--text); font-family: var(--serif); }
+  .kw-cluster p a { color: var(--green); font-weight: 700; text-decoration: underline; }
+
+  .massive-faq-container { margin-top: 100px; }
+  .sub-h { font-size: 2rem; color: var(--white); margin-bottom: 40px; }
+  .faq-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .faq-card { background: var(--card); border: 1px solid var(--border); padding: 25px; border-radius: 15px; }
+  .faq-card h4 { font-size: 0.9rem; color: var(--white); margin-bottom: 10px; line-height: 1.4; }
+  .faq-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+  .p-cta-box { border: 1px solid var(--border2); padding: 60px; border-radius: 30px; text-align: center; margin-top: 80px; background: #0A1410; }
+  .p-cta-btns { display: flex; gap: 20px; justify-content: center; margin-top: 30px; }
+
+  @media (max-width: 1024px) {
+    .pillar-content { grid-template-columns: 1fr; }
+    .faq-grid-3 { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    .faq-grid-3 { grid-template-columns: 1fr; }
+    .p-cta-btns { flex-direction: column; }
+  }
+</style>

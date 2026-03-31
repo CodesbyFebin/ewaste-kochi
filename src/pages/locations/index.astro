@@ -1,0 +1,136 @@
+---
+// src/pages/locations/index.astro — Master Service Areas Index
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { locations, primaryLocations, districtLocations } from '../../data/locations.js';
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.in/' },
+  { name: 'Service Areas', url: 'https://ewastekochi.in/locations' },
+];
+
+const pageTitle = "Service Areas: E-Waste & ITAD Across Kochi & Kerala | EWaste Kochi";
+const pageDesc = "We provide free bulk e-waste pickup across 52+ locations in Kochi, Ernakulam and all major Kerala districts. Check if we serve your area.";
+
+// Extract IT hubs separately for featured section
+const itHubs = locations.filter(l => l.isITHub);
+const commonAreas = locations.filter(l => !l.isITHub && l.district === 'Ernakulam');
+const otherDistricts = locations.filter(l => l.district !== 'Ernakulam');
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  breadcrumbs={breadcrumbs}
+>
+  <Navbar currentPath="/locations" />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="text-center">
+        <p class="sec-eyebrow">Find your area</p>
+        <h1 class="sec-title">52+ Areas <em>Covered</em> <br/>Across Kerala</h1>
+        <p class="sec-sub">
+          We provide free doorstep collection for corporate e-waste across the entire Kochi region 
+          and scheduled pickups for all other Kerala districts.
+        </p>
+      </div>
+
+      <div class="it-hubs-featured">
+        <div class="loc-h-header">
+          <h2>🏢 IT Hubs & Smart Cities</h2>
+          <p>Priority area for 2-hour bulk ITAD collection.</p>
+        </div>
+        <div class="it-hubs-grid">
+          {itHubs.map(hub => (
+            <a href={`/locations/${hub.slug}`} class="hub-card">
+              <div class="hc-icon">⚡</div>
+              <div class="hc-text">
+                <h3>{hub.name}</h3>
+                <p>{hub.description.substring(0, 80)}...</p>
+                <span class="hc-link">View Local Services →</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="area-directory">
+        <div class="dir-grid">
+          <div class="dir-col">
+            <div class="dir-header">
+              <h2>📍 Ernakulam / Kochi City</h2>
+              <p>Same-day and next-day service areas.</p>
+            </div>
+            <div class="dir-list">
+              {commonAreas.map(area => (
+                <a href={`/locations/${area.slug}`} class="area-link">
+                  <span>{area.name}</span>
+                  <span class="arr">→</span>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div class="dir-col">
+            <div class="dir-header">
+              <h2>🏗️ District-Wise Coverage</h2>
+              <p>Scheduled bulk collection for large corporate projects.</p>
+            </div>
+            <div class="dir-list">
+              {otherDistricts.map(area => (
+                <a href={`/locations/${area.slug}`} class="area-link district-link">
+                  <strong>{area.name}</strong>
+                  <span class="arr">→</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .it-hubs-featured { margin-top: 60px; }
+  .loc-h-header { margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+  .loc-h-header h2 { font-size: 1.5rem; color: var(--white); margin-bottom: 5px; }
+  .loc-h-header p { font-size: 0.9rem; color: var(--muted); }
+
+  .it-hubs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .hub-card { background: var(--card); border: 1px solid var(--green2); padding: 30px; border-radius: 20px; display: flex; gap: 25px; transition: 0.3s; }
+  .hub-card:hover { transform: translateY(-5px); border-color: var(--green); }
+  .hc-icon { font-size: 2rem; background: rgba(0,232,150,0.1); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 12px; }
+  .hc-text h3 { color: var(--white); font-size: 1.2rem; margin-bottom: 5px; }
+  .hc-text p { font-size: 0.85rem; color: var(--text); margin-bottom: 15px; line-height: 1.6; }
+  .hc-link { font-size: 0.8rem; color: var(--green); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .area-directory { margin-top: 80px; }
+  .dir-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 80px; }
+  .dir-header { margin-bottom: 30px; }
+  .dir-header h2 { font-size: 1.2rem; color: var(--white); margin-bottom: 5px; }
+  .dir-header p { font-size: 0.8rem; color: var(--muted); }
+
+  .dir-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .area-link { background: var(--card2); border: 1px solid var(--border); padding: 12px 18px; border-radius: 8px; font-size: 0.9rem; color: var(--text); display: flex; justify-content: space-between; align-items: center; transition: 0.2s; }
+  .area-link:hover { border-color: var(--green3); color: var(--green); background: var(--surface); }
+  .arr { font-size: 1rem; opacity: 0.2; }
+  
+  .district-link { border-left: 3px solid var(--green3); background: rgba(0,232,150,0.02); }
+  .district-link strong { color: var(--white); font-weight: 700; }
+
+  @media (max-width: 1024px) {
+    .it-hubs-grid, .dir-grid { grid-template-columns: 1fr; gap: 40px; }
+    .dir-list { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .dir-list { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
+    .dir-list { grid-template-columns: 1fr; }
+  }
+</style>

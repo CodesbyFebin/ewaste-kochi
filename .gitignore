@@ -1,0 +1,32 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Node modules
+node_modules/
+
+# OS Files
+.DS_Store
+
+# Astro build assets
+dist/
+.astro/
+
+# Environment
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.*
+
+# Tests
+coverage/
+
+# Misc
+.vercel
+.netlify
+.wrangler

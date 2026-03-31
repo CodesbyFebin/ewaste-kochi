@@ -1,0 +1,185 @@
+---
+// src/pages/faq.astro — Ultimate Programmatic FAQ Hub
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { faqCategories, faqs } from '../data/faqs.js';
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.in/' },
+  { name: 'FAQ Hub', url: 'https://ewastekochi.in/faq' },
+];
+
+const pageTitle = "E-Waste & ITAD FAQ Hub | 2000+ Questions Answered | EWaste Kochi";
+const pageDesc = "Everything you need to know about certified e-waste, ITAD, and data destruction in Kochi. Browse our 20 pillar categories to find instant answers.";
+
+// Pass all FAQs to BaseLayout for master schema injection
+const allFaqs = faqs.map(f => ({ q: f.q, a: f.a }));
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  faqs={allFaqs}
+  breadcrumbs={breadcrumbs}
+>
+  <Navbar currentPath="/faq" />
+
+  <section class="section faq-hero">
+    <div class="wrap">
+      <div class="text-center">
+        <p class="sec-eyebrow">Knowledge Center</p>
+        <h1 class="sec-title">Ultimate <em>FAQ</em> Hub</h1>
+        <p class="sec-sub">Browse over 20 categories to find answers to your questions about certified electronic disposal in Kochi and Kerala.</p>
+        
+        <div class="faq-search-bar" role="search">
+          <input type="text" id="faq-search" placeholder="Search for a question or keyword (e.g. 'Infopark' or 'NIST')..." />
+          <div class="search-icon" aria-hidden="true">🔍</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="wrap">
+      <div class="faq-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="faq-sidebar">
+          <div class="sidebar-sticky">
+            <h4>Pillar Categories</h4>
+            <nav class="faq-cat-nav">
+              {faqCategories.map(cat => (
+                <a href={`#category-${cat.id}`} class="cat-link">
+                  <span class="c-i">{cat.icon}</span>
+                  <span class="c-n">{cat.name}</span>
+                </a>
+              ))}
+            </nav>
+          </div>
+        </aside>
+
+        <!-- Main FAQ Content -->
+        <div class="faq-main">
+          {faqCategories.map(cat => {
+            const catFaqs = faqs.filter(f => f.category === cat.id);
+            if (catFaqs.length === 0) return null;
+            
+            return (
+              <div class="faq-category-block" id={`category-${cat.id}`}>
+                <div class="cat-header">
+                  <span class="cat-icon-lg">{cat.icon}</span>
+                  <h2>{cat.name}</h2>
+                </div>
+                
+                <div class="faq-grid-list">
+                  {catFaqs.map((faq, i) => (
+                    <div class="faq-item" role="listitem">
+                      <button class="faq-q" aria-expanded="false" aria-controls={`ans-${cat.id}-${i}`}>
+                        <span class="faq-qt">{faq.q}</span>
+                        <span class="faq-ic" aria-hidden="true">+</span>
+                      </button>
+                      <div class="faq-a" id={`ans-${cat.id}-${i}`} role="region" aria-hidden="true">
+                        <div class="faq-at">{faq.a}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+          
+          {/* Placeholder for no search results */}
+          <div id="no-results" style="display:none; text-align:center; padding:60px;">
+             <h3>No questions found for that search.</h3>
+             <p>Call <a href="tel:+917500555454" style="color:var(--green)">+91-7500555454</a> for an instant human answer.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .faq-hero { padding: 100px 0 60px; background: radial-gradient(circle at 10% 20%, rgba(0,232,150,0.05), transparent); }
+  .faq-search-bar { max-width: 600px; margin: 40px auto 0; position: relative; }
+  .faq-search-bar input { width: 100%; background: var(--card); border: 1px solid var(--border2); padding: 18px 25px 18px 50px; border-radius: 50px; color: var(--white); font-family: inherit; font-size: 1rem; box-shadow: 0 10px 40px rgba(0,0,0,0.3); transition: border-color 0.3s; }
+  .faq-search-bar input:focus { border-color: var(--green); outline: none; }
+  .search-icon { position: absolute; left: 20px; top: 18px; font-size: 1.2rem; opacity: 0.5; }
+
+  .faq-layout { display: grid; grid-template-columns: 320px 1fr; gap: 60px; align-items: start; }
+  .sidebar-sticky { position: sticky; top: 100px; }
+  .sidebar-sticky h4 { font-size: 0.8rem; text-transform: uppercase; margin-bottom: 20px; color: var(--muted); }
+  .faq-cat-nav { display: flex; flex-direction: column; gap: 8px; }
+  .cat-link { display: flex; align-items: center; gap: 12px; padding: 12px 18px; background: var(--card2); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-size: 0.9rem; font-weight: 600; transition: all 0.2s; }
+  .cat-link:hover { border-color: var(--green3); color: var(--green); background: var(--surface); }
+  .c-i { font-size: 1.2rem; }
+
+  .faq-category-block { margin-bottom: 80px; scroll-margin-top: 120px; }
+  .cat-header { display: flex; align-items: center; gap: 15px; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
+  .cat-icon-lg { font-size: 2.5rem; }
+  .cat-header h2 { font-size: 1.8rem; color: var(--white); }
+
+  .faq-grid-list { display: flex; flex-direction: column; gap: 12px; }
+  .faq-item { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: 0.3s; }
+  .faq-item.open { border-color: rgba(0,232,150,0.3); }
+  .faq-q { width: 100%; border: none; background: transparent; display: flex; align-items: center; justify-content: space-between; padding: 25px; color: var(--white); cursor: pointer; text-align: left; gap: 20px; }
+  .faq-qt { font-size: 1.05rem; font-weight: 700; flex: 1; }
+  .faq-ic { width: 30px; height: 30px; border-radius: 8px; background: rgba(0,232,150,0.1); color: var(--green); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: transform 0.3s; }
+  .faq-item.open .faq-ic { transform: rotate(45deg); }
+  
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: var(--surface); }
+  .faq-item.open .faq-a { max-height: 800px; border-top: 1px solid var(--border); }
+  .faq-at { padding: 25px; font-size: 0.95rem; color: var(--text); line-height: 1.8; font-family: var(--serif); }
+
+  @media (max-width: 1024px) {
+    .faq-layout { grid-template-columns: 1fr; }
+    .faq-sidebar { display: none; }
+  }
+</style>
+
+<script>
+  function setupFaq() {
+    // Accordion Logic
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const q = item.querySelector('.faq-q');
+      q.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        faqItems.forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // Search Logic
+    const searchInput = document.getElementById('faq-search');
+    const questions = document.querySelectorAll('.faq-item');
+    const categories = document.querySelectorAll('.faq-category-block');
+    const noResults = document.getElementById('no-results');
+
+    searchInput.addEventListener('input', (e) => {
+      const term = e.target.value.toLowerCase().trim();
+      let hasResults = false;
+
+      questions.forEach(q => {
+        const text = q.textContent.toLowerCase();
+        if (text.includes(term)) {
+          q.style.display = 'block';
+          hasResults = true;
+        } else {
+          q.style.display = 'none';
+        }
+      });
+
+      categories.forEach(cat => {
+        const visibleQuestions = cat.querySelectorAll('.faq-item[style="display: block;"]').length;
+        cat.style.display = visibleQuestions > 0 ? 'block' : 'none';
+      });
+
+      noResults.style.display = hasResults ? 'none' : 'block';
+    });
+  }
+
+  setupFaq();
+</script>

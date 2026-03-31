@@ -1,0 +1,111 @@
+---
+// src/pages/services/index.astro — Master Services Directory
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { pillarServices, supportingServices } from '../../data/services.js';
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.in/' },
+  { name: 'Services', url: 'https://ewastekochi.in/services' },
+];
+
+const pageTitle = "Our Certified E-Waste & ITAD Services | EWaste Kochi";
+const pageDesc = "Explore Kerala's most comprehensive suite of e-waste recycling, ITAD, and data destruction services. 100% compliant with KSPCB and DPDP Act 2023.";
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  breadcrumbs={breadcrumbs}
+>
+  <Navbar currentPath="/services" />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="text-center">
+        <p class="sec-eyebrow">Service Catalog</p>
+        <h1 class="sec-title">Our <em>Certified</em> <br/>Services</h1>
+        <p class="sec-sub">
+          From individual consumer level to enterprise-grade compliance, we handle every type of 
+          electronic waste and data asset destruction.
+        </p>
+      </div>
+
+      <div class="p-services">
+        <div class="p-svc-header">
+          <h2>Core Solutions</h2>
+          <p>Our main service pillars for enterprise and bulk recycling.</p>
+        </div>
+        <div class="p-svc-grid">
+          {pillarServices.map(svc => (
+            <div class="p-card">
+              <div class="pc-i">{svc.icon}</div>
+              <h3>{svc.name}</h3>
+              <p>{svc.description}</p>
+              <div class="pc-tags">
+                {(svc.badges || []).map(b => (
+                  <span class="p-tag">{b}</span>
+                ))}
+              </div>
+              <a href={`/services/${svc.slug}`} class="btn btn-outline btn-block">Explore Solution →</a>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="s-services">
+        <div class="p-svc-header">
+          <h2>Supporting & Special Services</h2>
+          <p>Niche requirements for compliance, buyback, and specialty recycling.</p>
+        </div>
+        <div class="s-svc-grid">
+          {supportingServices.map(svc => (
+            <a href={`/services/${svc.slug}`} class="s-card">
+              <span class="sc-i">{svc.icon}</span>
+              <div class="sc-text">
+                <h3>{svc.name}</h3>
+                <p>{svc.shortDescription || svc.description}</p>
+              </div>
+              <span class="sc-arr">→</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .p-services { margin-top: 60px; }
+  .p-svc-header { margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+  .p-svc-header h2 { font-size: 1.5rem; color: var(--white); margin-bottom: 5px; }
+  .p-svc-header p { font-size: 0.9rem; color: var(--muted); }
+
+  .p-svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+  .p-card { background: var(--card); border: 1px solid var(--border2); padding: 40px; border-radius: 20px; }
+  .pc-i { font-size: 2rem; margin-bottom: 20px; }
+  .p-card h3 { color: var(--white); font-size: 1.2rem; margin-bottom: 15px; }
+  .p-card p { font-size: 0.9rem; color: var(--text); line-height: 1.6; margin-bottom: 20px; min-height: 80px; }
+  .pc-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; }
+  .p-tag { font-size: 0.7rem; background: rgba(0,232,150,0.1); color: var(--green); padding: 4px 10px; border-radius: 20px; font-weight: 700; text-transform: uppercase; }
+
+  .s-services { margin-top: 80px; }
+  .s-svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .s-card { background: var(--card2); border: 1px solid var(--border); padding: 25px; border-radius: 15px; display: flex; align-items: center; gap: 20px; transition: 0.3s; }
+  .s-card:hover { border-color: var(--green); transform: translateX(5px); }
+  .sc-i { font-size: 1.5rem; background: rgba(255,255,255,0.05); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 12px; }
+  .sc-text { flex: 1; }
+  .sc-text h3 { color: var(--white); font-size: 1rem; margin-bottom: 4px; }
+  .sc-text p { font-size: 0.8rem; color: var(--muted); }
+  .sc-arr { color: var(--green); font-weight: 800; font-size: 1.2rem; opacity: 0.5; }
+
+  @media (max-width: 1024px) {
+    .p-svc-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .p-svc-grid, .s-svc-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,116 @@
+---
+// src/pages/recycling.astro — The Ultimate Environmental Recycling Innovation Hub
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { contact } from '../data/contact.js';
+import { generateTopicFaqs } from '../data/faqs.js';
+
+const pageTitle = "Electronics Recycling Kochi | Certified Zero-Landfill Tech | Kerala Circular Economy";
+const pageDesc = "Expert e-waste recycling in Kochi. Discover our zero-landfill technology, precious metal recovery, and sustainable circular economy practices at our Thrippunithura facility.";
+
+const faqs = generateTopicFaqs("Recycling Technology");
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.in/' },
+  { name: 'Recycling Hub', url: 'https://ewastekochi.in/recycling' },
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  faqs={faqs}
+  breadcrumbs={breadcrumbs}
+>
+  <Navbar currentPath="/recycling" />
+
+  <section class="section pillar-hero recycling-theme">
+    <div class="wrap">
+      <p class="sec-eyebrow">Innovation Hub</p>
+      <h1 class="sec-title">Recycling: <em>Zero-Landfill</em> <br/>Technology</h1>
+      <p class="sec-sub">The state-of-the-art facility for material recovery and toxic neutralization in Kochi, Kerala.</p>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="wrap">
+      <div class="pillar-content">
+        <!-- Cluster 1: Logistics -->
+        <article class="kw-cluster">
+          <div class="kw-header"><span>01</span> <h2>The Thrippunithura Recycling Lab</h2></div>
+          <p>Our main facility handles all <a href="/ewaste">electronic waste</a> collected from Kochi. We implement mechanized shredding and automated sorting to recover plastic, gold, and palladium.</p>
+        </article>
+
+        <!-- Cluster 2: Zero Landfill -->
+        <article class="kw-cluster">
+          <div class="kw-header"><span>02</span> <h2>Zero Landfill Commitment</h2></div>
+          <p>We ensure that 100% of the materials gathered from <a href="/locations">all 30 Kochi pillars</a> are repurposed as raw industrial material, fulfilling the circular economy mission.</p>
+        </article>
+
+        <!-- Cluster 3: ITAD Intersection -->
+        <article class="kw-cluster">
+          <div class="kw-header"><span>03</span> <h2>Sustainable ITAD Retirement</h2></div>
+          <p>For corporate assets, our <a href="/itad">ITAD department</a> works with our recycling wing to ensure that non-functional IT gear is shredded with full reporting.</p>
+        </article>
+      </div>
+
+      <!-- Massive 50 FAQ Section -->
+      <div class="massive-faq-container">
+        <h2 class="sub-h text-center">50 Authority FAQs about Recycling & Tech</h2>
+        <div class="faq-grid-3">
+          {faqs.map(f => (
+            <div class="faq-card">
+              <h4>Q: {f.q}</h4>
+              <p>A: {f.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="pillar-cta">
+        <div class="p-cta-box recycling-box">
+          <h2>Ready to Recycle Professionally?</h2>
+          <p>Our fleet covers <a href="/locations">all 30 Kerala locations</a> for certified bulk collection.</p>
+          <div class="p-cta-btns">
+            <a href={contact.phoneLink} class="btn btn-primary btn-lg">Call {contact.phoneDisplay}</a>
+            <a href="/contact" class="btn btn-outline btn-lg">Book Facility Tour →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .pillar-hero { padding: 120px 0 60px; text-align: center; }
+  .recycling-theme { background: radial-gradient(circle at 10% 20%, rgba(0,255,100,0.05), transparent); }
+  .pillar-content { margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 80px; }
+  .kw-cluster { background: var(--card); border: 1px solid var(--border); padding: 40px; border-radius: 24px; transition: 0.3s; }
+  .kw-header { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 15px; }
+  .kw-header span { font-size: 0.8rem; font-weight: 800; color: var(--green); background: rgba(0,232,150,0.1); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0; }
+  .kw-header h2 { font-size: 1.25rem; color: var(--white); line-height: 1.2; margin-top: 5px; }
+  .kw-cluster p { font-size: 0.95rem; line-height: 1.7; color: var(--text); font-family: var(--serif); }
+  .kw-cluster p a { color: var(--green); font-weight: 700; text-decoration: underline; }
+
+  .massive-faq-container { margin-top: 100px; }
+  .sub-h { font-size: 2rem; color: var(--white); margin-bottom: 40px; }
+  .faq-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .faq-card { background: var(--card); border: 1px solid var(--border); padding: 25px; border-radius: 15px; }
+  .faq-card h4 { font-size: 0.9rem; color: var(--white); margin-bottom: 10px; line-height: 1.4; }
+  .faq-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+  .recycling-box { background: linear-gradient(135deg, #0A1410, #050908); border-color: rgba(0,255,100,0.1); border: 1px solid var(--border2); padding: 60px; border-radius: 30px; margin-top: 80px; text-align: center; }
+  .p-cta-btns { display: flex; gap: 20px; justify-content: center; margin-top: 30px; }
+
+  @media (max-width: 1024px) {
+    .pillar-content { grid-template-columns: 1fr; }
+    .faq-grid-3 { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    .faq-grid-3 { grid-template-columns: 1fr; }
+    .p-cta-btns { flex-direction: column; }
+  }
+</style>

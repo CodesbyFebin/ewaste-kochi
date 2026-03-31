@@ -1,0 +1,116 @@
+---
+// src/pages/itad.astro — The Ultimate Corporate IT Asset Disposition Hub
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { contact } from '../data/contact.js';
+import { generateTopicFaqs } from '../data/faqs.js';
+
+const pageTitle = "ITAD Kochi | Certified IT Asset Disposition | DPDP Act 2023 | NIST/DoD Data Destruction";
+const pageDesc = "Expert ITAD services in Kochi. Secure asset disposition, asset tagging, NIST/DoD data destruction, and DPDP Act compliance for Kochi's largest IT companies.";
+
+const faqs = generateTopicFaqs("ITAD");
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.in/' },
+  { name: 'ITAD Hub', url: 'https://ewastekochi.in/itad' },
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  faqs={faqs}
+  breadcrumbs={breadcrumbs}
+>
+  <Navbar currentPath="/itad" />
+
+  <section class="section pillar-hero itad-theme">
+    <div class="wrap">
+      <p class="sec-eyebrow">Enterprise Hub</p>
+      <h1 class="sec-title">ITAD: <em>Secure</em> <br/>Asset Disposition</h1>
+      <p class="sec-sub">The state-of-the-art methodology for retiring corporate IT hardware in Kochi and Kerala.</p>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="wrap">
+      <div class="pillar-content">
+        <!-- Cluster 1: ITAD -->
+        <article class="kw-cluster">
+          <div class="kw-header"><span>01</span> <h2>ITAD: Beyond Simple Recycling</h2></div>
+          <p>ITAD focuses on security and recovery. For businesses at <a href="/locations/infopark-kochi">Infopark</a> and <a href="/locations/smart-city-kochi">Smart City</a>, it is more than just <a href="/recycling">e-waste recycling</a>; it is a professional decommissioning of infrastructure.</p>
+        </article>
+
+        <!-- Cluster 2: Data Destruction -->
+        <article class="kw-cluster">
+          <div class="kw-header"><span>02</span> <h2>Secure Asset Tagging & Manifests</h2></div>
+          <p>Every server, laptop, and networking gear is tagged for total accountability. This satisfies the legal requirements for <a href="/about">DPDP Act 2023</a> compliance in Kochi.</p>
+        </article>
+
+        <!-- Cluster 3-10: Scaled logic -->
+        <article class="kw-cluster">
+          <div class="kw-header"><span>03</span> <h2>Circular Economy Integration</h2></div>
+          <p>Components that cannot be remarketed are processed at our <a href="/recycling">certified recycling center in Thrippunithura</a>, ensuring a zero-landfill outcome.</p>
+        </article>
+      </div>
+
+      <!-- Massive 50 FAQ Section -->
+      <div class="massive-faq-container">
+        <h2 class="sub-h text-center">50 Authority FAQs about ITAD & Compliance</h2>
+        <div class="faq-grid-3">
+          {faqs.map(f => (
+            <div class="faq-card">
+              <h4>Q: {f.q}</h4>
+              <p>A: {f.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="pillar-cta">
+        <div class="p-cta-box itad-box">
+          <h2>Need Enterprise ITAD in Kochi?</h2>
+          <p>Schedule a 24/7 audit or bulk pickup across our <a href="/locations">30 pillar coverage areas</a>.</p>
+          <div class="p-cta-btns">
+            <a href={contact.phoneLink} class="btn btn-primary btn-lg">Call Support: {contact.phoneDisplay}</a>
+            <a href="/contact" class="btn btn-outline btn-lg">Request ITAD Audit →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .pillar-hero { padding: 120px 0 60px; text-align: center; }
+  .itad-theme { background: radial-gradient(circle at 10% 20%, rgba(0,180,255,0.05), transparent); }
+  .pillar-content { margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 80px; }
+  .kw-cluster { background: var(--card); border: 1px solid var(--border); padding: 40px; border-radius: 24px; transition: 0.3s; }
+  .kw-header { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 15px; }
+  .kw-header span { font-size: 0.8rem; font-weight: 800; color: var(--green); background: rgba(0,232,150,0.1); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0; }
+  .kw-header h2 { font-size: 1.25rem; color: var(--white); line-height: 1.2; margin-top: 5px; }
+  .kw-cluster p { font-size: 0.95rem; line-height: 1.7; color: var(--text); font-family: var(--serif); }
+  .kw-cluster p a { color: var(--green); font-weight: 700; text-decoration: underline; }
+
+  .massive-faq-container { margin-top: 100px; }
+  .sub-h { font-size: 2rem; color: var(--white); margin-bottom: 40px; }
+  .faq-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .faq-card { background: var(--card); border: 1px solid var(--border); padding: 25px; border-radius: 15px; }
+  .faq-card h4 { font-size: 0.9rem; color: var(--white); margin-bottom: 10px; line-height: 1.4; }
+  .faq-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+  .itad-box { background: linear-gradient(135deg, #0A1410, #050908); border-color: rgba(0,180,255,0.2); text-align: center; border: 1px solid var(--border2); padding: 60px; border-radius: 30px; margin-top: 80px; }
+  .p-cta-btns { display: flex; gap: 20px; justify-content: center; margin-top: 30px; }
+
+  @media (max-width: 1024px) {
+    .pillar-content { grid-template-columns: 1fr; }
+    .faq-grid-3 { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    .faq-grid-3 { grid-template-columns: 1fr; }
+    .p-cta-btns { flex-direction: column; }
+  }
+</style>

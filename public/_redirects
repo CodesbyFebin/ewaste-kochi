@@ -1,0 +1,19 @@
+# Netlify / Cloudflare redirects
+# Redirect non-www to www (or vice versa — adjust as needed)
+https://www.ewastekochi.in/* https://ewastekochi.in/:splat 301!
+
+# Legacy HTML page redirects → new Astro routes
+/itad.html /services/itad-kochi 301
+/ewaste.html /services/e-waste-recycling-kochi 301
+/services.html /services 301
+/blog.html /blog 301
+/about.html /about 301
+/contact.html /contact 301
+/e-waste-kakkanad.html /locations/kakkanad 301
+/e-waste-edapally.html /locations/edappally 301
+/e-waste-infopark.html /locations/infopark-kochi 301
+/sell-laptop-kochi.html /services/laptop-buyback-kochi 301
+/data-destruction.html /services/data-destruction-kochi 301
+/hard-drive-shredding.html /services/hard-drive-shredding-kochi 301
+/battery-recycling.html /services/battery-recycling-kochi 301
+/itad-infopark-companies-kochi.html /locations/infopark-kochi/itad-services 301

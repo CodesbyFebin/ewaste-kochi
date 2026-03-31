@@ -1,0 +1,233 @@
+---
+// src/pages/locations/[location]/[service].astro — Programmatic SEO Gold
+// Generates 450+ pages: /locations/kakkanad/itad-kochi, /locations/edappally/laptop-recycling, etc.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import { locations, getLocationBySlug, getNearbyLocations } from '../../../data/locations.js';
+import { services, getServiceBySlug } from '../../../data/services.js';
+import { contact } from '../../../data/contact.js';
+import { testimonials } from '../../../data/testimonials.js';
+
+export async function getStaticPaths() {
+  const paths = [];
+  
+  locations.forEach(location => {
+    services.forEach(service => {
+      paths.push({
+        params: { 
+          location: location.slug,
+          service: service.slug 
+        },
+        props: { location, service },
+      });
+    });
+  });
+  
+  return paths;
+}
+
+const { location, service } = Astro.props;
+
+// Contextual nearby locations and related services
+const nearbyLocations = getNearbyLocations(location.slug, 5);
+const relatedServices = service.relatedServices 
+  ? service.relatedServices.map(slug => getServiceBySlug(slug)).filter(Boolean)
+  : services.filter(s => s.slug !== service.slug).slice(0, 3);
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.in/' },
+  { name: 'Locations', url: 'https://ewastekochi.in/locations' },
+  { name: location.name, url: `https://ewastekochi.in/locations/${location.slug}` },
+  { name: service.shortName, url: `https://ewastekochi.in/locations/${location.slug}/${service.slug}` },
+];
+
+const pageTitle = `${service.shortName} in ${location.name} | Certified & Free Pickup | EWaste Kochi`;
+const pageDesc = `Certified ${service.name.toLowerCase()} services in ${location.name}, ${location.district}. ${location.isITHub ? 'Serving IT companies with' : 'Providing'} NIST/DoD data destruction & free bulk pickup. CoD in 24h.`;
+
+const combinedSchema = {
+  "@type": "Service",
+  "name": `${service.name} in ${location.name}`,
+  "serviceType": service.name,
+  "provider": { "@id": "https://ewastekochi.in/#organization" },
+  "areaServed": {
+    "@type": "City",
+    "name": location.name,
+    "addressRegion": "Kerala"
+  },
+  "description": pageDesc
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  schema={combinedSchema}
+  breadcrumbs={breadcrumbs}
+>
+  <Navbar currentPath={`/locations/${location.slug}/${service.slug}`} />
+
+  <!-- Contextual Breadcrumb -->
+  <nav class="breadcrumb-nav">
+    <div class="wrap">
+      <ol class="breadcrumb">
+        {breadcrumbs.map((crumb, i) => (
+          <li>
+            <a href={crumb.url}>{crumb.name}</a>
+            {i < breadcrumbs.length - 1 && <span class="bc-sep">›</span>}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Localized Service Hero -->
+  <section class="prog-hero">
+    <div class="prog-hero-bg"></div>
+    <div class="wrap">
+      <div class="prog-grid">
+        <div class="prog-left">
+          <div class="loc-badge">{location.name} · Certified {service.category}</div>
+          <h1 class="prog-h1">
+            {service.shortName}<br/>
+            in <span class="text-green">{location.name}</span>
+          </h1>
+          <p class="prog-lead">
+            Need {service.shortName.toLowerCase()} in {location.name}? EWaste Kochi provides KSPCB-authorized 
+            recycling and ITAD services with free bulk pickup across the {location.name} area and {location.district}.
+          </p>
+          
+          <div class="prog-features">
+            <div class="p-feat"><span>✓</span> Free Bulk Pickup in {location.name}</div>
+            <div class="p-feat"><span>✓</span> NIST/DoD Data Destruction</div>
+            <div class="p-feat"><span>✓</span> Certificate of Destruction</div>
+            <div class="p-feat"><span>✓</span> Same-Day Quote</div>
+          </div>
+
+          <div class="prog-ctas">
+            <a href="/contact" class="btn btn-primary btn-lg">Request Pickup in {location.name} →</a>
+            <a href={contact.whatsappMessage} class="btn btn-wa btn-lg">💬 WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="prog-right">
+          <div class="local-card">
+            <h3>Service Status: <span class="status-live">LIVE IN {location.name.toUpperCase()}</span></h3>
+            <div class="local-details">
+              <div class="ld-item">
+                <strong>📍 Coverage:</strong>
+                <span>All areas in {location.name}, {location.district}</span>
+              </div>
+              <div class="ld-item">
+                <strong>⏱️ Pickup:</strong>
+                <span>{location.isITHub ? '2-4 Hours (Infopark Priority)' : 'Same/Next Day'}</span>
+              </div>
+              <div class="ld-item">
+                <strong>📜 Documents:</strong>
+                <span>CoD + Environmental Report Provided</span>
+              </div>
+            </div>
+            <a href={contact.phoneLink} class="call-banner">
+              📞 Call {contact.phoneDisplay}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contextual Content Section -->
+  <section class="section">
+    <div class="wrap">
+      <div class="content-split">
+        <div class="content-text">
+          <h2>Professional {service.name} for {location.name} Businesses</h2>
+          <p>
+            Operating in {location.name}, {location.district}, {service.name} is a critical requirement for 
+            maintaining environmental compliance and data security. {location.description}
+          </p>
+          <p>
+            Our specialized {service.shortName.toLowerCase()} workflow in {location.name} ensures that your 
+            old electronics are handled according to the E-Waste Management Rules 2022. For our clients in 
+            {location.isITHub ? 'the IT hubs of ' : ''}{location.name}, we provide deep-level ITAD services including 
+            asset tagging and secure chain-of-custody documentation.
+          </p>
+
+          <h3>Why Choose us in {location.name}?</h3>
+          <ul>
+            <li><strong>Local Expertise:</strong> We know {location.name} inside out, ensuring faster pickups and logistics.</li>
+            <li><strong>Compliance:</strong> Fully compliant with DPDP Act 2023 for data destruction in {location.district}.</li>
+            <li><strong>Transparency:</strong> Witnessed on-site destruction available for companies in {location.name}.</li>
+          </ul>
+        </div>
+
+        <aside class="content-sidebar">
+          <div class="sidebar-box">
+            <h4>Related in {location.name}</h4>
+            <ul class="s-links">
+              {relatedServices.map(s => (
+                <li><a href={`/locations/${location.slug}/${s.slug}`}>{s.shortName} →</a></li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="sidebar-box">
+            <h4>Near {location.name}</h4>
+            <ul class="s-links">
+              {nearbyLocations.map(l => (
+                <li><a href={`/locations/${l.slug}/${service.slug}`}>{service.shortName} in {l.name} →</a></li>
+              ))}
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .breadcrumb-nav { background: var(--surface); padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .breadcrumb { display: flex; gap: 8px; list-style: none; font-size: 0.8rem; color: var(--muted); }
+  .bc-sep { margin-left: 8px; opacity: 0.3; }
+  
+  .prog-hero { padding: 80px 0; background: radial-gradient(circle at 10% 20%, rgba(0,232,150,0.05) 0%, transparent 50%); }
+  .prog-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
+  .loc-badge { display: inline-block; padding: 6px 14px; background: rgba(0,232,150,0.1); color: var(--green); border-radius: 20px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-bottom: 20px; }
+  .prog-h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); line-height: 1.1; margin-bottom: 20px; color: var(--white); }
+  .prog-lead { font-size: 1.1rem; color: var(--text); margin-bottom: 30px; font-family: var(--serif); max-width: 600px; }
+  
+  .prog-features { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 40px; }
+  .p-feat { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--white); font-weight: 600; }
+  .p-feat span { color: var(--green); }
+  
+  .prog-ctas { display: flex; gap: 15px; flex-wrap: wrap; }
+  
+  .local-card { background: var(--card); border: 1px solid var(--border2); border-radius: 20px; padding: 30px; }
+  .local-card h3 { font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; letter-spacing: 0.1em; }
+  .status-live { color: var(--green); font-weight: 800; }
+  .local-details { display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; }
+  .ld-item { font-size: 0.9rem; color: var(--text); }
+  .ld-item strong { display: block; color: var(--white); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 4px; }
+  
+  .call-banner { display: block; width: 100%; text-align: center; background: var(--border2); color: var(--green); padding: 15px; border-radius: 12px; font-weight: 700; transition: background 0.3s; }
+  .call-banner:hover { background: var(--border); }
+  
+  .content-split { display: grid; grid-template-columns: 1fr 300px; gap: 60px; }
+  .content-text h2 { margin-bottom: 20px; }
+  .content-text h3 { margin: 30px 0 15px; }
+  .content-text ul { padding-left: 20px; margin-bottom: 20px; }
+  .content-text li { margin-bottom: 10px; }
+  
+  .sidebar-box { background: var(--card); border: 1px solid var(--border); padding: 25px; border-radius: 15px; margin-bottom: 20px; }
+  .sidebar-box h4 { font-size: 0.8rem; text-transform: uppercase; margin-bottom: 15px; color: var(--white); }
+  .s-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .s-links a { font-size: 0.85rem; color: var(--muted); transition: color 0.2s; }
+  .s-links a:hover { color: var(--green); }
+
+  @media (max-width: 1024px) {
+    .prog-grid, .content-split { grid-template-columns: 1fr; gap: 40px; }
+    .content-sidebar { order: 2; }
+  }
+</style>
