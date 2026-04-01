@@ -174,3 +174,6 @@ export const generateMassiveFaqs = (topicName) => {
 
   return massive;
 };
+
+// Alias for about.astro and other pages expecting generateTopicFaqs
+export const generateTopicFaqs = generateMassiveFaqs;

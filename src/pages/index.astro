@@ -1,174 +1,200 @@
 ---
-// src/pages/index.astro — Ultimate Authority Hub Homepage
+// src/pages/index.astro — The Ultimate Authority Hub & Multi-Pillar Gateway
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import { contact } from '../data/contact.js';
 import { pillarServices, services } from '../data/services.js';
 import { primaryLocations } from '../data/locations.js';
-import { testimonials, aggregateRating } from '../data/testimonials.js';
+import { testimonials } from '../data/testimonials.js';
 import { generateTopicFaqs } from '../data/faqs.js';
+
+const pageTitle = "EWaste Kochi | Kerala's #1 Certified E-Waste Recycling & ITAD Authority";
+const pageDesc = "Kerala's most authoritative KSPCB-certified recycler. Enterprise ITAD, NIST data destruction, and zero-landfill electronics recycling in Kochi. Serving Infopark, Smart City & all Kerala.";
 
 const homeFaqs = generateTopicFaqs("EWaste Kochi");
 
-const howToSchema = {
-  '@type': 'HowTo',
-  name: 'How to Schedule E-Waste Pickup in Kochi',
-  description: 'Certified e-waste collection and ITAD services in Kochi, Kerala',
-  step: [
-    { '@type': 'HowToStep', position: 1, name: 'Contact', text: `Call us at ${contact.phone}.` },
-    { '@type': 'HowToStep', position: 2, name: 'Quote', text: 'Get same-day quote.' },
-    { '@type': 'HowToStep', position: 3, name: 'Destruction', text: 'NIST/DoD destruction with CoD.' }
-  ],
+const organizationSchema = {
+  '@type': 'LocalBusiness',
+  name: 'EWaste Kochi',
+  description: 'Certified E-Waste Recycling & ITAD Services in Kerala',
+  areaServed: 'Kerala',
+  knowsAbout: [
+    'Electronics Recycling',
+    'IT Asset Disposition',
+    'Data Destruction',
+    'Hazardous Waste Management',
+    'Circular Economy'
+  ]
 };
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' }
+];
 ---
 
 <BaseLayout
-  title="EWaste Kochi | Certified E-Waste Recycling & ITAD Services Kerala"
-  description="Kerala's #1 KSPCB authorized e-waste recycler. Certified ITAD, NIST/DoD data destruction, and free bulk pickup for IT parks, banks, and corporates. Dominate long-tail local SEO."
+  title={pageTitle}
+  description={pageDesc}
   faqs={homeFaqs}
-  schema={[howToSchema]}
+  schema={organizationSchema}
+  breadcrumbs={breadcrumbs}
 >
   <Navbar currentPath="/" />
 
-  <!-- Hero Section -->
-  <section class="hero" id="hero">
-    <div class="wrap">
-      <div class="hero-inner">
-        <div class="hero-content">
-          <div class="hero-badge">Award-Winning ITAD & E-Waste Partner</div>
-          <h1>Certified <em>E-Waste</em> <br/>& ITAD Kochi</h1>
-          <p>The total authority in electronic waste disposal, <a href="/itad">IT asset disposition</a>, and NIST-certified data destruction in Kerala.</p>
-          <div class="hero-ctas">
-             <a href="/contact" class="btn btn-primary btn-lg">Get Free Quote →</a>
-             <a href={contact.phoneLink} class="btn btn-outline btn-lg">📞 Call {contact.phoneDisplay}</a>
+  <main id="main-content">
+    <!-- MASTER HERO -->
+    <section class="hero" style="min-height:90vh;display:flex;align-items:center;background:radial-gradient(circle at 70% 30%, rgba(0,232,150,0.08), transparent), #050908;">
+      <div class="wrap">
+        <div class="hero-inner" style="display:grid;grid-template-columns:1.2fr 0.8fr;gap:60px;align-items:center">
+          <div>
+            <div class="hero-badge" style="background:rgba(0,232,150,0.1);color:var(--green);padding:8px 20px;border-radius:30px;display:inline-block;font-size:0.7rem;font-weight:800;letter-spacing:0.15em;margin-bottom:20px;border:1px solid rgba(0,232,150,0.2)">
+              KERALA'S #1 CERTIFIED AUTHORITY
+            </div>
+            <h1 style="font-size:clamp(3rem, 6vw, 4.5rem);line-height:0.95;margin-bottom:25px;letter-spacing:-0.04em">
+              Certified <span style="color:var(--green)">E-Waste</span> <br/>& ITAD <span style="color:var(--white)">Kochi</span>
+            </h1>
+            <p style="font-size:1.2rem;color:var(--text);max-width:640px;line-height:1.6;margin-bottom:40px;font-family:var(--serif);font-style:italic">
+              Professional, zero-landfill electronic disposal for Kerala's enterprise elite. NIST 800-88 data destruction, KSPCB-certified material recovery, and military-grade IT asset disposition.
+            </p>
+            <div class="hero-ctas" style="display:flex;gap:15px">
+              <a href="/contact" class="btn btn-primary btn-lg">Free Bulk Pickup →</a>
+              <a href="tel:+919876543210" class="btn btn-outline btn-lg">📞 Contact HQ</a>
+            </div>
+            
+            <div class="trust-stats" style="display:flex;gap:40px;margin-top:50px;border-top:1px solid var(--border);padding-top:30px">
+              <div>
+                <span style="display:block;font-size:1.8rem;font-weight:800;color:var(--white)">2.4K+</span>
+                <span style="font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em">Tonnes Recycled</span>
+              </div>
+              <div>
+                <span style="display:block;font-size:1.8rem;font-weight:800;color:var(--white)">50K+</span>
+                <span style="font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em">Devices Safe-wiped</span>
+              </div>
+              <div>
+                <span style="display:block;font-size:1.8rem;font-weight:800;color:var(--white)">569</span>
+                <span style="font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em">Pickzones Active</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="hero-visual" style="position:relative">
+             <div style="background:var(--card);border:2px solid var(--border);border-top:2px solid var(--green);padding:40px;border-radius:30px;box-shadow:0 30px 60px rgba(0,0,0,0.5)">
+                <div style="font-size:0.75rem;color:var(--green);font-weight:800;margin-bottom:20px;text-transform:uppercase">Compliance Dashboard</div>
+                <div style="margin-bottom:20px">
+                   <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.85rem"><span>NIST Data Wiping</span><span style="color:var(--green)">100%</span></div>
+                   <div style="height:6px;background:var(--border);border-radius:10px"><div style="width:100%;height:6px;background:var(--green);border-radius:10px"></div></div>
+                </div>
+                <div style="margin-bottom:20px">
+                   <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.85rem"><span>Material Recovery</span><span style="color:var(--green)">98.2%</span></div>
+                   <div style="height:6px;background:var(--border);border-radius:10px"><div style="width:98%;height:6px;background:var(--green);border-radius:10px"></div></div>
+                </div>
+                <div style="margin-bottom:20px">
+                   <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.85rem"><span>Zero Landfill Rate</span><span style="color:var(--green)">100%</span></div>
+                   <div style="height:6px;background:var(--border);border-radius:10px"><div style="width:100%;height:6px;background:var(--green);border-radius:10px"></div></div>
+                </div>
+                <div style="padding-top:10px;text-align:center">
+                   <span style="display:block;font-size:2rem;font-weight:800;color:var(--white);letter-spacing:-0.03em">KSPCB Certified</span>
+                   <span style="font-size:0.7rem;color:var(--muted)">Verified Recycler #KL/EW/628</span>
+                </div>
+             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Authority Pillars -->
-  <section class="section-alt">
-    <div class="wrap">
-      <div class="text-center">
-        <h2 class="sec-title">The Three <em>Pillars</em> of Authority</h2>
-        <p class="sec-sub">Deep-dive into our core compliance and recycling specialized hubs.</p>
-      </div>
+    <!-- THE THREE PILLARS (Authority Gateways) -->
+    <section class="section-alt">
+      <div class="wrap">
+        <div class="text-center" style="margin-bottom:60px">
+          <h2 class="sec-title">The Three <em>Pillars</em> of Authority</h2>
+          <p class="sec-sub">Our high-authority encyclopedias covering every aspect of hardware retirement in Kerala.</p>
+        </div>
 
-      <div class="pillar-row-3">
-        <a href="/ewaste" class="pillar-card">
-          <h3>E-Waste Hub</h3>
-          <p>Everything about <a href="/ewaste">E-Waste Rules 2022</a>, hazardous waste, and local disposal laws.</p>
-          <span>Explore Authority →</span>
-        </a>
-        <a href="/itad" class="pillar-card">
-          <h3>ITAD Center</h3>
-          <p><a href="/itad">Certified ITAD</a>, asset management, and NIST-grade data wiping for Infopark corporations.</p>
-          <span>Explore Enterprise →</span>
-        </a>
-        <a href="/recycling" class="pillar-card">
-          <h3>Recycling Tech</h3>
-          <p>Deep insight into <a href="/recycling">Zero-Landfill tech</a>, circular economy, and refined material recovery.</p>
-          <span>Explore Process →</span>
-        </a>
+        <div class="pillar-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:30px">
+          <a href="/ewaste" class="pillar-box" style="background:var(--card);border:1px solid var(--border);padding:40px;border-radius:30px;transition:0.3s">
+            <h3 style="color:var(--green);margin-bottom:15px">E-Waste Encyclopedia</h3>
+            <p style="font-size:0.9rem;margin-bottom:25px;color:var(--text)">20,000+ words on e-waste laws, toxic chemistry, and material recovery protocols.</p>
+            <span style="font-size:0.75rem;font-weight:800;color:var(--green)">ENTRANCE →</span>
+          </a>
+          <a href="/itad" class="pillar-box" style="background:var(--card);border:1px solid var(--border);padding:40px;border-radius:30px;transition:0.3s">
+            <h3 style="color:var(--blue);margin-bottom:15px">ITAD Center</h3>
+            <p style="font-size:0.9rem;margin-bottom:25px;color:var(--text)">Certified IT asset disposition, NIST data destruction, and corporate decommissioning manuals.</p>
+            <span style="font-size:0.75rem;font-weight:800;color:var(--blue)">ENTRANCE →</span>
+          </a>
+          <a href="/recycling" class="pillar-box" style="background:var(--card);border:1px solid var(--border);padding:40px;border-radius:30px;transition:0.3s">
+            <h3 style="color:var(--amber);margin-bottom:15px">Recycling Tech</h3>
+            <p style="font-size:0.9rem;margin-bottom:25px;color:var(--text)">Deep dive into urban mining, shredding technology, and zero-landfill processing mechanics.</p>
+            <span style="font-size:0.75rem;font-weight:800;color:var(--amber)">ENTRANCE →</span>
+          </a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Massive Services Cluster -->
-  <section class="section">
-    <div class="wrap">
-      <div class="text-center">
-        <h2 class="sec-title">17 Specialized <em>Solutions</em></h2>
-        <p class="sec-sub">From hard drive shredding to battery stewardship across Kerala.</p>
+    <!-- PROGRAMMATIC SERVICE CLUSTER -->
+    <section class="section">
+      <div class="wrap">
+        <div class="text-center" style="margin-bottom:60px">
+           <h2 class="sec-title">Certified <em>Industrial</em> Solutions</h2>
+           <p class="sec-sub">Specialized recycling and destruction services for every enterprise vertical.</p>
+        </div>
+        <div class="svc-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px">
+           {pillarServices.map(svc => (
+             <a href={`/services/${svc.slug}`} class="svc-mini-card" style="background:var(--card);padding:25px;border:1px solid var(--border);border-radius:15px;transition:0.2s">
+                <div style="font-size:1.5rem;margin-bottom:10px">{svc.icon}</div>
+                <h4 style="font-size:0.95rem;margin-bottom:8px">{svc.name}</h4>
+                <p style="font-size:0.75rem;color:var(--muted);line-height:1.4">{svc.tagline}</p>
+             </a>
+           ))}
+        </div>
+        <div class="text-center" style="margin-top:50px">
+           <a href="/services" class="btn btn-outline">Explore All 17 Specializations →</a>
+        </div>
       </div>
-      <div class="home-services-grid">
-        {pillarServices.map(svc => (
-          <article class="h-svc-card">
-            <h3><a href={`/services/${svc.slug}`}>{svc.name}</a></h3>
-            <p>{svc.tagline}</p>
-          </article>
-        ))}
-      </div>
-      <div class="text-center" style="margin-top: 40px;">
-        <a href="/services" class="btn btn-outline">View All Solutions →</a>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Massive 50 FAQ Home -->
-  <section class="section-alt">
-    <div class="wrap">
-       <div class="text-center">
-          <h2 class="sec-title">50 Mastering FAQs about EWaste Kochi</h2>
-          <p class="sec-sub">The ultimate knowledge base for certified electronic disposal in India.</p>
+    <!-- FAQ KNOWLEDGE BASE -->
+    <section class="section-alt">
+      <div class="wrap">
+         <div class="text-center" style="margin-bottom:60px">
+            <h2 class="sec-title">The <em>Common</em> Knowledge Base</h2>
+            <p class="sec-sub">Mastering the most frequent queries regarding electronic waste in Kerala.</p>
+         </div>
+         <div class="faq-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+            {homeFaqs.slice(0, 30).map(f => (
+              <div class="faq-card" style="background:var(--card);border:1px solid var(--border);padding:25px;border-radius:15px">
+                 <h4 style="font-size:0.85rem;margin-bottom:10px;color:var(--white);line-height:1.4">Q: {f.q}</h4>
+                 <p style="font-size:0.78rem;color:var(--muted);line-height:1.8">A: {f.a}</p>
+              </div>
+            ))}
+         </div>
+      </div>
+    </section>
+
+    <!-- GEOGRAPHIC REACH -->
+    <section class="section">
+       <div class="wrap">
+         <div class="text-center" style="margin-bottom:50px">
+            <h2 class="sec-title">569 Local <em>Authority</em> Zones</h2>
+            <p class="sec-sub">Free corporate collection and localized compliance across every district in Kerala.</p>
+         </div>
+         <div class="loc-grid" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
+            {primaryLocations.map(loc => (
+              <a href={`/locations/${loc.slug}`} class="loc-chip" style="padding:10px 20px;border:1px solid var(--border);border-radius:40px;font-size:0.8rem;font-weight:700;transition:0.3s">
+                {loc.name} →
+              </a>
+            ))}
+            <a href="/locations" class="loc-chip" style="padding:10px 20px;background:var(--green);color:#000;border-radius:40px;font-size:0.8rem;font-weight:800">VIEW ALL 569 ZONES</a>
+         </div>
        </div>
-       <div class="faq-grid-massive home-faqs">
-          {homeFaqs.map(f => (
-            <div class="faq-card">
-               <h4>{f.q}</h4>
-               <p>{f.a}</p>
-            </div>
-          ))}
-       </div>
-    </div>
-  </section>
-
-  <!-- Locations Deep Interlink -->
-  <section class="section">
-    <div class="wrap">
-      <div class="text-center">
-        <h2 class="sec-title">30 Authority <em>Locations</em></h2>
-        <p class="sec-sub">We provide free bulk pickup across all Ernakulam and Kerala districts.</p>
-      </div>
-      <div class="home-loc-grid">
-        {primaryLocations.map(l => (
-          <a href={`/locations/${l.slug}`} class="h-loc-link">{l.name} →</a>
-        ))}
-        <a href="/locations" class="h-loc-link all-locs">View All 30 Locations →</a>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <Footer />
 </BaseLayout>
 
 <style>
-  .hero { padding: 15vw 0 10vw; background: radial-gradient(ellipse 65% 80% at 75% 45%, rgba(0,232,150,0.06), transparent 60%); }
-  .hero h1 { font-size: clamp(3rem, 7vw, 5rem); line-height: 1; margin-bottom: 25px; }
-  .hero p { font-size: 1.35rem; color: var(--text); max-width: 700px; line-height: 1.6; margin-bottom: 40px; }
-  .hero-ctas { display: flex; gap: 20px; }
-  .hero-badge { display: inline-block; padding: 7px 18px; background: rgba(0,232,150,0.08); border: 1px solid rgba(0,232,150,0.18); border-radius: 20px; color: var(--green); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; }
-
-  .pillar-row-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; }
-  .pillar-card { background: var(--card); border: 1px solid var(--border); padding: 40px; border-radius: 30px; transition: 0.3s; display: block; }
-  .pillar-card:hover { border-color: var(--green); transform: translateY(-5px); }
-  .pillar-card h3 { font-size: 1.5rem; color: var(--white); margin-bottom: 15px; }
-  .pillar-card p { font-size: 0.9rem; color: var(--text); line-height: 1.6; margin-bottom: 25px; }
-  .pillar-card span { font-size: 0.8rem; font-weight: 800; color: var(--green); text-transform: uppercase; }
-
-  .home-services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 50px; }
-  .h-svc-card { padding: 25px; background: var(--card); border: 1px solid var(--border2); border-radius: 15px; }
-  .h-svc-card h3 { font-size: 1.05rem; }
-
-  .faq-grid-massive { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 60px; }
-  .faq-card { background: var(--card); border: 1px solid var(--border); padding: 25px; border-radius: 15px; }
-  .faq-card h4 { font-size: 0.9rem; color: var(--white); line-height: 1.4; margin-bottom: 10px; }
-  .faq-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
-
-  .home-loc-grid { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 50px; }
-  .h-loc-link { padding: 12px 25px; background: var(--card); border: 1px solid var(--border); border-radius: 50px; font-size: 0.9rem; font-weight: 700; color: var(--text); transition: 0.3s; }
-  .h-loc-link:hover { border-color: var(--green); color: var(--green); }
-  .all-locs { background: var(--green); color: var(--black) !important; border-color: var(--green); }
-
-  @media (max-width: 1024px) {
-     .pillar-row-3 { grid-template-columns: 1fr; }
-     .faq-grid-massive { grid-template-columns: 1fr 1fr; }
-     .home-services-grid { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 768px) {
-     .faq-grid-massive { grid-template-columns: 1fr; }
-     .home-services-grid { grid-template-columns: 1fr; }
-  }
+  .pillar-box:hover { transform: translateY(-8px); border-color: inherit; }
+  .svc-mini-card:hover { border-color: var(--white); transform: scale(1.02); }
+  .loc-chip:hover { border-color: var(--green); color: var(--green); }
 </style>
