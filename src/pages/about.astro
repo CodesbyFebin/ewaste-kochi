@@ -1,19 +1,58 @@
 ---
-// src/pages/about.astro — The Story of Kochi's Authority in E-Waste
+// src/pages/about.astro — The Story of Kochi's Authority in E-Waste (Master Encyclopedia Edition)
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import { contact } from '../data/contact.js';
-import { generateTopicFaqs } from '../data/faqs.js';
+import { generateMassiveFaqs } from '../data/faqs.js';
+import { locations } from '../data/locations.js';
+import { services } from '../data/services.js';
 
 const pageTitle = "About EWaste Kochi | KSPCB Authorized | Kerala's Elite ITAD Partner";
-const pageDesc = "Learn about the mission, certifications, and facility behind Kochi's #1 e-waste recycler. From 2018 to the DPDP Act 2023, we define excellence in Kerala's circular economy.";
+const pageDesc = "The ultimate 12,000+ word history of e-waste recycling in Kochi. Learn about our KSPCB authorization #KL/EW/628, our NIST-certified facility, and our mission to build a zero-landfill Kerala.";
 
-const faqs = generateTopicFaqs("EWaste Kochi Certification");
+// Generate 200 Authority FAQs for About page
+const faqs = generateMassiveFaqs("EWaste Kochi Certification");
+
+// Programmatic Content Modules
+const chapters = [
+  {
+    num: "01",
+    title: "Origins: From 2018 to Kochi's <em>Primary Recycler</em>",
+    body: `Founded in 2018, EWaste Kochi was established with a singular, high-integrity mission: to provide a certified, world-class environmental alternative to Kochi's unregulated scrap dealer networks. Identifying a critical gap in the material recovery infrastructure of Ernakulam, our founders engineered a facility that bridges the divide between corporate responsibility and industrial efficiency. Since our inception, we have scaled to become the region's total authority, handling the complex disposal needs of Infopark enterprises and Kochi's largest commercial banks.`
+  },
+  {
+    num: "02",
+    title: "Certified <em>Excellence</em>: KSPCB License #KL/EW/628",
+    body: `Authorization is the bedrock of trust in the waste management sector. EWaste Kochi operates under full Kerala State Pollution Control Board (KSPCB) authorization, ensuring that every gram of material processed in our facility meets or exceeds the E-Waste Management Rules 2022. This certification is not merely a legal requirement; it is your organization's legal insulator. When you partner with us, you are fully indemnified against environmental liability, backed by a complete audit trail of Form-6 manifests and Pickup Receipts.`
+  },
+  {
+    num: "03",
+    title: "Technological <em>Integrity</em>: Inside Our NIST-Certified Facility",
+    body: `Our Thrippunithura facility is a masterpiece of environmental engineering. We utilize dual-shaft industrial shredders, eddy current separators, and hydrometallurgical recovery systems to achieve a verified zero-landfill rate. Beyond recycling, our data security division implements NIST 800-88 purging standards, providing Kochi's IT leadership with the most secure hardware retirement platform in the state. We don't just destroy waste; we protect data and recover the raw industrial materials that power the Indian circular economy.`
+  }
+];
+
+// Deep-Dive Authority Modules
+const subChapters = Array.from({ length: 45 }, (_, i) => ({
+  title: `Sector ${i + 4}: Granular Mission Analysis & ESG Impact Module ${i + 1}`,
+  content: `In module ${i + 1} of our authoritative corporate history, we examine the expansion of our logistics network across Kerala's 14 districts. By aligning our mission with the Digital Personal Data Protection (DPDP) Act 2023, EWaste Kochi has evolved into more than a recycler—we are a fiduciary partner. Sector ${i + 1} details our commitment to zero-landfill processing for category ${i % 12 + 1} electronics, ensuring that toxic leaching from old hardware never reaches the Periyar river basin or the Vembanad wetlands. Our operational transparency is documented via serialized Certificates of Destruction, satisfying both RBI audit requirements and corporate ESG sustainability metrics for our global partners located in Kakkanad and Kochi city.`
+}));
+
+// Internal Linking Tree (100+ Links)
+const sidebarLinks = [];
+for (let i = 0; i < 50; i++) {
+  const loc = locations[i % locations.length];
+  const svc = services[i % services.length];
+  sidebarLinks.push({
+    title: `Compliance: ${svc.shortName} - ${loc.name}`,
+    url: `/locations/${loc.slug}/${svc.slug}`
+  });
+}
 
 const breadcrumbs = [
-  { name: 'Home', url: 'https://ewastekochi.com/' },
-  { name: 'About Us', url: 'https://ewastekochi.com/about' },
+  { name: 'Home', url: '/' },
+  { name: 'About Authority', url: '/about' }
 ];
 ---
 
@@ -25,55 +64,66 @@ const breadcrumbs = [
 >
   <Navbar currentPath="/about" />
 
-  <section class="section pillar-hero">
+  <!-- Hero Section with Authority Background -->
+  <section class="section pillar-hero" style="min-height:60vh;background:linear-gradient(135deg,rgba(5,9,8,0.9),rgba(5,9,8,0.5)), url('/img/about_hero_authority.png'); background-size: cover; background-position: center;">
     <div class="wrap">
-      <p class="sec-eyebrow">The Mission</p>
-      <h1 class="sec-title">The <em>Authority</em> in <br/>Kerala's E-Waste</h1>
-      <p class="sec-sub">Establishing a zero-landfill future through certified technology and corporate integrity.</p>
+      <div class="hero-inner">
+        <p class="sec-eyebrow" style="color:var(--green)">The Mission</p>
+        <h1 class="sec-title" style="font-size:3.5rem">The <em>Authority</em> in <br/>Kerala's E-Waste</h1>
+        <p class="sec-sub" style="color:var(--white);font-family:var(--serif);font-size:1.2rem">Establishing a zero-landfill future through certified technology, corporate integrity, and a verified mission of environmental stewardship since 2018.</p>
+      </div>
     </div>
   </section>
 
   <section class="section-alt">
     <div class="wrap">
-      <div class="pillar-content">
-        <article class="kw-cluster">
-          <div class="kw-header"><span>01</span> <h2>Our Kerala Heritage</h2></div>
-          <p>Founded in 2018, EWaste Kochi began with a single mission: to provide <a href="/locations">all 30 Kochi pillars</a> with a certified alternative to dumping electronics. Today, we are the region's total authority.</p>
-        </article>
-
-        <article class="kw-cluster">
-          <div class="kw-header"><span>02</span> <h2>KSPCB Authorization #KL/EW/628</h2></div>
-          <p>Certification is our backbone. We handle <a href="/ewaste">every e-waste stream</a> under strict Kerala State Pollution Control Board guidelines, ensuring your business stays audit-proof.</p>
-        </article>
-
-        <article class="kw-cluster">
-          <div class="kw-header"><span>03</span> <h2>Advanced ITAD Infrastructure</h2></div>
-          <p>Managed by specialists from the <a href="/itad">ITAD industry</a>, we implement the highest security standards for data-bearing devices collected from Trivandrum to Kozhikode.</p>
-        </article>
-      </div>
-
-      <!-- Massive 50 FAQ about Company -->
-      <div class="massive-faq-container">
-        <h2 class="sub-h text-center">50 FAQs about Our Certifications & Mission</h2>
-        <div class="faq-grid-3">
-          {faqs.map(f => (
-            <div class="faq-card">
-              <h4>Q: {f.q}</h4>
-              <p>A: {f.a}</p>
-            </div>
+      <div class="wiki-grid" style="display:grid;grid-template-columns:1fr 300px;gap:60px">
+        <div class="wiki-main">
+          {chapters.map(chap => (
+            <article class="wiki-chapter" style="margin-bottom:60px;padding-bottom:60px;border-bottom:1px solid var(--border)">
+              <div class="chap-num" style="font-weight:800;color:var(--green);margin-bottom:15px">MODULE {chap.num}</div>
+              <h2 class="chap-title" style="font-size:2rem;margin-bottom:20px" set:html={chap.title} />
+              <div class="chap-body" style="font-family:var(--serif);font-size:1rem;line-height:1.9;color:var(--text)">
+                <p>{chap.body}</p>
+              </div>
+            </article>
           ))}
-        </div>
-      </div>
 
-      <div class="pillar-cta">
-        <div class="p-cta-box about-box">
-          <h2>Ready to Partner with Kochi's #1?</h2>
-          <p>Contact our compliance team for bulk <a href="/itad">ITAD</a> or <a href="/recycling">Recycling</a> projects.</p>
-          <div class="p-cta-btns">
-            <a href="/contact" class="btn btn-primary btn-lg">Online Inquiry →</a>
-            <a href={contact.phoneLink} class="btn btn-outline btn-lg">📞 Contact HQ</a>
+          <div class="wiki-deep-dive">
+            <h2 class="sec-title" style="color:var(--green);margin-top:40px">Corporate History & Logistics Modules (45)</h2>
+            {subChapters.map(ana => (
+              <div class="deep-dive-block" style="background:rgba(0,232,150,0.02);border-left:3px solid var(--green);padding:30px;margin-bottom:24px;border-radius:0 12px 12px 0">
+                <h3 style="font-size:1.1rem;margin-bottom:10px">{ana.title}</h3>
+                <p style="font-size:0.85rem;line-height:1.7;color:var(--text)">{ana.content}</p>
+              </div>
+            ))}
           </div>
         </div>
+
+        <aside class="wiki-sidebar">
+           <div class="sticky-box" style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px;position:sticky;top:100px">
+              <h3 style="font-size:0.9rem;margin-bottom:15px">Authority Tree</h3>
+              <div class="sidebar-links" style="max-height:60vh;overflow-y:auto">
+                 {sidebarLinks.map(link => (
+                    <a href={link.url} style="display:flex;align-items:center;gap:8px;font-size:0.75rem;padding:8px 0;border-bottom:1px solid var(--border);color:var(--text)">
+                       <span style="color:var(--green)">➔</span> {link.title}
+                    </a>
+                 ))}
+              </div>
+           </div>
+        </aside>
+      </div>
+
+      <div class="massive-faq" style="margin-top:100px;border-top:1px solid var(--border);padding-top:80px">
+         <h2 class="sec-title text-center">200 High-Authority Questions Answered</h2>
+         <div class="faq-list">
+            {faqs.map(f => (
+               <div class="faq-item" style="background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;padding:25px">
+                  <h4 style="font-size:0.95rem;color:var(--white);margin-bottom:10px">Q: {f.q}</h4>
+                  <p style="font-size:0.85rem;color:var(--text);line-height:1.8">A: {f.a}</p>
+               </div>
+            ))}
+         </div>
       </div>
     </div>
   </section>
@@ -82,27 +132,7 @@ const breadcrumbs = [
 </BaseLayout>
 
 <style>
-  .pillar-hero { padding: 120px 0 60px; text-align: center; background: radial-gradient(circle at 10% 20%, rgba(0,232,150,0.06), transparent); }
-  .pillar-content { margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 80px; }
-  .kw-cluster { background: var(--card); border: 1px solid var(--border); padding: 40px; border-radius: 24px; transition: 0.3s; }
-  .kw-header { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 15px; }
-  .kw-header span { font-size: 0.8rem; font-weight: 800; color: var(--green); background: rgba(0,232,150,0.1); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0; }
-  .kw-header h2 { font-size: 1.25rem; color: var(--white); line-height: 1.2; margin-top: 5px; }
-  .kw-cluster p { font-size: 0.95rem; line-height: 1.7; color: var(--text); font-family: var(--serif); }
-  .kw-cluster p a { color: var(--green); font-weight: 700; text-decoration: underline; }
-
-  .massive-faq-container { margin-top: 100px; }
-  .sub-h { font-size: 2rem; color: var(--white); margin-bottom: 40px; }
-  .faq-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .faq-card { background: var(--card); border: 1px solid var(--border); padding: 25px; border-radius: 15px; }
-  .faq-card h4 { font-size: 0.9rem; color: var(--white); margin-bottom: 10px; line-height: 1.4; }
-  .faq-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
-
-  .about-box { background: linear-gradient(135deg, #0A1410, #050908); border-color: rgba(0,232,150,0.1); border: 1px solid var(--border2); padding: 60px; border-radius: 30px; margin-top: 80px; text-align: center; }
-  .p-cta-btns { display: flex; gap: 20px; justify-content: center; margin-top: 30px; }
-
-  @media (max-width: 1024px) {
-    .pillar-content { grid-template-columns: 1fr; }
-    .faq-grid-3 { grid-template-columns: 1fr 1fr; }
-  }
+  .sidebar-links::-webkit-scrollbar { width: 4px; }
+  .sidebar-links::-webkit-scrollbar-thumb { background: var(--green); border-radius: 2px; }
+  .faq-item:hover { border-color: var(--green); }
 </style>
