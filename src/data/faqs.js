@@ -139,24 +139,38 @@ export const generateServiceFaqs = (svcName) => {
 };
 
 /**
- * Automates 50+ Topic-Specific Authority FAQs for Pillar Pages.
+ * Automates 200+ Topic-Specific Authority FAQs for Pillar Pages.
+ * Designed to capture long-tail and question-based organic traffic.
  */
-export const generateTopicFaqs = (topicName) => {
-  const templates = [
-    { q: `Everything you need to know about ${topicName} in Kochi?`, a: `Professional guide to ${topicName} covering compliance, safety, and local disposal across Kerala.` },
-    { q: `Is ${topicName} mandatory for Kochi businesses?`, a: `Under E-Waste Rules 2022, certified handling of ${topicName} is a statutory requirement for all commercial entities.` },
-    { q: `How does EWaste Kochi excel in ${topicName}?`, a: `We provide KSPCB-authorized ${topicName} with full audit trails and a zero-landfill commitment.` },
-    { q: `Does ${topicName} protect my data?`, a: `Yes, any ${topicName} involving data-bearing devices includes NIST 800-88 certified wiping.` },
-    { q: `${topicName} best practices for Kerala households?`, a: `Residents of Kochi should avoid dumping ${topicName.toLowerCase()} and instead use our free drop-off or pickup services.` },
+export const generateMassiveFaqs = (topicName) => {
+  const baseTemplates = [
+    { q: `What exactly qualifies as ${topicName} in Kochi?`, a: `${topicName} encompasses all discarded electronic and electrical equipment (WEEE). In Kochi's commercial ecosystem, this ranges from Infopark server blades to residential appliances. Each requires specialized extraction to prevent environmental leaching.` },
+    { q: `Is ${topicName} disposal mandatory for businesses under Kerala law?`, a: `Yes. Under the E-Waste Management Rules 2022, every corporate entity in Kerala is legally obligated to channel ${topicName.toLowerCase()} through KSPCB-authorized recyclers. Failure to do so can result in significant environmental compensation penalties.` },
+    { q: `How does EWaste Kochi ensure data security during ${topicName} retirement?`, a: `We integrate NIST 800-88 certified data sanitization into the ${topicName} workflow. This ensures that while the physical hardware is recycled, the digital data is permanently purged, satisfying both e-waste and DPDP Act 2023 requirements.` },
+    { q: `Are there specific collection centers for ${topicName} in Ernakulam?`, a: `While we have a flagship processing facility in Thrippunithura, we offer doorstep collection across all major Ernakulam hubs including Kakkanad, Edappally, Aluva, and Vyttila for bulk ${topicName} quantities.` },
+    { q: `What is the environmental impact of improper ${topicName} dumping in Kerala?`, a: `Improper disposal leads to heavy metals like Lead, Mercury, and Cadmium leaching into Kerala's backwaters and groundwater, causing irreversible ecological damage and health risks to the local population.` },
+    { q: `Does ${topicName} recycling contribute to the circular economy?`, a: `Absolutely. By recovering precious metals like gold, silver, and copper from ${topicName.toLowerCase()}, we reduce the need for destructive mining and keep valuable resources within the industrial production loop in India.` },
+    { q: `Can I get a legal Certificate of Destruction for my ${topicName}?`, a: `Yes. We issue a serialized Certificate of Destruction (CoD) for every batch of ${topicName} collected, which serves as your primary proof of compliance for environmental and financial audits.` },
+    { q: `How often should a Kochi business conduct a ${topicName} audit?`, a: `We recommend quarterly or bi-annual ${topicName} retirement cycles for IT companies to maintain clean asset registers and ensure ongoing compliance with the latest KSPCB and CPCB guidelines.` },
+    { q: `What is the difference between green-gap and certified ${topicName} disposal?`, a: `Green-gap refers to informal "scrap" methods that often end in landfills. Certified ${topicName} disposal through EWaste Kochi guarantees 100% material recovery and safe hazardous waste neutralization.` },
+    { q: `Who is responsible for ${topicName} logistics in Kochi?`, a: `EWaste Kochi handles the entire logistics chain — from secure loading at your premises to transport in specialized hazardous-waste-compliant vehicles to our sorting facility.` },
   ];
 
-  const extras = [];
-  for (let i = 6; i <= 50; i++) {
-    extras.push({
-      q: `Standard Authority Query #${i} regarding ${topicName}?`,
-      a: `Expert insight for ${topicName} category ${i}, focusing on environmental sustainability and Kochi local compliance.`
+  // Programmatic generation logic for 200 items
+  const subjects = ['ITAD', 'compliance', 'sustainability', 'logistics', 'security', 'hazardous-materials', 'recycling-tech', 'legal-audit', 'material-recovery', 'community-health'];
+  const verbs = ['managing', 'securing', 'optimizing', 'auditing', 'legalizing', 'cleaning', 'processing', 'tracking', 'refining', 'protecting'];
+  
+  const massive = [...baseTemplates];
+  
+  // Distribute based on permutations to ensure unique-looking long-tail queries
+  for (let i = 11; i <= 200; i++) {
+    const s = subjects[i % subjects.length];
+    const v = verbs[i % verbs.length];
+    massive.push({
+      q: `Advanced Detail #${i}: How are you ${v} the ${s} aspect of ${topicName} for Kochi enterprises?`,
+      a: `Regarding ${s}, our ${v} workflow for ${topicName} ensures that every device is tracked, processed according to KSPCB standards, and refined for maximize material recovery while maintaining a 100% audit-proof trail for your compliance department.`
     });
   }
 
-  return [...templates, ...extras];
+  return massive;
 };
