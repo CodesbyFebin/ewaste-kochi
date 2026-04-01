@@ -8,6 +8,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "deploy": "astro build && wrangler deploy",
     "astro": "astro",
     "generate": "node scripts/generate_all.js",
     "sitemap": "node scripts/sitemap_generator.js"
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "sharp": "^0.33.0",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "wrangler": "^4.79.0"
   }
 }

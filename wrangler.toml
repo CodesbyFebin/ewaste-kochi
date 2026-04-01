@@ -1,0 +1,17 @@
+name = "ewastekochi"
+compatibility_date = "2026-03-31"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "dist"
+
+[vars]
+# Add any production environment variables here
+
+[[redirects]]
+from = "/ewaste"
+to = "/ewaste/"
+status = 301
+
+[[redirects]]
+from = "/itad"
+to = "/itad/"
+status = 301
