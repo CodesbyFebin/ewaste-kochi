@@ -1,0 +1,16 @@
+*.zip
+*.deb
+*.log
+__pycache__/
+.DS_Store
+ewastekochi-v3-chatbot/
+files (1)/
+sitemap.xml.bak
+*.txt.bak
+url_list.txt
+all_pages_list.txt
+html_files_list.txt
+*.csv
+gitlab_repo/
+ewaste-kochi/
+ewastekochi-production/

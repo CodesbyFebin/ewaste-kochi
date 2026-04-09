@@ -100,6 +100,9 @@ Allow: /
 # ── Sitemaps ──────────────────────────────────────────────────
 
 Sitemap: https://ewastekochi.com/sitemap.xml
+Sitemap: https://ewastekochi.com/sitemap-index.xml
+Sitemap: https://ewastekochi.com/sitemap-images.xml
+Sitemap: https://ewastekochi.com/sitemap-news.xml
 
 # ── Host ──────────────────────────────────────────────────────
 
