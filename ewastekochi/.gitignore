@@ -14,3 +14,5 @@ html_files_list.txt
 gitlab_repo/
 ewaste-kochi/
 ewastekochi-production/
+.vercel
+.env*.local
