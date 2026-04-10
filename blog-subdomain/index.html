@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blog | EWaste Kochi — ITAD, Data Security & E-Waste Kerala</title>
+<meta name="description" content="Expert guides on ITAD, data destruction, e-waste rules, laptop buyback, and DPDP Act compliance in Kochi, Kerala. 85 in-depth articles.">
+<link rel="canonical" href="https://blog.ewastekochi.com/">
+<meta property="og:title" content="EWaste Kochi Blog — Kerala ITAD & E-Waste Authority">
+<meta property="og:url" content="https://blog.ewastekochi.com/">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0F0C;--bg2:#111A14;--green:#00E664;--white:#E8F2EA;--text:#9BB8A2;--muted:#5A7A62;--border:rgba(0,230,100,.13)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+a{text-decoration:none;color:inherit}
+/* top nav */
+.top-nav{background:rgba(7,16,10,.97);border-bottom:1px solid var(--border);padding:0 24px;height:62px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(20px)}
+.nav-brand{font-family:'Bebas Neue';font-size:1.5rem;color:var(--white);display:flex;align-items:center;gap:8px}
+.nav-links{display:flex;gap:20px;font-size:.83rem;color:var(--muted);font-weight:600}
+.nav-links a:hover{color:var(--green)}
+.nav-cta{background:var(--green);color:var(--bg);padding:8px 18px;border-radius:8px;font-weight:800;font-size:.83rem}
+/* hero */
+.hero{padding:80px 24px 60px;text-align:center;border-bottom:1px solid var(--border);background:radial-gradient(ellipse at 50% 0%,rgba(0,230,100,.06),transparent 60%)}
+.hero h1{font-family:'Bebas Neue';font-size:clamp(2.6rem,7vw,5rem);color:var(--white);line-height:1.05;margin-bottom:16px}
+.hero h1 span{color:var(--green)}
+.hero p{color:var(--muted);max-width:580px;margin:0 auto 32px;line-height:1.8}
+.hero-stats{display:inline-flex;gap:32px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px 32px;font-size:.85rem}
+.hero-stats b{color:var(--green);font-size:1.3rem;display:block;font-family:'Bebas Neue'}
+/* search */
+.search-bar{max-width:900px;margin:40px auto 0;padding:0 24px}
+.search-bar input{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 20px;color:var(--white);font-size:1rem;outline:none;transition:border-color .2s}
+.search-bar input:focus{border-color:var(--green)}
+/* grid */
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;padding:40px 0 80px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:28px;display:flex;flex-direction:column;gap:12px;transition:border-color .2s,transform .2s;cursor:pointer}
+.card:hover{border-color:var(--green);transform:translateY(-3px)}
+.card-tag{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}
+.card h2{font-size:1.05rem;color:var(--white);font-weight:700;line-height:1.4;flex:1}
+.card-cta{font-size:.82rem;font-weight:800;color:var(--green)}
+/* footer */
+.footer{background:#050806;border-top:1px solid var(--border);padding:40px 24px;text-align:center;font-size:.82rem;color:var(--muted)}
+.footer a{color:var(--green);margin:0 8px}
+@media(max-width:600px){.nav-links{display:none}.hero h1{font-size:2.4rem}.hero-stats{flex-direction:column;gap:16px;text-align:center}}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Blog","name":"EWaste Kochi Blog","url":"https://blog.ewastekochi.com/","description":"Expert guides on ITAD, data destruction, e-waste compliance and laptop buyback in Kochi Kerala.","publisher":{"@type":"Organization","name":"EWaste Kochi","url":"https://ewastekochi.com/"}}
+</script>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-brand">📝 Blog.EwasteKochi</div>
+  <div class="nav-links">
+    <a href="https://blog.ewastekochi.com/">All Posts</a>
+    <a href="https://ewastekochi.com/itad-kochi.html">ITAD Guide</a>
+    <a href="https://ewastekochi.com/data-destruction-kochi.html">Data Destruction</a>
+    <a href="https://ewastekochi.com/ewaste-compliance-kerala.html">Compliance</a>
+  </div>
+  <a class="nav-cta" href="https://ewastekochi.com/">Main Site →</a>
+</nav>
+
+<div class="hero">
+  <h1>Kochi's #1 <span>E-Waste & ITAD</span><br>Knowledge Hub</h1>
+  <p>85 expert guides on data destruction, ITAD, DPDP Act compliance, laptop buyback, and e-waste rules — all focused on Kochi &amp; Kerala.</p>
+  <div class="hero-stats">
+    <div><b>85</b>In-Depth Articles</div>
+    <div><b>10</b>Topic Categories</div>
+    <div><b>2,000+</b>FAQs Covered</div>
+  </div>
+</div>
+
+<div class="search-bar">
+  <input type="text" id="search" placeholder="🔍  Search guides… e.g. DPDP Act, laptop buyback, data destruction" oninput="filterCards(this.value)">
+</div>
+
+<div class="wrap">
+  <div class="grid" id="grid">
+    <a href="https://blog.ewastekochi.com/bank-it-asset-disposition-rbi.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Bank It Asset Disposition Rbi</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/best-place-to-sell-used-electronics.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Best Place To Sell Used Electronics</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/bulk-computer-scrap-buyers-kerala.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Bulk Computer Scrap Buyers Kerala</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/cashify-vs-ewaste-kochi-laptop-buyback.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Cashify Vs Ewaste Kochi Laptop Buyback</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/corporate-checklist.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Corporate Checklist</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/corporate-e-waste-policy-template-india.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Corporate E Waste Policy Template India</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/corporate-itad-checklist.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Corporate Itad Checklist</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/corporate-social-responsibility-ewaste.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Corporate Social Responsibility Ewaste</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/data-breach-costs-india.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Data Breach Costs India</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/data-center-decommissioning-steps.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Data Center Decommissioning Steps</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/data-wiping-software-vs-shredding.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Data Wiping Software Vs Shredding</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/dpdp-act-2023-it-disposal-kerala.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Dpdp Act 2023 It Disposal Kerala</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/dpdp-act-impact-on-startups-kochi.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Dpdp Act Impact On Startups Kochi</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/dpdp-act-impact-startups.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Dpdp Act Impact Startups</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/dpdp-act-penalties-explained.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Dpdp Act Penalties Explained</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/dpdp-compliance.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Dpdp Compliance</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/dpdp-startups.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Dpdp Startups</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/electronic-waste-hazards.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Electronic Waste Hazards</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/ewaste-circular-economy.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Ewaste Circular Economy</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/ewaste-laws-kerala.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Ewaste Laws Kerala</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/ewaste-laws.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Ewaste Laws</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/ewaste-management-rules-2022-kerala.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Ewaste Management Rules 2022 Kerala</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/ewaste-recycling-guidelines-kerala-2026.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Ewaste Recycling Guidelines Kerala 2026</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/formatting.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Formatting</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/hard-disk-data-recovery-risk.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Hard Disk Data Recovery Risk</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/hard-drive-shredding-cost-kochi.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Hard Drive Shredding Cost Kochi</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/hard-drive-shredding-service-kochi.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Hard Drive Shredding Service Kochi</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/hard-drive-shredding-vs-degaussing.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Hard Drive Shredding Vs Degaussing</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/haritha-karma-sena-ewaste-fee.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Haritha Karma Sena Ewaste Fee</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/hospital-medical-equipment-disposal.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Hospital Medical Equipment Disposal</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/how-companies-dispose-it-assets-india.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>How Companies Dispose It Assets India</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/how-to-choose-itad-provider.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>How To Choose Itad Provider</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/how-to-dispose-e-waste-in-infopark-kakkanad.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>How To Dispose E Waste In Infopark Kakkanad</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/how-to-recycle-broken-tv-kochi.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>How To Recycle Broken Tv Kochi</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/how-to-sell-old-phone-without-olx-risks.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>How To Sell Old Phone Without Olx Risks</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/infopark-green-initiatives-2026.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Infopark Green Initiatives 2026</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/iphone-resale-value-drop-calc.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Iphone Resale Value Drop Calc</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/is-formatting-enough-data-delete.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Is Formatting Enough Data Delete</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/is-formatting-enough-delete-data.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Is Formatting Enough Delete Data</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/is-it-legal-to-throw-batteries.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Is It Legal To Throw Batteries</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/is-olx-safe-in-kerala.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Is Olx Safe In Kerala</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/itad-service-kochi-2026.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Itad Service Kochi 2026</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/kochi-municipal-corporation-ewaste.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Kochi Municipal Corporation Ewaste</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/kspcb-ewaste-rules-explained.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Kspcb Ewaste Rules Explained</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/laptop-battery-disposal-ernakulam.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Laptop Battery Disposal Ernakulam</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/laptop-data-wiping-software-vs-nist.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Laptop Data Wiping Software Vs Nist</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/laptop-disposal-infopark-kochi.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Laptop Disposal Infopark Kochi</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/laptop-resale-value-2026.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Laptop Resale Value 2026</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/laptop-resale-value-kochi.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Laptop Resale Value Kochi</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/laptop-resale.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Laptop Resale</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/nist-800-88-vs-dod-standards.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Nist 800 88 Vs Dod Standards</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/nist-vs-dod.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Nist Vs Dod</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/office-shifting-it-clearance.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Office Shifting It Clearance</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/pcb-authorized-ewaste-recyclers-list.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Pcb Authorized Ewaste Recyclers List</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/phone-data-recovery-risk.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Phone Data Recovery Risk</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/phone-risk.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Phone Risk</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/schools-ewaste-collection-drive.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Schools Ewaste Collection Drive</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/secure-data-destruction-methods.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Secure Data Destruction Methods</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/secure-phone-disposal-guide.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Secure Phone Disposal Guide</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/secure-phone-disposal.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Secure Phone Disposal</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/secure-server-decommissioning.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Secure Server Decommissioning</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/sell-dead-laptop-for-parts.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Sell Dead Laptop For Parts</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/sell-macbook-pro-kochi-cash.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Sell Macbook Pro Kochi Cash</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/selling-old-macbook-kochi.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Selling Old Macbook Kochi</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/shredding-cost.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Shredding Cost</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/smartphone-recycling-precious-metals.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Smartphone Recycling Precious Metals</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/ssd-destruction-myths.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Ssd Destruction Myths</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/tech-sustainability-tip-12.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Tech Sustainability Tip 12</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/tech-sustainability-tip-13.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Tech Sustainability Tip 13</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/tech-sustainability-tip-14.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Tech Sustainability Tip 14</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/tech-sustainability-tip-15.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Tech Sustainability Tip 15</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/tech-sustainability-tip-16.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Tech Sustainability Tip 16</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/tech-sustainability-tip-17.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Tech Sustainability Tip 17</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/tech-sustainability-tip-18.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Tech Sustainability Tip 18</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/tech-sustainability-tip-19.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Tech Sustainability Tip 19</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/what-happens-to-recycled-ewaste.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>What Happens To Recycled Ewaste</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/what-is-a-certificate-of-destruction.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>What Is A Certificate Of Destruction</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/what-is-e-waste.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>What Is E Waste</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/what-is-itad.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>What Is Itad</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/what-is-kspcb-authorization-for-e-waste.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>What Is Kspcb Authorization For E Waste</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/where-sell-old-phone-kochi.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Where Sell Old Phone Kochi</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/where-to-sell-old-phone-kochi.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Where To Sell Old Phone Kochi</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/why-companies-need-certificate-of-destruction.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Why Companies Need Certificate Of Destruction</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/why-not-to-throw-batteries-in-trash.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Why Not To Throw Batteries In Trash</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a>
+    <a href="https://blog.ewastekochi.com/why-recycling-macbooks-is-hard.html" class="card">
+      <div class="card-tag">EWaste Kochi</div>
+      <h2>Why Recycling Macbooks Is Hard</h2>
+      <span class="card-cta">Read Full Guide →</span>
+    </a></div>
+</div>
+
+<footer class="footer">
+  <p>© 2026 EWaste Kochi Blog — KSPCB Authorised ITAD Authority, Kochi Kerala</p>
+  <p style="margin-top:10px">
+    <a href="https://ewastekochi.com/">Main Site</a>
+    <a href="https://ewastekochi.com/itad-kochi.html">ITAD</a>
+    <a href="https://ewastekochi.com/data-destruction-kochi.html">Data Destruction</a>
+    <a href="https://ewastekochi.com/computer-scrap-kochi.html">Computer Scrap</a>
+    <a href="https://ewastekochi.com/ewaste-compliance-kerala.html">Compliance</a>
+  </p>
+</footer>
+
+<script>
+function filterCards(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('#grid .card').forEach(c => {
+    const t = c.querySelector('h2').textContent.toLowerCase();
+    c.style.display = t.includes(q) ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>

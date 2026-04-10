@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://blog.ewastekochi.com/sitemap.xml
