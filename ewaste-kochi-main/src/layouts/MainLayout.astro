@@ -1,0 +1,81 @@
+---
+// src/layouts/MainLayout.astro
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  jsonLd?: any;
+  noIndex?: boolean;
+}
+
+const { title, description, canonical, jsonLd, noIndex } = Astro.props as Props;
+const canonicalUrl = canonical || `https://ewastekochi.com${Astro.url.pathname}`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    {noIndex && <meta name="robots" content="noindex,follow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content="/assets/og-default.jpg" />
+
+    <!-- Minimal critical CSS inlined for performance -->
+    <style>
+      :root{--accent:#2d6a4f;--max-w:1200px}
+      html,body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:#0f172a}
+      header{background:#fff;border-bottom:1px solid #eee}
+      .container{max-width:var(--max-w);margin:0 auto;padding:1rem}
+      a{color:var(--accent);text-decoration:none}
+      footer{background:#fafafa;border-top:1px solid #eee;padding:1rem 0;font-size:0.95rem}
+      .hero{padding:2rem 0}
+      .badge{display:inline-block;background:#eef6ef;color:var(--accent);padding:0.25rem 0.5rem;border-radius:6px;font-weight:600}
+    </style>
+
+    <!-- Async font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"></noscript>
+
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body>
+    <header>
+      <div class="container" role="banner">
+        <a href="/" aria-label="EWaste Kochi homepage"><strong>EWaste Kochi</strong></a>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <slot />
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>© {new Date().getFullYear()} EWaste Kochi — KSPCB authorised. <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+      </div>
+    </footer>
+
+    <!-- Minimal client JS: only for progressive enhancements (deferred) -->
+    <script defer>
+      // small helper for opening tel/wa links tracking (no external deps)
+      document.addEventListener('click', (e) => {
+        const t = e.target.closest && e.target.closest('a[data-track]');
+        if (!t) return;
+        try { navigator.sendBeacon && navigator.sendBeacon('/_beacon', JSON.stringify({href:t.href, label:t.dataset.track})); } catch(e){}
+      });
+    </script>
+  </body>
+</html>

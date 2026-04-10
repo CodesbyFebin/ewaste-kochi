@@ -1,0 +1,58 @@
+---
+// src/templates/Service.astro
+import MainLayout from '../layouts/MainLayout.astro';
+import type { Service } from '../utils/dataLoader';
+
+const { data } = Astro.props as { data: Service };
+
+const title = data.metaTitle || `${data.name} | EWaste Kochi`;
+const description =
+  data.metaDescription ||
+  data.description ||
+  `Professional ${data.name} services in Kochi and across Kerala by EWaste Kochi.`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': data.schemaType || 'Service',
+  name: data.name,
+  description,
+  areaServed: {
+    '@type': 'City',
+    name: 'Kochi',
+  },
+  provider: {
+    '@type': 'Organization',
+    name: 'EWaste Kochi',
+  },
+  offers: data.price
+    ? {
+        '@type': 'Offer',
+        price: data.price,
+        priceCurrency: data.priceCurrency || 'INR',
+      }
+    : undefined,
+};
+---
+
+<MainLayout title={title} description={description} jsonLd={jsonLd}>
+  <section style="max-width: 1200px; margin: 0 auto; padding: 2rem 1rem;">
+    <h1>{data.name}</h1>
+    {data.tagline && <p><strong>{data.tagline}</strong></p>}
+
+    <p>{description}</p>
+
+    {data.longDescription && (
+      <article>
+        <p set:html={data.longDescription.replace(/\n/g, '<br/>')} />
+      </article>
+    )}
+
+    {data.badges && data.badges.length > 0 && (
+      <ul>
+        {data.badges.map((b) => (
+          <li>{b}</li>
+        ))}
+      </ul>
+    )}
+  </section>
+</MainLayout>

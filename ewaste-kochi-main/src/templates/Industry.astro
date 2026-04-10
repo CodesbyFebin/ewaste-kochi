@@ -1,0 +1,111 @@
+---
+// src/templates/Industry.astro — Full production template
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FaqSection from '../components/FaqSection.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const { data } = Astro.props;
+
+const BASE = 'https://ewastekochi.com';
+const canonical = `${BASE}/industries/${data.slug}/`;
+
+const breadcrumbs = [
+  { name: 'Home', url: `${BASE}/` },
+  { name: 'Industries', url: `${BASE}/industries/` },
+  { name: data.shortName || data.name, url: canonical },
+];
+
+const serviceSchema = {
+  '@type': 'Service',
+  name: data.name,
+  description: data.metaDescription || data.description,
+  provider: { '@type': 'Organization', name: 'EWaste Kochi', url: BASE },
+  areaServed: { '@type': 'State', name: 'Kerala' },
+};
+
+const faqs = (data.faqs || []).map((f) => ({ q: f.q, a: f.a }));
+---
+
+<BaseLayout
+  title={data.metaTitle || `${data.name} E-Waste Services | EWaste Kochi`}
+  description={data.metaDescription || data.description}
+  canonical={canonical}
+  schema={serviceSchema}
+  faqs={faqs}
+  breadcrumbs={breadcrumbs}
+>
+  <Breadcrumbs items={breadcrumbs} />
+
+  <!-- Hero -->
+  <section class="ind-hero section">
+    <div class="wrap">
+      <span class="sec-eyebrow">{data.icon} {data.shortName}</span>
+      <h1 class="sec-title">{data.heroHeadline}</h1>
+      <p class="sec-sub">{data.heroSubline}</p>
+      <div class="ind-ctas">
+        <a href="https://wa.me/919876543210" class="btn btn-wa btn-lg">💬 Get Free Quote</a>
+        <a href="/contact/" class="btn btn-outline btn-lg">Schedule Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Challenges & Solutions -->
+  {data.challenges && data.solutions && (
+    <section class="section-alt">
+      <div class="wrap">
+        <div class="cs-grid">
+          <div class="cs-col">
+            <h2 class="cs-heading challenge">⚠️ Industry Challenges</h2>
+            <ul class="cs-list">
+              {data.challenges.map((c) => <li>{c}</li>)}
+            </ul>
+          </div>
+          <div class="cs-col">
+            <h2 class="cs-heading solution">✅ Our Solutions</h2>
+            <ul class="cs-list solution-list">
+              {data.solutions.map((s) => <li>{s}</li>)}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- About this sector -->
+  <section class="section">
+    <div class="wrap ind-body">
+      <h2 class="sec-title">About Our <em>{data.name}</em> Service</h2>
+      <p class="body-text">{data.description}</p>
+    </div>
+  </section>
+
+  <!-- FAQs -->
+  <FaqSection faqs={faqs} heading={`${data.name} — Frequently Asked Questions`} />
+
+  <!-- Bottom CTA -->
+  <section class="section-alt">
+    <div class="wrap text-center">
+      <h2 class="sec-title">Ready to Get Started?</h2>
+      <p class="sec-sub">Same-day response for corporate clients. Free bulk pickup across Kerala.</p>
+      <div class="ind-ctas" style="justify-content:center;">
+        <a href="https://wa.me/919876543210" class="btn btn-wa btn-lg">💬 WhatsApp Us</a>
+        <a href="tel:+919876543210" class="btn btn-outline btn-lg">📞 Call Now</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.ind-hero { background: radial-gradient(ellipse at 70% 30%, rgba(0,180,255,.07) 0%, transparent 60%), var(--bg); }
+.ind-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 2rem; }
+.cs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.cs-heading { font-size: 1.1rem; margin-bottom: 1.2rem; }
+.cs-heading.challenge { color: #F5A623; }
+.cs-heading.solution { color: var(--green); }
+.cs-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.cs-list li { padding: 14px 18px; background: var(--card); border-radius: 10px; border: 1px solid var(--border); font-size: .88rem; color: var(--text); }
+.solution-list li { border-color: rgba(0,232,150,.15); }
+.ind-body { max-width: 780px; }
+.body-text { color: var(--text); line-height: 1.85; font-size: .97rem; }
+@media (max-width: 768px) { .cs-grid { grid-template-columns: 1fr; gap: 28px; } }
+</style>

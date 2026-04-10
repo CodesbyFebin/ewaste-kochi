@@ -1,0 +1,94 @@
+---
+// src/components/FaqSection.astro
+// Zero-JS collapsible FAQs using native <details>/<summary>
+// Also injects FAQPage JSON-LD schema
+
+interface Faq {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  faqs: Faq[];
+  heading?: string;
+  limit?: number;
+}
+
+const { faqs, heading = 'Frequently Asked Questions', limit = 15 } = Astro.props;
+const displayFaqs = faqs.slice(0, limit);
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: displayFaqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+{displayFaqs.length > 0 && (
+  <section class="faq-section section-alt" aria-label="Frequently Asked Questions">
+    <div class="wrap">
+      <div class="text-center">
+        <span class="sec-eyebrow">❓ FAQs</span>
+        <h2 class="sec-title">{heading}</h2>
+      </div>
+      <div class="faq-accordion" role="list">
+        {displayFaqs.map((faq, idx) => (
+          <details class="faq-details" role="listitem">
+            <summary class="faq-summary" aria-expanded="false">
+              <span class="faq-q-text">{faq.q}</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <div class="faq-answer">
+              <p set:html={faq.a}></p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </section>
+)}
+
+<style>
+.faq-section { padding: 80px 0; }
+.faq-accordion { max-width: 820px; margin: 3rem auto 0; display: flex; flex-direction: column; gap: 10px; }
+.faq-details { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: border-color .2s; }
+.faq-details[open] { border-color: rgba(0,232,150,.25); }
+.faq-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  cursor: pointer;
+  list-style: none;
+  color: var(--white);
+  font-weight: 700;
+  font-size: .93rem;
+}
+.faq-summary::-webkit-details-marker { display: none; }
+.faq-q-text { flex: 1; }
+.faq-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(0,232,150,.09);
+  border: 1px solid rgba(0,232,150,.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green);
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  transition: transform .25s;
+  line-height: 1;
+  text-align: center;
+}
+.faq-details[open] .faq-icon { transform: rotate(45deg); }
+.faq-answer { padding: 0 24px 20px; border-top: 1px solid var(--border); }
+.faq-answer p { padding-top: 16px; font-size: .87rem; color: var(--text); line-height: 1.75; font-family: var(--serif); margin: 0; }
+</style>

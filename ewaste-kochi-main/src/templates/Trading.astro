@@ -1,0 +1,137 @@
+---
+// src/templates/Trading.astro — Full production template
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FaqSection from '../components/FaqSection.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const { data } = Astro.props;
+
+const BASE = 'https://ewastekochi.com';
+const canonical = `${BASE}/trading/${data.slug}/`;
+
+const breadcrumbs = [
+  { name: 'Home', url: `${BASE}/` },
+  { name: 'Marketplace', url: `${BASE}/marketplace/` },
+  { name: data.shortName || data.name, url: canonical },
+];
+
+const productSchema = {
+  '@type': 'Product',
+  name: data.name,
+  description: data.description,
+  brand: { '@type': 'Brand', name: 'EWaste Kochi' },
+  offers: {
+    '@type': 'AggregateOffer',
+    priceCurrency: 'INR',
+    lowPrice: data.priceRange?.split('–')[0]?.replace(/[^\d]/g, '') || '0',
+    highPrice: data.priceRange?.split('–')[1]?.replace(/[^\d]/g, '') || '0',
+    availability: 'https://schema.org/InStock',
+    seller: { '@type': 'Organization', name: 'EWaste Kochi' },
+  },
+};
+
+const faqs = (data.faqs || []).map((f) => ({ q: f.q, a: f.a }));
+---
+
+<BaseLayout
+  title={data.metaTitle || `${data.name} | EWaste Kochi Marketplace`}
+  description={data.metaDescription || data.description}
+  canonical={canonical}
+  schema={productSchema}
+  faqs={faqs}
+  breadcrumbs={breadcrumbs}
+>
+  <Breadcrumbs items={breadcrumbs} />
+
+  <!-- Hero -->
+  <section class="trade-hero section">
+    <div class="wrap">
+      <span class="sec-eyebrow">{data.icon} Marketplace</span>
+      <h1 class="sec-title">{data.heroHeadline}</h1>
+      <p class="sec-sub">{data.heroSubline}</p>
+      {data.priceRange && (
+        <div class="price-range-badge">
+          <span class="price-label">Price Range</span>
+          <span class="price-value">{data.priceRange}</span>
+        </div>
+      )}
+      <div class="trade-ctas">
+        <a href="https://wa.me/919876543210" class="btn btn-wa btn-lg">💬 Get a Quote</a>
+        <a href="/contact/" class="btn btn-outline btn-lg">View All Stock</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  {data.certifications && (
+    <section class="section-alt">
+      <div class="wrap">
+        <div class="certs-row">
+          {data.certifications.map((cert) => (
+            <div class="cert-badge">
+              <span class="cert-check">✅</span>
+              <span>{cert}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Product Categories -->
+  {data.categories && (
+    <section class="section">
+      <div class="wrap">
+        <h2 class="sec-title">Available <em>Categories</em></h2>
+        <div class="cat-grid">
+          {data.categories.map((cat) => (
+            <div class="cat-card">
+              <span class="cat-icon">📦</span>
+              <span class="cat-name">{cat}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Description -->
+  <section class="section-alt">
+    <div class="wrap trade-body">
+      <h2 class="sec-title">About <em>{data.name}</em></h2>
+      <p class="body-text">{data.description}</p>
+      <p class="body-text" style="margin-top:1rem">{data.longDescription}</p>
+    </div>
+  </section>
+
+  <!-- FAQs -->
+  <FaqSection faqs={faqs} heading={`${data.name} — Frequently Asked Questions`} />
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="wrap text-center">
+      <h2 class="sec-title">Interested in <em>{data.name}</em>?</h2>
+      <p class="sec-sub">WhatsApp us your requirements for a same-day response and current stock availability.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;">
+        <a href="https://wa.me/919876543210" class="btn btn-wa btn-lg">💬 Enquire Now</a>
+        <a href="tel:+919876543210" class="btn btn-outline btn-lg">📞 Call Us</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.trade-hero { background: radial-gradient(ellipse at 40% 60%, rgba(245,166,35,.07) 0%, transparent 60%), var(--bg); }
+.price-range-badge { display: inline-flex; align-items: center; gap: 10px; background: var(--card); border: 1px solid rgba(245,166,35,.25); border-radius: 10px; padding: 10px 18px; margin: 1.5rem 0; }
+.price-label { font-size: .72rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .1em; }
+.price-value { font-size: 1.05rem; color: var(--amber); font-weight: 700; font-family: var(--mono); }
+.trade-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+.certs-row { display: flex; flex-wrap: wrap; gap: 14px; }
+.cert-badge { display: flex; align-items: center; gap: 8px; background: var(--card); border: 1px solid rgba(0,232,150,.15); border-radius: 10px; padding: 10px 16px; font-size: .83rem; color: var(--white); font-weight: 600; }
+.cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin-top: 2rem; }
+.cat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px; display: flex; align-items: center; gap: 12px; }
+.cat-icon { font-size: 1.3rem; }
+.cat-name { font-size: .88rem; color: var(--white); font-weight: 600; }
+.trade-body { max-width: 780px; }
+.body-text { color: var(--text); line-height: 1.85; font-size: .97rem; }
+</style>

@@ -1,0 +1,60 @@
+---
+// src/templates/Location.astro
+import MainLayout from '../layouts/MainLayout.astro';
+import type { Location } from '../utils/dataLoader';
+
+const { data } = Astro.props as { data: Location };
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'EWaste Kochi',
+  areaServed: data.name,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: data.name,
+    addressRegion: 'Kerala',
+    addressCountry: 'IN',
+  },
+  url: `https://ewastekochi.com/locations/${data.slug}/`,
+  telephone: '+91-XXX-XXX-XXXX',
+  serviceType: 'E‑waste recycling, IT asset disposition, data destruction',
+};
+---
+
+<MainLayout title={data.seo_title} description={data.meta_desc} jsonLd={jsonLd}>
+  <section style="max-width: 1200px; margin: 0 auto; padding: 2rem 1rem;">
+    <h1>{data.h1}</h1>
+    <p>{data.meta_desc}</p>
+
+    <h2>Free doorstep e‑waste pickup in {data.name}</h2>
+    <ul>
+      <li>✔ KSPCB authorised recycler</li>
+      <li>✔ Free pickup from home or office</li>
+      <li>✔ Data destruction certificate (NIST 800‑88)</li>
+      <li>✔ Competitive pricing – we pay you for certain scrap</li>
+    </ul>
+
+    <h2>How it works in {data.name}</h2>
+    <ol>
+      <li>
+        Call or WhatsApp us at <strong>+91-XXX-XXX-XXXX</strong>
+      </li>
+      <li>We schedule free pickup from your location</li>
+      <li>We collect, dismantle, and recycle responsibly</li>
+    </ol>
+
+    <h2>Accepted e‑waste items</h2>
+    <p>
+      Old mobiles, laptops, desktops, servers, UPS, batteries, ACs, refrigerators,
+      TVs, printers, cables, and more.
+    </p>
+
+    <h2>Request pickup now</h2>
+    <p>
+      <a href="tel:+91XXXXXXXXXX">📞 Call now</a>
+      or
+      <a href="https://wa.me/91XXXXXXXXXX" target="_blank">💬 WhatsApp us</a>
+    </p>
+  </section>
+</MainLayout>

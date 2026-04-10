@@ -1,0 +1,104 @@
+---
+// src/templates/Compliance.astro — Full production template
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FaqSection from '../components/FaqSection.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const { data } = Astro.props;
+
+const BASE = 'https://ewastekochi.com';
+const canonical = `${BASE}/compliance/${data.slug}/`;
+
+const breadcrumbs = [
+  { name: 'Home', url: `${BASE}/` },
+  { name: 'Compliance', url: `${BASE}/compliance/` },
+  { name: data.shortName || data.name, url: canonical },
+];
+
+const schema = {
+  '@type': 'Article',
+  headline: data.metaTitle || data.name,
+  description: data.metaDescription || data.description,
+  author: { '@type': 'Organization', name: 'EWaste Kochi', url: BASE },
+  publisher: { '@type': 'Organization', name: 'EWaste Kochi' },
+};
+
+const faqs = (data.faqs || []).map((f) => ({ q: f.q, a: f.a }));
+---
+
+<BaseLayout
+  title={data.metaTitle || `${data.name} | EWaste Kochi Compliance`}
+  description={data.metaDescription || data.description}
+  canonical={canonical}
+  schema={schema}
+  faqs={faqs}
+  breadcrumbs={breadcrumbs}
+>
+  <Breadcrumbs items={breadcrumbs} />
+
+  <!-- Hero -->
+  <section class="comp-hero section">
+    <div class="wrap">
+      <span class="sec-eyebrow">{data.icon} Compliance Guide</span>
+      <h1 class="sec-title">{data.heroHeadline}</h1>
+      <p class="sec-sub">{data.heroSubline}</p>
+    </div>
+  </section>
+
+  <!-- Key Points -->
+  {data.keyPoints && data.keyPoints.length > 0 && (
+    <section class="section-alt">
+      <div class="wrap">
+        <span class="sec-eyebrow">Key Takeaways</span>
+        <h2 class="sec-title">What You Need to <em>Know</em></h2>
+        <div class="keypoints-grid">
+          {data.keyPoints.map((point, i) => (
+            <div class="keypoint-card">
+              <span class="keypoint-num">0{i + 1}</span>
+              <p class="keypoint-text">{point}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Body -->
+  <section class="section">
+    <div class="wrap comp-body">
+      <h2 class="sec-title">Understanding <em>{data.name}</em></h2>
+      <p class="body-text">{data.description}</p>
+      <div class="comp-cta-box">
+        <p>Need help achieving compliance? Our team handles all documentation.</p>
+        <a href="https://wa.me/919876543210" class="btn btn-wa">💬 Get Compliance Help</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQs -->
+  <FaqSection faqs={faqs} heading={`${data.name} — Compliance FAQs`} />
+
+  <!-- Bottom CTA -->
+  <section class="section-alt">
+    <div class="wrap text-center">
+      <h2 class="sec-title">Need <em>Documentation</em> or Compliance Help?</h2>
+      <p class="sec-sub">We supply Certificate of Destruction, Form-6, and full audit packages.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;">
+        <a href="https://wa.me/919876543210" class="btn btn-wa btn-lg">💬 WhatsApp Us</a>
+        <a href="/docs/" class="btn btn-outline btn-lg">📋 Docs Hub</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.comp-hero { background: radial-gradient(ellipse at 50% 40%, rgba(245,166,35,.07) 0%, transparent 60%), var(--bg); }
+.keypoints-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; margin-top: 2.5rem; }
+.keypoint-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; display: flex; gap: 16px; align-items: flex-start; }
+.keypoint-num { font-size: .65rem; font-weight: 700; color: var(--amber); font-family: var(--mono); letter-spacing: .1em; flex-shrink: 0; padding-top: 3px; }
+.keypoint-text { font-size: .87rem; color: var(--text); line-height: 1.7; margin: 0; }
+.comp-body { max-width: 780px; }
+.body-text { color: var(--text); line-height: 1.85; font-size: .97rem; margin-bottom: 2rem; }
+.comp-cta-box { background: var(--card); border: 1px solid rgba(0,232,150,.15); border-radius: 14px; padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.comp-cta-box p { color: var(--muted); font-size: .9rem; margin: 0; }
+</style>

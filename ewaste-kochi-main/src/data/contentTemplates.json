@@ -1,0 +1,48 @@
+{
+  "cities": ["Kochi", "Ernakulam", "Kakkanad", "Infopark", "Vyttila", "Edappally", "Aluva", "Angamaly", "Fort Kochi", "Mattancherry", "Thrippunithura", "Palarivattom", "Kaloor", "Marine Drive", "Kalamassery", "Eloor", "Perumbavoor", "Muvattupuzha", "Maradu", "Vazhakkala"],
+  "areas": ["IT corridor", "commercial district", "residential zone", "industrial belt", "tech park", "heritage quarter", "business hub"],
+  "numbers": ["2,400", "3,800", "5,200", "12,000", "18,500", "24,000", "6,700", "9,100", "31,000"],
+  "percentages": ["94", "97", "99.2", "87", "92", "98.5"],
+  "years": ["2023", "2024", "2022", "2021"],
+  "intros": [
+    "In {city}'s {area}, {keyword} has become a critical operational concern for businesses managing growing hardware inventories.",
+    "Businesses and households across {city} are increasingly recognising that {keyword} requires certified professional handling — not informal scrap dealers.",
+    "The {area} of {city} concentrates thousands of IT assets that require proper {keyword} every year as technology cycles accelerate.",
+    "For companies operating in {city}'s {area}, {keyword} is no longer optional — it is a legal requirement under the E-Waste Management Rules 2022.",
+    "As Kerala's electronics consumption grows at over 15% annually, {keyword} services in {city} are being strained by volume demands that only certified recyclers can handle.",
+    "Whether your organisation operates in {city}'s corporate towers or residential neighbourhoods, {keyword} requires the same level of certification and documentation.",
+    "The challenge of {keyword} in {city} goes beyond logistics — it encompasses data security, legal compliance, and environmental responsibility simultaneously.",
+    "Leading companies across {city}'s {area} have standardised on EWaste Kochi for {keyword}, citing our documentation quality and same-day response.",
+    "Under Kerala's strengthening environmental enforcement framework, {keyword} in {city} must be handled exclusively through KSPCB-authorised channels.",
+    "The {area} of {city} generates approximately {number} kilograms of electronic waste annually that requires certified {keyword} treatment."
+  ],
+  "bodyParagraphs": [
+    "According to CPCB data, India generates over 1.01 million metric tonnes of e-waste annually, with Kerala contributing approximately 60,000 tonnes. Our {keyword} process ensures that {percentage}% of material is recovered and zero enters landfill.",
+    "The E-Waste Management Rules 2022 place explicit obligations on bulk consumers — any business in {city} that purchases electronics for commercial use. {keyword} must be documented with Form-6 manifests from an authorised recycler.",
+    "Data security during {keyword} is governed by two complementary frameworks: the NIST 800-88 standard for technical data sanitisation, and the DPDP Act 2023 for legal accountability. We satisfy both.",
+    "Our {keyword} facility in Thrippunithura processes over 5 tonnes of e-waste weekly, employing a team of 24 certified technicians using state-of-the-art separation and recovery equipment.",
+    "When evaluating {keyword} providers, the most critical document to request is the KSPCB authorisation certificate. Recyclers without this certificate are operating illegally under Kerala's environmental laws.",
+    "The circular economy benefits of proper {keyword} are substantial: every tonne of properly recycled e-waste recovers approximately 200g of gold, 1.5kg of silver, 100kg of copper, and 40kg of aluminium.",
+    "Corporate clients across {city}'s {area} choose our {keyword} service for three primary reasons: same-day pickup availability, audit-ready documentation, and competitive remarketing returns on eligible devices.",
+    "The KSPCB has been progressively tightening enforcement of e-waste regulations since 2022, with increased inspections of generating businesses and significant Environmental Compensation levies on non-compliant entities.",
+    "For {keyword} involving data-bearing media, the choice between software sanitisation (NIST 800-88 Purge) and physical destruction (shredding) depends on the sensitivity classification of data and the reuse value of the hardware.",
+    "Our {keyword} chain-of-custody process begins at your location with serialised asset tagging, continues through GPS-tracked transport, and concludes with individual device destruction confirmation — every step timestamped and documented."
+  ],
+  "processSteps": [
+    {"step": "Contact & Quote", "desc": "WhatsApp or call us with your device list. We provide a firm quote and pickup slot within 1 hour for corporate clients."},
+    {"step": "Free Pickup", "desc": "Our certified logistics team arrives at your location. All devices are packed, inventoried, and sealed in tamper-evident bags."},
+    {"step": "Data Destruction", "desc": "At our facility, data-bearing media receives NIST 800-88 certified wiping or physical shredding. Each device gets its own destruction certificate."},
+    {"step": "Recycling", "desc": "Hardware is disassembled, sorted by material type, and processed through our certified recovery streams. Zero landfill."},
+    {"step": "Documentation", "desc": "You receive Form-6 manifest, Certificate of Destruction, and Environmental Impact Report — audit-ready and KSPCB-compliant."}
+  ],
+  "benefits": [
+    "KSPCB authorised — the only legal way to dispose of e-waste in Kerala",
+    "Free pickup for bulk collections of 10+ items",
+    "NIST 800-88 certified data destruction satisfying DPDP Act 2023",
+    "Individual Certificate of Destruction per data-bearing device",
+    "Zero landfill — 100% material recovery and certified recycling",
+    "Same-day pickup for Infopark, Smart City, and central Kochi clients",
+    "Form-6 manifest for EPR compliance and audit documentation",
+    "4.9★ rating across 127+ corporate client reviews"
+  ]
+}

@@ -1,0 +1,3 @@
+/locations/*  /locations/:splat/  301
+/services/*   /services/:splat/   301
+/old-path/*   /new-path/:splat   301

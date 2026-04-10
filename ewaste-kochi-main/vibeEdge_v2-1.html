@@ -1,0 +1,2070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VibeEdge — Decentralized Edge AI Platform for Vibecoders</title>
+<meta name="description" content="The first unified DePIN edge platform. Turn idle devices into earning machines. Build + deploy instantly with AI. TurboQuant: 6× KV reduction, 8× attention speedup. Earn $VIBE while idle.">
+<meta property="og:title" content="VibeEdge — Decentralized Edge AI for Vibecoders">
+<meta property="og:description" content="Earn while idle. Build + deploy instantly. All together we are strong. The first unified DePIN platform on Solana.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vibeEdge.io">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="VibeEdge — Decentralized Edge AI Platform">
+<meta name="twitter:description" content="Turn every device into a full-stack decentralized cloud. AI, CDN, compute, storage — all earning $VIBE.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;600&family=Familjen+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #030508;
+    --deep: #080c12;
+    --panel: #0d1117;
+    --border: #1a2332;
+    --lime: #b8ff00;
+    --lime-dim: #7aaa00;
+    --coral: #ff4d6d;
+    --cyan: #00e5ff;
+    --amber: #ffb700;
+    --violet: #a855f7;
+    --ghost: rgba(184,255,0,0.06);
+    --text: #c8d6e8;
+    --muted: #5a7090;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+    --font-body: 'Familjen Grotesk', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  @media (hover: none) {
+    body { cursor: auto; }
+    a, button, .plan-btn, .nav-cta, .btn-primary, .btn-ghost { cursor: pointer !important; }
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed; width: 12px; height: 12px;
+    background: var(--lime); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    position: fixed; width: 36px; height: 36px;
+    border: 1px solid var(--lime); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%,-50%);
+    transition: transform 0.15s ease, width 0.3s, height 0.3s, opacity 0.3s;
+    opacity: 0.5;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--void); }
+  ::-webkit-scrollbar-thumb { background: var(--lime-dim); }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none; opacity: 0.4;
+  }
+  /* SCANLINES */
+  body::after {
+    content: '';
+    position: fixed; inset: 0; z-index: 2;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+    pointer-events: none;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; height: 64px;
+    background: rgba(3,5,8,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 28px; letter-spacing: 2px;
+    color: var(--lime);
+    text-shadow: 0 0 20px rgba(184,255,0,0.4);
+  }
+  .nav-logo span { color: var(--coral); }
+  .nav-links {
+    display: flex; gap: 28px; list-style: none;
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .nav-links a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--lime); }
+  .nav-links .new-badge {
+    display: inline-block; background: var(--coral); color: var(--void);
+    font-size: 8px; font-weight: 700; letter-spacing: 1px;
+    padding: 1px 5px; margin-left: 4px; vertical-align: middle;
+  }
+  .nav-cta {
+    background: var(--lime); color: var(--void);
+    border: none; padding: 10px 24px;
+    font-family: var(--font-mono); font-size: 12px;
+    font-weight: 600; letter-spacing: 1px;
+    cursor: pointer; transition: all 0.2s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .nav-cta:hover { background: var(--coral); transform: translateY(-1px); }
+
+  /* ===== HERO ===== */
+  #hero {
+    position: relative; min-height: 100vh;
+    display: grid; place-items: center;
+    padding: 100px 40px 60px;
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(184,255,0,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(184,255,0,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridDrift 20s linear infinite;
+  }
+  @keyframes gridDrift {
+    0% { transform: translate(0,0); }
+    100% { transform: translate(60px,60px); }
+  }
+  .orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(80px); pointer-events: none;
+  }
+  .orb-1 { width: 400px; height: 400px; background: rgba(184,255,0,0.07); top: 10%; left: -5%; animation: orbFloat 8s ease-in-out infinite; }
+  .orb-2 { width: 300px; height: 300px; background: rgba(255,77,109,0.06); top: 40%; right: 5%; animation: orbFloat 10s ease-in-out infinite reverse; }
+  .orb-3 { width: 250px; height: 250px; background: rgba(0,229,255,0.05); bottom: 10%; left: 30%; animation: orbFloat 12s ease-in-out infinite 2s; }
+  @keyframes orbFloat {
+    0%,100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+
+  .hero-content {
+    position: relative; z-index: 5;
+    max-width: 1100px; margin: 0 auto;
+    text-align: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(184,255,0,0.08); border: 1px solid rgba(184,255,0,0.2);
+    padding: 6px 16px; margin-bottom: 32px;
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--lime);
+  }
+  .badge-dot { width: 6px; height: 6px; background: var(--lime); border-radius: 50%; animation: pulse 2s ease infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(72px, 10vw, 140px);
+    line-height: 0.9; letter-spacing: 2px;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .hero-title .accent { color: var(--lime); text-shadow: 0 0 40px rgba(184,255,0,0.5); }
+  .hero-title .sub { color: var(--coral); }
+
+  .glitch { position: relative; display: inline-block; }
+  .glitch::before, .glitch::after {
+    content: attr(data-text);
+    position: absolute; top: 0; left: 0;
+    font-family: var(--font-display);
+    font-size: inherit; color: inherit;
+  }
+  .glitch::before {
+    color: var(--cyan); clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
+    animation: glitch1 4s infinite;
+  }
+  .glitch::after {
+    color: var(--coral); clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%);
+    animation: glitch2 4s infinite;
+  }
+  @keyframes glitch1 { 0%,90%,100% { transform: none; opacity: 0; } 92% { transform: translateX(-3px); opacity: 0.8; } 94% { transform: translateX(3px); opacity: 0.5; } 96% { transform: none; opacity: 0; } }
+  @keyframes glitch2 { 0%,88%,100% { transform: none; opacity: 0; } 90% { transform: translateX(3px); opacity: 0.8; } 93% { transform: translateX(-2px); opacity: 0.5; } 95% { transform: none; opacity: 0; } }
+
+  .hero-tagline {
+    font-family: var(--font-mono); font-size: 16px;
+    color: var(--muted); letter-spacing: 1px;
+    margin: 24px 0 16px;
+  }
+  .hero-tagline span { color: var(--lime); }
+
+  .hero-sub {
+    font-size: 17px; color: var(--muted);
+    max-width: 680px; margin: 0 auto 48px;
+    line-height: 1.7;
+  }
+  .hero-actions {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 64px;
+  }
+  .btn-primary {
+    background: var(--lime); color: var(--void);
+    border: none; padding: 16px 40px;
+    font-family: var(--font-mono); font-size: 13px;
+    font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--coral); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,77,109,0.3); }
+  .btn-ghost {
+    background: transparent; color: var(--lime);
+    border: 1px solid rgba(184,255,0,0.3); padding: 16px 40px;
+    font-family: var(--font-mono); font-size: 13px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--lime); background: rgba(184,255,0,0.05); }
+
+  /* Hero stats */
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border); max-width: 900px; margin: 0 auto;
+  }
+  .stat-item { background: var(--panel); padding: 20px 24px; text-align: left; }
+  .stat-num {
+    font-family: var(--font-display); font-size: 36px;
+    color: var(--lime); letter-spacing: 1px; line-height: 1;
+  }
+  .stat-num .unit { font-size: 18px; color: var(--lime-dim); }
+  .stat-label {
+    font-family: var(--font-mono); font-size: 10px;
+    color: var(--muted); letter-spacing: 1.5px;
+    text-transform: uppercase; margin-top: 4px;
+  }
+  .stat-delta { font-family: var(--font-mono); font-size: 10px; color: var(--lime); margin-top: 2px; }
+
+  /* TICKER */
+  .ticker-wrap { background: var(--lime); overflow: hidden; padding: 10px 0; position: relative; z-index: 10; }
+  .ticker { display: flex; animation: ticker 30s linear infinite; width: max-content; }
+  .ticker-item {
+    font-family: var(--font-mono); font-size: 11px;
+    font-weight: 600; color: var(--void);
+    padding: 0 32px; letter-spacing: 1px; white-space: nowrap;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .ticker-item::after { content: '◆'; opacity: 0.4; }
+  @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  /* SECTION COMMON */
+  section { position: relative; z-index: 5; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+  .section-label {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--lime); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--lime); }
+  .section-title {
+    font-family: var(--font-display); font-size: clamp(42px, 6vw, 72px);
+    line-height: 0.95; letter-spacing: 1px; color: #fff; margin-bottom: 24px;
+  }
+  .section-title em { color: var(--lime); font-style: normal; }
+  .section-title .coral { color: var(--coral); }
+
+  /* WHY */
+  #why { padding: 120px 0; background: linear-gradient(180deg, var(--void) 0%, var(--deep) 100%); }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 60px; }
+  .why-desc { font-size: 18px; line-height: 1.8; color: var(--muted); margin-bottom: 32px; }
+  .why-desc strong { color: var(--text); }
+  .pain-points { display: flex; flex-direction: column; gap: 12px; }
+  .pain-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px 16px; border: 1px solid var(--border);
+    background: var(--ghost); transition: border-color 0.2s;
+  }
+  .pain-item:hover { border-color: rgba(184,255,0,0.3); }
+  .pain-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .pain-text { font-size: 14px; line-height: 1.6; color: var(--muted); }
+  .pain-text strong { color: var(--text); display: block; margin-bottom: 2px; font-size: 13px; font-family: var(--font-mono); }
+  .why-right { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .vibe-card {
+    background: var(--panel); border: 1px solid var(--border);
+    padding: 28px 24px; position: relative; overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .vibe-card:hover { border-color: var(--lime); transform: translateY(-2px); }
+  .vibe-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--lime); transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  .vibe-card:hover::before { transform: scaleX(1); }
+  .vibe-card.coral:hover { border-color: var(--coral); }
+  .vibe-card.coral::before { background: var(--coral); }
+  .vibe-card.cyan:hover { border-color: var(--cyan); }
+  .vibe-card.cyan::before { background: var(--cyan); }
+  .vibe-card.amber:hover { border-color: var(--amber); }
+  .vibe-card.amber::before { background: var(--amber); }
+  .vc-num { font-family: var(--font-display); font-size: 48px; color: var(--border); position: absolute; top: 12px; right: 16px; line-height: 1; transition: color 0.3s; }
+  .vibe-card:hover .vc-num { color: rgba(184,255,0,0.15); }
+  .vibe-card.coral:hover .vc-num { color: rgba(255,77,109,0.15); }
+  .vc-icon { font-size: 28px; margin-bottom: 12px; }
+  .vc-title { font-family: var(--font-mono); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--lime); margin-bottom: 8px; }
+  .vibe-card.coral .vc-title { color: var(--coral); }
+  .vibe-card.cyan .vc-title { color: var(--cyan); }
+  .vibe-card.amber .vc-title { color: var(--amber); }
+  .vc-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* ===== TURBO QUANT — NEW SECTION ===== */
+  #turbo {
+    padding: 120px 0;
+    background: var(--void);
+    border-top: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .turbo-inner { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: center; margin-top: 60px; }
+  .turbo-metrics { display: flex; flex-direction: column; gap: 2px; }
+  .turbo-metric {
+    background: var(--panel); border: 1px solid var(--border);
+    padding: 28px 32px; position: relative; overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .turbo-metric:hover { border-color: rgba(184,255,0,0.4); }
+  .turbo-metric::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--lime);
+  }
+  .turbo-metric.coral::before { background: var(--coral); }
+  .turbo-metric.cyan::before { background: var(--cyan); }
+  .turbo-metric.amber::before { background: var(--amber); }
+  .turbo-metric.violet::before { background: var(--violet); }
+  .tm-multiplier {
+    font-family: var(--font-display); font-size: 64px; color: var(--lime); line-height: 1;
+    text-shadow: 0 0 40px rgba(184,255,0,0.3);
+  }
+  .turbo-metric.coral .tm-multiplier { color: var(--coral); text-shadow: 0 0 40px rgba(255,77,109,0.3); }
+  .turbo-metric.cyan .tm-multiplier { color: var(--cyan); text-shadow: 0 0 40px rgba(0,229,255,0.3); }
+  .turbo-metric.amber .tm-multiplier { color: var(--amber); }
+  .turbo-metric.violet .tm-multiplier { color: var(--violet); }
+  .tm-label { font-family: var(--font-mono); font-size: 11px; color: var(--text); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; }
+  .tm-desc { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+  .turbo-explainer {}
+  .turbo-tag {
+    display: inline-block; background: rgba(184,255,0,0.1); border: 1px solid rgba(184,255,0,0.3);
+    color: var(--lime); font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 2px; text-transform: uppercase; padding: 4px 12px; margin-bottom: 24px;
+  }
+  .turbo-title { font-family: var(--font-display); font-size: clamp(48px, 6vw, 80px); color: #fff; line-height: 0.9; margin-bottom: 24px; letter-spacing: 1px; }
+  .turbo-title .lime { color: var(--lime); }
+  .turbo-desc { font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 32px; }
+  .turbo-desc strong { color: var(--text); }
+  .turbo-spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .turbo-spec {
+    background: var(--ghost); border: 1px solid var(--border); padding: 14px 16px;
+  }
+  .ts-label { font-family: var(--font-mono); font-size: 10px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .ts-value { font-family: var(--font-mono); font-size: 13px; color: var(--lime); }
+
+  /* ARCHITECTURE */
+  #architecture { padding: 120px 0; background: var(--deep); border-top: 1px solid var(--border); }
+  .arch-header { margin-bottom: 60px; }
+  .layer-stack { display: flex; flex-direction: column; gap: 2px; }
+  .layer {
+    background: var(--panel); border: 1px solid var(--border);
+    padding: 0; overflow: hidden; transition: border-color 0.3s;
+  }
+  .layer:hover { border-color: rgba(184,255,0,0.25); }
+  .layer-header { display: flex; align-items: center; gap: 0; cursor: default; }
+  .layer-num {
+    font-family: var(--font-display); font-size: 48px;
+    color: var(--void); background: var(--lime);
+    width: 80px; height: 80px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; line-height: 1;
+  }
+  .layer-num.coral { background: var(--coral); }
+  .layer-num.cyan { background: var(--cyan); }
+  .layer-num.amber { background: var(--amber); }
+  .layer-meta { flex: 1; padding: 20px 28px; }
+  .layer-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .layer-name { font-family: var(--font-display); font-size: 28px; color: #fff; letter-spacing: 1px; }
+  .layer-body { padding: 0 28px 28px 108px; }
+  .layer-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; max-width: 700px; }
+  .module-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    background: var(--ghost); border: 1px solid var(--border);
+    padding: 5px 12px; font-family: var(--font-mono); font-size: 11px;
+    color: var(--muted); letter-spacing: 0.5px; transition: all 0.2s;
+  }
+  .pill:hover { border-color: var(--lime); color: var(--lime); background: rgba(184,255,0,0.05); }
+  .pill.hot { border-color: rgba(184,255,0,0.3); color: var(--lime); }
+  .earning-badge {
+    display: inline-block; margin-top: 16px;
+    background: rgba(184,255,0,0.08); border: 1px solid rgba(184,255,0,0.2);
+    padding: 6px 14px; font-family: var(--font-mono); font-size: 11px; color: var(--lime);
+    letter-spacing: 0.5px;
+  }
+
+  /* EARN */
+  #earn { padding: 120px 0; background: var(--void); border-top: 1px solid var(--border); }
+  .earn-header { margin-bottom: 60px; }
+  .devices-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 40px; }
+  .device-card { background: var(--panel); border: 1px solid var(--border); padding: 32px 28px; transition: border-color 0.3s; }
+  .device-card:hover { border-color: rgba(184,255,0,0.25); }
+  .device-icon { font-size: 36px; display: block; margin-bottom: 16px; }
+  .device-name { font-family: var(--font-display); font-size: 28px; color: #fff; letter-spacing: 1px; margin-bottom: 8px; }
+  .device-earn { font-family: var(--font-display); font-size: 56px; color: var(--lime); line-height: 1; }
+  .device-earn-label { font-family: var(--font-mono); font-size: 10px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; }
+  .device-tasks { display: flex; flex-direction: column; gap: 6px; }
+  .task-row { display: flex; align-items: center; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
+  .task-row:last-child { border-bottom: none; }
+  .task-name { color: var(--muted); font-family: var(--font-mono); font-size: 11px; }
+  .task-reward { color: var(--lime); font-family: var(--font-mono); font-size: 11px; }
+  .earn-disclaimer { font-family: var(--font-mono); font-size: 10px; color: var(--muted); margin-top: -28px; margin-bottom: 40px; letter-spacing: 0.5px; opacity: 0.7; }
+
+  /* Token */
+  .token-section { display: grid; grid-template-columns: 1fr 1.4fr; gap: 2px; }
+  .token-card { background: var(--panel); border: 1px solid var(--border); padding: 40px; }
+  .token-symbol { font-family: var(--font-display); font-size: 96px; color: var(--lime); line-height: 1; text-shadow: 0 0 60px rgba(184,255,0,0.3); margin-bottom: 8px; }
+  .token-name { font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
+  .token-uses { display: flex; flex-direction: column; gap: 10px; }
+  .token-use { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--ghost); border: 1px solid var(--border); font-size: 13px; color: var(--muted); }
+  .token-use-icon { font-size: 16px; flex-shrink: 0; }
+  .streams-card { background: var(--panel); border: 1px solid var(--border); padding: 40px; }
+  .streams-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--lime); margin-bottom: 28px; }
+  .stream-bars { display: flex; flex-direction: column; gap: 16px; }
+  .stream-bar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .stream-bar-name { font-family: var(--font-mono); font-size: 12px; color: var(--text); }
+  .stream-bar-pct { font-family: var(--font-mono); font-size: 12px; color: var(--lime); }
+  .stream-track { height: 4px; background: var(--border); position: relative; overflow: hidden; }
+  .stream-fill { height: 100%; background: var(--lime); }
+  .stream-fill.coral { background: var(--coral); }
+  .stream-fill.cyan { background: var(--cyan); }
+  .stream-fill.amber { background: var(--amber); }
+  .stream-desc { font-size: 11px; color: var(--muted); margin-top: 6px; font-family: var(--font-mono); }
+
+  /* ===== VIBE CODING HUB — NEW ===== */
+  #vibehub {
+    padding: 120px 0;
+    background: var(--deep);
+    border-top: 1px solid var(--border);
+  }
+  .hub-header { margin-bottom: 60px; }
+  .hub-tabs {
+    display: flex; gap: 2px; margin-bottom: 40px; border-bottom: 1px solid var(--border);
+  }
+  .hub-tab {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--muted);
+    padding: 12px 24px; background: transparent; border: none;
+    cursor: pointer; transition: all 0.2s; position: relative; bottom: -1px;
+    border-bottom: 2px solid transparent;
+  }
+  .hub-tab:hover { color: var(--text); }
+  .hub-tab.active { color: var(--lime); border-bottom-color: var(--lime); }
+  .hub-panel { display: none; }
+  .hub-panel.active { display: block; }
+
+  /* Tools Grid */
+  .tools-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  }
+  .tool-card {
+    background: var(--panel); border: 1px solid var(--border);
+    padding: 24px; transition: all 0.25s; position: relative; overflow: hidden;
+  }
+  .tool-card:hover { border-color: var(--lime); transform: translateY(-2px); }
+  .tool-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--lime); transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  .tool-card:hover::before { transform: scaleX(1); }
+  .tool-card.coral::before { background: var(--coral); }
+  .tool-card.coral:hover { border-color: var(--coral); }
+  .tool-card.cyan::before { background: var(--cyan); }
+  .tool-card.cyan:hover { border-color: var(--cyan); }
+  .tool-card.amber::before { background: var(--amber); }
+  .tool-card.amber:hover { border-color: var(--amber); }
+  .tool-card.violet::before { background: var(--violet); }
+  .tool-card.violet:hover { border-color: var(--violet); }
+  .tool-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .tool-icon { font-size: 24px; }
+  .tool-badge {
+    font-family: var(--font-mono); font-size: 9px; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 2px 8px;
+  }
+  .tool-badge.native { background: rgba(184,255,0,0.15); color: var(--lime); border: 1px solid rgba(184,255,0,0.3); }
+  .tool-badge.integrated { background: rgba(0,229,255,0.12); color: var(--cyan); border: 1px solid rgba(0,229,255,0.3); }
+  .tool-badge.community { background: rgba(168,85,247,0.12); color: var(--violet); border: 1px solid rgba(168,85,247,0.3); }
+  .tool-badge.recommended { background: rgba(255,183,0,0.12); color: var(--amber); border: 1px solid rgba(255,183,0,0.3); }
+  .tool-name { font-family: var(--font-mono); font-size: 13px; color: var(--text); font-weight: 600; margin-bottom: 6px; }
+  .tool-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .tool-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; }
+  .tool-tag { font-family: var(--font-mono); font-size: 9px; color: var(--muted); background: var(--ghost); border: 1px solid var(--border); padding: 2px 6px; }
+
+  /* Learning Path */
+  .learning-path { display: flex; flex-direction: column; gap: 2px; }
+  .learn-step {
+    display: grid; grid-template-columns: 80px 1fr auto; gap: 0;
+    background: var(--panel); border: 1px solid var(--border); overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .learn-step:hover { border-color: rgba(184,255,0,0.3); }
+  .learn-step-num {
+    background: var(--ghost); border-right: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 36px; color: var(--lime-dim);
+    min-height: 80px;
+  }
+  .learn-step.active .learn-step-num { background: rgba(184,255,0,0.1); color: var(--lime); }
+  .learn-body { padding: 20px 24px; }
+  .learn-title { font-family: var(--font-mono); font-size: 13px; color: var(--text); font-weight: 600; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .learn-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .learn-meta { padding: 20px 24px; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 6px; }
+  .learn-duration { font-family: var(--font-mono); font-size: 10px; color: var(--muted); letter-spacing: 1px; }
+  .learn-status {
+    font-family: var(--font-mono); font-size: 9px; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 3px 8px;
+  }
+  .learn-status.live { background: rgba(184,255,0,0.12); color: var(--lime); border: 1px solid rgba(184,255,0,0.25); }
+  .learn-status.soon { background: rgba(90,112,144,0.15); color: var(--muted); border: 1px solid var(--border); }
+
+  /* Playground */
+  .playground-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .playground-left {}
+  .playground-intro { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 28px; }
+  .playground-intro strong { color: var(--text); }
+  .prompt-selector { display: flex; flex-direction: column; gap: 6px; margin-bottom: 28px; }
+  .prompt-chip {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--ghost); border: 1px solid var(--border);
+    padding: 10px 14px; cursor: pointer; transition: all 0.2s;
+    font-family: var(--font-mono); font-size: 12px; color: var(--muted);
+  }
+  .prompt-chip:hover, .prompt-chip.active { border-color: var(--lime); color: var(--lime); background: rgba(184,255,0,0.05); }
+  .prompt-chip-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
+  .prompt-chip.active .prompt-chip-dot { background: var(--lime); }
+  .playground-right {}
+  .terminal {
+    background: #050810; border: 1px solid var(--border);
+    font-family: var(--font-mono); border-radius: 0; overflow: hidden;
+  }
+  .terminal-bar {
+    background: #0d1117; padding: 12px 16px;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .term-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .term-dot.r { background: #ff5f57; }
+  .term-dot.y { background: #ffbd2e; }
+  .term-dot.g { background: #28ca41; }
+  .term-title { font-size: 11px; color: var(--muted); margin-left: 8px; letter-spacing: 0.5px; }
+  .terminal-body { padding: 24px; min-height: 360px; overflow-y: auto; }
+  .term-line { margin-bottom: 6px; font-size: 13px; line-height: 1.6; opacity: 0; animation: fadeIn 0.3s ease forwards; }
+  @keyframes fadeIn { to { opacity: 1; } }
+  .term-line.cmd { color: var(--lime); }
+  .term-line.success { color: #28ca41; }
+  .term-line.info { color: var(--cyan); }
+  .term-line.warn { color: var(--amber); }
+  .term-line.err { color: var(--coral); }
+  .term-prompt { color: var(--lime-dim); }
+  .cursor-blink { display: inline-block; width: 8px; height: 14px; background: var(--lime); vertical-align: middle; animation: blink 1s step-end infinite; }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+  .playground-cta { margin-top: 20px; display: flex; gap: 10px; }
+
+  /* DEV PLATFORM */
+  #devplatform { padding: 120px 0; background: var(--deep); border-top: 1px solid var(--border); }
+  .platform-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; margin-top: 60px; align-items: start; }
+  .platform-features { display: flex; flex-direction: column; gap: 2px; }
+  .feat-row { display: flex; gap: 0; border: 1px solid var(--border); transition: border-color 0.2s; }
+  .feat-row:hover { border-color: rgba(184,255,0,0.3); }
+  .feat-accent { width: 4px; background: var(--lime); flex-shrink: 0; }
+  .feat-accent.coral { background: var(--coral); }
+  .feat-accent.cyan { background: var(--cyan); }
+  .feat-accent.amber { background: var(--amber); }
+  .feat-body { padding: 20px; flex: 1; }
+  .feat-title { font-family: var(--font-mono); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--text); margin-bottom: 4px; }
+  .feat-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .feat-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .feat-tag { background: var(--ghost); border: 1px solid var(--border); padding: 2px 8px; font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
+
+  /* SERVICES */
+  #services { padding: 120px 0; background: var(--void); border-top: 1px solid var(--border); }
+  .niche-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+  .niche-card {
+    background: var(--panel); border: 1px solid var(--border);
+    padding: 28px 24px; position: relative; overflow: hidden;
+    transition: all 0.3s; min-height: 200px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .niche-card:hover { border-color: var(--accent-color, var(--lime)); z-index: 2; transform: scale(1.01); }
+  .niche-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--accent-color, var(--lime));
+    transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  .niche-card:hover::before { transform: scaleX(1); }
+  .niche-num { font-family: var(--font-display); font-size: 64px; color: var(--border); position: absolute; bottom: -8px; right: 12px; line-height: 1; }
+  .niche-icon { font-size: 32px; margin-bottom: 16px; }
+  .niche-name { font-family: var(--font-display); font-size: 22px; color: #fff; letter-spacing: 1px; margin-bottom: 8px; }
+  .niche-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .niche-status { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; margin-top: 12px; }
+
+  /* ROADMAP */
+  #roadmap { padding: 120px 0; background: var(--deep); border-top: 1px solid var(--border); }
+  .phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
+  .phase-card { background: var(--panel); border: 1px solid var(--border); padding: 36px 28px; position: relative; overflow: hidden; }
+  .phase-card.active { border-color: var(--lime); }
+  .phase-card.active::after { content: 'LIVE'; position: absolute; top: 16px; right: 16px; background: var(--lime); color: var(--void); font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 2px; padding: 3px 8px; }
+  .phase-num { font-family: var(--font-display); font-size: 96px; color: var(--border); line-height: 0.9; margin-bottom: 20px; }
+  .phase-card.active .phase-num { color: rgba(184,255,0,0.12); }
+  .phase-title { font-family: var(--font-display); font-size: 28px; color: #fff; letter-spacing: 1px; margin-bottom: 8px; }
+  .phase-subtitle { font-family: var(--font-mono); font-size: 11px; color: var(--lime); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; }
+  .phase-items { display: flex; flex-direction: column; gap: 8px; }
+  .phase-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); padding: 8px 0; border-bottom: 1px solid var(--border); }
+  .phase-item:last-child { border-bottom: none; }
+  .phase-check { font-size: 12px; flex-shrink: 0; }
+
+  /* FREEMIUM */
+  #freemium { padding: 120px 0; background: var(--void); border-top: 1px solid var(--border); }
+  .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
+  .plan-card { background: var(--panel); border: 1px solid var(--border); padding: 40px 32px; position: relative; transition: all 0.3s; }
+  .plan-card.featured { border-color: var(--lime); }
+  .plan-card.featured::before { content: '★ MOST POPULAR'; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: var(--lime); color: var(--void); font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 2px; padding: 4px 16px; white-space: nowrap; }
+  .plan-tier { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .plan-card.featured .plan-tier { color: var(--lime); }
+  .plan-card:not(.featured) .plan-tier { color: var(--muted); }
+  .plan-price { font-family: var(--font-display); font-size: 56px; color: #fff; line-height: 1; margin-bottom: 4px; }
+  .plan-price-sub { font-family: var(--font-mono); font-size: 11px; color: var(--muted); margin-bottom: 28px; }
+  .plan-features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+  .plan-feat { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
+  .plan-feat .check { color: var(--lime); font-size: 12px; }
+  .plan-feat .x { color: var(--coral); font-size: 12px; }
+  .plan-btn { width: 100%; padding: 14px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; border: none; transition: all 0.2s; background: var(--border); color: var(--muted); }
+  .plan-card.featured .plan-btn { background: var(--lime); color: var(--void); font-weight: 700; }
+  .plan-btn:hover { background: var(--coral); color: var(--void); }
+
+  /* GOVERNANCE */
+  #governance { padding: 120px 0; background: var(--deep); border-top: 1px solid var(--border); }
+  .dao-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 60px; align-items: center; }
+  .dao-stats { display: flex; flex-direction: column; gap: 2px; }
+  .dao-stat { background: var(--panel); border: 1px solid var(--border); padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; }
+  .dao-stat-label { font-family: var(--font-mono); font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+  .dao-stat-value { font-family: var(--font-display); font-size: 32px; color: var(--lime); }
+  .dao-quote { font-family: var(--font-display); font-size: 42px; color: #fff; line-height: 1.1; letter-spacing: 1px; margin-bottom: 24px; }
+  .dao-quote em { color: var(--lime); font-style: normal; }
+  .dao-desc { font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 32px; }
+  .dao-pillars { display: flex; flex-direction: column; gap: 10px; }
+  .dao-pillar { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--ghost); border: 1px solid var(--border); font-size: 13px; color: var(--muted); }
+  .dao-pillar-icon { color: var(--lime); font-size: 14px; }
+
+  /* CTA */
+  #cta { padding: 140px 0; background: var(--void); border-top: 1px solid var(--border); text-align: center; position: relative; overflow: hidden; }
+  #cta .orb-cta { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(184,255,0,0.08) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+  .cta-title { font-family: var(--font-display); font-size: clamp(60px, 9vw, 120px); line-height: 0.9; letter-spacing: 2px; color: #fff; margin-bottom: 24px; position: relative; z-index: 2; }
+  .cta-title .lime { color: var(--lime); text-shadow: 0 0 60px rgba(184,255,0,0.4); }
+  .cta-sub { font-family: var(--font-mono); font-size: 15px; color: var(--muted); margin-bottom: 48px; position: relative; z-index: 2; letter-spacing: 0.5px; }
+  .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 2; }
+
+  /* FOOTER */
+  footer { background: var(--panel); border-top: 1px solid var(--border); padding: 60px 40px 40px; }
+  .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+  .footer-logo { font-family: var(--font-display); font-size: 32px; color: var(--lime); letter-spacing: 2px; margin-bottom: 12px; }
+  .footer-tagline { font-size: 13px; color: var(--muted); line-height: 1.7; max-width: 280px; }
+  .footer-col-title { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--lime); margin-bottom: 16px; }
+  .footer-links { display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--lime); }
+  .footer-bottom { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding-top: 24px; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+  .footer-status { display: flex; align-items: center; gap: 8px; color: #28ca41; }
+  .status-dot { width: 6px; height: 6px; background: #28ca41; border-radius: 50%; animation: pulse 2s infinite; }
+
+  /* ANIMATIONS / UTILITY */
+  .fade-up { opacity: 0; transform: translateY(24px); animation: fadeUp 0.7s ease forwards; }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+  .delay-5 { animation-delay: 0.5s; }
+  .delay-6 { animation-delay: 0.6s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .container { padding: 0 20px; }
+    .why-grid, .platform-grid, .dao-grid, .token-section, .turbo-inner, .playground-grid { grid-template-columns: 1fr; gap: 24px; }
+    .why-right { grid-template-columns: 1fr 1fr; }
+    .niche-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-stats { grid-template-columns: 2fr 2fr; }
+    .phases { grid-template-columns: 1fr; }
+    .plans-grid { grid-template-columns: 1fr; }
+    .devices-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .layer-body { padding: 0 20px 20px 20px; }
+    .layer-num { display: none; }
+    .tools-grid { grid-template-columns: 1fr 1fr; }
+    .turbo-spec-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-grid, .orb, .glitch::before, .glitch::after, .ticker { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Vibe<span>Edge</span></div>
+  <ul class="nav-links">
+    <li><a href="#turbo">TurboQuant</a></li>
+    <li><a href="#architecture">Architecture</a></li>
+    <li><a href="#earn">Earn</a></li>
+    <li><a href="#vibehub">Vibe Hub <span class="new-badge">NEW</span></a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#freemium">Plans</a></li>
+  </ul>
+  <button class="nav-cta">Run Node →</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge fade-up">
+      <span class="badge-dot"></span>
+      DePIN · Edge AI · TurboQuant · Creator Economy · Solana
+    </div>
+
+    <h1 class="hero-title fade-up delay-1">
+      <span class="glitch accent" data-text="VIBE">VIBE</span><br>
+      <span style="color:#fff">EDGE</span>
+    </h1>
+
+    <p class="hero-tagline fade-up delay-2">
+      <span>Earn while you idle.</span> Build + deploy instantly. <span>All together we are strong.</span>
+    </p>
+
+    <p class="hero-sub fade-up delay-3">
+      The first unified DePIN edge platform with <strong style="color:var(--lime)">TurboQuant</strong> — 6× KV memory reduction, 8× attention speedup. Turn every device into a full-stack decentralized cloud. Learn, build, and deploy with AI. All earning $VIBE.
+    </p>
+
+    <div class="hero-actions fade-up delay-4">
+      <a href="#earn" class="btn-primary">Start Earning Free →</a>
+      <a href="#vibehub" class="btn-ghost">Vibe Coding Hub</a>
+      <a href="#devplatform" class="btn-ghost">Deploy in 60s</a>
+    </div>
+
+    <div class="hero-stats fade-up delay-5">
+      <div class="stat-item">
+        <div class="stat-num" id="nodeCount">0<span class="unit">K</span></div>
+        <div class="stat-label">Active Nodes</div>
+        <div class="stat-delta">↑ +2.4K this week</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="tbServed">0<span class="unit">TB</span></div>
+        <div class="stat-label">Data Served Today</div>
+        <div class="stat-delta">↑ Real-time growing</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="earnedTotal">$0<span class="unit">K</span></div>
+        <div class="stat-label">Paid to Providers</div>
+        <div class="stat-delta">↑ +$12K today</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="countries">0</div>
+        <div class="stat-label">Countries</div>
+        <div class="stat-delta">↑ Global mesh</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ticker-item">$VIBE +12.4%</div>
+    <div class="ticker-item">TurboQuant: 6× KV reduction live</div>
+    <div class="ticker-item">Node #88421 earning $0.34/hr</div>
+    <div class="ticker-item">Bandwidth: 2.1PB served</div>
+    <div class="ticker-item">AI inference: 840K calls/day</div>
+    <div class="ticker-item">New deploy: meme-ai.edge.vibe</div>
+    <div class="ticker-item">14 new nodes joined (Mumbai)</div>
+    <div class="ticker-item">DAO Proposal #47 PASSED</div>
+    <div class="ticker-item">Transcoding: 18K videos/day</div>
+    <div class="ticker-item">RPC calls: 9.2M today</div>
+    <div class="ticker-item">$VIBE +12.4%</div>
+    <div class="ticker-item">TurboQuant: 6× KV reduction live</div>
+    <div class="ticker-item">Node #88421 earning $0.34/hr</div>
+    <div class="ticker-item">Bandwidth: 2.1PB served</div>
+    <div class="ticker-item">AI inference: 840K calls/day</div>
+    <div class="ticker-item">New deploy: meme-ai.edge.vibe</div>
+    <div class="ticker-item">14 new nodes joined (Mumbai)</div>
+    <div class="ticker-item">DAO Proposal #47 PASSED</div>
+    <div class="ticker-item">Transcoding: 18K videos/day</div>
+    <div class="ticker-item">RPC calls: 9.2M today</div>
+  </div>
+</div>
+
+<!-- WHY -->
+<section id="why">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-left">
+        <div class="section-label">The Problem</div>
+        <h2 class="section-title">Big Tech <em>owns</em> your stack.<br>We <span class="coral">don't.</span></h2>
+        <p class="why-desc">
+          <strong>AWS. Vercel. Cloudflare. Google Cloud.</strong> You build on their rails, pay their prices, play by their rules. Your data, your compute, your creativity — rented, not owned.
+        </p>
+        <p class="why-desc">
+          VibeEdge flips this entirely. Every layer of the cloud — bandwidth, compute, storage, AI, CDN, RPC, RTC — is contributed by its users and owned by its community.
+        </p>
+        <div class="pain-points">
+          <div class="pain-item">
+            <span class="pain-icon">⚡</span>
+            <div class="pain-text">
+              <strong>// FRAGMENTATION PROBLEM</strong>
+              Grass for bandwidth. io.net for GPU. Filecoin for storage. Helium for wireless. 6 wallets. 6 dashboards. 6 tokens. Chaos.
+            </div>
+          </div>
+          <div class="pain-item">
+            <span class="pain-icon">💸</span>
+            <div class="pain-text">
+              <strong>// COST PROBLEM</strong>
+              AWS charges $0.09/GB egress. VibeEdge providers earn 70–80% of fees. Devs save 50–80%. Everyone wins except the middlemen.
+            </div>
+          </div>
+          <div class="pain-item">
+            <span class="pain-icon">🔒</span>
+            <div class="pain-text">
+              <strong>// OWNERSHIP PROBLEM</strong>
+              Your code on their servers. One ToS change and you're locked out. VibeEdge: export anything, anytime. Your edge.
+            </div>
+          </div>
+          <div class="pain-item">
+            <span class="pain-icon">🤖</span>
+            <div class="pain-text">
+              <strong>// COMPLEXITY PROBLEM</strong>
+              DevOps is a full-time job. VibeEdge: describe your app in plain English → AI builds, deploys to edge, sets up monetization. Done.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="why-right">
+        <div class="vibe-card fade-up">
+          <div class="vc-num">01</div>
+          <div class="vc-icon">🌐</div>
+          <div class="vc-title">// Unified Stack</div>
+          <div class="vc-desc">14 DePIN niches. One platform. One token. One dashboard. No more protocol hopping.</div>
+        </div>
+        <div class="vibe-card coral fade-up delay-1">
+          <div class="vc-num">02</div>
+          <div class="vc-icon">💰</div>
+          <div class="vc-title">// Real Earnings</div>
+          <div class="vc-desc">$5–50/mo per phone. $20–200+/mo per laptop. Paid from actual usage fees, not just inflation.*</div>
+        </div>
+        <div class="vibe-card cyan fade-up delay-2">
+          <div class="vc-num">03</div>
+          <div class="vc-icon">🧑‍💻</div>
+          <div class="vc-title">// Vibe Dev UX</div>
+          <div class="vc-desc">AI-first workflows. One-click deploys. Meme/creator tools. Gen Z-native. Actually fun to use.</div>
+        </div>
+        <div class="vibe-card amber fade-up delay-3">
+          <div class="vc-num">04</div>
+          <div class="vc-icon">⚡</div>
+          <div class="vc-title">// TurboQuant Core</div>
+          <div class="vc-desc">6× KV memory reduction. 8× attention speedup. First decentralized long-context AI execution platform.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TURBO QUANT — NEW SECTION -->
+<section id="turbo">
+  <div class="container">
+    <div class="turbo-inner">
+      <div class="turbo-metrics">
+        <div class="turbo-metric">
+          <div class="tm-multiplier">6×</div>
+          <div class="tm-label">KV Memory Reduction</div>
+          <div class="tm-desc">TurboQuant compresses key-value cache by 6× without accuracy loss — enabling longer context at the same cost.</div>
+        </div>
+        <div class="turbo-metric coral">
+          <div class="tm-multiplier">8×</div>
+          <div class="tm-label">Attention Speedup</div>
+          <div class="tm-desc">Flash-attention variant optimized for edge hardware. 8× throughput improvement on consumer GPUs and NPUs.</div>
+        </div>
+        <div class="turbo-metric cyan">
+          <div class="tm-multiplier">∞</div>
+          <div class="tm-label">Context Length</div>
+          <div class="tm-desc">First decentralized platform to support long-context AI inference across distributed edge nodes at consumer cost.</div>
+        </div>
+        <div class="turbo-metric amber">
+          <div class="tm-multiplier">70%</div>
+          <div class="tm-label">Cost vs Centralized</div>
+          <div class="tm-desc">Pay 70% less than AWS/Azure for equivalent inference throughput. Providers earn more. Devs spend less.</div>
+        </div>
+        <div class="turbo-metric violet">
+          <div class="tm-multiplier">$0</div>
+          <div class="tm-label">Entry Cost</div>
+          <div class="tm-desc">Freemium tier. Run your model, get your context, earn $VIBE. No credit card. No enterprise contract. Just nodes.</div>
+        </div>
+      </div>
+
+      <div class="turbo-explainer">
+        <div class="turbo-tag">// core differentiator</div>
+        <h2 class="turbo-title">TURBO<br><span class="lime">QUANT</span></h2>
+        <p class="turbo-desc">
+          Every AI platform on centralized cloud limits your context window because memory is expensive. <strong>TurboQuant changes the math entirely.</strong>
+        </p>
+        <p class="turbo-desc">
+          Our proprietary KV quantization algorithm compresses attention caches by 6× and executes 8× faster on the same hardware — making long-context AI economically viable at the edge for the first time. No datacenter required. Just vibecoders running nodes.
+        </p>
+        <p class="turbo-desc">
+          This is why VibeEdge isn't just a DePIN bandwidth play. We're the first platform that makes <strong>decentralized long-context AI inference</strong> real, cheap, and globally distributed.
+        </p>
+        <div class="turbo-spec-grid">
+          <div class="turbo-spec">
+            <div class="ts-label">Architecture</div>
+            <div class="ts-value">BiLSTM + Flash-Attn Edge</div>
+          </div>
+          <div class="turbo-spec">
+            <div class="ts-label">Runtime</div>
+            <div class="ts-value">WASM + ONNX + TVM</div>
+          </div>
+          <div class="turbo-spec">
+            <div class="ts-label">Chain</div>
+            <div class="ts-value">Solana (Agave 2.x)</div>
+          </div>
+          <div class="turbo-spec">
+            <div class="ts-label">Proof System</div>
+            <div class="ts-value">ZK Inference Proofs</div>
+          </div>
+          <div class="turbo-spec">
+            <div class="ts-label">Min Hardware</div>
+            <div class="ts-value">4GB RAM phone / laptop</div>
+          </div>
+          <div class="turbo-spec">
+            <div class="ts-label">Precision</div>
+            <div class="ts-value">INT4 / FP8 quantized</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section id="architecture">
+  <div class="container">
+    <div class="arch-header">
+      <div class="section-label">System Design</div>
+      <h2 class="section-title">Layered <em>Architecture</em></h2>
+      <p style="color:var(--muted);font-size:16px;max-width:600px;line-height:1.7;margin-top:12px;">
+        Clean, scalable, battle-tested. Built on libp2p + QUIC + WebRTC + WASM + ZK proofs + TurboQuant. Each layer earns independently and compounds together.
+      </p>
+    </div>
+    <div class="layer-stack">
+      <div class="layer">
+        <div class="layer-header">
+          <div class="layer-num">01</div>
+          <div class="layer-meta">
+            <div class="layer-tag">// backbone</div>
+            <div class="layer-name">🌐 Network Layer — DePIN Core</div>
+          </div>
+        </div>
+        <div class="layer-body">
+          <p class="layer-desc">The backbone of VibeEdge. Decentralized bandwidth sharing, geo-aware CDN edge nodes, wireless mesh (WiFi/LoRa/5G-ready), and ultra-precise geo-positioning routing. ZK-verified proof-of-bandwidth + uptime. Node reputation scoring prevents Sybil attacks.</p>
+          <div class="module-pills">
+            <span class="pill hot">Bandwidth Sharing</span>
+            <span class="pill hot">CDN Edge Nodes</span>
+            <span class="pill">Wireless Mesh</span>
+            <span class="pill">Geo-Aware Routing</span>
+            <span class="pill hot">libp2p / QUIC</span>
+            <span class="pill">Proof-of-Bandwidth</span>
+            <span class="pill">Node Reputation</span>
+            <span class="pill">ZK Uptime Proofs</span>
+            <span class="pill">LoRa / WiFi 6E</span>
+          </div>
+          <div class="earning-badge">💰 Earn: Paid per GB served + latency tier bonus</div>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="layer-header">
+          <div class="layer-num coral">02</div>
+          <div class="layer-meta">
+            <div class="layer-tag">// compute</div>
+            <div class="layer-name">⚡ Compute + TurboQuant AI Layer</div>
+          </div>
+        </div>
+        <div class="layer-body">
+          <p class="layer-desc">TurboQuant-accelerated inference on every idle device. 6× KV compression means your phone runs models that previously required a datacenter. AI inference nodes, serverless compute, GPU/CPU pooling, and transcoding. Battery-aware throttling + thermal safeguards.</p>
+          <div class="module-pills">
+            <span class="pill hot">TurboQuant Engine</span>
+            <span class="pill hot">AI Inference Nodes</span>
+            <span class="pill hot">Serverless Compute</span>
+            <span class="pill">GPU Pooling</span>
+            <span class="pill hot">Video Transcoding</span>
+            <span class="pill">WASM Runtime</span>
+            <span class="pill">Edge Functions</span>
+            <span class="pill">ZK Inference Proofs</span>
+          </div>
+          <div class="earning-badge">💰 Earn: Paid per CPU/GPU cycle + inference call + transcoding job</div>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="layer-header">
+          <div class="layer-num cyan">03</div>
+          <div class="layer-meta">
+            <div class="layer-tag">// developer stack</div>
+            <div class="layer-name">🧠 Service Layer — Full Dev Stack</div>
+          </div>
+        </div>
+        <div class="layer-body">
+          <p class="layer-desc">Geo-routed blockchain RPC endpoints (faster + cheaper than centralized). Decentralized SQL+NoSQL hybrid DB. IPFS-optimized hot/cold storage with native CDN. P2P WebRTC for gaming + live streaming. AI model hosting + fine-tuning marketplace with TurboQuant acceleration.</p>
+          <div class="module-pills">
+            <span class="pill hot">Blockchain RPC</span>
+            <span class="pill">Decentralized DB</span>
+            <span class="pill hot">Hot/Cold Storage</span>
+            <span class="pill hot">RTC / WebRTC</span>
+            <span class="pill hot">AI Model Hosting</span>
+            <span class="pill">Fine-Tuning Market</span>
+            <span class="pill">Encrypted Shards</span>
+            <span class="pill">ZK Privacy</span>
+          </div>
+          <div class="earning-badge">💰 Earn: Per RPC call, per DB query, per storage GB, per inference</div>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="layer-header">
+          <div class="layer-num amber">04</div>
+          <div class="layer-meta">
+            <div class="layer-tag">// secret weapon</div>
+            <div class="layer-name">🛠️ Dev Platform — VibeCoder Experience</div>
+          </div>
+        </div>
+        <div class="layer-body">
+          <p class="layer-desc">One-click deploys. AI-first "vibe coding" workflows — describe your app → AI builds, deploys, monetizes. Templates for AI apps, SaaS, bots, meme coins, live streams. Structured learning path from zero to full-stack. Your code, your data, export anytime.</p>
+          <div class="module-pills">
+            <span class="pill hot">One-Click Deploy</span>
+            <span class="pill hot">AI-Assisted Build</span>
+            <span class="pill">CLI + Dashboard</span>
+            <span class="pill hot">Vibe Coding Hub</span>
+            <span class="pill hot">App Templates</span>
+            <span class="pill hot">API Marketplace</span>
+            <span class="pill">NFT Minting</span>
+            <span class="pill">Creator Economy</span>
+          </div>
+          <div class="earning-badge">💰 Earn: API sales, referral multipliers, creator monetization</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EARN -->
+<section id="earn">
+  <div class="container">
+    <div class="earn-header">
+      <div class="section-label">Incentive Layer</div>
+      <h2 class="section-title">Earn While <em>Idle.</em></h2>
+      <p style="color:var(--muted);font-size:16px;max-width:600px;line-height:1.7;margin-top:12px;">
+        Real payouts from real usage. Download VibeEdge → background node runs 24/7 → you earn $VIBE from actual traffic, not just inflation.
+      </p>
+    </div>
+    <div class="devices-grid">
+      <div class="device-card">
+        <span class="device-icon">📱</span>
+        <div class="device-name">Phone Node</div>
+        <div class="device-earn">$5–50</div>
+        <div class="device-earn-label">/ month passive (est.)*</div>
+        <div class="device-tasks">
+          <div class="task-row"><span class="task-name">Bandwidth Relay</span><span class="task-reward">$0.004/GB</span></div>
+          <div class="task-row"><span class="task-name">TurboQuant Inference</span><span class="task-reward">$0.001/call</span></div>
+          <div class="task-row"><span class="task-name">Geo Positioning Data</span><span class="task-reward">$0.01/hr</span></div>
+          <div class="task-row"><span class="task-name">Uptime Proof</span><span class="task-reward">+10% bonus</span></div>
+        </div>
+      </div>
+      <div class="device-card">
+        <span class="device-icon">💻</span>
+        <div class="device-name">Laptop Node</div>
+        <div class="device-earn">$20–200</div>
+        <div class="device-earn-label">/ month idle mode (est.)*</div>
+        <div class="device-tasks">
+          <div class="task-row"><span class="task-name">TurboQuant AI (CPU)</span><span class="task-reward">$0.002/call</span></div>
+          <div class="task-row"><span class="task-name">Video Transcoding</span><span class="task-reward">$0.05/job</span></div>
+          <div class="task-row"><span class="task-name">CDN Edge Serving</span><span class="task-reward">$0.008/GB</span></div>
+          <div class="task-row"><span class="task-name">Storage Hosting</span><span class="task-reward">$0.006/GB-mo</span></div>
+          <div class="task-row"><span class="task-name">RPC Serving</span><span class="task-reward">$0.0001/req</span></div>
+        </div>
+      </div>
+      <div class="device-card">
+        <span class="device-icon">🖥️</span>
+        <div class="device-name">Dedicated Node</div>
+        <div class="device-earn">$200+</div>
+        <div class="device-earn-label">/ month full contrib (est.)*</div>
+        <div class="device-tasks">
+          <div class="task-row"><span class="task-name">GPU TurboQuant AI</span><span class="task-reward">$0.05/call</span></div>
+          <div class="task-row"><span class="task-name">Bulk Transcoding</span><span class="task-reward">$0.20/job</span></div>
+          <div class="task-row"><span class="task-name">High-Speed CDN</span><span class="task-reward">$0.015/GB</span></div>
+          <div class="task-row"><span class="task-name">Full DB Node</span><span class="task-reward">$0.012/GB-mo</span></div>
+          <div class="task-row"><span class="task-name">Robotics Verification</span><span class="task-reward">$0.10/task</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="earn-disclaimer">* Earnings are estimated projections based on expected network utilization. Actual earnings vary by contribution level, network demand, and $VIBE market conditions. Not financial advice.</div>
+    <div class="token-section">
+      <div class="token-card">
+        <div class="token-symbol">$VIBE</div>
+        <div class="token-name">VibeEdge Protocol Token · Solana SPL</div>
+        <div class="token-uses">
+          <div class="token-use"><span class="token-use-icon">💎</span> Node operator rewards from usage fees</div>
+          <div class="token-use"><span class="token-use-icon">⚡</span> Pay for compute, storage, AI inference, CDN</div>
+          <div class="token-use"><span class="token-use-icon">🔥</span> 5–10% burn on protocol fees — deflationary</div>
+          <div class="token-use"><span class="token-use-icon">🗳️</span> DAO governance voting weight</div>
+          <div class="token-use"><span class="token-use-icon">🎯</span> Stake to boost earnings multiplier</div>
+          <div class="token-use"><span class="token-use-icon">🚀</span> API marketplace settlement currency</div>
+        </div>
+      </div>
+      <div class="streams-card">
+        <div class="streams-title">// Revenue Streams to Providers</div>
+        <div class="stream-bars">
+          <div class="stream-bar">
+            <div class="stream-bar-header"><span class="stream-bar-name">Bandwidth + CDN</span><span class="stream-bar-pct">35%</span></div>
+            <div class="stream-track"><div class="stream-fill" style="width:35%"></div></div>
+            <div class="stream-desc">GB served × latency tier × uptime multiplier</div>
+          </div>
+          <div class="stream-bar">
+            <div class="stream-bar-header"><span class="stream-bar-name">TurboQuant AI Inference</span><span class="stream-bar-pct">28%</span></div>
+            <div class="stream-track"><div class="stream-fill coral" style="width:28%"></div></div>
+            <div class="stream-desc">Inference calls × model tier × TurboQuant acceleration bonus</div>
+          </div>
+          <div class="stream-bar">
+            <div class="stream-bar-header"><span class="stream-bar-name">Compute + Transcoding</span><span class="stream-bar-pct">18%</span></div>
+            <div class="stream-track"><div class="stream-fill cyan" style="width:18%"></div></div>
+            <div class="stream-desc">CPU/GPU cycles × transcoding jobs × WASM executions</div>
+          </div>
+          <div class="stream-bar">
+            <div class="stream-bar-header"><span class="stream-bar-name">Storage + RPC + DB</span><span class="stream-bar-pct">11%</span></div>
+            <div class="stream-track"><div class="stream-fill" style="width:11%;background:var(--amber)"></div></div>
+            <div class="stream-desc">Storage-months × retrieval requests × RPC calls</div>
+          </div>
+          <div class="stream-bar">
+            <div class="stream-bar-header"><span class="stream-bar-name">RTC / Wireless / Geo</span><span class="stream-bar-pct">8%</span></div>
+            <div class="stream-track"><div class="stream-fill" style="width:8%;background:var(--violet)"></div></div>
+            <div class="stream-desc">P2P minutes × mesh relays × positioning data</div>
+          </div>
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)">
+            <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);letter-spacing:1px;">Provider take-rate: <span style="color:var(--lime)">70–80%</span> of usage fees. Treasury: <span style="color:var(--muted)">15%</span>. Burn: <span style="color:var(--coral)">5–10%</span>. DAO governed.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VIBE CODING HUB — NEW SECTION ===== -->
+<section id="vibehub">
+  <div class="container">
+    <div class="hub-header">
+      <div class="section-label">Learn · Build · Deploy · Earn</div>
+      <h2 class="section-title">The <em>Vibe Coding</em> Hub</h2>
+      <p style="color:var(--muted);font-size:16px;max-width:680px;line-height:1.7;margin-top:12px;">
+        Everything the open-source vibe coding community offers — tools directory, structured learning path, live playground — but deployed directly on decentralized edge infrastructure you own and earn from. No Vercel. No AWS. Just your nodes.
+      </p>
+    </div>
+
+    <div class="hub-tabs">
+      <button class="hub-tab active" onclick="switchTab('tools')">🛠️ Tools Directory</button>
+      <button class="hub-tab" onclick="switchTab('learn')">📚 Learning Path</button>
+      <button class="hub-tab" onclick="switchTab('playground')">⚡ Live Playground</button>
+    </div>
+
+    <!-- TOOLS TAB -->
+    <div class="hub-panel active" id="tab-tools">
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-header">
+            <span class="tool-icon">🔧</span>
+            <span class="tool-badge native">Native</span>
+          </div>
+          <div class="tool-name">VibeEdge CLI</div>
+          <div class="tool-desc">The `vibe` command. Init, deploy, earn, monitor — all from your terminal. AI-assisted project scaffolding built in.</div>
+          <div class="tool-tags"><span class="tool-tag">CLI</span><span class="tool-tag">Deploy</span><span class="tool-tag">Earn</span></div>
+        </div>
+        <div class="tool-card coral">
+          <div class="tool-header">
+            <span class="tool-icon">🤖</span>
+            <span class="tool-badge native">Native</span>
+          </div>
+          <div class="tool-name">Vibe AI Builder</div>
+          <div class="tool-desc">Describe your app → AI generates full-stack code → deploys to edge nodes → monetization configured automatically.</div>
+          <div class="tool-tags"><span class="tool-tag">AI</span><span class="tool-tag">No-Code</span><span class="tool-tag">Deploy</span></div>
+        </div>
+        <div class="tool-card cyan">
+          <div class="tool-header">
+            <span class="tool-icon">⚡</span>
+            <span class="tool-badge native">Native</span>
+          </div>
+          <div class="tool-name">TurboQuant API</div>
+          <div class="tool-desc">Call long-context AI models via REST. 6× cheaper than OpenAI for equivalent context window. No model hosting overhead.</div>
+          <div class="tool-tags"><span class="tool-tag">API</span><span class="tool-tag">AI</span><span class="tool-tag">TurboQuant</span></div>
+        </div>
+        <div class="tool-card amber">
+          <div class="tool-header">
+            <span class="tool-icon">🎛️</span>
+            <span class="tool-badge integrated">Integrated</span>
+          </div>
+          <div class="tool-name">Cursor + VibeEdge</div>
+          <div class="tool-desc">Official Cursor plugin. Deploy directly from AI-generated code to your edge node fleet. .viberules config support.</div>
+          <div class="tool-tags"><span class="tool-tag">IDE</span><span class="tool-tag">Cursor</span><span class="tool-tag">Plugin</span></div>
+        </div>
+        <div class="tool-card violet">
+          <div class="tool-header">
+            <span class="tool-icon">🌊</span>
+            <span class="tool-badge integrated">Integrated</span>
+          </div>
+          <div class="tool-name">Windsurf Plugin</div>
+          <div class="tool-desc">Deploy Windsurf-generated apps to VibeEdge with one command. Built-in edge routing and $VIBE monetization.</div>
+          <div class="tool-tags"><span class="tool-tag">IDE</span><span class="tool-tag">Windsurf</span><span class="tool-tag">Deploy</span></div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-header">
+            <span class="tool-icon">⚡</span>
+            <span class="tool-badge integrated">Integrated</span>
+          </div>
+          <div class="tool-name">Bolt.new → Edge</div>
+          <div class="tool-desc">One-click migration from Bolt.new prototypes to production edge deployment with built-in CDN and earn mode.</div>
+          <div class="tool-tags"><span class="tool-tag">Bolt</span><span class="tool-tag">Migration</span><span class="tool-tag">Deploy</span></div>
+        </div>
+        <div class="tool-card coral">
+          <div class="tool-header">
+            <span class="tool-icon">📋</span>
+            <span class="tool-badge community">Community</span>
+          </div>
+          <div class="tool-name">.viberules</div>
+          <div class="tool-desc">Like .cursorrules but for the entire VibeEdge ecosystem. Curated prompt templates for edge-native AI development.</div>
+          <div class="tool-tags"><span class="tool-tag">Prompts</span><span class="tool-tag">Config</span><span class="tool-tag">Templates</span></div>
+        </div>
+        <div class="tool-card cyan">
+          <div class="tool-header">
+            <span class="tool-icon">📡</span>
+            <span class="tool-badge native">Native</span>
+          </div>
+          <div class="tool-name">MCP Server</div>
+          <div class="tool-desc">Model Context Protocol server for VibeEdge. Connect Claude, Cursor, and other AI agents directly to your node fleet.</div>
+          <div class="tool-tags"><span class="tool-tag">MCP</span><span class="tool-tag">Claude</span><span class="tool-tag">Agents</span></div>
+        </div>
+        <div class="tool-card amber">
+          <div class="tool-header">
+            <span class="tool-icon">📊</span>
+            <span class="tool-badge native">Native</span>
+          </div>
+          <div class="tool-name">Node Dashboard</div>
+          <div class="tool-desc">Real-time earnings, bandwidth stats, inference counts, uptime scores, and DAO governance — all in one cyberpunk UI.</div>
+          <div class="tool-tags"><span class="tool-tag">Dashboard</span><span class="tool-tag">Monitoring</span><span class="tool-tag">Earn</span></div>
+        </div>
+        <div class="tool-card violet">
+          <div class="tool-header">
+            <span class="tool-icon">🏪</span>
+            <span class="tool-badge native">Native</span>
+          </div>
+          <div class="tool-name">API Marketplace</div>
+          <div class="tool-desc">Sell your own APIs, AI models, and templates. Others call → you earn $VIBE. The App Store for decentralized services.</div>
+          <div class="tool-tags"><span class="tool-tag">Marketplace</span><span class="tool-tag">APIs</span><span class="tool-tag">Earn</span></div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-header">
+            <span class="tool-icon">🔒</span>
+            <span class="tool-badge native">Native</span>
+          </div>
+          <div class="tool-name">ZK Privacy Layer</div>
+          <div class="tool-desc">ZK proofs for computation integrity. End-to-end encryption. Prove your AI ran correctly without revealing inputs.</div>
+          <div class="tool-tags"><span class="tool-tag">ZK</span><span class="tool-tag">Privacy</span><span class="tool-tag">Proofs</span></div>
+        </div>
+        <div class="tool-card coral">
+          <div class="tool-header">
+            <span class="tool-icon">🚀</span>
+            <span class="tool-badge recommended">Recommended</span>
+          </div>
+          <div class="tool-name">Template Gallery</div>
+          <div class="tool-desc">50+ production-ready templates: meme coin launchpad, AI SaaS, live streaming, NFT minting, gaming backends.</div>
+          <div class="tool-tags"><span class="tool-tag">Templates</span><span class="tool-tag">SaaS</span><span class="tool-tag">NFT</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEARNING TAB -->
+    <div class="hub-panel" id="tab-learn">
+      <div style="max-width:800px;margin-bottom:32px;">
+        <p style="font-size:15px;color:var(--muted);line-height:1.8;">
+          Structured path from zero to full-stack DePIN developer. <strong style="color:var(--text)">Unlike static GitHub tutorials</strong>, every exercise deploys to real edge nodes — you learn <em style="color:var(--lime)">and earn</em> simultaneously.
+        </p>
+      </div>
+      <div class="learning-path">
+        <div class="learn-step active">
+          <div class="learn-step-num">0</div>
+          <div class="learn-body">
+            <div class="learn-title">// BOOTCAMP — Vibe Coding Foundations</div>
+            <div class="learn-desc">What is vibe coding? The "Commander not Coder" mindset. Setting up your VibeEdge node. Your first $VIBE earned. Hello world deploy in 3 minutes.</div>
+          </div>
+          <div class="learn-meta">
+            <div class="learn-duration">~2 hours</div>
+            <div class="learn-status live">● Live</div>
+          </div>
+        </div>
+        <div class="learn-step active">
+          <div class="learn-step-num">1</div>
+          <div class="learn-body">
+            <div class="learn-title">// TOOLS — AI IDEs + VibeEdge CLI</div>
+            <div class="learn-desc">Cursor, Windsurf, Bolt.new — choosing your weapon. Connecting to VibeEdge. .viberules config. Prompt engineering for edge-native apps.</div>
+          </div>
+          <div class="learn-meta">
+            <div class="learn-duration">~4 hours</div>
+            <div class="learn-status live">● Live</div>
+          </div>
+        </div>
+        <div class="learn-step active">
+          <div class="learn-step-num">2</div>
+          <div class="learn-body">
+            <div class="learn-title">// BUILD — From Idea to Edge Deployment</div>
+            <div class="learn-desc">MVP mindset. PRD writing for AI. First full-stack app: describe → AI builds → vibe deploy → app live on your edge node + earning.</div>
+          </div>
+          <div class="learn-meta">
+            <div class="learn-duration">~8 hours</div>
+            <div class="learn-status live">● Live</div>
+          </div>
+        </div>
+        <div class="learn-step">
+          <div class="learn-step-num">3</div>
+          <div class="learn-body">
+            <div class="learn-title">// EARN — DePIN Economics + $VIBE Strategy</div>
+            <div class="learn-desc">Maximizing node earnings. Staking multipliers. API marketplace — sell your own APIs. Referral council. DAO participation.</div>
+          </div>
+          <div class="learn-meta">
+            <div class="learn-duration">~6 hours</div>
+            <div class="learn-status soon">○ Q2 2026</div>
+          </div>
+        </div>
+        <div class="learn-step">
+          <div class="learn-step-num">4</div>
+          <div class="learn-body">
+            <div class="learn-title">// ADVANCED — TurboQuant AI + Long-Context Apps</div>
+            <div class="learn-desc">Building apps that leverage TurboQuant's long-context advantage. Fine-tuning marketplace. ZK inference proofs. Multi-agent edge pipelines.</div>
+          </div>
+          <div class="learn-meta">
+            <div class="learn-duration">~12 hours</div>
+            <div class="learn-status soon">○ Q3 2026</div>
+          </div>
+        </div>
+        <div class="learn-step">
+          <div class="learn-step-num">5</div>
+          <div class="learn-body">
+            <div class="learn-title">// PRODUCTION — Full-Stack DePIN SaaS</div>
+            <div class="learn-desc">Production-grade: auth, payments (crypto + fiat), Stripe integration, WeChat mini programs, multi-region edge routing, 99.9% uptime SLAs.</div>
+          </div>
+          <div class="learn-meta">
+            <div class="learn-duration">~20 hours</div>
+            <div class="learn-status soon">○ Q4 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLAYGROUND TAB -->
+    <div class="hub-panel" id="tab-playground">
+      <div class="playground-grid">
+        <div class="playground-left">
+          <p class="playground-intro">
+            <strong>Try the VibeEdge CLI flow live.</strong> Select a template below and watch it initialize, deploy to edge nodes, and configure earning — all in under 60 seconds. This is what your terminal looks like the first time you vibe deploy.
+          </p>
+          <div class="prompt-selector">
+            <div class="prompt-chip active" onclick="runDemo(this,'meme')">
+              <div class="prompt-chip-dot"></div>
+              🎭 AI Meme Generator + NFT Minting
+            </div>
+            <div class="prompt-chip" onclick="runDemo(this,'saas')">
+              <div class="prompt-chip-dot"></div>
+              🚀 SaaS Landing + Payment + Auth
+            </div>
+            <div class="prompt-chip" onclick="runDemo(this,'stream')">
+              <div class="prompt-chip-dot"></div>
+              📡 Live Streaming + Transcoding Node
+            </div>
+            <div class="prompt-chip" onclick="runDemo(this,'ai')">
+              <div class="prompt-chip-dot"></div>
+              🤖 TurboQuant AI API Endpoint
+            </div>
+          </div>
+          <div class="playground-cta">
+            <a href="#" class="btn-primary" style="font-size:12px;padding:12px 28px;">Download CLI →</a>
+            <a href="#" class="btn-ghost" style="font-size:12px;padding:12px 28px;">Read Docs</a>
+          </div>
+        </div>
+        <div class="playground-right">
+          <div class="terminal">
+            <div class="terminal-bar">
+              <div class="term-dot r"></div>
+              <div class="term-dot y"></div>
+              <div class="term-dot g"></div>
+              <span class="term-title">vibe — edge terminal</span>
+            </div>
+            <div class="terminal-body" id="terminal-body"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEV PLATFORM -->
+<section id="devplatform">
+  <div class="container">
+    <div class="section-label">VibeCoder Experience</div>
+    <h2 class="section-title">Deploy in <em>60 seconds.</em><br>AI builds it <span class="coral">for you.</span></h2>
+
+    <div class="platform-grid">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="term-dot r"></div>
+          <div class="term-dot y"></div>
+          <div class="term-dot g"></div>
+          <span class="term-title">vibe — live deploy</span>
+        </div>
+        <div class="terminal-body" id="terminal-body-2" style="min-height:400px;"></div>
+      </div>
+
+      <div class="platform-features">
+        <div class="feat-row">
+          <div class="feat-accent"></div>
+          <div class="feat-body">
+            <div class="feat-title">AI-Assisted Build</div>
+            <div class="feat-desc">Describe your app in plain English. AI generates full-stack code, selects the right edge node cluster, and configures monetization.</div>
+            <div class="feat-tags"><span class="feat-tag">Claude-powered</span><span class="feat-tag">Cursor</span><span class="feat-tag">Windsurf</span></div>
+          </div>
+        </div>
+        <div class="feat-row">
+          <div class="feat-accent coral"></div>
+          <div class="feat-body">
+            <div class="feat-title">TurboQuant Inference</div>
+            <div class="feat-desc">Every deployed app gets access to TurboQuant AI endpoints. Long-context models at 6× less cost than centralized cloud.</div>
+            <div class="feat-tags"><span class="feat-tag">6× cheaper</span><span class="feat-tag">Long-context</span><span class="feat-tag">ZK proofs</span></div>
+          </div>
+        </div>
+        <div class="feat-row">
+          <div class="feat-accent cyan"></div>
+          <div class="feat-body">
+            <div class="feat-title">Geo-Routed Edge CDN</div>
+            <div class="feat-desc">Apps automatically served from the nearest node. Proximity-first routing. Sub-30ms latency globally. Automatic failover.</div>
+            <div class="feat-tags"><span class="feat-tag">134 countries</span><span class="feat-tag">Auto-routing</span><span class="feat-tag">Failover</span></div>
+          </div>
+        </div>
+        <div class="feat-row">
+          <div class="feat-accent amber"></div>
+          <div class="feat-body">
+            <div class="feat-title">Built-in Monetization</div>
+            <div class="feat-desc">API sales, usage billing, NFT minting, referral earnings — all configured automatically at deploy time. $VIBE flows immediately.</div>
+            <div class="feat-tags"><span class="feat-tag">$VIBE payments</span><span class="feat-tag">NFT</span><span class="feat-tag">Referrals</span></div>
+          </div>
+        </div>
+        <div class="feat-row">
+          <div class="feat-accent"></div>
+          <div class="feat-body">
+            <div class="feat-title">MCP + Agent Integration</div>
+            <div class="feat-desc">Official MCP server connects Claude Code, Cursor agents, and multi-agent pipelines directly to your VibeEdge deployment fleet.</div>
+            <div class="feat-tags"><span class="feat-tag">MCP</span><span class="feat-tag">Claude Code</span><span class="feat-tag">Multi-agent</span></div>
+          </div>
+        </div>
+        <div class="feat-row">
+          <div class="feat-accent coral"></div>
+          <div class="feat-body">
+            <div class="feat-title">Export Anything. Always.</div>
+            <div class="feat-desc">Your code, your data, your keys. One command exports your full deployment. No vendor lock-in. Forever and always, your edge.</div>
+            <div class="feat-tags"><span class="feat-tag">Open source core</span><span class="feat-tag">Self-hostable</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES / NICHES -->
+<section id="services">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-label">14 Niches. One Platform.</div>
+      <h2 class="section-title">Every Layer of the <em>Decentralized Web</em></h2>
+    </div>
+    <div class="niche-grid">
+      <div class="niche-card" style="--accent-color: var(--lime)">
+        <div class="niche-num">01</div>
+        <div class="niche-icon">🌐</div>
+        <div class="niche-name">CDN</div>
+        <div class="niche-desc">Geo-routed content delivery. Faster than centralized CDNs via proximity-first routing.</div>
+        <div class="niche-status" style="color:var(--lime)">● Phase 1</div>
+      </div>
+      <div class="niche-card" style="--accent-color: var(--coral)">
+        <div class="niche-num">02</div>
+        <div class="niche-icon">📡</div>
+        <div class="niche-name">Bandwidth</div>
+        <div class="niche-desc">Share idle internet bandwidth. Like Grass but integrated with full-stack incentives.</div>
+        <div class="niche-status" style="color:var(--lime)">● Phase 1</div>
+      </div>
+      <div class="niche-card" style="--accent-color: var(--cyan)">
+        <div class="niche-num">03</div>
+        <div class="niche-icon">⚡</div>
+        <div class="niche-name">Compute</div>
+        <div class="niche-desc">Serverless edge functions + GPU pooling. Deploy WASM workers to idle devices globally.</div>
+        <div class="niche-status" style="color:var(--lime)">● Phase 2</div>
+      </div>
+      <div class="niche-card" style="--accent-color: var(--amber)">
+        <div class="niche-num">04</div>
+        <div class="niche-icon">🧠</div>
+        <div class="niche-name">TurboQuant AI</div>
+        <div class="niche-desc">6× KV reduction. 8× attention speedup. Long-context models at edge cost. First of its kind.</div>
+        <div class="niche-status" style="color:var(--lime)">● Phase 1</div>
+      </div>
+      <div class="niche-card" style="--accent-color: var(--lime)">
+        <div class="niche-num">05</div>
+        <div class="niche-icon">📦</div>
+        <div class="niche-name">Storage</div>
+        <div class="niche-desc">IPFS-optimized hot/cold storage. Native CDN integration. Encrypted shards. Retrieval-incentivized.</div>
+        <div class="niche-status" style="color:var(--lime)">● Phase 1</div>
+      </div>
+      <div class="niche-card" style="--accent-color: var(--coral)">
+        <div class="niche-num">06</div>
+        <div class="niche-icon">🔌</div>
+        <div class="niche-name">RPC</div>
+        <div class="niche-desc">Geo-routed blockchain RPC endpoints. Faster + cheaper than centralized providers.</div>
+        <div class="niche-status" style="color:var(--lime)">● Phase 2</div>
+      </div>
+      <div class="niche-card" style="--accent-color: var(--cyan)">
+        <div class="niche-num">07</div>
+        <div class="niche-icon">🎬</div>
+        <div class="niche-name">Transcoding</div>
+        <div class="niche-desc">Distributed video/audio transcoding for creators and streaming platforms. GPU-accelerated.</div>
+        <div class="niche-status" style="color:var(--amber)">◐ Phase 2</div>
+      </div>
+      <div class="niche-card" style="--accent-color: var(--amber)">
+        <div class="niche-num">08</div>
+        <div class="niche-icon">📞</div>
+        <div class="niche-name">RTC</div>
+        <div class="niche-desc">P2P video/audio via WebRTC. Gaming + live streaming SDKs. Zero central servers.</div>
+        <div class="niche-status" style="color:var(--amber)">◐ Phase 3</div>
+      </div>
+      <div class="niche-card" style="--accent-color: var(--lime)">
+        <div class="niche-num">09</div>
+        <div class="niche-icon">🗄️</div>
+        <div class="niche-name">Database</div>
+        <div class="niche-desc">Decentralized SQL+NoSQL hybrid. Edge caching. Encrypted shards. Privacy by default.</div>
+        <div class="niche-status" style="color:var(--amber)">◐ Phase 3</div>
+      </div>
+      <div class="niche-card" style="--accent-color: var(--coral)">
+        <div class="niche-num">10</div>
+        <div class="niche-icon">📶</div>
+        <div class="niche-name">Wireless</div>
+        <div class="niche-desc">Decentralized mesh networking. WiFi 6E + LoRa + 5G-ready. Helium-like but fully integrated.</div>
+        <div class="niche-status" style="color:var(--muted)">○ Phase 3</div>
+      </div>
+      <div class="niche-card" style="--accent-color: var(--cyan)">
+        <div class="niche-num">11</div>
+        <div class="niche-icon">📍</div>
+        <div class="niche-name">Geo Positioning</div>
+        <div class="niche-desc">Ultra-precise decentralized positioning data. GEODNET-inspired. Monetize your location signal.</div>
+        <div class="niche-status" style="color:var(--amber)">◐ Phase 2</div>
+      </div>
+      <div class="niche-card" style="--accent-color: var(--amber)">
+        <div class="niche-num">12</div>
+        <div class="niche-icon">🔐</div>
+        <div class="niche-name">Privacy</div>
+        <div class="niche-desc">ZK proofs throughout. End-to-end encryption. No data snooping. Compliant by design.</div>
+        <div class="niche-status" style="color:var(--lime)">● Phase 1</div>
+      </div>
+      <div class="niche-card" style="--accent-color: var(--lime)">
+        <div class="niche-num">13</div>
+        <div class="niche-icon">🤖</div>
+        <div class="niche-name">Robotics</div>
+        <div class="niche-desc">Decentralized task verification + swarm control. Peaq-inspired. Edge robotics control plane.</div>
+        <div class="niche-status" style="color:var(--muted)">○ Phase 4</div>
+      </div>
+      <div class="niche-card" style="--accent-color: var(--coral)">
+        <div class="niche-num">14</div>
+        <div class="niche-icon">🔗</div>
+        <div class="niche-name">Edge Network</div>
+        <div class="niche-desc">The unifying layer. Orchestrates all 13 services. Geo-aware, latency-optimized, reputation-scored.</div>
+        <div class="niche-status" style="color:var(--lime)">● Phase 1</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="container">
+    <div class="section-label">Protocol Timeline</div>
+    <h2 class="section-title">From <em>Genesis</em> to<br>Global <span class="coral">Mesh.</span></h2>
+    <div class="phases">
+      <div class="phase-card active">
+        <div class="phase-num">01</div>
+        <div class="phase-title">Genesis</div>
+        <div class="phase-subtitle">// Network Foundations</div>
+        <div class="phase-items">
+          <div class="phase-item"><span class="phase-check">✓</span> CDN + Bandwidth nodes live</div>
+          <div class="phase-item"><span class="phase-check">✓</span> TurboQuant v1 inference</div>
+          <div class="phase-item"><span class="phase-check">✓</span> $VIBE token launch on Solana</div>
+          <div class="phase-item"><span class="phase-check">✓</span> Storage + Privacy layer</div>
+          <div class="phase-item"><span class="phase-check">✓</span> Edge Network orchestration</div>
+          <div class="phase-item"><span class="phase-check">✓</span> Vibe Coding Hub beta</div>
+        </div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">02</div>
+        <div class="phase-title">Ignition</div>
+        <div class="phase-subtitle">// Compute + AI Scale</div>
+        <div class="phase-items">
+          <div class="phase-item"><span class="phase-check">◐</span> TurboQuant v2 — 8× speedup</div>
+          <div class="phase-item"><span class="phase-check">◐</span> Compute + GPU pooling</div>
+          <div class="phase-item"><span class="phase-check">◐</span> RPC marketplace live</div>
+          <div class="phase-item"><span class="phase-check">◐</span> Geo positioning network</div>
+          <div class="phase-item"><span class="phase-check">○</span> Cursor / Windsurf plugins</div>
+          <div class="phase-item"><span class="phase-check">○</span> MCP server public release</div>
+        </div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">03</div>
+        <div class="phase-title">Global Mesh</div>
+        <div class="phase-subtitle">// Full DePIN Stack</div>
+        <div class="phase-items">
+          <div class="phase-item"><span class="phase-check">○</span> RTC + WebRTC network</div>
+          <div class="phase-item"><span class="phase-check">○</span> Decentralized DB live</div>
+          <div class="phase-item"><span class="phase-check">○</span> Wireless mesh (LoRa/WiFi 6E)</div>
+          <div class="phase-item"><span class="phase-check">○</span> Full DAO governance</div>
+          <div class="phase-item"><span class="phase-check">○</span> 1M+ node target</div>
+          <div class="phase-item"><span class="phase-check">○</span> Robotics control layer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FREEMIUM -->
+<section id="freemium">
+  <div class="container">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">Free to <em>Earn.</em><br>Pay to <span class="coral">Scale.</span></h2>
+    <div class="plans-grid">
+      <div class="plan-card">
+        <div class="plan-tier">// Free Node</div>
+        <div class="plan-price">$0</div>
+        <div class="plan-price-sub">forever · earn $VIBE passively</div>
+        <div class="plan-features">
+          <div class="plan-feat"><span class="check">✓</span> Node operator earning</div>
+          <div class="plan-feat"><span class="check">✓</span> 1 app deployment</div>
+          <div class="plan-feat"><span class="check">✓</span> 10GB bandwidth/month</div>
+          <div class="plan-feat"><span class="check">✓</span> TurboQuant AI (100 calls/day)</div>
+          <div class="plan-feat"><span class="check">✓</span> Vibe Coding Hub access</div>
+          <div class="plan-feat"><span class="check">✓</span> Community Discord</div>
+          <div class="plan-feat"><span class="x">✗</span> Custom domains</div>
+          <div class="plan-feat"><span class="x">✗</span> API marketplace listing</div>
+        </div>
+        <button class="plan-btn">Start Free →</button>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-tier">// Vibe Pro</div>
+        <div class="plan-price">$29</div>
+        <div class="plan-price-sub">/ month · earn more than you spend</div>
+        <div class="plan-features">
+          <div class="plan-feat"><span class="check">✓</span> Everything in Free</div>
+          <div class="plan-feat"><span class="check">✓</span> Unlimited app deployments</div>
+          <div class="plan-feat"><span class="check">✓</span> 1TB bandwidth/month</div>
+          <div class="plan-feat"><span class="check">✓</span> TurboQuant AI (unlimited)</div>
+          <div class="plan-feat"><span class="check">✓</span> Custom domains + SSL</div>
+          <div class="plan-feat"><span class="check">✓</span> API marketplace listing</div>
+          <div class="plan-feat"><span class="check">✓</span> 2× earning multiplier</div>
+          <div class="plan-feat"><span class="check">✓</span> Priority node routing</div>
+        </div>
+        <button class="plan-btn">Go Pro →</button>
+      </div>
+      <div class="plan-card">
+        <div class="plan-tier">// Node Operator</div>
+        <div class="plan-price">$99</div>
+        <div class="plan-price-sub">/ month · avg earnings $300+/mo</div>
+        <div class="plan-features">
+          <div class="plan-feat"><span class="check">✓</span> Everything in Vibe Pro</div>
+          <div class="plan-feat"><span class="check">✓</span> Multi-device node fleet</div>
+          <div class="plan-feat"><span class="check">✓</span> GPU inference tier access</div>
+          <div class="plan-feat"><span class="check">✓</span> 5× earning multiplier</div>
+          <div class="plan-feat"><span class="check">✓</span> DAO governance voting</div>
+          <div class="plan-feat"><span class="check">✓</span> Referral council eligibility</div>
+          <div class="plan-feat"><span class="check">✓</span> Dedicated account manager</div>
+          <div class="plan-feat"><span class="check">✓</span> White-label node app</div>
+        </div>
+        <button class="plan-btn">Run Fleet →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GOVERNANCE -->
+<section id="governance">
+  <div class="container">
+    <div class="section-label">DAO</div>
+    <h2 class="section-title">Owned by <em>Everyone.</em><br>Controlled by <span class="coral">None.</span></h2>
+    <div class="dao-grid">
+      <div class="dao-stats">
+        <div class="dao-stat">
+          <span class="dao-stat-label">Token Holders</span>
+          <span class="dao-stat-value">142K+</span>
+        </div>
+        <div class="dao-stat">
+          <span class="dao-stat-label">$VIBE Staked</span>
+          <span class="dao-stat-value">2.1B</span>
+        </div>
+        <div class="dao-stat">
+          <span class="dao-stat-label">Treasury Value</span>
+          <span class="dao-stat-value">$14.2M</span>
+        </div>
+        <div class="dao-stat">
+          <span class="dao-stat-label">Node Operators</span>
+          <span class="dao-stat-value">68K+</span>
+        </div>
+      </div>
+      <div class="dao-ethos">
+        <div class="dao-quote">"All Together<br>We Are <em>Strong.</em>"</div>
+        <p class="dao-desc">VibeEdge isn't a company that runs a network. It's a network that runs itself. Token holders and node operators co-own the protocol via on-chain governance. Every fee, every parameter, every roadmap decision — DAO-voted from day one.</p>
+        <div class="dao-pillars">
+          <div class="dao-pillar"><span class="dao-pillar-icon">⚡</span> On-chain proposals: 48-hour voting, token-weighted + quadratic options</div>
+          <div class="dao-pillar"><span class="dao-pillar-icon">🔒</span> Multi-sig treasury — no single actor controls funds</div>
+          <div class="dao-pillar"><span class="dao-pillar-icon">📡</span> Node operators get governance power proportional to contribution</div>
+          <div class="dao-pillar"><span class="dao-pillar-icon">🌐</span> Open-source core — fork rights guaranteed in protocol constitution</div>
+          <div class="dao-pillar"><span class="dao-pillar-icon">🤝</span> Referral councils — top contributors shape ecosystem grants</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="orb-cta"></div>
+  <div class="container">
+    <div class="cta-title">
+      Ready to<br>
+      <span class="lime">Vibe</span> the<br>
+      Edge?
+    </div>
+    <p class="cta-sub">The future is idle, decentralized, and yours.<br>Run your first node. Deploy your first app. Earn your first $VIBE. All in under 5 minutes.</p>
+    <div class="cta-actions">
+      <a href="#" class="btn-primary">Download Node App →</a>
+      <a href="#vibehub" class="btn-ghost">Vibe Coding Hub</a>
+      <a href="#" class="btn-ghost">Read the Docs</a>
+      <a href="#" class="btn-ghost">Join Discord</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">VibeEdge</div>
+      <p class="footer-tagline">The first unified DePIN edge platform with TurboQuant AI. Earn while idle. Build + deploy instantly. All together we are strong.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">// Platform</div>
+      <div class="footer-links">
+        <a href="#">Node App</a>
+        <a href="#">CLI Tools</a>
+        <a href="#">Dashboard</a>
+        <a href="#">API Marketplace</a>
+        <a href="#">Template Gallery</a>
+        <a href="#">Status Page</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">// Developers</div>
+      <div class="footer-links">
+        <a href="#">Documentation</a>
+        <a href="#">SDK Reference</a>
+        <a href="#">RPC Endpoints</a>
+        <a href="#">MCP Server</a>
+        <a href="#">GitHub</a>
+        <a href="#">Bug Bounty</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">// Community</div>
+      <div class="footer-links">
+        <a href="#">Vibe Coding Hub</a>
+        <a href="#">DAO Portal</a>
+        <a href="#">Discord</a>
+        <a href="#">Twitter / X</a>
+        <a href="#">Telegram</a>
+        <a href="#">Grants</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 VibeEdge Protocol — DAO Owned. All rights belong to the community.</div>
+    <div class="footer-status">
+      <div class="status-dot"></div>
+      All systems operational · 99.97% uptime
+    </div>
+  </div>
+</footer>
+
+<script>
+// --- Cursor ---
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  setTimeout(() => {
+    ring.style.left = e.clientX + 'px';
+    ring.style.top = e.clientY + 'px';
+  }, 80);
+});
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.width = '20px'; cursor.style.height = '20px';
+    ring.style.width = '48px'; ring.style.height = '48px';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.width = '12px'; cursor.style.height = '12px';
+    ring.style.width = '36px'; ring.style.height = '36px';
+  });
+});
+
+// --- Counter Animation — delayed 600ms to let hero fade-up complete ---
+const nodeCountEl = document.getElementById('nodeCount');
+const tbEl = document.getElementById('tbServed');
+const earnEl = document.getElementById('earnedTotal');
+const countriesEl = document.getElementById('countries');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      setTimeout(() => {
+        let n = 0; const t1 = setInterval(() => { n += 0.8; if(n>=142){n=142;clearInterval(t1);} nodeCountEl.innerHTML = Math.floor(n) + '<span class="unit">K</span>'; }, 16);
+        let t = 0; const t2 = setInterval(() => { t += 1.2; if(t>=287){t=287;clearInterval(t2);} tbEl.innerHTML = Math.floor(t) + '<span class="unit">TB</span>'; }, 16);
+        let e2 = 0; const t3 = setInterval(() => { e2 += 3; if(e2>=840){e2=840;clearInterval(t3);} earnEl.innerHTML = '$' + Math.floor(e2) + '<span class="unit">K</span>'; }, 16);
+        let c = 0; const t4 = setInterval(() => { c += 1; if(c>=134){c=134;clearInterval(t4);} countriesEl.textContent = c; }, 20);
+      }, 600);
+      observer.disconnect();
+    }
+  });
+}, { threshold: 0.3, rootMargin: '-50px' });
+observer.observe(document.querySelector('.hero-stats'));
+
+// --- Demo scripts for playground ---
+const demos = {
+  meme: [
+    { text: '$ vibe init --template ai-meme-generator', cls: 'cmd', delay: 100 },
+    { text: '◆ Initializing AI Meme Generator project...', cls: 'info', delay: 500 },
+    { text: '◆ Detecting optimal edge nodes (geo-routing)...', cls: 'info', delay: 900 },
+    { text: '✓ 24 edge nodes selected across 8 regions', cls: 'success', delay: 1400 },
+    { text: '$ vibe ai "add live streaming + NFT minting"', cls: 'cmd', delay: 2000 },
+    { text: '◆ TurboQuant AI analyzing request...', cls: 'info', delay: 2500 },
+    { text: '◆ Generating WebRTC + IPFS + NFT stack...', cls: 'info', delay: 2900 },
+    { text: '✓ Stack generated: RTC + Storage + Mint module', cls: 'success', delay: 3400 },
+    { text: '$ vibe deploy --earn-mode bandwidth,compute', cls: 'cmd', delay: 3900 },
+    { text: '◆ Compiling to WASM edge bundle...', cls: 'info', delay: 4300 },
+    { text: '◆ Distributing to 24 edge nodes...', cls: 'info', delay: 4700 },
+    { text: '◆ Setting up CDN routing + $VIBE monetization...', cls: 'info', delay: 5200 },
+    { text: '✓ DEPLOYED → meme-ai.edge.vibe', cls: 'success', delay: 5700 },
+    { text: '✓ Earning: $VIBE 0.034/hr (bandwidth + compute)', cls: 'success', delay: 6100 },
+    { text: '✓ Live at: https://meme-ai.edge.vibe', cls: 'success', delay: 6500 },
+    { text: '$ █', cls: 'cmd', delay: 7000 },
+  ],
+  saas: [
+    { text: '$ vibe init --template saas-starter', cls: 'cmd', delay: 100 },
+    { text: '◆ Scaffolding SaaS template...', cls: 'info', delay: 500 },
+    { text: '✓ Next.js + Prisma + Stripe + Auth setup complete', cls: 'success', delay: 1100 },
+    { text: '$ vibe ai "add subscription billing + user dashboard"', cls: 'cmd', delay: 1700 },
+    { text: '◆ TurboQuant AI generating billing logic...', cls: 'info', delay: 2200 },
+    { text: '✓ Stripe webhooks + $VIBE payment rails integrated', cls: 'success', delay: 3000 },
+    { text: '$ vibe deploy --ssl --custom-domain app.yourdomain.com', cls: 'cmd', delay: 3600 },
+    { text: '◆ Issuing SSL certificate via ACME...', cls: 'info', delay: 4100 },
+    { text: '◆ Configuring geo-routing across 134 countries...', cls: 'info', delay: 4500 },
+    { text: '✓ SSL cert issued. Edge routing configured.', cls: 'success', delay: 5100 },
+    { text: '✓ DEPLOYED → app.yourdomain.com', cls: 'success', delay: 5600 },
+    { text: '✓ API marketplace listing created. Earning $VIBE.', cls: 'success', delay: 6100 },
+    { text: '$ █', cls: 'cmd', delay: 6600 },
+  ],
+  stream: [
+    { text: '$ vibe init --template live-stream-node', cls: 'cmd', delay: 100 },
+    { text: '◆ Configuring transcoding node...', cls: 'info', delay: 500 },
+    { text: '✓ GPU transcoding pool: 8 nodes available', cls: 'success', delay: 1000 },
+    { text: '$ vibe node --enable transcoding,rtc,bandwidth', cls: 'cmd', delay: 1600 },
+    { text: '◆ Activating WebRTC P2P mesh...', cls: 'info', delay: 2100 },
+    { text: '◆ Enabling HLS + DASH transcoding pipeline...', cls: 'info', delay: 2500 },
+    { text: '✓ Transcoding: active (H.264 + AV1 + VP9)', cls: 'success', delay: 3100 },
+    { text: '✓ RTC mesh: 42 nodes in relay pool', cls: 'success', delay: 3500 },
+    { text: '✓ Bandwidth sharing: 120 Mbps contributed', cls: 'success', delay: 3900 },
+    { text: '◆ Calculating expected earnings...', cls: 'info', delay: 4400 },
+    { text: '✓ Est. $0.089/hr from transcoding + bandwidth', cls: 'success', delay: 5000 },
+    { text: '✓ Stream endpoint: rtc://stream.edge.vibe/node-88421', cls: 'success', delay: 5500 },
+    { text: '$ █', cls: 'cmd', delay: 6000 },
+  ],
+  ai: [
+    { text: '$ vibe turbo --deploy claude-3-haiku-quantized', cls: 'cmd', delay: 100 },
+    { text: '◆ Loading TurboQuant INT4 model weights...', cls: 'info', delay: 500 },
+    { text: '◆ KV cache compression: 6× reduction applied', cls: 'info', delay: 1000 },
+    { text: '✓ Attention speedup: 8× vs baseline confirmed', cls: 'success', delay: 1600 },
+    { text: '◆ Distributing shards to 12 inference nodes...', cls: 'info', delay: 2100 },
+    { text: '✓ Model live on 12 nodes across 5 regions', cls: 'success', delay: 2800 },
+    { text: '$ vibe api --publish --price 0.0008/1k-tokens', cls: 'cmd', delay: 3400 },
+    { text: '◆ Creating API marketplace listing...', cls: 'info', delay: 3900 },
+    { text: '✓ Endpoint: https://api.edge.vibe/turbo/haiku-q', cls: 'success', delay: 4500 },
+    { text: '✓ Context window: 200K tokens (6× KV reduction)', cls: 'success', delay: 5000 },
+    { text: '✓ Cost: $0.0008/1K tokens vs $0.0025 centralized', cls: 'success', delay: 5500 },
+    { text: '✓ Earning $VIBE per inference call. ZK proofs active.', cls: 'success', delay: 6000 },
+    { text: '$ █', cls: 'cmd', delay: 6500 },
+  ]
+};
+
+let currentDemo = 'meme';
+let demoTimers = [];
+
+function clearDemoTimers() {
+  demoTimers.forEach(t => clearTimeout(t));
+  demoTimers = [];
+}
+
+function runDemo(chipEl, demoKey) {
+  document.querySelectorAll('.prompt-chip').forEach(c => c.classList.remove('active'));
+  chipEl.classList.add('active');
+  currentDemo = demoKey;
+  const tb = document.getElementById('terminal-body');
+  tb.innerHTML = '';
+  clearDemoTimers();
+  const lines = demos[demoKey];
+  lines.forEach(line => {
+    const timer = setTimeout(() => {
+      const div = document.createElement('div');
+      div.className = 'term-line ' + line.cls;
+      if (line.text.includes('█')) {
+        div.innerHTML = '<span class="term-prompt">VibeEdge</span> ' + line.text.replace('█', '<span class="cursor-blink"></span>');
+      } else {
+        div.textContent = line.text;
+      }
+      tb.appendChild(div);
+      tb.scrollTop = tb.scrollHeight;
+    }, line.delay);
+    demoTimers.push(timer);
+  });
+}
+
+// Dev platform terminal
+const devLines = [
+  { text: '$ vibe init --template ai-meme-generator', cls: 'cmd', delay: 200 },
+  { text: '◆ Initializing AI Meme Generator project...', cls: 'info', delay: 600 },
+  { text: '◆ Detecting optimal edge nodes (geo-routing)...', cls: 'info', delay: 1000 },
+  { text: '✓ 24 edge nodes selected across 8 regions', cls: 'success', delay: 1600 },
+  { text: '$ vibe ai "add live streaming + NFT minting"', cls: 'cmd', delay: 2200 },
+  { text: '◆ TurboQuant AI analyzing...', cls: 'info', delay: 2700 },
+  { text: '◆ Generating WebRTC + IPFS + NFT stack...', cls: 'info', delay: 3100 },
+  { text: '✓ Stack generated: RTC + Storage + Mint module', cls: 'success', delay: 3700 },
+  { text: '$ vibe deploy --earn-mode bandwidth,compute', cls: 'cmd', delay: 4200 },
+  { text: '◆ Compiling to WASM edge bundle...', cls: 'info', delay: 4700 },
+  { text: '◆ Distributing to 24 edge nodes...', cls: 'info', delay: 5100 },
+  { text: '◆ Setting up CDN routing + $VIBE monetization...', cls: 'info', delay: 5700 },
+  { text: '✓ DEPLOYED → meme-ai.edge.vibe', cls: 'success', delay: 6200 },
+  { text: '✓ Earning: $VIBE 0.034/hr (bandwidth + compute)', cls: 'success', delay: 6600 },
+  { text: '✓ Live at: https://meme-ai.edge.vibe', cls: 'success', delay: 7000 },
+  { text: '$ █', cls: 'cmd', delay: 7500 },
+];
+
+const tb2 = document.getElementById('terminal-body-2');
+const termObs2 = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) {
+    tb2.innerHTML = '';
+    devLines.forEach(line => {
+      setTimeout(() => {
+        const div = document.createElement('div');
+        div.className = 'term-line ' + line.cls;
+        if (line.text.includes('█')) {
+          div.innerHTML = '<span class="term-prompt">VibeEdge</span> ' + line.text.replace('█', '<span class="cursor-blink"></span>');
+        } else {
+          div.textContent = line.text;
+        }
+        tb2.appendChild(div);
+        tb2.scrollTop = tb2.scrollHeight;
+      }, line.delay);
+    });
+    termObs2.disconnect();
+  }
+}, { threshold: 0.2 });
+termObs2.observe(tb2);
+
+// --- Tab switching ---
+function switchTab(tabKey) {
+  document.querySelectorAll('.hub-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.hub-panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('tab-' + tabKey).classList.add('active');
+  if (tabKey === 'playground') {
+    // Auto-run default demo
+    setTimeout(() => runDemo(document.querySelector('.prompt-chip'), 'meme'), 200);
+  }
+}
+
+// --- Intersection Observer for fade-up ---
+const fadeEls = document.querySelectorAll('.fade-up');
+const fadeObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+fadeEls.forEach(el => {
+  if (!el.closest('#hero')) fadeObs.observe(el);
+});
+
+// --- Stream bar animation on scroll ---
+const streamObs = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) {
+    document.querySelectorAll('.stream-fill').forEach(el => {
+      const target = el.style.width;
+      el.style.width = '0';
+      setTimeout(() => {
+        el.style.transition = 'width 1.5s ease-out';
+        el.style.width = target;
+      }, 100);
+    });
+    streamObs.disconnect();
+  }
+}, { threshold: 0.3 });
+const streamSection = document.querySelector('.streams-card');
+if (streamSection) streamObs.observe(streamSection);
+
+// Auto-run playground on page load
+setTimeout(() => runDemo(document.querySelector('.prompt-chip'), 'meme'), 300);
+</script>
+</body>
+</html>

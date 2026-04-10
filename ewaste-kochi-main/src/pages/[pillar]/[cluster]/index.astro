@@ -1,0 +1,85 @@
+---
+// src/pages/[pillar]/[cluster]/index.astro — Cluster index page (100 posts listed)
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import pillarsData from '../../../data/pillars.json';
+
+// We generate cluster index pages from pillars data
+export function getStaticPaths() {
+  const paths = [];
+  for (const pillar of pillarsData) {
+    for (const cluster of pillar.clusters) {
+      paths.push({
+        params: { pillar: pillar.slug, cluster: cluster.id },
+        props: { pillar, cluster },
+      });
+    }
+  }
+  return paths;
+}
+
+const { pillar, cluster } = Astro.props;
+const BASE = 'https://ewastekochi.com';
+const canonical = `${BASE}/${pillar.slug}/${cluster.id}/`;
+
+const breadcrumbs = [
+  { name: 'Home', url: `${BASE}/` },
+  { name: pillar.name, url: `${BASE}/${pillar.slug}/` },
+  { name: cluster.name, url: canonical },
+];
+
+// We'll list the first 20 posts by linking to their slugs
+// Since posts are deterministically slugged, we can reconstruct them
+function slugify(str) {
+  return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+
+// Generate a sample of 20 post slugs for this cluster (same formula as generateBlogPosts.js)
+const samplePosts = Array.from({length: 20}, (_, i) => ({
+  num: i + 1,
+  slug: slugify(`${cluster.keyword}-${i + 1}`),
+  title: `${cluster.name}: Guide ${i + 1} for ${pillar.name}`,
+}));
+---
+
+<BaseLayout
+  title={`${cluster.name} — ${pillar.name} | EWaste Kochi`}
+  description={`Complete ${cluster.name.toLowerCase()} resource hub. 100 in-depth articles covering every aspect of ${cluster.keyword} in Kerala.`}
+  canonical={canonical}
+  breadcrumbs={breadcrumbs}
+>
+  <Breadcrumbs items={breadcrumbs} />
+
+  <section class="section">
+    <div class="wrap">
+      <span class="sec-eyebrow">{pillar.icon} {pillar.name} › {cluster.name}</span>
+      <h1 class="sec-title">{cluster.name} — <em>Complete Resource Hub</em></h1>
+      <p class="sec-sub">100 in-depth articles covering every aspect of {cluster.keyword} in Kerala.</p>
+
+      <div class="post-grid">
+        {samplePosts.map((post) => (
+          <a href={`/${pillar.slug}/${cluster.id}/${post.slug}/`} class="post-card">
+            <span class="post-num">#{post.num.toString().padStart(2,'0')}</span>
+            <h2 class="post-title">{cluster.keyword} — Guide {post.num}</h2>
+            <p class="post-cluster">{cluster.name} · {pillar.name}</p>
+            <span class="post-arrow">Read article →</span>
+          </a>
+        ))}
+      </div>
+
+      <div style="text-align:center; margin-top: 3rem;">
+        <a href={`/${pillar.slug}/`} class="btn btn-outline">← Back to {pillar.name}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.post-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; margin-top: 3rem; }
+.post-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; transition: all .2s; }
+.post-card:hover { border-color: rgba(0,232,150,.3); transform: translateY(-2px); }
+.post-num { font-size: .65rem; font-weight: 700; color: var(--green); font-family: var(--mono); letter-spacing: .1em; }
+.post-title { font-size: .95rem; font-weight: 700; color: var(--white); margin: 0; line-height: 1.3; }
+.post-cluster { font-size: .75rem; color: var(--muted); margin: 0; }
+.post-arrow { font-size: .8rem; color: var(--green); margin-top: auto; }
+</style>

@@ -1,0 +1,157 @@
+---
+// src/pages/[pillar]/[cluster]/[post].astro
+// Generates all 10,000 blog post pages: /{pillar}/{cluster}/{post}/
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import FaqSection from '../../../components/FaqSection.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import RelatedPosts from '../../../components/RelatedPosts.astro';
+import RelatedQuestions from '../../../components/RelatedQuestions.astro';
+import blogPosts_1 from '../../../data/blogPosts_part1.json';
+import blogPosts_2 from '../../../data/blogPosts_part2.json';
+import blogPosts_3 from '../../../data/blogPosts_part3.json';
+import blogPosts_4 from '../../../data/blogPosts_part4.json';
+
+const blogPostsData = [...blogPosts_1, ...blogPosts_2, ...blogPosts_3, ...blogPosts_4];
+import pillarsData from '../../../data/pillars.json';
+import { marked } from 'marked';
+
+// marked is needed only if content is markdown; adapt if content is already HTML
+export async function getStaticPaths() {
+  return blogPostsData.map((post) => ({
+    params: {
+      pillar: post.pillarSlug,
+      cluster: post.clusterSlug,
+      post: post.slug,
+    },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const BASE = 'https://ewastekochi.com';
+const canonical = `${BASE}/${post.pillarSlug}/${post.clusterSlug}/${post.slug}/`;
+
+// Find parent pillar for cluster name lookups
+const pillar = pillarsData.find((p) => p.slug === post.pillarSlug);
+const cluster = pillar?.clusters.find((c) => c.id === post.clusterSlug);
+
+const breadcrumbs = [
+  { name: 'Home', url: `${BASE}/` },
+  { name: pillar?.name ?? post.pillarSlug, url: `${BASE}/${post.pillarSlug}/` },
+  { name: cluster?.name ?? post.clusterSlug, url: `${BASE}/${post.pillarSlug}/${post.clusterSlug}/` },
+  { name: post.title.slice(0, 50), url: canonical },
+];
+
+// Render markdown content to HTML (content is generated as markdown)
+const contentHtml = marked.parse(post.content ?? '');
+
+// Article schema
+const articleSchema = {
+  '@type': 'Article',
+  headline: post.title,
+  description: post.metaDesc,
+  author: {
+    '@type': 'Organization',
+    name: 'EWaste Kochi',
+    url: BASE,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'EWaste Kochi',
+    logo: { '@type': 'ImageObject', url: `${BASE}/assets/images/logo.webp` },
+  },
+  dateModified: post.dateModified,
+  mainEntityOfPage: canonical,
+};
+---
+
+<BaseLayout
+  title={`${post.title} | EWaste Kochi`}
+  description={post.metaDesc}
+  canonical={canonical}
+  schema={articleSchema}
+  faqs={post.faqs?.map(f => ({ q: f.question, a: f.answer })) ?? []}
+  breadcrumbs={breadcrumbs}
+  dateModified={post.dateModified}
+>
+  <Breadcrumbs items={breadcrumbs} />
+
+  <article class="blog-article" itemscope itemtype="https://schema.org/Article">
+    <div class="wrap">
+      <!-- Header -->
+      <header class="article-header section-tight">
+        <div class="article-meta">
+          <a href={`/${post.pillarSlug}/`} class="badge badge-g">{pillar?.icon} {pillar?.name}</a>
+          <a href={`/${post.pillarSlug}/${post.clusterSlug}/`} class="badge badge-b">{cluster?.name}</a>
+          <time datetime={post.dateModified} class="article-date">{post.dateModified}</time>
+        </div>
+        <h1 itemprop="headline">{post.h1}</h1>
+        <p class="article-desc">{post.metaDesc}</p>
+        <div class="article-actions">
+          <a href="https://wa.me/919876543210" class="btn btn-wa" data-track="blog-wa">💬 Get Free Quote</a>
+          <a href={`/${post.pillarSlug}/`} class="btn btn-outline">← {pillar?.name}</a>
+        </div>
+      </header>
+
+      <!-- Content body -->
+      <div class="article-body" itemprop="articleBody">
+        <div class="article-content" set:html={contentHtml} />
+      </div>
+
+      <!-- FAQ Section -->
+      {post.faqs && post.faqs.length > 0 && (
+        <FaqSection
+          faqs={post.faqs.map(f => ({ q: f.question, a: f.answer }))}
+          heading="Frequently Asked Questions"
+        />
+      )}
+      
+      <!-- Related Questions (Dynamic from Database) -->
+      <RelatedQuestions 
+        pillarSlug={post.pillarSlug} 
+        clusterSlug={post.clusterSlug} 
+        limit={3} 
+      />
+
+      <!-- Related Posts -->
+      <RelatedPosts
+        currentSlug={post.slug}
+        pillarSlug={post.pillarSlug}
+        clusterSlug={post.clusterSlug}
+      />
+
+      <!-- Bottom CTA -->
+      <div class="article-cta">
+        <div class="article-cta-inner">
+          <h2>Ready to Book Your E-Waste Pickup in {post.city}?</h2>
+          <p>Free doorstep collection. KSPCB authorised. Certificate of Destruction included.</p>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
+            <a href="https://wa.me/919876543210" class="btn btn-wa btn-lg">💬 WhatsApp Us</a>
+            <a href="tel:+919876543210" class="btn btn-outline btn-lg">📞 Call Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.blog-article { padding-bottom: 80px; }
+.article-header { border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; padding-bottom: 2.5rem; }
+.article-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 1.2rem; }
+.article-date { font-size: .75rem; color: var(--muted); font-family: var(--mono); }
+.article-header h1 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); line-height: 1.15; margin-bottom: 1rem; }
+.article-desc { color: var(--muted); font-size: .97rem; line-height: 1.7; margin-bottom: 1.5rem; max-width: 680px; }
+.article-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.article-body { max-width: 780px; }
+.article-content { color: var(--text); line-height: 1.85; font-family: var(--serif); font-size: .97rem; }
+.article-content h2 { color: var(--white); font-size: 1.35rem; margin: 2.5rem 0 .8rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.article-content h3 { color: var(--white); font-size: 1.08rem; margin: 1.8rem 0 .6rem; }
+.article-content p { margin-bottom: 1.2rem; }
+.article-content ul, .article-content ol { padding-left: 1.4rem; margin-bottom: 1.2rem; }
+.article-content li { margin-bottom: .5rem; }
+.article-content strong { color: var(--white); }
+.article-cta { background: linear-gradient(135deg, rgba(0,232,150,.09), rgba(0,180,255,.05)); border: 1px solid rgba(0,232,150,.18); border-radius: 20px; padding: 48px; margin-top: 48px; text-align: center; }
+.article-cta h2 { font-size: 1.6rem; margin-bottom: 1rem; }
+.article-cta p { color: var(--muted); margin-bottom: 1.5rem; }
+</style>

@@ -1,0 +1,142 @@
+{
+  "computer-scrap-kochi": {
+    "incoming": [
+      "index.html"
+    ],
+    "outgoing_pillars": [
+      "battery-recycling-kochi",
+      "itad-kochi",
+      "free-ewaste-pickup-kochi"
+    ],
+    "outgoing_blogs": [
+      "ITAD Guides",
+      "Local Kochi Hubs"
+    ]
+  },
+  "battery-recycling-kochi": {
+    "incoming": [
+      "index.html"
+    ],
+    "outgoing_pillars": [
+      "itad-kochi",
+      "data-destruction-kochi",
+      "computer-scrap-kochi"
+    ],
+    "outgoing_blogs": [
+      "Compliance & Legal",
+      "Environmental Impact"
+    ]
+  },
+  "itad-kochi": {
+    "incoming": [
+      "index.html"
+    ],
+    "outgoing_pillars": [
+      "data-destruction-kochi",
+      "laptop-buyback-kochi",
+      "battery-recycling-kochi"
+    ],
+    "outgoing_blogs": [
+      "Buyback Price Guides",
+      "Data Security"
+    ]
+  },
+  "data-destruction-kochi": {
+    "incoming": [
+      "index.html"
+    ],
+    "outgoing_pillars": [
+      "laptop-buyback-kochi",
+      "mobile-recycling-kochi",
+      "itad-kochi"
+    ],
+    "outgoing_blogs": [
+      "Local Kochi Hubs",
+      "ITAD Guides"
+    ]
+  },
+  "laptop-buyback-kochi": {
+    "incoming": [
+      "index.html"
+    ],
+    "outgoing_pillars": [
+      "mobile-recycling-kochi",
+      "corporate-ewaste-kochi",
+      "data-destruction-kochi"
+    ],
+    "outgoing_blogs": [
+      "Environmental Impact",
+      "Compliance & Legal"
+    ]
+  },
+  "mobile-recycling-kochi": {
+    "incoming": [
+      "index.html"
+    ],
+    "outgoing_pillars": [
+      "corporate-ewaste-kochi",
+      "industrial-ewaste-kochi",
+      "laptop-buyback-kochi"
+    ],
+    "outgoing_blogs": [
+      "Data Security",
+      "Buyback Price Guides"
+    ]
+  },
+  "corporate-ewaste-kochi": {
+    "incoming": [
+      "index.html"
+    ],
+    "outgoing_pillars": [
+      "industrial-ewaste-kochi",
+      "ewaste-compliance-kerala",
+      "mobile-recycling-kochi"
+    ],
+    "outgoing_blogs": [
+      "ITAD Guides",
+      "Local Kochi Hubs"
+    ]
+  },
+  "industrial-ewaste-kochi": {
+    "incoming": [
+      "index.html"
+    ],
+    "outgoing_pillars": [
+      "ewaste-compliance-kerala",
+      "free-ewaste-pickup-kochi",
+      "corporate-ewaste-kochi"
+    ],
+    "outgoing_blogs": [
+      "Compliance & Legal",
+      "Environmental Impact"
+    ]
+  },
+  "ewaste-compliance-kerala": {
+    "incoming": [
+      "index.html"
+    ],
+    "outgoing_pillars": [
+      "free-ewaste-pickup-kochi",
+      "computer-scrap-kochi",
+      "industrial-ewaste-kochi"
+    ],
+    "outgoing_blogs": [
+      "Buyback Price Guides",
+      "Data Security"
+    ]
+  },
+  "free-ewaste-pickup-kochi": {
+    "incoming": [
+      "index.html"
+    ],
+    "outgoing_pillars": [
+      "computer-scrap-kochi",
+      "battery-recycling-kochi",
+      "ewaste-compliance-kerala"
+    ],
+    "outgoing_blogs": [
+      "Local Kochi Hubs",
+      "ITAD Guides"
+    ]
+  }
+}

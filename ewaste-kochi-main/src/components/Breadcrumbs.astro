@@ -1,0 +1,40 @@
+---
+// src/components/Breadcrumbs.astro — With BreadcrumbList microdata
+interface Crumb { name: string; url: string; }
+interface Props { items: Crumb[]; }
+const { items } = Astro.props;
+---
+<nav aria-label="Breadcrumb" class="breadcrumbs-nav">
+  <div class="wrap">
+    <ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+      {items.map((crumb, i) => (
+        <li
+          class="bc-item"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
+        >
+          {i < items.length - 1 ? (
+            <a href={crumb.url} itemprop="item" class="bc-link">
+              <span itemprop="name">{crumb.name}</span>
+            </a>
+          ) : (
+            <span itemprop="name" class="bc-current">{crumb.name}</span>
+          )}
+          <meta itemprop="position" content={String(i + 1)} />
+          {i < items.length - 1 && <span class="bc-sep" aria-hidden="true">›</span>}
+        </li>
+      ))}
+    </ol>
+  </div>
+</nav>
+
+<style>
+.breadcrumbs-nav { padding: 14px 0; border-bottom: 1px solid var(--border); }
+.breadcrumbs { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
+.bc-item { display: flex; align-items: center; gap: 6px; font-size: .78rem; }
+.bc-link { color: var(--muted); transition: color .15s; }
+.bc-link:hover { color: var(--green); }
+.bc-sep { color: var(--border2); }
+.bc-current { color: var(--text); }
+</style>

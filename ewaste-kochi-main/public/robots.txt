@@ -1,0 +1,58 @@
+# ============================================
+# ROBOTS.TXT for EWaste Kochi
+# Optimized for maximum indexing + local SEO
+# ============================================
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /draft/
+Disallow: /tmp/
+Disallow: /backup/
+Crawl-delay: 0.3
+
+# ============================================
+# Googlebot – highest priority
+# ============================================
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0.1
+# Tell Google to index all location and service pages quickly
+
+# ============================================
+# Bing / Yahoo / DuckDuckGo
+# ============================================
+User-agent: bingbot
+Allow: /
+Crawl-delay: 0.5
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 0.5
+
+# ============================================
+# AI crawlers (allow – they help with visibility)
+# ============================================
+User-agent: GPTBot
+User-agent: Google-Extended
+User-agent: anthropic-ai
+User-agent: CCBot
+Allow: /
+Crawl-delay: 0.5
+
+# ============================================
+# Local SEO crawlers (social previews)
+# ============================================
+User-agent: FacebookBot
+User-agent: LinkedInBot
+User-agent: Twitterbot
+Allow: /
+
+# ============================================
+# Sitemaps – reference all
+# ============================================
+Sitemap: https://ewastekochi.com/sitemap-index.xml
+Sitemap: https://ewastekochi.com/sitemap-0.xml
+
+# Host directive (for Yandex)
+Host: https://ewastekochi.com

@@ -1,0 +1,68 @@
+---
+// src/pages/[...slug].astro
+import { getLocations, getServices, getIndustries, getCompliance, getTrading } from '../utils/dataLoader';
+import MainLayout from '../layouts/MainLayout.astro';
+import LocationTemplate from '../templates/Location.astro';
+import ServiceTemplate from '../templates/Service.astro';
+import IndustryTemplate from '../templates/Industry.astro';
+import ComplianceTemplate from '../templates/Compliance.astro';
+import TradingTemplate from '../templates/Trading.astro';
+
+export async function getStaticPaths() {
+  const locations = await getLocations();
+  const services = await getServices();
+  const industries = await getIndustries();
+  const compliance = await getCompliance();
+  const trading = await getTrading();
+
+  const locationPaths = locations.map((loc) => ({
+    params: { slug: `locations/${loc.slug}` },
+    props: { type: 'location', data: loc },
+  }));
+
+  const servicePaths = services.map((svc) => ({
+    params: { slug: `services/${svc.slug}` },
+    props: { type: 'service', data: svc },
+  }));
+
+  const industryPaths = industries.map((ind) => ({
+    params: { slug: `industries/${ind.slug}` },
+    props: { type: 'industry', data: ind },
+  }));
+
+  const compliancePaths = compliance.map((comp) => ({
+    params: { slug: `compliance/${comp.slug}` },
+    props: { type: 'compliance', data: comp },
+  }));
+
+  const tradingPaths = trading.map((tr) => ({
+    params: { slug: `trading/${tr.slug}` },
+    props: { type: 'trading', data: tr },
+  }));
+
+  return [
+    ...locationPaths,
+    ...servicePaths,
+    ...industryPaths,
+    ...compliancePaths,
+    ...tradingPaths,
+  ];
+}
+
+const { type, data } = Astro.props;
+
+const templates = {
+  location: LocationTemplate,
+  service: ServiceTemplate,
+  industry: IndustryTemplate,
+  compliance: ComplianceTemplate,
+  trading: TradingTemplate,
+};
+
+const Template = templates[type as keyof typeof templates];
+if (!Template) {
+  return Astro.redirect('/404');
+}
+---
+
+<Template data={data} />
