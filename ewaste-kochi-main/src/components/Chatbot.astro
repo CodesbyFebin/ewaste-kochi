@@ -1,0 +1,579 @@
+---
+// src/components/Chatbot.astro
+// Integrated EWasteKochi AI Chatbot system
+---
+
+<div id="ew-chat-root"></div>
+
+<style is:global>
+/* ── RESET ── */
+#ew-chat-root * { box-sizing:border-box; margin:0; padding:0; }
+#ew-chat-root { font-family:'DM Sans','Segoe UI',system-ui,sans-serif; }
+
+/* ── DESIGN TOKENS ── */
+#ew-chat-root {
+  --ew-bg:      #07100A;
+  --ew-panel:   #0F1C12;
+  --ew-surf:    #162019;
+  --ew-surf2:   #1E2D22;
+  --ew-border:  rgba(0,232,122,.15);
+  --ew-border2: rgba(0,232,122,.28);
+  --ew-green:   #00E87A;
+  --ew-green2:  #00C463;
+  --ew-lime:    #B4FF5C;
+  --ew-amber:   #F5A827;
+  --ew-red:     #FF4D6D;
+  --ew-white:   #F0F7F2;
+  --ew-text:    #A8C4AE;
+  --ew-muted:   #5A7A62;
+  --ew-shadow:  0 24px 64px rgba(0,0,0,.6), 0 0 0 1px rgba(0,232,122,.1);
+}
+
+/* ── LAUNCHER BUTTON ── */
+.ew-launcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.ew-launcher-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--ew-green);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 24px rgba(0,232,122,.35);
+  transition: all .25s cubic-bezier(.34,1.56,.64,1);
+  position: relative;
+  flex-shrink: 0;
+}
+.ew-launcher-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 32px rgba(0,232,122,.5);
+}
+.ew-launcher-btn svg { width:26px; height:26px; fill:var(--ew-bg); transition:transform .3s; }
+.ew-launcher-btn.open svg { transform:rotate(45deg); }
+
+.ew-notif {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--ew-red);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: ew-pulse 2s infinite;
+  border: 2px solid var(--ew-bg);
+}
+@keyframes ew-pulse { 0%,100%{box-shadow:0 0 0 0 rgba(255,77,109,.6);} 50%{box-shadow:0 0 0 6px rgba(255,77,109,0);} }
+
+.ew-tooltip {
+  background: var(--ew-panel);
+  border: 1px solid var(--ew-border2);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--ew-white);
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(0,0,0,.4);
+  animation: ew-fadein .3s ease;
+  position: relative;
+  max-width: 240px;
+  white-space: normal;
+  text-align: right;
+  line-height: 1.4;
+  display: none;
+}
+.ew-tooltip::after {
+  content:'';
+  position:absolute;
+  right:18px;
+  bottom:-6px;
+  width:10px; height:10px;
+  background:var(--ew-panel);
+  border-right:1px solid var(--ew-border2);
+  border-bottom:1px solid var(--ew-border2);
+  transform:rotate(45deg);
+}
+.ew-tooltip strong { color:var(--ew-green); display:block; margin-bottom:2px; font-size:13px; }
+
+/* ── CHAT WINDOW ── */
+.ew-window {
+  position: fixed;
+  bottom: 96px;
+  right: 24px;
+  width: 380px;
+  max-height: 580px;
+  border-radius: 16px;
+  background: var(--ew-panel);
+  border: 1px solid var(--ew-border2);
+  box-shadow: var(--ew-shadow);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(.92) translateY(16px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1), opacity .25s ease;
+}
+.ew-window.open {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.ew-header {
+  background: linear-gradient(135deg, #0A1A0D, #0F2214);
+  border-bottom: 1px solid var(--ew-border);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.ew-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--ew-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  position: relative;
+}
+.ew-online {
+  position: absolute;
+  bottom: 1px; right: 1px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--ew-green);
+  border: 2px solid var(--ew-panel);
+  box-shadow: 0 0 6px var(--ew-green);
+  animation: ew-pulse 2.5s infinite;
+}
+.ew-header-info { flex: 1; min-width: 0; }
+.ew-header-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ew-white);
+  line-height: 1.2;
+}
+.ew-header-status {
+  font-size: 11px;
+  color: var(--ew-green);
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.ew-header-status::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--ew-green);
+  display: inline-block;
+  animation: ew-pulse 2s infinite;
+}
+.ew-header-actions {
+  display: flex;
+  gap: 6px;
+}
+.ew-header-btn {
+  width: 30px; height: 30px;
+  border-radius: 6px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--ew-border);
+  color: var(--ew-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all .2s;
+  text-decoration: none;
+}
+.ew-header-btn:hover {
+  background: rgba(0,232,122,.1);
+  border-color: var(--ew-green);
+  color: var(--ew-green);
+}
+
+.ew-context-badge {
+  background: rgba(0,232,122,.06);
+  border-bottom: 1px solid var(--ew-border);
+  padding: 6px 16px;
+  font-size: 10.5px;
+  color: var(--ew-green);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.ew-context-badge span { color: var(--ew-muted); }
+
+.ew-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scroll-behavior: smooth;
+}
+.ew-messages::-webkit-scrollbar { width: 4px; }
+.ew-messages::-webkit-scrollbar-track { background: transparent; }
+.ew-messages::-webkit-scrollbar-thumb { background: var(--ew-surf2); border-radius: 2px; }
+
+.ew-msg {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  animation: ew-msgIn .3s ease;
+}
+@keyframes ew-msgIn {
+  from { opacity:0; transform:translateY(8px); }
+  to { opacity:1; transform:translateY(0); }
+}
+.ew-msg.user { flex-direction: row-reverse; }
+
+.ew-msg-avatar {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--ew-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+  align-self: flex-end;
+}
+.ew-msg.user .ew-msg-avatar { background: var(--ew-surf2); }
+
+.ew-bubble {
+  max-width: 78%;
+  padding: 10px 13px;
+  border-radius: 14px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  word-break: break-word;
+}
+.ew-msg.bot .ew-bubble {
+  background: var(--ew-surf);
+  border: 1px solid var(--ew-border);
+  color: var(--ew-text);
+  border-bottom-left-radius: 4px;
+}
+.ew-msg.user .ew-bubble {
+  background: var(--ew-green);
+  color: var(--ew-bg);
+  font-weight: 500;
+  border-bottom-right-radius: 4px;
+}
+.ew-bubble strong { color: var(--ew-white); font-weight: 700; }
+.ew-msg.user .ew-bubble strong { color: var(--ew-bg); }
+.ew-bubble .ew-highlight { color: var(--ew-green); font-weight: 600; }
+
+.ew-typing {
+  display: flex;
+  gap: 4px;
+  padding: 12px 14px;
+  background: var(--ew-surf);
+  border: 1px solid var(--ew-border);
+  border-radius: 14px;
+  border-bottom-left-radius: 4px;
+  width: fit-content;
+}
+.ew-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--ew-muted);
+  animation: ew-bounce .9s infinite;
+}
+.ew-dot:nth-child(2) { animation-delay: .15s; }
+.ew-dot:nth-child(3) { animation-delay: .30s; }
+@keyframes ew-bounce {
+  0%,80%,100% { transform:translateY(0); background:var(--ew-muted); }
+  40% { transform:translateY(-6px); background:var(--ew-green); }
+}
+
+.ew-quick-replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 14px 10px;
+}
+.ew-quick-btn {
+  padding: 6px 12px;
+  background: var(--ew-surf);
+  border: 1px solid var(--ew-border2);
+  border-radius: 20px;
+  color: var(--ew-text);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .2s;
+  white-space: nowrap;
+  font-family: inherit;
+}
+.ew-quick-btn:hover {
+  background: rgba(0,232,122,.1);
+  border-color: var(--ew-green);
+  color: var(--ew-green);
+  transform: translateY(-1px);
+}
+
+.ew-input-area {
+  border-top: 1px solid var(--ew-border);
+  padding: 10px 12px;
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  background: var(--ew-surf);
+  flex-shrink: 0;
+}
+.ew-input {
+  flex: 1;
+  background: var(--ew-bg);
+  border: 1px solid var(--ew-border);
+  border-radius: 10px;
+  padding: 9px 12px;
+  color: var(--ew-white);
+  font-size: 13.5px;
+  font-family: inherit;
+  resize: none;
+  min-height: 40px;
+  max-height: 100px;
+  overflow-y: auto;
+  line-height: 1.4;
+  transition: border-color .2s;
+}
+.ew-input:focus { outline: none; border-color: var(--ew-green2); }
+.ew-input::placeholder { color: var(--ew-muted); }
+.ew-send {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: var(--ew-green);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .2s;
+  flex-shrink: 0;
+}
+.ew-send:hover { background: var(--ew-lime); transform: scale(1.05); }
+.ew-send svg { width:16px; height:16px; fill:var(--ew-bg); }
+
+.ew-wa-cta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 13px;
+  background: rgba(37,211,102,.1);
+  border: 1px solid rgba(37,211,102,.25);
+  border-radius: 10px;
+  color: #25D366;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all .2s;
+  margin: 0 14px 10px;
+}
+
+.ew-lead-form {
+  padding: 14px;
+  background: var(--ew-surf);
+  border-top: 1px solid var(--ew-border);
+  display: none;
+}
+.ew-lead-form.show { display: block; }
+.ew-lead-form h4 { font-size: 13px; font-weight: 700; color: var(--ew-white); margin-bottom: 10px; }
+.ew-lead-row { display: flex; gap: 8px; margin-bottom: 8px; }
+.ew-lead-input { flex: 1; background: var(--ew-bg); border: 1px solid var(--ew-border); border-radius: 8px; padding: 8px 10px; color: var(--ew-white); font-size: 12.5px; }
+.ew-lead-submit { width: 100%; padding: 9px; background: var(--ew-green); border: none; border-radius: 8px; color: var(--ew-bg); font-size: 13px; font-weight: 700; cursor: pointer; }
+
+.ew-urgency {
+  background: rgba(245,168,39,.08);
+  border-bottom: 1px solid rgba(245,168,39,.2);
+  padding: 6px 14px;
+  font-size: 11px;
+  color: var(--ew-amber);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.ew-urgency::before { content: '⚡'; font-size: 12px; }
+
+@media(max-width:480px) {
+  .ew-window { width:calc(100vw - 20px); right:10px; bottom:84px; }
+  .ew-launcher { right:10px; bottom:16px; }
+}
+@keyframes ew-fadein { from{opacity:0;transform:translateY(6px);} to{opacity:1;transform:translateY(0);} }
+</style>
+
+<script is:inline>
+(function() {
+'use strict';
+
+const CONFIG = {
+  WA_NUMBER:    '917500555454',
+  PHONE:        '+91-7500-555-454',
+  SITE_NAME:    'EWasteKochi',
+  MODEL:        'claude-3-5-sonnet-20240620', // Defaulting to current stable
+  MAX_TOKENS:   300,
+  POPUP_DELAY:  4000,
+  SCROLL_DEPTH: 300,
+  LEAD_FORM_AFTER: 3,
+};
+
+const PILLARS = {
+  homepage: {
+    label: '🏠 General Enquiry',
+    systemPrompt: `You are the AI sales assistant for EWasteKochi, Kerala's #1 certified ITAD facility.
+    Visitor is on homepage. Identify if they are Selling (Individual) or Corporate (ITAD). 
+    Rules: Short responses, ₹ prices for Macbooks/Phones, NIST 800-88, WhatsApp funnel.`,
+    greeting: '👋 Hi! I\'m Kochi\'s e-waste AI assistant.\n\nAre you looking to **sell an old device** or need **corporate IT disposal**?',
+    quickReplies: ['💻 Sell Laptop', '🏢 Corporate ITAD', '🚛 Book Pickup'],
+    hook: '⚡ Same-day pickup available in Kochi today.',
+    waTemplate: 'Hi EWasteKochi, I need a quote for e-waste services.',
+  }
+};
+
+const PAGE_CONTEXT = 'homepage';
+const PILLAR = PILLARS[PAGE_CONTEXT] || PILLARS.homepage;
+
+let isOpen = false;
+let isStreaming = false;
+let msgCount = 0;
+let leadCaptured = false;
+let conversationHistory = [];
+
+window.buildChatDOM = function() {
+  const root = document.getElementById('ew-chat-root');
+  if (!root) return;
+
+  root.innerHTML = `
+  <div class="ew-launcher">
+    <div class="ew-tooltip" id="ewTooltip">
+      <strong>${PILLAR.hook}</strong>
+      Chat with our AI — answers in seconds
+    </div>
+    <button class="ew-launcher-btn" id="ewLauncherBtn" onclick="ewToggle()">
+      <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+      <div class="ew-notif" id="ewNotif">1</div>
+    </button>
+  </div>
+  <div class="ew-window" id="ewWindow">
+    <div class="ew-header">
+      <div class="ew-avatar">♻️<div class="ew-online"></div></div>
+      <div class="ew-header-info">
+        <div class="ew-header-name">EWasteKochi AI</div>
+        <div class="ew-header-status">Online now · Kochi</div>
+      </div>
+      <button class="ew-header-btn" onclick="ewToggle()">✕</button>
+    </div>
+    <div class="ew-context-badge">${PILLAR.label}</div>
+    <div class="ew-urgency">5,200+ devices processed · 4.9★ Google</div>
+    <div class="ew-messages" id="ewMessages"></div>
+    <div class="ew-quick-replies" id="ewQuickReplies"></div>
+    <a class="ew-wa-cta" id="ewWaCta" href="#" target="_blank" style="display:none;">
+      <span>Continue on WhatsApp →</span>
+    </a>
+    <div class="ew-input-area">
+      <textarea class="ew-input" id="ewInput" placeholder="Ask anything..." rows="1" onkeydown="ewKeyDown(event)"></textarea>
+      <button class="ew-send" onclick="ewSend()">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+  </div>`;
+};
+
+window.ewToggle = function() {
+    const win = document.getElementById('ewWindow');
+    const btn = document.getElementById('ewLauncherBtn');
+    isOpen = !isOpen;
+    if (isOpen) {
+        win.classList.add('open');
+        btn.classList.add('open');
+        document.getElementById('ewNotif').style.display = 'none';
+        document.getElementById('ewTooltip').style.display = 'none';
+        if (conversationHistory.length === 0) setTimeout(ewStart, 500);
+    } else {
+        win.classList.remove('open');
+        btn.classList.remove('open');
+    }
+};
+
+async function ewStart() {
+    ewAddBotMessage(PILLAR.greeting);
+    ewShowQuickReplies(PILLAR.quickReplies);
+}
+
+function ewAddBotMessage(text) {
+    const msgs = document.getElementById('ewMessages');
+    const div = document.createElement('div');
+    div.className = 'ew-msg bot';
+    div.innerHTML = `<div class="ew-bubble">${text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</div>`;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+}
+
+function ewShowQuickReplies(opts) {
+    const qr = document.getElementById('ewQuickReplies');
+    qr.innerHTML = '';
+    opts.forEach(o => {
+        const b = document.createElement('button');
+        b.className = 'ew-quick-btn';
+        b.textContent = o;
+        b.onclick = () => { ewAddUserMsg(o); qr.innerHTML = ''; };
+        qr.appendChild(b);
+    });
+}
+
+function ewAddUserMsg(text) {
+    const msgs = document.getElementById('ewMessages');
+    const div = document.createElement('div');
+    div.className = 'ew-msg user';
+    div.innerHTML = `<div class="ew-bubble">${text}</div>`;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+    conversationHistory.push({role:'user', content:text});
+    setTimeout(() => ewAddBotMessage("Our team will WhatsApp you with a quote soon! Most business laptops get ₹15-20% higher than Cashify."), 1000);
+}
+
+window.ewKeyDown = function(e) { if (e.key === 'Enter') { e.preventDefault(); ewSend(); } };
+window.ewSend = function() {
+    const i = document.getElementById('ewInput');
+    if (i.value) { ewAddUserMsg(i.value); i.value = ''; }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    window.buildChatDOM();
+    setTimeout(() => {
+        if (!isOpen) document.getElementById('ewTooltip').style.display = 'block';
+    }, CONFIG.POPUP_DELAY);
+});
+
+})();
+</script>
