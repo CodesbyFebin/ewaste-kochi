@@ -33,3 +33,5 @@ coverage/
 .env*.local
 ewastekochi/
 *.deb
+src/data/blogPosts.json
+src/data/megaContent.json

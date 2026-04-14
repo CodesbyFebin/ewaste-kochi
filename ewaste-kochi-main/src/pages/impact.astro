@@ -1,0 +1,304 @@
+---
+// src/pages/impact.astro — Recycling Impact Dashboard (Add-on Module)
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { impactStats } from '../data/impactStats.js';
+import { contact } from '../data/contact.js';
+
+const pageTitle = 'E-Waste Impact Dashboard | EWaste Kochi | Recycling Metrics';
+const pageDesc = 'Live recycling impact data from EWaste Kochi. 2,400+ tonnes collected, 53,800+ devices safely wiped, 8,640 tonnes CO₂ prevented. Certified KSPCB-authorized recycler.';
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.com/' },
+  { name: 'Impact Dashboard', url: 'https://ewastekochi.com/impact' },
+];
+
+const { totals, monthlyTrend, categoryBreakdown, certifications, sdgMappings } = impactStats;
+
+const impactSchema = {
+  '@type': 'Dataset',
+  name: 'EWaste Kochi Recycling Impact Metrics',
+  description: 'Cumulative e-waste recycling impact data for EWaste Kochi — tonnes collected, devices processed, CO₂ prevented, and material recovery.',
+  url: 'https://ewastekochi.com/impact',
+  creator: { '@type': 'Organization', name: 'EWaste Kochi' },
+  temporalCoverage: '2018/..',
+  spatialCoverage: 'Kerala, India',
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  schema={impactSchema}
+  breadcrumbs={breadcrumbs}
+  canonical="https://ewastekochi.com/impact"
+>
+  <Navbar currentPath="/impact" />
+
+  <main id="main-content">
+
+    <!-- HERO -->
+    <section class="impact-hero">
+      <div class="wrap">
+        <div class="text-center">
+          <div class="sec-eyebrow">Live Metrics · Updated Monthly</div>
+          <h1 class="sec-title" style="font-size:clamp(2.4rem,5vw,4rem)">
+            Our Recycling <em>Impact</em>
+          </h1>
+          <p class="sec-sub" style="margin:20px auto 0;font-size:1.05rem">
+            Every kilogram of e-waste we responsibly process prevents toxic leaching, recovers precious metals, and keeps Kerala's environment cleaner. Here's the data behind our promise.
+          </p>
+          <p class="last-updated">Last updated: <time datetime={impactStats.lastUpdated}>{impactStats.lastUpdated}</time> · <a href={contact.whatsappMessage} target="_blank" rel="noopener noreferrer">Request Full Report →</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEGA STATS GRID -->
+    <section class="section">
+      <div class="wrap">
+        <div class="mega-stats">
+          <div class="mstat mstat-hero" id="stat-tonnes">
+            <span class="mstat-icon">⚖️</span>
+            <span class="mstat-num counter" data-target="{totals.tonnesCollected}">{totals.tonnesCollected.toLocaleString('en-IN')}</span>
+            <span class="mstat-unit">Tonnes</span>
+            <span class="mstat-label">E-Waste Collected</span>
+            <span class="mstat-sub">Since 2018 · All Kerala</span>
+          </div>
+
+          <div class="mstat" id="stat-devices">
+            <span class="mstat-icon">💻</span>
+            <span class="mstat-num">{totals.devicesWiped.toLocaleString('en-IN')}+</span>
+            <span class="mstat-unit">Devices</span>
+            <span class="mstat-label">Securely Wiped</span>
+            <span class="mstat-sub">NIST 800-88 · Zero data leaks</span>
+          </div>
+
+          <div class="mstat" id="stat-co2">
+            <span class="mstat-icon">🌱</span>
+            <span class="mstat-num">{totals.co2SavedTonnes.toLocaleString('en-IN')}</span>
+            <span class="mstat-unit">Tonnes CO₂</span>
+            <span class="mstat-label">Emissions Prevented</span>
+            <span class="mstat-sub">vs. landfill / incineration</span>
+          </div>
+
+          <div class="mstat" id="stat-gold">
+            <span class="mstat-icon">⚡</span>
+            <span class="mstat-num">{(totals.goldRecoveredGrams / 1000).toFixed(1)}kg</span>
+            <span class="mstat-unit">Gold Recovered</span>
+            <span class="mstat-label">Urban Mining</span>
+            <span class="mstat-sub">{(totals.silvRecoveredGrams / 1000).toFixed(1)}kg silver also recovered</span>
+          </div>
+
+          <div class="mstat" id="stat-clients">
+            <span class="mstat-icon">🏢</span>
+            <span class="mstat-num">{totals.clientsServed.toLocaleString('en-IN')}+</span>
+            <span class="mstat-unit">Clients</span>
+            <span class="mstat-label">Businesses Served</span>
+            <span class="mstat-sub">Enterprise, SME & Government</span>
+          </div>
+
+          <div class="mstat" id="stat-zones">
+            <span class="mstat-icon">📍</span>
+            <span class="mstat-num">{totals.pickupZones}</span>
+            <span class="mstat-unit">Zones</span>
+            <span class="mstat-label">Active Pickup Areas</span>
+            <span class="mstat-sub">Across all of Kerala</span>
+          </div>
+
+          <div class="mstat mstat-full" id="stat-landfill">
+            <span class="mstat-icon">♻️</span>
+            <div>
+              <span class="mstat-num">{totals.zeroDumpRate}%</span>
+              <span class="mstat-unit"> Zero‑Landfill Rate</span>
+            </div>
+            <span class="mstat-label">Every gram processed · none landfilled · since 2018</span>
+            <div class="rate-bar" aria-label="100% zero landfill">
+              <div class="rate-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MONTHLY TREND CHART -->
+    <section class="section-alt">
+      <div class="wrap">
+        <div class="text-center" style="margin-bottom:56px">
+          <h2 class="sec-title">Monthly <em>Collection Trend</em></h2>
+          <p class="sec-sub">Tonnes collected per month for the last 6 months, showing steady growth.</p>
+        </div>
+
+        <div class="chart-wrap">
+          <div class="chart-bars" role="img" aria-label="Monthly e-waste collection chart">
+            {monthlyTrend.map((m, i) => {
+              const maxTonnes = Math.max(...monthlyTrend.map(x => x.tonnes));
+              const pct = Math.round((m.tonnes / maxTonnes) * 100);
+              return (
+                <div class="chart-col">
+                  <div class="chart-bar-wrap">
+                    <span class="chart-val">{m.tonnes}T</span>
+                    <div class="chart-bar" style={`height:${pct}%`} title={`${m.month}: ${m.tonnes} tonnes`}></div>
+                  </div>
+                  <span class="chart-label">{m.month.split(' ')[0]}</span>
+                  <span class="chart-sub">{m.devices.toLocaleString('en-IN')} devices</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORY BREAKDOWN -->
+    <section class="section">
+      <div class="wrap">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center">
+          <div>
+            <div class="sec-eyebrow">By Device Type</div>
+            <h2 class="sec-title">What We <em>Recycle</em></h2>
+            <p class="sec-sub">The breakdown of all electronic devices processed at our facility since 2018.</p>
+          </div>
+          <div class="cat-bars">
+            {categoryBreakdown.map(cat => (
+              <div class="cat-row">
+                <span class="cat-icon">{cat.icon}</span>
+                <div style="flex:1">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+                    <span class="cat-name">{cat.category}</span>
+                    <span class="cat-pct">{cat.percentage}%</span>
+                  </div>
+                  <div class="cat-bar-bg">
+                    <div class="cat-bar-fill" style={`width:${cat.percentage}%`}></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SDG GOALS -->
+    <section class="section-alt">
+      <div class="wrap">
+        <div class="text-center" style="margin-bottom:56px">
+          <h2 class="sec-title">UN <em>Sustainable Development</em> Goals</h2>
+          <p class="sec-sub">Our work directly contributes to global sustainability targets.</p>
+        </div>
+        <div class="sdg-grid">
+          {sdgMappings.map(sdg => (
+            <div class="sdg-card">
+              <div class="sdg-badge">{sdg.goal}</div>
+              <h3>{sdg.label}</h3>
+              <p>{sdg.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section class="section">
+      <div class="wrap">
+        <div class="text-center" style="margin-bottom:56px">
+          <h2 class="sec-title">Our <em>Certifications</em></h2>
+        </div>
+        <div class="cert-grid">
+          {certifications.map(cert => (
+            <div class="cert-card">
+              <span class="cert-check">✓</span>
+              <div>
+                <strong>{cert.name}</strong>
+                <span class="cert-id">{cert.id}</span>
+                <span class="cert-yr">Since {cert.issued}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="impact-cta text-center" style="margin-top:72px">
+          <h2 class="sec-title">Ready to <em>Add to These Numbers?</em></h2>
+          <p class="sec-sub" style="margin:16px auto 32px">Schedule a pickup today and your devices will count towards Kerala's green future.</p>
+          <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+            <a href="/pickup" class="btn btn-primary btn-lg">🚀 Schedule Free Pickup →</a>
+            <a href="/map" class="btn btn-outline btn-lg">📍 Find Drop-off Centers</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .impact-hero { padding: 100px 0 72px; background: radial-gradient(circle at 50% 60%, rgba(0,232,150,.06), transparent); border-bottom: 1px solid var(--border); }
+  .last-updated { font-size: .75rem; color: var(--muted); margin-top: 20px; }
+  .last-updated a { color: var(--green); text-decoration: underline; }
+
+  /* Mega Stats */
+  .mega-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .mstat { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px 28px; display: flex; flex-direction: column; gap: 4px; position: relative; overflow: hidden; transition: border-color .25s, transform .25s; }
+  .mstat:hover { border-color: rgba(0,232,150,.3); transform: translateY(-4px); }
+  .mstat::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 80% 20%, rgba(0,232,150,.04), transparent 60%); pointer-events: none; }
+  .mstat-hero { border-color: rgba(0,232,150,.25); grid-column: span 1; }
+  .mstat-full { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 24px; }
+  .mstat-full > div { display: flex; align-items: baseline; gap: 8px; }
+  .mstat-icon { font-size: 1.5rem; margin-bottom: 8px; }
+  .mstat-num { font-size: 2.4rem; font-weight: 800; color: var(--white); letter-spacing: -.04em; line-height: 1; }
+  .mstat-unit { font-size:.75rem; font-weight:800; color:var(--green); text-transform:uppercase; letter-spacing:.1em; }
+  .mstat-label { font-size: .9rem; font-weight: 700; color: var(--white); margin-top: 4px; }
+  .mstat-sub { font-size: .72rem; color: var(--muted); }
+  .rate-bar { height: 8px; background: var(--border); border-radius: 4px; width: 100%; max-width: 400px; overflow: hidden; }
+  .rate-fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--lime)); border-radius: 4px; transition: width 1.5s ease; }
+
+  /* Chart */
+  .chart-wrap { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 40px; }
+  .chart-bars { display: flex; align-items: flex-end; gap: 20px; height: 240px; }
+  .chart-col { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1; height: 100%; }
+  .chart-bar-wrap { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; flex: 1; width: 100%; }
+  .chart-val { font-size: .7rem; font-weight: 700; color: var(--green); margin-bottom: 4px; }
+  .chart-bar { width: 100%; max-width: 56px; background: linear-gradient(to top, var(--green3), var(--green)); border-radius: 6px 6px 0 0; transition: height .8s ease; min-height: 6px; }
+  .chart-label { font-size: .72rem; font-weight: 700; color: var(--white); }
+  .chart-sub { font-size: .65rem; color: var(--muted); text-align: center; }
+
+  /* Category bars */
+  .cat-bars { display: flex; flex-direction: column; gap: 16px; }
+  .cat-row { display: flex; align-items: center; gap: 14px; }
+  .cat-icon { font-size: 1.2rem; width: 28px; flex-shrink: 0; }
+  .cat-name { font-size: .82rem; color: var(--white); font-weight: 600; }
+  .cat-pct { font-size: .78rem; font-weight: 700; color: var(--green); }
+  .cat-bar-bg { height: 7px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .cat-bar-fill { height: 100%; background: linear-gradient(90deg, var(--green3), var(--green)); border-radius: 4px; }
+
+  /* SDG */
+  .sdg-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .sdg-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; }
+  .sdg-badge { display: inline-block; background: rgba(0,232,150,.1); color: var(--green); font-size: .7rem; font-weight: 800; letter-spacing: .12em; padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(0,232,150,.2); margin-bottom: 14px; }
+  .sdg-card h3 { font-size: .9rem; color: var(--white); margin-bottom: 8px; }
+  .sdg-card p { font-size: .78rem; color: var(--muted); line-height: 1.6; }
+
+  /* Certs */
+  .cert-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 800px; margin: 0 auto; }
+  .cert-card { background: var(--card); border: 1px solid rgba(0,232,150,.15); border-radius: var(--radius); padding: 24px; display: flex; align-items: flex-start; gap: 16px; }
+  .cert-check { width: 36px; height: 36px; background: rgba(0,232,150,.1); border: 1.5px solid rgba(0,232,150,.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--green); font-weight: 800; flex-shrink: 0; font-size: 1rem; }
+  .cert-card strong { display: block; font-size: .9rem; color: var(--white); margin-bottom: 4px; }
+  .cert-id, .cert-yr { display: block; font-size: .72rem; color: var(--muted); font-family: var(--mono); }
+
+  .impact-cta { padding-top: 40px; border-top: 1px solid var(--border); }
+
+  @media (max-width: 1024px) {
+    .mega-stats { grid-template-columns: repeat(2, 1fr); }
+    .sdg-grid { grid-template-columns: repeat(2, 1fr); }
+    section .wrap > div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .mega-stats { grid-template-columns: 1fr; }
+    .cert-grid { grid-template-columns: 1fr; }
+    .chart-bars { gap: 8px; }
+    .mstat-full { flex-direction: column; }
+    .sdg-grid { grid-template-columns: 1fr; }
+  }
+</style>

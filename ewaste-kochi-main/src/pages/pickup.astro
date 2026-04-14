@@ -1,0 +1,500 @@
+---
+// src/pages/pickup.astro — E-Waste Pickup Request System (Add-on Module)
+// Standalone page; no existing files modified
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { contact } from '../data/contact.js';
+import { services } from '../data/services.js';
+import { locations } from '../data/locations.js';
+
+const pageTitle = 'Schedule Free E-Waste Pickup Kochi | EWaste Kochi';
+const pageDesc = 'Book a free certified e-waste pickup in Kochi. Same-day collection from Infopark, Smart City & all of Ernakulam. KSPCB-compliant, Certificate of Destruction issued.';
+
+const pickupFaqs = [
+  { q: 'How quickly can you pick up?', a: 'Same-day pickup is available for bulk collections (10+ items) in Infopark, Smart City, and central Kochi. Standard bookings are fulfilled within 24–48 hours.' },
+  { q: 'Is the pickup really free?', a: 'Yes. Free pickup applies for 10 or more items in the Ernakulam district. For smaller quantities, contact us for logistics options.' },
+  { q: 'What documents will I receive?', a: 'Every corporate pickup comes with a signed Pickup Manifest and Certificate of Destruction for each data-bearing device — essential for ISO and RBI audits.' },
+  { q: 'Do you pick up from apartments?', a: 'Yes. For residential pickups of 5+ items in Kochi, we schedule a collection. WhatsApp us for the fastest response.' },
+];
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.com/' },
+  { name: 'Schedule Pickup', url: 'https://ewastekochi.com/pickup' },
+];
+
+const serviceOptions = services.map(s => s.name);
+const locationOptions = locations.slice(0, 30).map(l => l.name);
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  faqs={pickupFaqs}
+  breadcrumbs={breadcrumbs}
+  canonical="https://ewastekochi.com/pickup"
+>
+  <Navbar currentPath="/pickup" />
+
+  <main id="main-content">
+
+    <!-- HERO -->
+    <section class="pickup-hero">
+      <div class="wrap">
+        <div class="pickup-hero-inner">
+          <div class="pickup-hero-text">
+            <div class="sec-eyebrow">Free Collection · KSPCB Certified</div>
+            <h1 class="sec-title" style="font-size:clamp(2.4rem,5vw,3.8rem)">
+              Schedule Your<br><em>Free E-Waste Pickup</em>
+            </h1>
+            <p class="sec-sub" style="font-size:1.05rem;line-height:1.8;margin-top:20px">
+              Book certified e-waste collection in under 2 minutes. We serve all of Ernakulam district — from Infopark to Fort Kochi — with zero-landfill guarantee.
+            </p>
+            <div class="pickup-trust" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:28px">
+              <span class="badge badge-g">✓ KSPCB Authorized</span>
+              <span class="badge badge-b">✓ Certificate of Destruction</span>
+              <span class="badge badge-g">✓ Same‑Day Available</span>
+              <span class="badge badge-a">✓ Zero Landfill</span>
+            </div>
+          </div>
+
+          <div class="pickup-stats-col">
+            <div class="p-stat">
+              <span class="p-stat-n">569</span>
+              <span class="p-stat-l">Active pickup zones</span>
+            </div>
+            <div class="p-stat">
+              <span class="p-stat-n">2.4K+</span>
+              <span class="p-stat-l">Tonnes collected</span>
+            </div>
+            <div class="p-stat">
+              <span class="p-stat-n">24/7</span>
+              <span class="p-stat-l">Support available</span>
+            </div>
+            <a href={contact.whatsappMessage} target="_blank" rel="noopener noreferrer" class="btn btn-wa btn-lg" style="margin-top:10px;justify-content:center">
+              💬 Instant WhatsApp Booking
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TWO-COLUMN: FORM + SIDEBAR -->
+    <section class="section">
+      <div class="wrap">
+        <div class="pickup-layout">
+
+          <!-- BOOKING FORM -->
+          <div class="pickup-form-wrap">
+            <div class="form-header">
+              <span class="form-badge">📋 Pickup Request Form</span>
+              <h2 style="font-size:1.5rem;margin-top:12px">Book a Free Collection</h2>
+              <p style="font-size:.85rem;color:var(--muted);margin-top:8px">We'll confirm within 30 minutes on business days.</p>
+            </div>
+
+            <form id="pickup-form" class="pform" novalidate>
+              <!-- Step indicator -->
+              <div class="form-steps" aria-label="Form steps">
+                <div class="fstep active" id="step-ind-1">1 Contact</div>
+                <div class="fstep-sep"></div>
+                <div class="fstep" id="step-ind-2">2 Items</div>
+                <div class="fstep-sep"></div>
+                <div class="fstep" id="step-ind-3">3 Schedule</div>
+              </div>
+
+              <!-- STEP 1: Contact -->
+              <fieldset class="pform-step active" id="pstep-1">
+                <legend class="sr-only">Your Contact Information</legend>
+
+                <div class="form-row">
+                  <div class="fgroup">
+                    <label for="pf-name">Full Name *</label>
+                    <input id="pf-name" name="name" type="text" placeholder="Rahul Menon" required autocomplete="name">
+                  </div>
+                  <div class="fgroup">
+                    <label for="pf-phone">Phone / WhatsApp *</label>
+                    <input id="pf-phone" name="phone" type="tel" placeholder="+91 98765 43210" required autocomplete="tel">
+                  </div>
+                </div>
+
+                <div class="fgroup">
+                  <label for="pf-email">Email Address</label>
+                  <input id="pf-email" name="email" type="email" placeholder="you@company.com" autocomplete="email">
+                </div>
+
+                <div class="fgroup">
+                  <label for="pf-type">Collection Type *</label>
+                  <select id="pf-type" name="collectionType" required>
+                    <option value="">— Select —</option>
+                    <option value="corporate">Corporate / IT Department</option>
+                    <option value="startup">Startup / SME</option>
+                    <option value="datacenter">Data Centre Decommission</option>
+                    <option value="residential">Residential / Home</option>
+                    <option value="bulk">Bulk / Industrial</option>
+                    <option value="govt">Government / PSU</option>
+                  </select>
+                </div>
+
+                <div class="fgroup">
+                  <label for="pf-company">Company / Organisation</label>
+                  <input id="pf-company" name="company" type="text" placeholder="Infosys Kochi Campus" autocomplete="organization">
+                </div>
+
+                <button type="button" class="btn btn-primary btn-full" id="next-1" onclick="nextStep(1)">
+                  Continue to Items →
+                </button>
+              </fieldset>
+
+              <!-- STEP 2: Items -->
+              <fieldset class="pform-step" id="pstep-2">
+                <legend class="sr-only">Items for Collection</legend>
+
+                <div class="items-grid">
+                  {[
+                    { icon: '💻', label: 'Laptops', id: 'item-laptops' },
+                    { icon: '🖥️', label: 'Desktops', id: 'item-desktops' },
+                    { icon: '📱', label: 'Mobiles', id: 'item-mobiles' },
+                    { icon: '🖨️', label: 'Printers', id: 'item-printers' },
+                    { icon: '📺', label: 'Monitors / TVs', id: 'item-monitors' },
+                    { icon: '🔋', label: 'Batteries / UPS', id: 'item-batteries' },
+                    { icon: '🗄️', label: 'Servers', id: 'item-servers' },
+                    { icon: '🌐', label: 'Networking Gear', id: 'item-networking' },
+                    { icon: '📀', label: 'Hard Drives', id: 'item-drives' },
+                    { icon: '🔌', label: 'Cables & Adapters', id: 'item-cables' },
+                    { icon: '❄️', label: 'ACs / Fridges', id: 'item-appliances' },
+                    { icon: '📦', label: 'Other Electronics', id: 'item-other' },
+                  ].map(item => (
+                    <label class="item-chip" for={item.id}>
+                      <input type="checkbox" id={item.id} name="items" value={item.label}>
+                      <span>{item.icon}</span>
+                      <span>{item.label}</span>
+                    </label>
+                  ))}
+                </div>
+
+                <div class="fgroup" style="margin-top:20px">
+                  <label for="pf-qty">Approx. Total Quantity *</label>
+                  <select id="pf-qty" name="quantity" required>
+                    <option value="">— Select —</option>
+                    <option value="1-9">1–9 items (nominal charge may apply)</option>
+                    <option value="10-25">10–25 items (free pickup)</option>
+                    <option value="26-100">26–100 items (free pickup, priority)</option>
+                    <option value="101-500">101–500 items (dedicated team)</option>
+                    <option value="500+">500+ items (enterprise project)</option>
+                  </select>
+                </div>
+
+                <div class="fgroup">
+                  <label for="pf-data">Data Destruction Required?</label>
+                  <select id="pf-data" name="dataDestruction">
+                    <option value="yes-cert">Yes — with Certificate of Destruction</option>
+                    <option value="yes-no-cert">Yes — no certificate needed</option>
+                    <option value="no">No — non-data-bearing items only</option>
+                    <option value="unknown">Not sure, please advise</option>
+                  </select>
+                </div>
+
+                <div style="display:flex;gap:12px;margin-top:8px">
+                  <button type="button" class="btn btn-outline" onclick="prevStep(2)">← Back</button>
+                  <button type="button" class="btn btn-primary" style="flex:1" id="next-2" onclick="nextStep(2)">
+                    Continue to Schedule →
+                  </button>
+                </div>
+              </fieldset>
+
+              <!-- STEP 3: Schedule -->
+              <fieldset class="pform-step" id="pstep-3">
+                <legend class="sr-only">Pickup Schedule and Address</legend>
+
+                <div class="fgroup">
+                  <label for="pf-area">Pickup Area / District *</label>
+                  <select id="pf-area" name="area" required>
+                    <option value="">— Select area —</option>
+                    {locationOptions.map(loc => (
+                      <option value={loc}>{loc}</option>
+                    ))}
+                    <option value="other">Other (specify in address)</option>
+                  </select>
+                </div>
+
+                <div class="fgroup">
+                  <label for="pf-address">Full Pickup Address *</label>
+                  <textarea id="pf-address" name="address" rows="3" placeholder="Building name, floor, street, landmark, pin" required></textarea>
+                </div>
+
+                <div class="form-row">
+                  <div class="fgroup">
+                    <label for="pf-date">Preferred Date *</label>
+                    <input id="pf-date" name="preferredDate" type="date" required min="">
+                  </div>
+                  <div class="fgroup">
+                    <label for="pf-time">Preferred Time</label>
+                    <select id="pf-time" name="preferredTime">
+                      <option value="morning">Morning (9 AM – 12 PM)</option>
+                      <option value="afternoon">Afternoon (12 PM – 4 PM)</option>
+                      <option value="evening">Evening (4 PM – 7 PM)</option>
+                      <option value="flexible">I'm flexible — anytime</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="fgroup">
+                  <label for="pf-notes">Additional Notes</label>
+                  <textarea id="pf-notes" name="notes" rows="2" placeholder="Access instructions, contact at site, special handling needs…"></textarea>
+                </div>
+
+                <!-- Privacy -->
+                <label class="privacy-check">
+                  <input type="checkbox" id="pf-consent" name="consent" required>
+                  <span>I agree to EWaste Kochi's <a href="/privacy-policy" target="_blank">Privacy Policy</a> and consent to be contacted regarding this pickup request.</span>
+                </label>
+
+                <div style="display:flex;gap:12px;margin-top:8px">
+                  <button type="button" class="btn btn-outline" onclick="prevStep(3)">← Back</button>
+                  <button type="submit" class="btn btn-primary" style="flex:1" id="submit-btn">
+                    🚀 Confirm Pickup Request
+                  </button>
+                </div>
+              </fieldset>
+
+              <!-- SUCCESS STATE -->
+              <div id="pform-success" style="display:none" class="success-state" role="alert" aria-live="assertive">
+                <div class="success-icon">✅</div>
+                <h3>Pickup Request Confirmed!</h3>
+                <p>Our team will WhatsApp you within 30 minutes to confirm the slot. Check <a href={contact.whatsappMessage} target="_blank" rel="noopener noreferrer">WhatsApp</a> for updates.</p>
+                <a href="/impact" class="btn btn-outline btn-sm" style="margin-top:16px">View Our Impact Dashboard →</a>
+              </div>
+            </form>
+          </div>
+
+          <!-- SIDEBAR -->
+          <aside class="pickup-sidebar">
+            <div class="sidebar-box">
+              <h3>⚡ Instant WhatsApp Booking</h3>
+              <p>Skip the form — send us a WhatsApp message now for the fastest confirmation.</p>
+              <a href={contact.whatsappMessage} target="_blank" rel="noopener noreferrer" class="btn btn-wa btn-full" style="margin-top:14px">
+                💬 Chat on WhatsApp
+              </a>
+            </div>
+
+            <div class="sidebar-box">
+              <h3>📞 Call Us Directly</h3>
+              <p>Talk to our pickup coordinators 24 hours a day, 7 days a week.</p>
+              <a href={contact.phoneLink} class="btn btn-outline btn-full" style="margin-top:14px">
+                📞 {contact.phoneDisplay}
+              </a>
+            </div>
+
+            <div class="sidebar-box process-box">
+              <h3>How It Works</h3>
+              <ol class="process-list">
+                <li>
+                  <span class="proc-num">1</span>
+                  <div>
+                    <strong>Submit Request</strong>
+                    <p>Fill the form or WhatsApp us your requirements.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="proc-num">2</span>
+                  <div>
+                    <strong>Confirm Slot</strong>
+                    <p>Our coordinator confirms date and time within 30 min.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="proc-num">3</span>
+                  <div>
+                    <strong>We Collect</strong>
+                    <p>Certified team arrives with manifest and packing materials.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="proc-num">4</span>
+                  <div>
+                    <strong>Certificate Issued</strong>
+                    <p>Certificate of Destruction emailed within 24 hrs of processing.</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+
+            <div class="sidebar-box">
+              <h4 style="font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:12px">Quick Links</h4>
+              <nav style="display:flex;flex-direction:column;gap:6px">
+                <a href="/impact" class="ql-link">📊 View Impact Dashboard →</a>
+                <a href="/map" class="ql-link">📍 Find Drop-off Centers →</a>
+                <a href="/services" class="ql-link">🔧 All Services →</a>
+                <a href="/blog" class="ql-link">📰 E-Waste Blog →</a>
+              </nav>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section-alt">
+      <div class="wrap">
+        <div class="text-center" style="margin-bottom:48px">
+          <h2 class="sec-title">Pickup <em>FAQs</em></h2>
+        </div>
+        <div class="faq-list">
+          {pickupFaqs.map((f, i) => (
+            <div class="faq-item">
+              <button class="faq-q" aria-expanded="false">
+                <span class="faq-qt">{f.q}</span>
+                <span class="faq-ic" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-a" aria-hidden="true">
+                <p class="faq-at">{f.a}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .pickup-hero { padding: 100px 0 80px; background: radial-gradient(circle at 60% 50%, rgba(0,232,150,.07), transparent), var(--bg); border-bottom: 1px solid var(--border); }
+  .pickup-hero-inner { display: grid; grid-template-columns: 1.4fr 0.6fr; gap: 60px; align-items: center; }
+  .pickup-stats-col { display: flex; flex-direction: column; gap: 20px; }
+  .p-stat { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; }
+  .p-stat-n { display: block; font-size: 2rem; font-weight: 800; color: var(--white); letter-spacing: -.03em; }
+  .p-stat-l { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
+
+  /* Layout */
+  .pickup-layout { display: grid; grid-template-columns: 1fr 320px; gap: 48px; align-items: flex-start; }
+
+  /* Form */
+  .pickup-form-wrap { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .form-header { padding: 32px 36px 24px; border-bottom: 1px solid var(--border); }
+  .form-badge { background: rgba(0,232,150,.09); color: var(--green); font-size: .72rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(0,232,150,.18); }
+  .pform { padding: 28px 36px 36px; }
+  .form-steps { display: flex; align-items: center; gap: 0; margin-bottom: 28px; }
+  .fstep { font-size: .72rem; font-weight: 700; color: var(--muted); padding: 6px 14px; border-radius: 20px; transition: all .2s; }
+  .fstep.active { background: rgba(0,232,150,.1); color: var(--green); border: 1px solid rgba(0,232,150,.2); }
+  .fstep-sep { flex: 1; height: 1px; background: var(--border); }
+
+  .pform-step { border: none; padding: 0; display: none; }
+  .pform-step.active { display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+  .fgroup { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+  .fgroup label { font-size: .78rem; font-weight: 700; color: var(--white); letter-spacing: .01em; }
+  .fgroup input, .fgroup select, .fgroup textarea { background: var(--card2); border: 1.5px solid var(--border2); border-radius: var(--radius); color: var(--white); font-family: var(--font); font-size: .88rem; padding: 12px 14px; outline: none; transition: border-color .2s; width: 100%; resize: vertical; }
+  .fgroup input:focus, .fgroup select:focus, .fgroup textarea:focus { border-color: rgba(0,232,150,.5); }
+  .fgroup input::placeholder, .fgroup textarea::placeholder { color: var(--muted); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  /* Item chips */
+  .items-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 8px; }
+  .item-chip { display: flex; flex-direction: column; align-items: center; gap: 6px; background: var(--card2); border: 1.5px solid var(--border2); border-radius: var(--radius); padding: 14px 8px; cursor: pointer; font-size: .72rem; font-weight: 600; color: var(--muted); text-align: center; transition: all .2s; user-select: none; }
+  .item-chip input { position: absolute; opacity: 0; pointer-events: none; }
+  .item-chip span:first-of-type { font-size: 1.5rem; }
+  .item-chip:has(input:checked) { border-color: var(--green); background: rgba(0,232,150,.07); color: var(--green); }
+
+  .btn-full { width: 100%; justify-content: center; }
+  .privacy-check { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 18px; cursor: pointer; }
+  .privacy-check input { flex-shrink: 0; margin-top: 3px; accent-color: var(--green); }
+  .privacy-check span { font-size: .78rem; color: var(--muted); line-height: 1.5; }
+  .privacy-check a { color: var(--green); text-decoration: underline; }
+
+  .success-state { text-align: center; padding: 40px; }
+  .success-icon { font-size: 3rem; margin-bottom: 16px; }
+  .success-state h3 { color: var(--white); font-size: 1.5rem; margin-bottom: 12px; }
+  .success-state p { color: var(--text); font-size: .9rem; line-height: 1.7; }
+  .success-state a { color: var(--green); text-decoration: underline; }
+
+  /* Sidebar */
+  .pickup-sidebar { display: flex; flex-direction: column; gap: 20px; position: sticky; top: 88px; }
+  .sidebar-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+  .sidebar-box h3 { font-size: 1rem; margin-bottom: 10px; color: var(--white); }
+  .sidebar-box p { font-size: .82rem; color: var(--muted); line-height: 1.65; }
+  .process-list { list-style: none; display: flex; flex-direction: column; gap: 18px; margin-top: 16px; }
+  .process-list li { display: flex; align-items: flex-start; gap: 14px; }
+  .proc-num { width: 28px; height: 28px; background: rgba(0,232,150,.1); border: 1.5px solid rgba(0,232,150,.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 800; color: var(--green); flex-shrink: 0; }
+  .process-list strong { display: block; font-size: .88rem; color: var(--white); margin-bottom: 3px; }
+  .process-list p { font-size: .78rem; color: var(--muted); margin: 0; }
+  .ql-link { font-size: .82rem; color: var(--muted); padding: 8px 12px; border-radius: 8px; transition: all .2s; display: block; }
+  .ql-link:hover { color: var(--green); background: rgba(0,232,150,.05); }
+
+  @media (max-width: 1024px) {
+    .pickup-layout { grid-template-columns: 1fr; }
+    .pickup-sidebar { position: static; }
+    .pickup-hero-inner { grid-template-columns: 1fr; }
+    .pickup-stats-col { flex-direction: row; flex-wrap: wrap; }
+    .p-stat { flex: 1; min-width: 120px; }
+  }
+  @media (max-width: 640px) {
+    .pform { padding: 20px; }
+    .form-header { padding: 24px 20px; }
+    .form-row { grid-template-columns: 1fr; }
+    .items-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+<script>
+  // Set minimum date to today
+  const dateInput = document.getElementById('pf-date') as HTMLInputElement;
+  if (dateInput) {
+    dateInput.min = new Date().toISOString().split('T')[0];
+    dateInput.value = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+  }
+
+  // Multi-step navigation
+  window.nextStep = function(currentStep: number) {
+    const step = document.getElementById(`pstep-${currentStep}`);
+    const inputs = step ? step.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input[required],select[required],textarea[required]') : [];
+    let valid = true;
+    inputs.forEach(inp => {
+      if (!inp.value.trim()) {
+        inp.style.borderColor = 'var(--red)';
+        valid = false;
+      } else {
+        inp.style.borderColor = '';
+      }
+    });
+    if (!valid) return;
+
+    step?.classList.remove('active');
+    document.getElementById(`pstep-${currentStep + 1}`)?.classList.add('active');
+    document.getElementById(`step-ind-${currentStep}`)?.classList.remove('active');
+    document.getElementById(`step-ind-${currentStep + 1}`)?.classList.add('active');
+    window.scrollTo({ top: (document.getElementById('pickup-form')?.getBoundingClientRect().top ?? 0) + window.scrollY - 100, behavior: 'smooth' });
+  };
+
+  window.prevStep = function(currentStep: number) {
+    document.getElementById(`pstep-${currentStep}`)?.classList.remove('active');
+    document.getElementById(`pstep-${currentStep - 1}`)?.classList.add('active');
+    document.getElementById(`step-ind-${currentStep}`)?.classList.remove('active');
+    document.getElementById(`step-ind-${currentStep - 1}`)?.classList.add('active');
+  };
+
+  // Form submission — sends to WhatsApp as fallback (no backend yet)
+  const form = document.getElementById('pickup-form');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form as HTMLFormElement);
+    const name = data.get('name') || '';
+    const phone = data.get('phone') || '';
+    const area  = data.get('area') || '';
+    const qty   = data.get('quantity') || '';
+    const items = data.getAll('items').join(', ') || 'General e-waste';
+    const date  = data.get('preferredDate') || '';
+    const msg   = `Hi, I would like to schedule an e-waste pickup.\n\nName: ${name}\nPhone: ${phone}\nArea: ${area}\nDate: ${date}\nItems: ${items}\nQuantity: ${qty}`;
+    const waUrl = `https://wa.me/917500555454?text=${encodeURIComponent(msg)}`;
+
+    // Show success then redirect to WhatsApp
+    const form3 = document.getElementById('pstep-3');
+    if (form3) form3.style.display = 'none';
+    const success = document.getElementById('pform-success');
+    if (success) success.style.display = 'block';
+    setTimeout(() => { window.open(waUrl, '_blank'); }, 600);
+  });
+</script>

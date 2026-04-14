@@ -1,0 +1,311 @@
+---
+// src/pages/search.astro — Client-side full-text search (Add-on Module)
+// Reads ?q= param; searches blog titles, excerpts, services, locations client-side
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import SearchBar from '../components/SearchBar.astro';
+import { services } from '../data/services.js';
+import { locations } from '../data/locations.js';
+import { blogCategories } from '../data/blogs.js';
+
+// Build a lightweight search index at build time — titles + excerpts only
+// (We avoid importing the massive blogPosts JSON directly here to keep bundle small;
+//  instead we build a minimal index from blog metadata injected as JSON)
+
+import part1 from '../data/blogPosts_part1.json';
+import part2 from '../data/blogPosts_part2.json';
+import part3 from '../data/blogPosts_part3.json';
+
+// Use first 3 parts (~3k posts) as search-index seed — enough for UX
+const blogIndex = [...part1, ...part2, ...part3].map(b => ({
+  type: 'blog',
+  title: b.title,
+  excerpt: b.excerpt?.slice(0, 140) ?? '',
+  url: `/blog/${b.slug}`,
+  category: b.category ?? '',
+  date: b.date ?? '',
+}));
+
+const serviceIndex = services.map(s => ({
+  type: 'service',
+  title: s.name,
+  excerpt: s.tagline ?? s.description?.slice(0, 140) ?? '',
+  url: `/services/${s.slug}`,
+  category: 'service',
+  date: '',
+}));
+
+const locationIndex = locations.slice(0, 100).map(l => ({
+  type: 'location',
+  title: `E-Waste Services in ${l.name}`,
+  excerpt: `Certified e-waste pickup and recycling in ${l.name}, Kerala.`,
+  url: `/locations/${l.slug}`,
+  category: 'location',
+  date: '',
+}));
+
+// Combine into one search index (injected to client via JSON)
+const searchIndex = [...serviceIndex, ...locationIndex, ...blogIndex];
+
+const pageTitle = 'Search | EWaste Kochi';
+const pageDesc = 'Search blog posts, services, and locations across EWaste Kochi — Kerala\'s certified e-waste recycling authority.';
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  noIndex={false}
+  breadcrumbs={[{ name: 'Home', url: 'https://ewastekochi.com/' }, { name: 'Search', url: 'https://ewastekochi.com/search' }]}
+>
+  <Navbar currentPath="/search" />
+
+  <main id="main-content">
+    <section class="search-hero">
+      <div class="wrap">
+        <div class="text-center" style="margin-bottom:40px">
+          <div class="sec-eyebrow">Search Everything</div>
+          <h1 class="sec-title">Find What You <em>Need</em></h1>
+          <p class="sec-sub" style="margin:16px auto 0">
+            Search 10,000+ blog posts, all services, and every location in Kerala.
+          </p>
+        </div>
+        <div style="max-width:640px;margin:0 auto">
+          <SearchBar id="main-search" redirectToPage={false} placeholder="Search blog posts, services, locations…" />
+        </div>
+        <div class="search-shortcuts" role="navigation" aria-label="Quick category shortcuts">
+          <span class="sc-label">Quick:</span>
+          {['ITAD', 'Laptop recycling', 'Data destruction', 'Free pickup', 'Battery disposal', 'Infopark'].map(term => (
+            <button class="sc-chip" data-query={term}>{term}</button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <!-- Stats bar -->
+        <div class="search-stats-bar" id="search-stats" aria-live="polite" aria-atomic="true">
+          <span id="results-count"></span>
+          <div class="result-filters" id="result-filters" style="display:none">
+            <button class="rf-btn active" data-filter="all">All</button>
+            <button class="rf-btn" data-filter="blog">Blog</button>
+            <button class="rf-btn" data-filter="service">Services</button>
+            <button class="rf-btn" data-filter="location">Locations</button>
+          </div>
+        </div>
+
+        <!-- Results grid -->
+        <div id="search-results" class="results-grid" role="list" aria-label="Search results"></div>
+
+        <!-- Empty state -->
+        <div id="search-empty" class="search-empty" style="display:none" aria-live="polite">
+          <div class="empty-icon">🔍</div>
+          <h3>No results found</h3>
+          <p id="search-empty-msg">Try a different keyword or browse our categories below.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:24px">
+            <a href="/blog" class="btn btn-outline">Browse Blog →</a>
+            <a href="/services" class="btn btn-outline">Browse Services →</a>
+            <a href="/locations" class="btn btn-outline">Browse Locations →</a>
+            <a href="/pickup" class="btn btn-primary">Schedule Pickup →</a>
+          </div>
+        </div>
+
+        <!-- Initial state (no query) -->
+        <div id="search-initial" class="search-initial">
+          <h2 class="sec-title" style="font-size:1.6rem;margin-bottom:32px">Browse by <em>Category</em></h2>
+          <div class="browse-grid">
+            <a href="/blog" class="browse-card">
+              <span class="browse-icon">📰</span>
+              <strong>Blog &amp; Guides</strong>
+              <span>10,000+ articles on e-waste, ITAD &amp; recycling</span>
+            </a>
+            <a href="/services" class="browse-card">
+              <span class="browse-icon">🔧</span>
+              <strong>All Services</strong>
+              <span>E-waste recycling, ITAD, data destruction &amp; more</span>
+            </a>
+            <a href="/locations" class="browse-card">
+              <span class="browse-icon">📍</span>
+              <strong>Locations</strong>
+              <span>569 service zones across Kerala</span>
+            </a>
+            <a href="/impact" class="browse-card">
+              <span class="browse-icon">📊</span>
+              <strong>Impact Dashboard</strong>
+              <span>Our recycling metrics and certifications</span>
+            </a>
+            <a href="/map" class="browse-card">
+              <span class="browse-icon">🗺️</span>
+              <strong>Drop-off Map</strong>
+              <span>8 certified collection centers in Kochi</span>
+            </a>
+            <a href="/pickup" class="browse-card">
+              <span class="browse-icon">🚀</span>
+              <strong>Schedule Pickup</strong>
+              <span>Free bulk collection — book in 2 minutes</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<!-- Inject search index to client via script tag -->
+<script define:vars={{ searchIndex }}>
+  window.__SEARCH_INDEX = searchIndex;
+</script>
+
+<script>
+  const INDEX = (window as any).__SEARCH_INDEX || [];
+  let activeFilter = 'all';
+  let lastQuery = '';
+
+  function highlight(text, query) {
+    if (!query) return text;
+    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+  }
+
+  function search(query) {
+    const q = query.trim().toLowerCase();
+    lastQuery = q;
+
+    const statsEl = document.getElementById('results-count');
+    const resultsEl = document.getElementById('search-results');
+    const emptyEl = document.getElementById('search-empty');
+    const emptyMsg = document.getElementById('search-empty-msg');
+    const initialEl = document.getElementById('search-initial');
+    const filtersEl = document.getElementById('result-filters');
+
+    if (!q) {
+      if (initialEl) initialEl.style.display = '';
+      if (resultsEl) resultsEl.innerHTML = '';
+      if (emptyEl) emptyEl.style.display = 'none';
+      if (statsEl) statsEl.textContent = '';
+      if (filtersEl) filtersEl.style.display = 'none';
+      return;
+    }
+
+    if (initialEl) initialEl.style.display = 'none';
+
+    const words = q.split(/\s+/);
+    const results = INDEX.filter(item => {
+      const haystack = `${item.title} ${item.excerpt} ${item.category}`.toLowerCase();
+      return words.every(w => haystack.includes(w));
+    });
+
+    const filtered = activeFilter === 'all' ? results : results.filter(r => r.type === activeFilter);
+
+    if (statsEl) {
+      statsEl.innerHTML = filtered.length > 0
+        ? `<span class="rc-count">${filtered.length.toLocaleString('en-IN')}</span> results for "<em>${q}</em>"`
+        : '';
+    }
+    if (filtersEl) filtersEl.style.display = results.length > 0 ? 'flex' : 'none';
+
+    if (filtered.length === 0) {
+      if (resultsEl) resultsEl.innerHTML = '';
+      if (emptyEl) {
+        emptyEl.style.display = '';
+        if (emptyMsg) emptyMsg.textContent = results.length > 0
+          ? `No ${activeFilter} results for "${q}". Try switching category above.`
+          : `No results for "${q}". Try a broader term.`;
+      }
+      return;
+    }
+
+    if (emptyEl) emptyEl.style.display = 'none';
+    const typeLabel = { blog: '📰 Blog', service: '🔧 Service', location: '📍 Location' };
+
+    if (resultsEl) {
+      resultsEl.innerHTML = filtered.slice(0, 48).map(item => `
+        <a href="${item.url}" class="result-card" role="listitem">
+          <span class="rc-type">${typeLabel[item.type] || item.type}</span>
+          <h3 class="rc-title">${highlight(item.title, q)}</h3>
+          <p class="rc-excerpt">${highlight(item.excerpt, q)}</p>
+          ${item.date ? `<span class="rc-date">${item.date}</span>` : ''}
+        </a>
+      `).join('');
+    }
+  }
+
+  // Hook up search input
+  const input = document.getElementById('main-search') as HTMLInputElement;
+  const form = document.getElementById('main-search-form') as HTMLFormElement;
+
+  // Read initial ?q= param
+  const urlQ = new URLSearchParams(window.location.search).get('q') || '';
+  if (urlQ && input) {
+    input.value = urlQ;
+    search(urlQ);
+  }
+
+  input?.addEventListener('input', () => {
+    search(input.value);
+    history.replaceState({}, '', input.value ? `?q=${encodeURIComponent(input.value)}` : '/search');
+  });
+
+  form?.addEventListener('submit', (e) => { e.preventDefault(); search(input?.value || ''); });
+
+  // Shortcut chips
+  document.querySelectorAll('.sc-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const query = (chip as HTMLElement).dataset.query || '';
+      if (input) input.value = query;
+      search(query);
+    });
+  });
+
+  // Filter buttons
+  document.querySelectorAll<HTMLElement>('.rf-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeFilter = btn.dataset.filter || 'all';
+      document.querySelectorAll('.rf-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      search(lastQuery);
+    });
+  });
+</script>
+
+<style>
+  .search-hero { padding: 100px 0 72px; border-bottom: 1px solid var(--border); background: radial-gradient(circle at 50% 40%, rgba(0,232,150,.06), transparent); }
+  .search-shortcuts { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 20px; justify-content: center; }
+  .sc-label { font-size: .72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
+  .sc-chip { background: var(--card); border: 1.5px solid var(--border2); border-radius: 20px; color: var(--muted); font-family: var(--font); font-size: .78rem; font-weight: 600; padding: 6px 14px; cursor: pointer; transition: all .2s; }
+  .sc-chip:hover { border-color: var(--green); color: var(--green); background: rgba(0,232,150,.05); }
+
+  .search-stats-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; min-height: 40px; margin-bottom: 28px; font-size: .88rem; color: var(--muted); }
+  .search-stats-bar em { color: var(--white); font-style: normal; }
+  .rc-count { color: var(--green); font-weight: 800; font-size: 1rem; }
+  .result-filters { display: flex; gap: 6px; }
+  .rf-btn { background: var(--card); border: 1.5px solid var(--border2); border-radius: 20px; color: var(--muted); font-family: var(--font); font-size: .75rem; font-weight: 700; padding: 5px 14px; cursor: pointer; transition: all .2s; }
+  .rf-btn.active { background: rgba(0,232,150,.1); border-color: var(--green); color: var(--green); }
+
+  .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .result-card { background: var(--card); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 22px; display: flex; flex-direction: column; gap: 6px; transition: all .2s; }
+  .result-card:hover { border-color: rgba(0,232,150,.3); transform: translateY(-2px); }
+  .rc-type { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+  .rc-title { font-size: .92rem; color: var(--white); font-weight: 700; line-height: 1.3; }
+  .rc-excerpt { font-size: .78rem; color: var(--muted); line-height: 1.6; flex: 1; }
+  .rc-date { font-size: .68rem; color: var(--muted); margin-top: 4px; font-family: var(--mono); }
+  :global(.result-card mark) { background: rgba(0,232,150,.2); color: var(--green); border-radius: 2px; padding: 0 2px; }
+
+  .search-empty { text-align: center; padding: 80px 20px; }
+  .empty-icon { font-size: 3rem; margin-bottom: 16px; }
+  .search-empty h3 { font-size: 1.5rem; color: var(--white); margin-bottom: 10px; }
+  .search-empty p { color: var(--muted); font-size: .9rem; }
+
+  .browse-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .browse-card { background: var(--card); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 28px 24px; display: flex; flex-direction: column; gap: 8px; transition: all .2s; }
+  .browse-card:hover { border-color: rgba(0,232,150,.3); transform: translateY(-3px); }
+  .browse-icon { font-size: 1.8rem; }
+  .browse-card strong { font-size: .95rem; color: var(--white); }
+  .browse-card span { font-size: .78rem; color: var(--muted); line-height: 1.5; }
+
+  @media (max-width: 1024px) { .results-grid { grid-template-columns: repeat(2, 1fr); } .browse-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .results-grid { grid-template-columns: 1fr; } .browse-grid { grid-template-columns: 1fr; } }
+</style>

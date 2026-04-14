@@ -188,6 +188,43 @@ const breadcrumbs = [
          </div>
        </div>
     </section>
+
+    <!-- QUICK ACTIONS — Add-on Module Gateway -->
+    <section class="section-alt">
+      <div class="wrap">
+        <div class="text-center" style="margin-bottom:56px">
+          <h2 class="sec-title">Quick <em>Actions</em></h2>
+          <p class="sec-sub">Everything you need in seconds — pickup, live metrics, drop-off map, and search.</p>
+        </div>
+        <div class="qa-grid">
+          <a href="/pickup" class="qa-card qa-primary">
+            <span class="qa-icon">🚀</span>
+            <strong>Schedule Free Pickup</strong>
+            <p>Book certified e-waste collection in under 2 minutes. Same-day available.</p>
+            <span class="qa-arrow">→</span>
+          </a>
+          <a href="/impact" class="qa-card">
+            <span class="qa-icon">📊</span>
+            <strong>Impact Dashboard</strong>
+            <p>2,400+ tonnes recycled. See our live recycling metrics and certifications.</p>
+            <span class="qa-arrow">→</span>
+          </a>
+          <a href="/map" class="qa-card">
+            <span class="qa-icon">🗺️</span>
+            <strong>Drop-off Map</strong>
+            <p>Find the nearest of our 8 certified drop-off centers across Kochi.</p>
+            <span class="qa-arrow">→</span>
+          </a>
+          <a href="/search" class="qa-card">
+            <span class="qa-icon">🔍</span>
+            <strong>Search Everything</strong>
+            <p>Search 10,000+ blog guides, all services, and 569 Kerala locations.</p>
+            <span class="qa-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <Footer />
@@ -197,4 +234,16 @@ const breadcrumbs = [
   .pillar-box:hover { transform: translateY(-8px); border-color: inherit; }
   .svc-mini-card:hover { border-color: var(--white); transform: scale(1.02); }
   .loc-chip:hover { border-color: var(--green); color: var(--green); }
+
+  /* Quick Actions */
+  .qa-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .qa-card { background: var(--card); border: 1.5px solid var(--border); border-radius: var(--radius-lg); padding: 32px 24px; display: flex; flex-direction: column; gap: 10px; transition: all .25s; }
+  .qa-card:hover { transform: translateY(-6px); border-color: rgba(0,232,150,.3); }
+  .qa-primary { border-color: rgba(0,232,150,.2); background: linear-gradient(135deg, rgba(0,232,150,.06), var(--card)); }
+  .qa-icon { font-size: 2rem; }
+  .qa-card strong { font-size: 1rem; color: var(--white); font-weight: 700; }
+  .qa-card p { font-size: .82rem; color: var(--muted); line-height: 1.6; flex: 1; }
+  .qa-arrow { font-size: .85rem; font-weight: 800; color: var(--green); }
+  @media (max-width: 1024px) { .qa-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .qa-grid { grid-template-columns: 1fr; } }
 </style>

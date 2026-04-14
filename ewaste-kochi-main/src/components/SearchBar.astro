@@ -1,0 +1,60 @@
+---
+// src/components/SearchBar.astro — Global search add-on component
+// Drop into any page; reads from window.__SEARCH_INDEX injected by /search page
+// On other pages it links to /search?q=...
+
+interface Props {
+  placeholder?: string;
+  redirectToPage?: boolean; // true = send to /search on submit; false = in-page search
+  id?: string;
+}
+
+const {
+  placeholder = 'Search blog posts, services, locations…',
+  redirectToPage = true,
+  id = 'global-search',
+} = Astro.props;
+---
+
+<div class="search-bar-wrap" role="search">
+  <form
+    id={`${id}-form`}
+    class="search-form"
+    action="/search"
+    method="get"
+    aria-label="Site search"
+  >
+    <span class="search-icon" aria-hidden="true">🔍</span>
+    <input
+      id={id}
+      name="q"
+      type="search"
+      class="search-input"
+      placeholder={placeholder}
+      autocomplete="off"
+      aria-label="Search query"
+      spellcheck="false"
+    />
+    <button type="submit" class="search-submit btn btn-primary btn-sm">Search</button>
+  </form>
+
+  <!-- Inline suggestions dropdown (only on pages with redirectToPage=false) -->
+  {!redirectToPage && (
+    <div class="search-suggestions" id={`${id}-suggestions`} role="listbox" aria-label="Search suggestions" hidden></div>
+  )}
+</div>
+
+<style>
+  .search-bar-wrap { position: relative; width: 100%; }
+  .search-form { display: flex; align-items: center; gap: 10px; background: var(--card); border: 1.5px solid var(--border2); border-radius: 50px; padding: 8px 8px 8px 20px; transition: border-color .2s; }
+  .search-form:focus-within { border-color: rgba(0,232,150,.4); box-shadow: 0 0 0 3px rgba(0,232,150,.06); }
+  .search-icon { font-size: 1rem; flex-shrink: 0; }
+  .search-input { flex: 1; background: none; border: none; outline: none; font-family: var(--font); font-size: .88rem; color: var(--white); min-width: 0; }
+  .search-input::placeholder { color: var(--muted); }
+  .search-submit { border-radius: 40px !important; flex-shrink: 0; }
+  .search-suggestions { position: absolute; top: calc(100% + 8px); left: 0; right: 0; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; z-index: 500; box-shadow: 0 16px 40px rgba(0,0,0,.5); }
+  .search-suggestion-item { padding: 12px 20px; font-size: .85rem; color: var(--text); cursor: pointer; border-bottom: 1px solid var(--border); transition: background .15s; display: flex; align-items: center; gap: 10px; }
+  .search-suggestion-item:last-child { border-bottom: none; }
+  .search-suggestion-item:hover, .search-suggestion-item[aria-selected="true"] { background: rgba(0,232,150,.05); color: var(--white); }
+  .search-sug-type { font-size: .65rem; color: var(--muted); background: var(--surface); padding: 2px 6px; border-radius: 8px; flex-shrink: 0; }
+</style>

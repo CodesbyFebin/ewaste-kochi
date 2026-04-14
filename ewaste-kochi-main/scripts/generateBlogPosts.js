@@ -201,9 +201,19 @@ for (const pillar of pillars) {
 
 console.log(`\n\n✅ Generated ${blogPosts.length} blog posts`);
 
-// Write output
+// Write output in 10 parts for LFS optimization and matching [slug].astro
+const CHUNK_SIZE = 1000;
+for (let i = 0; i < 10; i++) {
+  const part = blogPosts.slice(i * CHUNK_SIZE, (i + 1) * CHUNK_SIZE);
+  const partPath = join(ROOT, `src/data/blogPosts_part${i + 1}.json`);
+  writeFileSync(partPath, JSON.stringify(part, null, 0));
+}
+
+console.log(`\n✅ Split ${blogPosts.length} posts into 10 JSON parts in src/data/`);
+
+// Optionally write the main file too, but we should gitignore it
 const outPath = join(ROOT, 'src/data/blogPosts.json');
-writeFileSync(outPath, JSON.stringify(blogPosts, null, 0)); // minified for performance
+writeFileSync(outPath, JSON.stringify(blogPosts, null, 0));
 const fileSizeKB = Math.round(readFileSync(outPath).length / 1024);
-console.log(`✅ Wrote ${outPath} (${fileSizeKB} KB)`);
+console.log(`✅ Wrote master index ${outPath} (${fileSizeKB} KB)`);
 console.log(`\n🚀 Run 'npm run build' to generate the 10,010+ page site.`);
