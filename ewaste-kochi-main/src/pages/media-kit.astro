@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout title="Media Kit | EWaste Kochi" description="Official media assets and brand guidelines for EWaste Kochi.">
+  <Navbar currentPath="/media-kit" />
+  <section class="section">
+    <div class="wrap">
+      <h1>Media Kit</h1>
+      <p>Download our official logos and brand assets.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Logos</h3>
+          <p>High-resolution SVG and PNG formats.</p>
+          <a href="#" class="btn btn-outline">Download →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <Footer />
+</BaseLayout>

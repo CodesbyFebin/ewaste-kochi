@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════════════
-// BLOG HUB — 20 Categories (Pillar-driven Content Strategy)
+// BLOG HUB — Authority Encyclopedia Hub
 // ═══════════════════════════════════════════════════════════════════
 
 export const blogCategories = [
@@ -27,48 +27,22 @@ export const blogCategories = [
 
 /**
  * Programmatic Blog Generator Blueprint
- * Every category aims for 100 long-tail keywords. 
- * This array can be scaled with thousands of titles.
+ * 10,020 Blog Posts across 10 JSON Shards
  */
-export const blogs = [
-  {
-    slug: 'dpdp-act-2023-it-disposal-compliance',
-    title: 'How India’s DPDP Act 2023 Influences IT Disposal for Kochi Businesses',
-    category: 'dpdp',
-    excerpt: 'The DPDP Act 2023 mandates strict data privacy rules for retired devices. Failing to follow NIST standards in Kochi can now cost corporatations ₹250 crore...',
-    content: `
-      <h2>The New Data Reality for Kerala Enterprises</h2>
-      <p>India's landmark <strong>DPDP Act 2023</strong> has changed the legal landscape for IT procurement and disposal. In Kochi's thriving IT corridors, every discarded laptop is now a potential liability.</p>
-      
-      <h3>The Rule of Data Destruction</h3>
-      <p>Under the act, businesses are data fiduciaries. When you retire a computer, you must ensure all personal data is permanently deleted. Simply formatting a drive does not satisfy the legal requirement of the act.</p>
-      
-      <h3>How to Stay Compliant in Kochi</h3>
-      <p>To avoid massive statutory penalties, companies in Infopark and Smart City should adopt a three-pillar ITAD strategy: 
-      1. Certified Wiping; 2. Documentation of Disposal; 3. Use of KSPCB authorized recyclers.</p>
-    `,
-    date: '2026-03-31',
-    author: 'Compliance Team, EWaste Kochi',
-  },
-  {
-    slug: 'itad-roi-kochi-enterprise',
-    title: 'Maximizing ROI: Why Kochi Enterprises are Switching to Certified ITAD',
-    category: 'itad',
-    excerpt: 'Most companies treat old hardware as junk. We show you how IT Asset Disposition can actually recover up to 20% of your initial procurement cost...',
-    content: `
-      <h2>ROI in the IT Hardware Lifecycle</h2>
-      <p>Professional ITAD is a financial strategy as much as an environmental one. For large Kochi businesses, retiring 500+ laptops is a major logistical event.</p>
-      
-      <h3>Remarketing Functional Assets</h3>
-      <p>Functional devices can be refurbishd and resold insecondary markets. We handle the secure wiping and remarketing for you, returning a portion of the value to your budget.</p>
-      
-      <h3>Logistics Savings in Ernakulam</h3>
-      <p>By using an authorized local partner like EWaste Kochi, you save on transportation costs and ensure a faster, more transparent decommissioning cycle.</p>
-    `,
-    date: '2026-03-25',
-    author: 'Operations Head, EWaste Kochi',
-  },
-  // Scale this to 2000+ entries
+import part1 from './blogPosts_part1.json';
+import part2 from './blogPosts_part2.json';
+import part3 from './blogPosts_part3.json';
+import part4 from './blogPosts_part4.json';
+import part5 from './blogPosts_part5.json';
+import mega6 from './blogPosts_part6.json';
+import mega7 from './blogPosts_part7.json';
+import mega8 from './blogPosts_part8.json';
+import mega9 from './blogPosts_part9.json';
+import mega10 from './blogPosts_part10.json';
+
+export const blogs = [ 
+  ...part1, ...part2, ...part3, ...part4, ...part5, 
+  ...mega6, ...mega7, ...mega8, ...mega9, ...mega10 
 ];
 
 export const getPillarBlogs = (catId) => blogs.filter(b => b.category === catId);

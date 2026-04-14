@@ -9,6 +9,7 @@ import { contact } from '../../data/contact.js';
 import { testimonials } from '../../data/testimonials.js';
 import { locations } from '../../data/locations.js';
 import { getPillarFaqs } from '../../data/faqs.js';
+import megaServices from '../../data/megaContent_services.json';
 
 const getServiceBySlug = (slug) => services.find(s => s.slug === slug);
 
@@ -23,6 +24,9 @@ const { service } = Astro.props as any;
 
 // Contextual FAQs for this service category
 const serviceFaqs = getPillarFaqs(service.category, 5);
+
+const mega = megaServices[service.slug] || { content: '', faqs: [] };
+const displayFaqs = mega.faqs && mega.faqs.length > 0 ? mega.faqs : (service.faqs || []);
 
 // Build related services
 const relatedServices = service.relatedServices
@@ -148,6 +152,8 @@ const serviceSchema = {
       <div class="content-grid">
         <div class="content-main">
           <article class="content-body" itemprop="description">
+            <div class="mega-body" set:html={mega.content}></div>
+
             <h2>About {service.name} in Kochi</h2>
             {service.longDescription
               ? service.longDescription.split('\n\n').map(para => (
@@ -255,24 +261,29 @@ const serviceSchema = {
   </section>
 
   <!-- Service FAQs Visually Rendered Core Link Loop -->
-  {serviceFaqs && serviceFaqs.length > 0 && (
-    <section class="section">
-      <div class="wrap">
-        <div class="text-center">
-          <h2 class="sec-title">{service.shortName} FAQs</h2>
-          <p class="sec-sub">Crucial questions regarding our {service.shortName.toLowerCase()} solutions. Find our complete knowledge base on our <a href="/" style="color:var(--green);text-decoration:underline">master authority homepage</a>.</p>
-        </div>
-        <div class="faq-accordion" style="max-width:820px;margin:2rem auto 0;display:flex;flex-direction:column;gap:12px">
-          {serviceFaqs.map((faq) => (
-            <details class="faq-details" style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px">
-              <summary style="font-weight:700;cursor:pointer;list-style:none">{faq.q}</summary>
-              <p style="margin-top:15px;font-size:0.9rem;color:var(--text);line-height:1.7" set:html={faq.a}></p>
-            </details>
-          ))}
-        </div>
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="text-center">
+        <span class="sec-eyebrow">💡 Frequent Questions</span>
+        <h2 class="sec-title">{service.shortName} Authority FAQ</h2>
+        <p class="sec-sub">Crucial questions regarding our {service.shortName.toLowerCase()} solutions. Find our complete knowledge base on our <a href="/" style="color:var(--green);text-decoration:underline">master authority homepage</a>.</p>
       </div>
-    </section>
-  )}
+      
+      <div class="faq-accordion-mega">
+        {displayFaqs.map((faq, index) => (
+          <details class="faq-details-mega">
+            <summary class="faq-summary-mega">
+              <span class="faq-q-text">{index + 1}. {faq.question}</span>
+              <span class="faq-icon">+</span>
+            </summary>
+            <div class="faq-answer-mega">
+              <div set:html={faq.answer}></div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <!-- CTA -->
   <section class="section-tight">
@@ -362,6 +373,21 @@ const serviceSchema = {
     .content-grid { grid-template-columns: 1fr; }
     .testi-grid { grid-template-columns: repeat(2,1fr); }
   }
+
+  .mega-body { margin-bottom: 40px; }
+  .mega-body p { margin-bottom: 24px; color: var(--text); line-height: 1.8; font-size: 1.05rem; }
+  .mega-body h3 { margin: 40px 0 20px; color: var(--white); font-family: var(--serif); }
+
+  .faq-accordion-mega { max-width: 900px; margin: 40px auto; display: flex; flex-direction: column; gap: 15px; }
+  .faq-details-mega { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: all 0.3s ease; }
+  .faq-details-mega:hover { border-color: var(--green); }
+  .faq-summary-mega { display: flex; align-items: center; justify-content: space-between; padding: 22px 28px; cursor: pointer; list-style: none; font-weight: 700; font-size: 1rem; color: var(--white); outline: none; }
+  .faq-summary-mega::-webkit-details-marker { display: none; }
+  .faq-q-text { flex: 1; padding-right: 20px; }
+  .faq-icon { color: var(--green); font-size: 1.4rem; transition: transform 0.3s; }
+  .faq-details-mega[open] .faq-icon { transform: rotate(45deg); }
+  .faq-answer-mega { padding: 0 28px 25px; border-top: 1px solid var(--border); color: var(--text); font-size: 0.95rem; line-height: 1.7; }
+  .faq-answer-mega p { margin-top: 15px; }
   @media (max-width: 768px) {
     .testi-grid { grid-template-columns: 1fr; }
     .svc-ctas { flex-direction: column; }

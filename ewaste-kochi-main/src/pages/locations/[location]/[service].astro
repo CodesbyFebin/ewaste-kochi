@@ -8,6 +8,22 @@ import { locations } from '../../../data/locations.js';
 import { services } from '../../../data/services.js';
 import { contact } from '../../../data/contact.js';
 import { testimonials } from '../../../data/testimonials.js';
+import RelatedQuestions from '../../../components/RelatedQuestions.astro';
+
+import mega1 from '../../../data/megaContent_part1.json';
+import mega2 from '../../../data/megaContent_part2.json';
+import mega3 from '../../../data/megaContent_part3.json';
+import mega4 from '../../../data/megaContent_part4.json';
+import mega5 from '../../../data/megaContent_part5.json';
+import mega6 from '../../../data/megaContent_part6.json';
+import mega7 from '../../../data/megaContent_part7.json';
+import mega8 from '../../../data/megaContent_part8.json';
+import mega9 from '../../../data/megaContent_part9.json';
+import mega10 from '../../../data/megaContent_part10.json';
+import mega11 from '../../../data/megaContent_part11.json';
+import mega12 from '../../../data/megaContent_part12.json';
+
+const megaData = { ...mega1, ...mega2, ...mega3, ...mega4, ...mega5, ...mega6, ...mega7, ...mega8, ...mega9, ...mega10, ...mega11, ...mega12 };
 
 const getLocationBySlug = (slug) => locations.find(l => l.slug === slug);
 const getServiceBySlug = (slug) => services.find(s => s.slug === slug);
@@ -59,6 +75,10 @@ const combinedSchema = {
   },
   "description": pageDesc
 };
+
+const pageKey = `${location.slug}-${service.slug}`;
+const mega = megaData[pageKey] || { content: '', faqs: [] };
+const displayFaqs = mega.faqs && mega.faqs.length > 0 ? mega.faqs : (service.faqs || []);
 ---
 
 <BaseLayout
@@ -144,23 +164,27 @@ const combinedSchema = {
       <div class="content-split">
         <div class="content-text">
           <h2>Professional {service.name} for {location.name} Businesses</h2>
-          <p>
-            Operating in {location.name}, {location.district}, {service.name} is a critical requirement for 
-            maintaining environmental compliance and data security. {location.description}
-          </p>
-          <p>
-            Our specialized {service.shortName.toLowerCase()} workflow in {location.name} ensures that your 
-            old electronics are handled according to the E-Waste Management Rules 2022. For our clients in 
-            {location.isITHub ? 'the IT hubs of ' : ''}{location.name}, we provide deep-level ITAD services including 
-            asset tagging and secure chain-of-custody documentation.
-          </p>
+          <div class="mega-body" set:html={mega.content}></div>
+          
+          <div class="standard-content">
+            <p>
+              Operating in {location.name}, {location.district}, {service.name} is a critical requirement for 
+              maintaining environmental compliance and data security. {location.description}
+            </p>
+            <p>
+              Our specialized {service.shortName.toLowerCase()} workflow in {location.name} ensures that your 
+              old electronics are handled according to the E-Waste Management Rules 2022. For our clients in 
+              {location.isITHub ? 'the IT hubs of ' : ''}{location.name}, we provide deep-level ITAD services including 
+              asset tagging and secure chain-of-custody documentation.
+            </p>
 
-          <h3>Why Choose us in {location.name}?</h3>
-          <ul>
-            <li><strong>Local Expertise:</strong> We know {location.name} inside out, ensuring faster pickups and logistics.</li>
-            <li><strong>Compliance:</strong> Fully compliant with DPDP Act 2023 for data destruction in {location.district}.</li>
-            <li><strong>Transparency:</strong> Witnessed on-site destruction available for companies in {location.name}.</li>
-          </ul>
+            <h3>Why Choose us in {location.name}?</h3>
+            <ul>
+              <li><strong>Local Expertise:</strong> We know {location.name} inside out, ensuring faster pickups and logistics.</li>
+              <li><strong>Compliance:</strong> Fully compliant with DPDP Act 2023 for data destruction in {location.district}.</li>
+              <li><strong>Transparency:</strong> Witnessed on-site destruction available for companies in {location.name}.</li>
+            </ul>
+          </div>
         </div>
 
         <aside class="content-sidebar">
@@ -182,6 +206,30 @@ const combinedSchema = {
             </ul>
           </div>
         </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section (Generated 50+ FAQs) -->
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="text-center mb-12">
+        <span class="sec-eyebrow">💡 Frequent Questions</span>
+        <h2 class="sec-title">Deep Insights into {service.shortName} in {location.name}</h2>
+      </div>
+      
+      <div class="faq-accordion-mega">
+        {displayFaqs.map((faq, index) => (
+          <details class="faq-details-mega">
+            <summary class="faq-summary-mega">
+              <span class="faq-q-text">{index + 1}. {faq.question}</span>
+              <span class="faq-icon">+</span>
+            </summary>
+            <div class="faq-answer-mega">
+              <div set:html={faq.answer}></div>
+            </div>
+          </details>
+        ))}
       </div>
     </div>
   </section>
@@ -232,4 +280,20 @@ const combinedSchema = {
     .prog-grid, .content-split { grid-template-columns: 1fr; gap: 40px; }
     .content-sidebar { order: 2; }
   }
+
+  .mega-body { margin-bottom: 40px; }
+  .mega-body p { margin-bottom: 24px; color: var(--text); line-height: 1.8; font-size: 1.05rem; }
+  .mega-body h3 { margin: 40px 0 20px; color: var(--white); font-family: var(--serif); }
+
+  .faq-accordion-mega { max-width: 900px; margin: 40px auto; display: flex; flex-direction: column; gap: 15px; }
+  .faq-details-mega { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: all 0.3s ease; }
+  .faq-details-mega:hover { border-color: var(--green-shimmer); }
+  .faq-summary-mega { display: flex; align-items: center; justify-content: space-between; padding: 22px 28px; cursor: pointer; list-style: none; font-weight: 700; font-size: 1rem; color: var(--white); outline: none; }
+  .faq-summary-mega::-webkit-details-marker { display: none; }
+  .faq-q-text { flex: 1; padding-right: 20px; }
+  .faq-icon { color: var(--green); font-size: 1.4rem; transition: transform 0.3s; }
+  .faq-details-mega[open] .faq-icon { transform: rotate(45deg); }
+  .faq-answer-mega { padding: 0 28px 25px; border-top: 1px solid var(--border); color: var(--text); font-size: 0.95rem; line-height: 1.7; }
+  .faq-answer-mega p { margin-top: 15px; }
+  .mb-12 { margin-bottom: 3rem; }
 </style>

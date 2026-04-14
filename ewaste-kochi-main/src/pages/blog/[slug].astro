@@ -3,8 +3,19 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
-import { blogs, getBlogBySlug, blogCategories } from '../../data/blogs.js';
-import { faqs } from '../../data/faqs.js';
+import part1 from '../../data/blogPosts_part1.json';
+import part2 from '../../data/blogPosts_part2.json';
+import part3 from '../../data/blogPosts_part3.json';
+import part4 from '../../data/blogPosts_part4.json';
+import part5 from '../../data/blogPosts_part5.json';
+import part6 from '../../data/blogPosts_part6.json';
+import part7 from '../../data/blogPosts_part7.json';
+import part8 from '../../data/blogPosts_part8.json';
+import part9 from '../../data/blogPosts_part9.json';
+import part10 from '../../data/blogPosts_part10.json';
+import { blogCategories } from '../../data/blogs.js';
+
+const blogs = [...part1, ...part2, ...part3, ...part4, ...part5, ...part6, ...part7, ...part8, ...part9, ...part10];
 
 export async function getStaticPaths() {
   return blogs.map(blog => ({
@@ -16,8 +27,8 @@ export async function getStaticPaths() {
 const { blog } = Astro.props;
 const category = blogCategories.find(c => c.id === blog.category);
 
-// Programmatic context: Match FAQs related to this blog's category
-const relatedFaqs = faqs.filter(f => f.category === blog.category).slice(0, 5);
+// Use embedded FAQs if available, fallback to global faqs
+const relatedFaqs = blog.faqs || [];
 
 const breadcrumbs = [
   { name: 'Home', url: 'https://ewastekochi.com/' },

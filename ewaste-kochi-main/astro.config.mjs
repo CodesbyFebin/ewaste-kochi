@@ -8,6 +8,13 @@ export default defineConfig({
   site: 'https://ewastekochi.com',
   output: 'static',
   trailingSlash: 'always',
+  redirects: {
+    '/itad-kochi': '/itad',
+    '/itad-kochi.html': '/itad',
+    '/it-asset-inventory-audit.html': '/services/it-asset-inventory-audit',
+    '/sell-old-phone-kochi.html': '/services/mobile-recycling-kochi',
+    '/hard-drive-degaussing-kochi.html': '/services/hard-drive-degaussing-kochi',
+  },
   adapter: vercel({
     webAnalytics: { enabled: true }
   }),

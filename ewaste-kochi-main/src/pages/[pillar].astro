@@ -6,6 +6,8 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqSection from '../components/FaqSection.astro';
 import RelatedPosts from '../components/RelatedPosts.astro';
 
+import megaPillars from '../data/megaContent_pillars.json';
+
 export function getStaticPaths() {
   return pillarsData.map((pillar) => ({
     params: { pillar: pillar.slug },
@@ -36,7 +38,8 @@ const itemListSchema = {
 };
 
 // Sample FAQs for this pillar (first 6)
-const pillarFaqs = [
+const mega = megaPillars[pillar.slug] || { content: '', faqs: [] };
+const pillarFaqs = mega.faqs && mega.faqs.length > 0 ? mega.faqs : [
   { q: `What is ${pillar.name}?`, a: pillar.description },
   { q: `Why is ${pillar.name} important for Kerala businesses?`, a: pillar.intro },
 ];
@@ -74,6 +77,7 @@ const pillarFaqs = [
         <div class="pillar-intro-content">
           <span class="sec-eyebrow">Overview</span>
           <h2 class="sec-title">Why <em>{pillar.name}</em> Matters in Kerala</h2>
+          <div class="mega-body" set:html={mega.content}></div>
           <p style="color:var(--text); line-height:1.85; font-size:.97rem;">{pillar.intro}</p>
         </div>
         <div class="pillar-intro-badges">
@@ -132,7 +136,28 @@ const pillarFaqs = [
   </section>
 
   <!-- Pillar FAQs -->
-  <FaqSection faqs={pillarFaqs} heading={`${pillar.name} — Frequently Asked Questions`} />
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="text-center mb-12">
+        <span class="sec-eyebrow">💡 Frequent Questions</span>
+        <h2 class="sec-title">{pillar.name} Authority FAQ</h2>
+      </div>
+      
+      <div class="faq-accordion-mega">
+        {pillarFaqs.map((faq, index) => (
+          <details class="faq-details-mega">
+            <summary class="faq-summary-mega">
+              <span class="faq-q-text">{index + 1}. {faq.q || faq.question}</span>
+              <span class="faq-icon">+</span>
+            </summary>
+            <div class="faq-answer-mega">
+              <div set:html={faq.a || faq.answer}></div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <!-- CTA -->
   <section class="section-alt">
@@ -168,8 +193,24 @@ const pillarFaqs = [
   .pillar-intro-grid { grid-template-columns: 1fr; gap: 36px; }
   .pillar-intro-badges { grid-template-columns: 1fr 1fr; }
 }
-@media (max-width: 600px) {
-  .pillar-intro-badges { grid-template-columns: 1fr; }
-  .cluster-grid { grid-template-columns: 1fr; }
-}
+  @media (max-width: 600px) {
+    .pillar-intro-badges { grid-template-columns: 1fr; }
+    .cluster-grid { grid-template-columns: 1fr; }
+  }
+
+  .mega-body { margin-bottom: 40px; }
+  .mega-body p { margin-bottom: 24px; color: var(--text); line-height: 1.8; font-size: 1.05rem; }
+  .mega-body h3 { margin: 40px 0 20px; color: var(--white); font-family: var(--serif); }
+
+  .faq-accordion-mega { max-width: 900px; margin: 40px auto; display: flex; flex-direction: column; gap: 15px; }
+  .faq-details-mega { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: all 0.3s ease; }
+  .faq-details-mega:hover { border-color: var(--green); }
+  .faq-summary-mega { display: flex; align-items: center; justify-content: space-between; padding: 22px 28px; cursor: pointer; list-style: none; font-weight: 700; font-size: 1rem; color: var(--white); outline: none; }
+  .faq-summary-mega::-webkit-details-marker { display: none; }
+  .faq-q-text { flex: 1; padding-right: 20px; }
+  .faq-icon { color: var(--green); font-size: 1.4rem; transition: transform 0.3s; }
+  .faq-details-mega[open] .faq-icon { transform: rotate(45deg); }
+  .faq-answer-mega { padding: 0 28px 25px; border-top: 1px solid var(--border); color: var(--text); font-size: 0.95rem; line-height: 1.7; }
+  .faq-answer-mega p { margin-top: 15px; }
+  .mb-12 { margin-bottom: 3rem; }
 </style>

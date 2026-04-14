@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout title="Privacy Policy | EWaste Kochi" description="Privacy policy for the EWaste Kochi platform.">
+  <Navbar currentPath="/privacy-policy" />
+  <section class="section">
+    <div class="wrap">
+      <h1>Privacy Policy</h1>
+      <p>Last updated: June 2025</p>
+      <div class="content">
+        <p>Your privacy is important to us. This policy explains how we handle your data.</p>
+        <!-- Standard privacy content -->
+        <h2>1. Data Collection</h2>
+        <p>We collect information for pickup requests and service fulfillment.</p>
+        <h2>2. Data Security</h2>
+        <p>We use industry-standard encryption and security protocols.</p>
+      </div>
+    </div>
+  </section>
+  <Footer />
+</BaseLayout>
