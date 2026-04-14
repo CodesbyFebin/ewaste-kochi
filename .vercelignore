@@ -1,0 +1,53 @@
+# Exclude heavy binaries and installers
+*.deb
+*.zip
+*.tar.gz
+*.exe
+*.msi
+
+# Exclude dev environments and secrets
+.venv
+node_modules
+.env
+.gitignore
+
+# Exclude git metadata
+.git
+.github
+
+# Exclude scripts not needed for serving
+master_generator.py
+build_sitemap.py
+scaffold.py
+mass_expander.py
+mass_page_generator.py
+mass_scale_generator.py
+mass_seo_expansion.py
+init_data_hub.py
+inject_authority_base.py
+organize_categories.py
+schema_generator.py
+schema_injector.py
+seo_injector.py
+organize_folders.py
+mass_seo_expansion_v2.py
+mega_pages_generator.py
+mega_seo_injector.py
+mega_services_generator.py
+nano_seo_generator.py
+organize_site.py
+rebrand_and_deploy_vfinal.py
+rebuild_sitemap_robots.py
+update_interlinking.py
+update_mega_sitemap.py
+update_v2_design.py
+wire_interlinking.py
+internal_link_weaver.py
+internal_link_map.json
+laptops.csv
+phones.csv
+locations.csv
+url_list.txt
+_all_urls.txt
+all_pages_list.txt
+__pycache__

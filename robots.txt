@@ -1,0 +1,109 @@
+# ============================================================
+# ROBOTS.TXT — EWaste Kochi | KSPCB Authorised Recycler
+# Updated: 2026-04-10
+# ============================================================
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /backup/
+Disallow: /private/
+Disallow: /*.py$
+Disallow: /*.log$
+Disallow: /*.csv$
+Disallow: /*.json$
+Crawl-delay: 0.5
+
+# ── Major Search Engines ──────────────────────────────────────
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0.3
+
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /assets/images/
+
+User-agent: Googlebot-News
+Allow: /blog/
+
+User-agent: bingbot
+Allow: /
+Crawl-delay: 0.5
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 0.5
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 1
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 1
+
+# ── AI + LLM Crawlers (Full Access for Visibility) ───────────
+
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 0.5
+
+User-agent: Google-Extended
+Allow: /
+Crawl-delay: 0.5
+
+User-agent: anthropic-ai
+Allow: /
+Crawl-delay: 0.5
+
+User-agent: Claude-Web
+Allow: /
+Crawl-delay: 0.5
+
+User-agent: PerplexityBot
+Allow: /
+Crawl-delay: 0.5
+
+User-agent: CCBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Applebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: cohere-ai
+Allow: /
+Crawl-delay: 0.5
+
+# ── Social Media Crawlers ─────────────────────────────────────
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# ── Sitemaps ──────────────────────────────────────────────────
+
+Sitemap: https://ewastekochi.com/sitemap.xml
+Sitemap: https://ewastekochi.com/sitemap-index.xml
+Sitemap: https://ewastekochi.com/sitemap-images.xml
+Sitemap: https://ewastekochi.com/sitemap-news.xml
+
+# ── Host ──────────────────────────────────────────────────────
+
+Host: https://ewastekochi.com
