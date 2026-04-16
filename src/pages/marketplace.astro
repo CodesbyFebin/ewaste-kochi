@@ -1,0 +1,80 @@
+---
+// marketplace.astro - GSC: 76 impressions pos 17.6 — BIGGEST OPPORTUNITY
+// Targets: "e waste buyers near me", "where to sell electronics locally", "ewaste hub"
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { contact } from '../data/contact.js';
+
+const pageTitle = "E-Waste Marketplace Kochi — Sell Electronics & Buy Refurbished | EWaste Kochi";
+const pageDesc = "Kochi's e-waste marketplace. Sell old laptops, phones, servers for best prices. Buy certified refurbished electronics. E-waste buyers near me in Kochi. MacBook up to ₹65K, iPhone up to ₹75K.";
+
+const categories = [
+  { icon: '💻', name: 'Laptops & MacBooks', items: ['MacBook Pro M1/M2/M3', 'MacBook Air', 'Dell Latitude', 'HP EliteBook', 'Lenovo ThinkPad', 'All brands accepted'], top: 'Up to ₹65,000' },
+  { icon: '📱', name: 'Phones & Tablets', items: ['iPhone 13/14/15 series', 'Samsung Galaxy S', 'Google Pixel', 'iPad all models', 'Android flagships', 'Feature phones too'], top: 'Up to ₹75,000' },
+  { icon: '🖥️', name: 'Desktops & Servers', items: ['Dell PowerEdge servers', 'HP ProLiant rack', 'Workstations', 'Desktop PCs', 'NAS devices', 'Networking gear'], top: 'Up to ₹45,000' },
+  { icon: '📺', name: 'TVs & Monitors', items: ['Smart TVs 32"+', 'LED/LCD monitors', 'CRT disposal free', 'Projectors', 'Digital displays', 'Set-top boxes'], top: 'Free recycling' },
+  { icon: '🔋', name: 'Batteries & UPS', items: ['Laptop batteries', 'UPS units', 'Lead-acid batteries', 'Li-ion packs', 'Power banks', 'Solar batteries'], top: 'Free recycling' },
+  { icon: '🔌', name: 'All Electronics', items: ['Printers & scanners', 'ACs & refrigerators', 'Washing machines', 'Networking gear', 'Gaming consoles', 'LED/CFL bulbs'], top: 'Free recycling' },
+];
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.com/' },
+  { name: 'Marketplace', url: 'https://ewastekochi.com/marketplace/' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} breadcrumbs={breadcrumbs}>
+  <Navbar currentPath="/marketplace/" />
+  <main>
+
+    <section style="padding:80px 0 60px;background:var(--bg)">
+      <div class="wrap">
+        <nav aria-label="Breadcrumb" style="font-size:.8rem;color:var(--muted);margin-bottom:20px">
+          <a href="/" style="color:var(--green)">Home</a> › Marketplace
+        </nav>
+        <h1 style="font-size:clamp(2rem,5vw,3.8rem);line-height:1.05;margin-bottom:20px;font-weight:800">
+          E-Waste <span style="color:var(--green)">Marketplace</span> Kochi<br/>Sell · Recycle · Buy Refurbished
+        </h1>
+        <p style="font-size:1.05rem;color:var(--text);max-width:640px;line-height:1.65;margin-bottom:35px">
+          Kerala's most trusted e-waste marketplace in Kochi. Sell old electronics at best prices. Drop in for free recycling. NIST data destruction included. KSPCB authorized.
+        </p>
+        <div style="display:flex;gap:15px;flex-wrap:wrap">
+          <a href={contact.whatsappMessage} target="_blank" rel="noopener" class="btn btn-wa btn-lg">💬 Sell Your Electronics</a>
+          <a href="/contact/" class="btn btn-primary btn-lg">📦 Book Free Pickup</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-alt">
+      <div class="wrap">
+        <h2 class="sec-title" style="margin-bottom:2rem">What We <em>Buy & Recycle</em></h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px">
+          {categories.map(cat => (
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:15px;padding:28px">
+              <div style="font-size:2rem;margin-bottom:12px">{cat.icon}</div>
+              <h3 style="font-size:1rem;margin-bottom:8px">{cat.name}</h3>
+              <div class="badge badge-g" style="margin-bottom:16px">{cat.top}</div>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+                {cat.items.map(item => <li style="font-size:.82rem;color:var(--muted)">• {item}</li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap" style="text-align:center">
+        <h2 class="sec-title">Ready to Sell or <em>Recycle?</em></h2>
+        <p class="sec-sub" style="margin:0 auto 35px">WhatsApp us your device details for a quote in 15 minutes. Free pickup in Kochi.</p>
+        <div style="display:flex;gap:15px;justify-content:center;flex-wrap:wrap">
+          <a href={contact.whatsappMessage} target="_blank" rel="noopener" class="btn btn-wa btn-lg">💬 WhatsApp — Get Quote</a>
+          <a href="/sell-electronics-kochi/" class="btn btn-outline btn-lg">See All Buyback Prices →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>

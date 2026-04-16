@@ -1,0 +1,378 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { blogs as legacyBlogs } from '../../data/blogs.js';
+import {
+  blogLibraryCategories,
+  blogLibraryConfig,
+  blogLibraryStats,
+  getFeaturedLibraryPosts,
+} from '../../data/programmaticBlogEngine.js';
+
+const featuredLibraryPosts = getFeaturedLibraryPosts();
+const featuredLegacyPosts = legacyBlogs.slice(0, 4);
+
+const pageTitle = 'EWaste Kochi SEO Library | 1000 Local Intent Blog Pages';
+const pageDescription =
+  'Explore EWaste Kochi\'s programmatic SEO library with 10 categories, 1000 local-intent pages, and conversion-focused internal linking across recycling, ITAD, data destruction, battery recycling, and disposal guides.';
+
+const pageSchema = {
+  '@type': 'CollectionPage',
+  name: pageTitle,
+  description: pageDescription,
+  about: blogLibraryCategories.map((category) => category.name).join(', '),
+};
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.com/' },
+  { name: 'SEO Library', url: 'https://ewastekochi.com/blogs/' },
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  schema={pageSchema}
+  breadcrumbs={breadcrumbs}
+  chatbotContext="homepage"
+>
+  <Navbar currentPath="/blogs/" />
+
+  <main>
+    <section class="section library-hero">
+      <div class="wrap">
+        <div class="library-kicker">Programmatic SEO Engine</div>
+        <h1 class="sec-title library-title">A 10-category <em>local SEO library</em> built to scale EwasteKochi beyond static pages.</h1>
+        <p class="sec-sub library-sub">
+          This route space is designed as the deploy-ready content engine behind <strong>{blogLibraryConfig.subdomainHint}</strong>.
+          It ships with category hubs, internal links back to services and locations, and a page-aware chatbot on every library page.
+        </p>
+
+        <div class="library-stats">
+          <div class="library-stat">
+            <strong>{blogLibraryStats.categories}</strong>
+            <span>core categories</span>
+          </div>
+          <div class="library-stat">
+            <strong>{blogLibraryStats.posts}</strong>
+            <span>generated pages</span>
+          </div>
+          <div class="library-stat">
+            <strong>{blogLibraryStats.longTailKeywords}</strong>
+            <span>long-tail targets</span>
+          </div>
+          <div class="library-stat">
+            <strong>{blogLibraryStats.geoTargets}</strong>
+            <span>local market targets</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-alt">
+      <div class="wrap">
+        <div class="library-section-head">
+          <p class="sec-eyebrow">Why These Clusters</p>
+          <h2 class="sec-title">Built around the commercial patterns already showing up in search.</h2>
+          <p class="sec-sub">
+            The library leans into the strongest themes from the current search footprint: pickup-led queries, battery intent,
+            data destruction, ITAD qualification, and location-specific disposal searches that are visible but still under-converted.
+          </p>
+        </div>
+
+        <div class="library-opportunities">
+          <article class="library-opportunity">
+            <span>01</span>
+            <h3>High-impression service pages</h3>
+            <p>Battery recycling, data destruction, and free pickup now have dedicated blog clusters feeding them with internal links and CTA paths.</p>
+          </article>
+          <article class="library-opportunity">
+            <span>02</span>
+            <h3>Location-heavy query coverage</h3>
+            <p>Every category fans out across 10 strong local targets so the site can capture city-and-service combinations without hand-building each page.</p>
+          </article>
+          <article class="library-opportunity">
+            <span>03</span>
+            <h3>Question-led public search intent</h3>
+            <p>The category hubs surface the kinds of "where", "how", and "is it safe" queries that typically come from PAA, forums, and Reddit-style research behavior.</p>
+          </article>
+          <article class="library-opportunity">
+            <span>04</span>
+            <h3>Conversion-first page architecture</h3>
+            <p>Every generated page links back to services, locations, and existing blog articles so informational traffic has a clear path into WhatsApp, quotes, and pickups.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="library-section-head">
+          <p class="sec-eyebrow">Category Hubs</p>
+          <h2 class="sec-title">10 categories. 100 local pages each. One shared conversion system.</h2>
+        </div>
+
+        <div class="category-grid">
+          {blogLibraryCategories.map((category) => (
+            <article class="category-card">
+              <div class="category-card-top">
+                <span class="category-icon">{category.emoji}</span>
+                <span class="badge badge-g">{category.articleCount} pages</span>
+              </div>
+              <h3>{category.name}</h3>
+              <p>{category.summary}</p>
+
+              <div class="keyword-chip-row">
+                {category.shortTailKeywords.slice(0, 4).map((keyword) => (
+                  <span class="keyword-chip">{keyword}</span>
+                ))}
+              </div>
+
+              <div class="link-stack">
+                {category.serviceLinks.slice(0, 2).map((link) => (
+                  <a href={link.href}>{link.label}</a>
+                ))}
+              </div>
+
+              <a class="btn btn-primary btn-sm" href={`/blogs/${category.slug}/`}>Open {category.name} -&gt;</a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-alt">
+      <div class="wrap">
+        <div class="library-section-head">
+          <p class="sec-eyebrow">Featured Entries</p>
+          <h2 class="sec-title">Representative pages from the generated library.</h2>
+        </div>
+
+        <div class="post-grid">
+          {featuredLibraryPosts.map((post) => (
+            <a class="post-card" href={`/blogs/${post.categorySlug}/${post.slug}/`}>
+              <div class="post-card-meta">
+                <span class="badge badge-g">{post.categoryName}</span>
+                <span>{post.location.titleLabel}</span>
+              </div>
+              <h3>{post.title}</h3>
+              <p>{post.summary}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="library-section-head">
+          <p class="sec-eyebrow">Existing Blog Assets</p>
+          <h2 class="sec-title">Legacy editorial posts that still support the wider funnel.</h2>
+        </div>
+
+        <div class="post-grid legacy-grid">
+          {featuredLegacyPosts.map((post) => (
+            <a class="post-card legacy-card" href={`/blog/${post.slug}/`}>
+              <div class="post-card-meta">
+                <span class="badge badge-b">Legacy blog</span>
+                <span>{post.category}</span>
+              </div>
+              <h3>{post.title}</h3>
+              <p>{post.excerpt}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .library-hero {
+    padding-top: 110px;
+    padding-bottom: 80px;
+    background:
+      radial-gradient(circle at top right, rgba(0, 232, 150, 0.12), transparent 32%),
+      radial-gradient(circle at bottom left, rgba(170, 255, 87, 0.08), transparent 30%);
+  }
+
+  .library-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 232, 150, 0.18);
+    background: rgba(0, 232, 150, 0.06);
+    color: var(--green);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .library-title {
+    max-width: 900px;
+    margin-bottom: 16px;
+  }
+
+  .library-sub {
+    max-width: 820px;
+  }
+
+  .library-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 16px;
+    margin-top: 36px;
+  }
+
+  .library-stat,
+  .library-opportunity,
+  .category-card,
+  .post-card {
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+
+  .library-stat {
+    padding: 20px;
+  }
+
+  .library-stat strong {
+    display: block;
+    color: var(--white);
+    font-size: 2rem;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .library-stat span {
+    color: var(--muted);
+    font-size: 0.84rem;
+  }
+
+  .library-section-head {
+    margin-bottom: 32px;
+  }
+
+  .library-opportunities {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+  }
+
+  .library-opportunity {
+    padding: 24px;
+  }
+
+  .library-opportunity span {
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(0, 232, 150, 0.08);
+    color: var(--green);
+    font-weight: 800;
+    margin-bottom: 14px;
+  }
+
+  .library-opportunity h3,
+  .category-card h3,
+  .post-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+  }
+
+  .library-opportunity p,
+  .category-card p,
+  .post-card p {
+    color: var(--text);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .category-grid,
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+  }
+
+  .category-card,
+  .post-card {
+    padding: 22px;
+  }
+
+  .category-card-top,
+  .post-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  .category-icon {
+    font-size: 1.5rem;
+  }
+
+  .keyword-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
+  }
+
+  .keyword-chip {
+    padding: 6px 9px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.76rem;
+  }
+
+  .link-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .link-stack a {
+    color: var(--green);
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .post-card {
+    text-decoration: none;
+    transition: transform 0.18s ease, border-color 0.18s ease;
+  }
+
+  .post-card:hover,
+  .category-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(0, 232, 150, 0.24);
+  }
+
+  .legacy-card .badge {
+    margin-right: auto;
+  }
+
+  @media (max-width: 640px) {
+    .library-hero {
+      padding-top: 90px;
+    }
+  }
+</style>

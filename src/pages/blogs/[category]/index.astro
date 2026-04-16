@@ -1,0 +1,376 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import {
+  blogLibraryConfig,
+  blogLibraryCategories,
+  getBlogLibraryCategory,
+  getBlogLibraryCategoryClusters,
+  getBlogLibraryPostsByCategory,
+} from '../../../data/programmaticBlogEngine.js';
+
+export async function getStaticPaths() {
+  return blogLibraryCategories.map((category) => ({
+    params: { category: category.slug },
+    props: { category },
+  }));
+}
+
+const { category } = Astro.props;
+const categoryPage = getBlogLibraryCategory(category.slug);
+const clusters = getBlogLibraryCategoryClusters(category.slug);
+const categoryPosts = getBlogLibraryPostsByCategory(category.slug);
+const featuredPosts = categoryPosts.slice(0, 9);
+const pageTitle = `${categoryPage.name} | EWaste Kochi SEO Library`;
+const pageDescription = `${categoryPage.name} cluster with ${categoryPage.articleCount} local-intent pages, 10 short-tail keywords, and conversion-led internal links into EWaste Kochi services.`;
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.com/' },
+  { name: 'SEO Library', url: 'https://ewastekochi.com/blogs/' },
+  { name: categoryPage.name, url: `${blogLibraryConfig.host}/blogs/${categoryPage.slug}/` },
+];
+
+const faqs = [
+  {
+    q: `How many pages are in the ${categoryPage.name} cluster?`,
+    a: `The ${categoryPage.name} cluster contains ${categoryPage.articleCount} local-intent pages generated from 10 topic groups across 10 service areas. Each page links back to the relevant services, locations, and conversion routes on ewastekochi.com.`,
+  },
+  {
+    q: `What kinds of keywords does the ${categoryPage.name} hub target?`,
+    a: `The hub mixes short-tail commercial terms with longer "where", "how", and "best option" variations. That helps EwasteKochi capture both direct service intent and upper-funnel public research behavior.`,
+  },
+  {
+    q: `Do these pages link back to service and location landing pages?`,
+    a: `Yes. Every generated page includes contextual links to service pages, nearby location pages, and supporting editorial assets so informational traffic has a route into quotes, pickups, and WhatsApp conversations.`,
+  },
+  {
+    q: `Is the ${categoryPage.name} hub ready for a separate blogs subdomain?`,
+    a: `Yes. The route architecture is built so the content can live under /blogs/ on ewastekochi.com now and be moved to a dedicated blogs.ewastekochi.com deployment later by updating the host configuration.`,
+  },
+];
+
+const pageSchema = {
+  '@type': 'CollectionPage',
+  name: pageTitle,
+  description: pageDescription,
+  isPartOf: `${blogLibraryConfig.host}/blogs/`,
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  schema={pageSchema}
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  chatbotContext={categoryPage.pageContext}
+>
+  <Navbar currentPath="/blogs/" />
+
+  <main>
+    <section class="section category-hero">
+      <div class="wrap category-hero-grid">
+        <div>
+          <div class="category-badge">{categoryPage.emoji} {categoryPage.name}</div>
+          <h1 class="sec-title">{categoryPage.name} built for <em>local search capture</em> and service conversion.</h1>
+          <p class="sec-sub">{categoryPage.summary} Every page in this cluster is connected back to real money pages, real local pages, and a page-aware chatbot.</p>
+
+          <div class="category-stats">
+            <div>
+              <strong>{categoryPage.articleCount}</strong>
+              <span>cluster pages</span>
+            </div>
+            <div>
+              <strong>{categoryPage.shortTailKeywords.length}</strong>
+              <span>short-tail anchors</span>
+            </div>
+            <div>
+              <strong>{categoryPage.geoTargets.length}</strong>
+              <span>geo targets</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="category-panel">
+          <h2>Short-tail focus keywords</h2>
+          <div class="keyword-grid">
+            {categoryPage.shortTailKeywords.map((keyword) => (
+              <span>{keyword}</span>
+            ))}
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section-alt">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="sec-eyebrow">Public Search Intent</p>
+          <h2 class="sec-title">Question-led prompts this cluster is designed to absorb.</h2>
+        </div>
+
+        <div class="question-grid">
+          {categoryPage.publicQuestions.map((question) => (
+            <article class="question-card">
+              <h3>{question}</h3>
+              <p>{categoryPage.promise.charAt(0).toUpperCase()}{categoryPage.promise.slice(1)}.</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="sec-eyebrow">Topic Clusters</p>
+          <h2 class="sec-title">10 topic groups x 10 service areas = 100 pages.</h2>
+        </div>
+
+        <div class="cluster-grid">
+          {clusters.map((cluster) => (
+            <article class="cluster-card">
+              <div class="cluster-card-head">
+                <h3>{cluster.label}</h3>
+                <span class="badge badge-g">{cluster.posts.length} pages</span>
+              </div>
+              <p>{cluster.keyword.replace('{location}', 'local service areas')}</p>
+              <div class="cluster-links">
+                {cluster.posts.map((post) => (
+                  <a href={`/blogs/${post.categorySlug}/${post.slug}/`}>{post.location.titleLabel}</a>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-alt">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="sec-eyebrow">Supporting Pages</p>
+          <h2 class="sec-title">Service pages this cluster is built to strengthen.</h2>
+        </div>
+
+        <div class="service-link-grid">
+          {categoryPage.serviceLinks.map((link) => (
+            <a class="service-link-card" href={link.href}>{link.label}</a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="sec-eyebrow">Featured Pages</p>
+          <h2 class="sec-title">Representative entries from this category.</h2>
+        </div>
+
+        <div class="featured-grid">
+          {featuredPosts.map((post) => (
+            <a class="featured-card" href={`/blogs/${post.categorySlug}/${post.slug}/`}>
+              <span class="badge badge-b">{post.location.titleLabel}</span>
+              <h3>{post.title}</h3>
+              <p>{post.summary}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .category-hero {
+    padding-top: 110px;
+    padding-bottom: 72px;
+    background:
+      radial-gradient(circle at top right, rgba(0, 232, 150, 0.12), transparent 26%),
+      radial-gradient(circle at bottom left, rgba(170, 255, 87, 0.08), transparent 28%);
+  }
+
+  .category-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+    gap: 28px;
+    align-items: start;
+  }
+
+  .category-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 232, 150, 0.18);
+    background: rgba(0, 232, 150, 0.06);
+    color: var(--green);
+    font-size: 0.78rem;
+    font-weight: 800;
+  }
+
+  .category-stats {
+    margin-top: 26px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .category-stats div,
+  .category-panel,
+  .question-card,
+  .cluster-card,
+  .service-link-card,
+  .featured-card {
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+
+  .category-stats div {
+    padding: 18px;
+  }
+
+  .category-stats strong {
+    display: block;
+    color: var(--white);
+    font-size: 1.7rem;
+    margin-bottom: 6px;
+  }
+
+  .category-stats span {
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  .category-panel {
+    padding: 22px;
+  }
+
+  .category-panel h2 {
+    font-size: 1rem;
+    margin-bottom: 14px;
+  }
+
+  .keyword-grid,
+  .service-link-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .keyword-grid span,
+  .service-link-card {
+    padding: 9px 11px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.82rem;
+  }
+
+  .section-head {
+    margin-bottom: 28px;
+  }
+
+  .question-grid,
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .question-card,
+  .featured-card {
+    padding: 22px;
+  }
+
+  .question-card h3,
+  .cluster-card h3,
+  .featured-card h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .question-card p,
+  .cluster-card p,
+  .featured-card p {
+    color: var(--text);
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  .cluster-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .cluster-card {
+    padding: 22px;
+  }
+
+  .cluster-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .cluster-links {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .cluster-links a,
+  .service-link-card,
+  .featured-card {
+    text-decoration: none;
+  }
+
+  .cluster-links a {
+    padding: 7px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 232, 150, 0.14);
+    background: rgba(0, 232, 150, 0.05);
+    color: var(--green);
+    font-size: 0.76rem;
+    font-weight: 700;
+  }
+
+  .service-link-card {
+    transition: transform 0.18s ease, border-color 0.18s ease;
+  }
+
+  .service-link-card:hover,
+  .featured-card:hover,
+  .cluster-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(0, 232, 150, 0.24);
+  }
+
+  @media (max-width: 900px) {
+    .category-hero-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .category-hero {
+      padding-top: 90px;
+    }
+
+    .category-stats {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

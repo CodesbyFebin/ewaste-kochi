@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { contact } from '../data/contact.js';
+
+const pageTitle = 'Privacy Policy | EWaste Kochi';
+const pageDesc =
+  'Privacy policy for EWaste Kochi covering contact submissions, pickup requests, WhatsApp messages, analytics, and data handling for recycling and ITAD enquiries.';
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.com/' },
+  { name: 'Privacy Policy', url: 'https://ewastekochi.com/privacy-policy/' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} breadcrumbs={breadcrumbs}>
+  <Navbar currentPath="/privacy-policy/" />
+
+  <main class="section">
+    <div class="wrap" style="max-width: 860px;">
+      <p class="sec-eyebrow">Privacy</p>
+      <h1 class="sec-title">Privacy Policy</h1>
+      <p class="sec-sub" style="max-width: none; margin-bottom: 28px;">
+        This policy explains how EWaste Kochi collects and uses information when you contact us for e-waste pickup,
+        ITAD, data destruction, buyback, or recycling support.
+      </p>
+
+      <section class="policy-card">
+        <h2>What we collect</h2>
+        <p>We may collect your name, phone number, email address, company name, pickup location, device details, and any message you send through our forms, calls, email, or WhatsApp.</p>
+      </section>
+
+      <section class="policy-card">
+        <h2>Why we collect it</h2>
+        <p>We use enquiry data to schedule pickups, prepare quotes, confirm services, maintain compliance documentation, and respond to customer support requests.</p>
+      </section>
+
+      <section class="policy-card">
+        <h2>Data-bearing devices</h2>
+        <p>Operational contact information is separate from device data. For retired media and hardware, EWaste Kochi follows documented destruction or sanitization workflows based on the service booked.</p>
+      </section>
+
+      <section class="policy-card">
+        <h2>Analytics and site performance</h2>
+        <p>We may use privacy-conscious analytics and server logs to understand page performance, route demand, and conversion behaviour so we can improve the website.</p>
+      </section>
+
+      <section class="policy-card">
+        <h2>Sharing information</h2>
+        <p>We do not sell your enquiry data. Information may be shared only with logistics, compliance, or service partners where necessary to complete collection, recycling, remarketing, or destruction workflows.</p>
+      </section>
+
+      <section class="policy-card">
+        <h2>Contact</h2>
+        <p>If you need clarification, correction, or deletion support for enquiry data, contact us at <a href={contact.emailLink}>{contact.email}</a> or <a href={contact.phoneLink}>{contact.phoneDisplay}</a>.</p>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .policy-card {
+    padding: 24px;
+    margin-bottom: 16px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+
+  .policy-card h2 {
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+  }
+
+  .policy-card p {
+    color: var(--text);
+    line-height: 1.8;
+    font-size: 0.94rem;
+  }
+</style>

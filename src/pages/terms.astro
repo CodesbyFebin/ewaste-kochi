@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { contact } from '../data/contact.js';
+
+const pageTitle = 'Terms of Service | EWaste Kochi';
+const pageDesc =
+  'Terms of service for EWaste Kochi covering pickup requests, quotes, recycling, data destruction, buyback, and customer responsibilities.';
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.com/' },
+  { name: 'Terms of Service', url: 'https://ewastekochi.com/terms/' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} breadcrumbs={breadcrumbs}>
+  <Navbar currentPath="/terms/" />
+
+  <main class="section">
+    <div class="wrap" style="max-width: 860px;">
+      <p class="sec-eyebrow">Terms</p>
+      <h1 class="sec-title">Terms of Service</h1>
+      <p class="sec-sub" style="max-width: none; margin-bottom: 28px;">
+        These terms apply to website use, pickup requests, quotes, recycling jobs, ITAD engagements, and related
+        support provided by EWaste Kochi.
+      </p>
+
+      <section class="terms-card">
+        <h2>Service scope</h2>
+        <p>Quotes, collection schedules, and documentation depend on the device mix, quantity, location, access conditions, and whether the load contains batteries or data-bearing media.</p>
+      </section>
+
+      <section class="terms-card">
+        <h2>Customer responsibility</h2>
+        <p>Please provide accurate inventory details where possible and flag any hazards, damaged batteries, or restricted-access sites before pickup is booked.</p>
+      </section>
+
+      <section class="terms-card">
+        <h2>Data destruction</h2>
+        <p>When destruction or sanitization services are included, EWaste Kochi follows the documented workflow agreed for the engagement. Certificates and reports are issued according to the booked service type.</p>
+      </section>
+
+      <section class="terms-card">
+        <h2>Buyback and valuation</h2>
+        <p>Indicative values may change after physical inspection, specification verification, condition grading, battery health checks, and market fluctuations affecting resale demand.</p>
+      </section>
+
+      <section class="terms-card">
+        <h2>Website content</h2>
+        <p>Informational pages are provided for general guidance and do not replace formal legal, regulatory, or tax advice. Compliance decisions should be based on your internal requirements and official regulations.</p>
+      </section>
+
+      <section class="terms-card">
+        <h2>Contact</h2>
+        <p>For service clarification or support, reach us at <a href={contact.emailLink}>{contact.email}</a> or <a href={contact.phoneLink}>{contact.phoneDisplay}</a>.</p>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .terms-card {
+    padding: 24px;
+    margin-bottom: 16px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+
+  .terms-card h2 {
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+  }
+
+  .terms-card p {
+    color: var(--text);
+    line-height: 1.8;
+    font-size: 0.94rem;
+  }
+</style>

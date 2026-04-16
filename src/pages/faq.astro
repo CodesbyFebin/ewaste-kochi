@@ -1,0 +1,170 @@
+---
+// faq.astro — GSC-optimised FAQ hub
+// Upgraded April 2026: 50 real GSC-targeted FAQs, better CTR title, proper schema
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { faqCategories, faqs, generateMassiveFaqs } from '../data/faqs.js';
+import { locations } from '../data/locations.js';
+import { services } from '../data/services.js';
+
+const pageTitle = "E-Waste & ITAD FAQ Kochi 2026 — 50 Expert Answers | NIST, DPDP Act, Pickup, Prices";
+const pageDesc = "50 expert answers on e-waste recycling, ITAD, data destruction and DPDP Act compliance in Kochi. Covers pickup costs, buyback prices, KSPCB rules, NIST 800-88, Certificate of Destruction and Kerala e-waste laws.";
+
+const authorityFaqs = generateMassiveFaqs("E-Waste Compliance");
+const allFaqs = [...faqs, ...authorityFaqs].map(f => ({ q: f.q, a: f.a }));
+
+// Sidebar internal links
+const sidebarLinks = [];
+for (let i = 0; i < 40; i++) {
+  const loc = locations[i % locations.length];
+  const svc = services[i % services.length];
+  sidebarLinks.push({ title: `${svc.shortName} — ${loc.name}`, url: `/locations/${loc.slug}/${svc.slug}/` });
+}
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.com/' },
+  { name: 'FAQ', url: 'https://ewastekochi.com/faq/' },
+];
+
+// Category labels + anchors for jump nav
+const catAnchors = [
+  { id: 'general',      label: 'General', color: 'var(--green)' },
+  { id: 'itad',         label: 'ITAD', color: 'var(--blue)' },
+  { id: 'data',         label: 'Data Security', color: 'var(--red)' },
+  { id: 'compliance',   label: 'DPDP & Legal', color: 'var(--amber)' },
+  { id: 'locations',    label: 'Kochi Pickup', color: 'var(--green)' },
+  { id: 'buyback',      label: 'Prices', color: 'var(--amber)' },
+  { id: 'recycling',    label: 'Recycling', color: 'var(--green)' },
+  { id: 'battery',      label: 'Batteries', color: 'var(--amber)' },
+  { id: 'certifications', label: 'Certificates', color: 'var(--blue)' },
+  { id: 'server',       label: 'Servers', color: 'var(--muted)' },
+  { id: 'residential',  label: 'Home Users', color: 'var(--green)' },
+  { id: 'partnerships', label: 'Corporate', color: 'var(--blue)' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} faqs={allFaqs} breadcrumbs={breadcrumbs}>
+  <Navbar currentPath="/faq/" />
+  <main>
+
+    <!-- HERO -->
+    <section style="padding:80px 0 60px;background:linear-gradient(145deg,var(--bg),var(--surface))">
+      <div class="wrap">
+        <nav aria-label="Breadcrumb" style="font-size:.8rem;color:var(--muted);margin-bottom:20px">
+          <a href="/" style="color:var(--green)">Home</a> › FAQ
+        </nav>
+        <div class="badge badge-a" style="margin-bottom:16px">❓ 50 Expert-Verified Answers · Updated April 2026</div>
+        <h1 style="font-size:clamp(2rem,5vw,3.8rem);line-height:1.05;margin-bottom:16px;font-weight:800;letter-spacing:-.03em">
+          E-Waste & ITAD <span style="color:var(--green)">FAQ</span> Kochi<br/>50 Questions Answered
+        </h1>
+        <p style="font-size:1rem;color:var(--text);max-width:640px;line-height:1.65;margin-bottom:30px;font-family:var(--serif);font-style:italic">
+          Expert answers on e-waste recycling, ITAD, data destruction, DPDP Act 2023, pickup costs, buyback prices and Kerala e-waste laws — from Kochi's certified KSPCB-authorized recycler.
+        </p>
+        <!-- Jump nav -->
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+          {catAnchors.map(c => (
+            <a href={`#${c.id}`} style={`font-size:.75rem;font-weight:700;padding:5px 14px;border-radius:20px;border:1px solid ${c.color}33;color:${c.color};background:${c.color}11;text-decoration:none;transition:all .2s`}>{c.label}</a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN FAQ BODY -->
+    <section class="section-alt">
+      <div class="wrap">
+        <div style="display:grid;grid-template-columns:1fr 300px;gap:60px;align-items:start">
+
+          <!-- FAQ CONTENT -->
+          <div>
+            {catAnchors.map(cat => {
+              const catFaqs = faqs.filter(f => f.category === cat.id);
+              if (catFaqs.length === 0) return null;
+              const catMeta = faqCategories.find(c => c.id === cat.id);
+              return (
+                <div id={cat.id} style="margin-bottom:60px;scroll-margin-top:90px">
+                  <div style={`display:flex;align-items:center;gap:12px;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--border)`}>
+                    <span style="font-size:1.5rem">{catMeta?.icon}</span>
+                    <h2 style={`font-size:1.5rem;color:${cat.color};letter-spacing:-.02em`}>{catMeta?.name}</h2>
+                    <span style="font-size:.72rem;color:var(--muted);font-family:var(--mono);margin-left:auto">{catFaqs.length} questions</span>
+                  </div>
+                  <div class="faq-list">
+                    {catFaqs.map(f => (
+                      <div class="faq-item">
+                        <button class="faq-q">
+                          <span class="faq-qt">{f.q}</span>
+                          <span class="faq-ic">+</span>
+                        </button>
+                        <div class="faq-a">
+                          <p class="faq-at">{f.a}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+
+            <!-- CTA -->
+            <div style="background:rgba(0,232,150,.06);border:1px solid rgba(0,232,150,.18);border-radius:16px;padding:35px;text-align:center;margin-top:30px">
+              <h3 style="font-size:1.4rem;margin-bottom:10px">Still Have Questions?</h3>
+              <p style="color:var(--muted);font-size:.9rem;margin-bottom:25px">Our certified ITAD experts respond within 15 minutes Mon–Sat 8AM–8PM.</p>
+              <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+                <a href="https://wa.me/917500555454?text=Hi%2C+I+have+a+question+about+ewaste+in+Kochi" target="_blank" rel="noopener" class="btn btn-wa">💬 WhatsApp Us</a>
+                <a href="/contact/" class="btn btn-outline">Contact Page →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- STICKY SIDEBAR -->
+          <aside style="position:sticky;top:90px">
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:20px">
+              <h4 style="font-size:.85rem;color:var(--white);margin-bottom:4px">Book Free Pickup</h4>
+              <p style="font-size:.78rem;color:var(--muted);margin-bottom:16px">10+ devices — free anywhere in Ernakulam</p>
+              <a href="https://wa.me/917500555454" target="_blank" rel="noopener" class="btn btn-wa btn-sm" style="width:100%;justify-content:center;margin-bottom:8px">💬 WhatsApp</a>
+              <a href="/contact/" class="btn btn-outline btn-sm" style="width:100%;justify-content:center">Request Pickup</a>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:20px">
+              <h4 style="font-size:.8rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--green);margin-bottom:14px">Location Services</h4>
+              <div style="display:flex;flex-direction:column;gap:2px;max-height:380px;overflow-y:auto">
+                {sidebarLinks.map(link => (
+                  <a href={link.url} style="font-size:.73rem;color:var(--muted);padding:6px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;transition:color .2s">
+                    <span style="color:var(--green);font-size:.7rem">→</span>{link.title}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- RELATED PAGES -->
+    <section class="section">
+      <div class="wrap">
+        <h2 class="sec-title" style="margin-bottom:2rem">Explore Our <em>Services</em></h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px">
+          {[
+            {label:'Corporate ITAD Kochi', url:'/itad/'},
+            {label:'Data Destruction Kochi', url:'/services/data-destruction-kochi/'},
+            {label:'Hard Drive Shredding', url:'/services/hard-drive-shredding-kochi/'},
+            {label:'Sell Old Laptop Kochi', url:'/sell-electronics-kochi/'},
+            {label:'Free E-Waste Pickup', url:'/services/free-ewaste-pickup-kochi/'},
+            {label:'E-Waste Recycling', url:'/ewaste/'},
+            {label:'DPDP Act 2023 Guide', url:'/services/dpdp-act-compliance-kochi/'},
+            {label:'Certificate of Destruction', url:'/services/certificate-of-destruction-kochi/'},
+            {label:'vs Cashify', url:'/cashify-vs-ewastekochi/'},
+            {label:'Marketplace', url:'/marketplace/'},
+          ].map(link => (
+            <a href={link.url} style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;font-size:.85rem;color:var(--text);display:flex;align-items:center;gap:8px;transition:all .2s">
+              <span style="color:var(--green)">→</span>{link.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,159 @@
+---
+// e-waste-collection-kochi.astro
+// GSC target: "e waste collection kochi" (pos 8.3, 23 impressions, 1 click)
+// GSC target: "e waste collection near me" (pos 6.0, 6 impressions)
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { contact } from '../data/contact.js';
+
+const pageTitle = "E-Waste Collection Kochi — Free Pickup for Offices & Homes | KSPCB Authorized | EWaste Kochi";
+const pageDesc = "Free e-waste collection in Kochi for 10+ devices. Same-day pickup at Infopark, Kakkanad, Smart City, MG Road, Thrippunithura, Edappally and all Ernakulam. KSPCB authorized. NIST data wipe + Certificate of Destruction included.";
+
+const areas = [
+  { name: 'Infopark', type: 'IT Park', sla: 'Same-day', slug: 'infopark-kochi' },
+  { name: 'Smart City', type: 'IT Park', sla: 'Same-day', slug: 'smart-city-kochi' },
+  { name: 'Kakkanad', type: 'IT Hub', sla: 'Same-day', slug: 'kakkanad' },
+  { name: 'Edappally', type: 'Commercial', sla: 'Next day', slug: 'edappally' },
+  { name: 'MG Road', type: 'Commercial', sla: 'Next day', slug: 'ernakulam-south' },
+  { name: 'Thrippunithura', type: 'Residential', sla: '24 hours', slug: 'thrippunithura' },
+  { name: 'Aluva', type: 'Industrial', sla: '24 hours', slug: 'aluva' },
+  { name: 'Kalamassery', type: 'Industrial', sla: '24 hours', slug: 'kalamassery' },
+  { name: 'Fort Kochi', type: 'Mixed', sla: '24 hours', slug: 'fort-kochi' },
+  { name: 'Vytilla', type: 'Mixed', sla: '24 hours', slug: 'vyttila' },
+  { name: 'Maradu', type: 'Residential', sla: '24 hours', slug: 'maradu' },
+  { name: 'Angamaly', type: 'Commercial', sla: '48 hours', slug: 'angamaly' },
+];
+
+const acceptedItems = [
+  { cat: '💻 IT Equipment', items: 'Laptops, MacBooks, desktops, servers, workstations, monitors, printers, networking gear, UPS systems' },
+  { cat: '📱 Mobile Devices', items: 'Smartphones (all brands), feature phones, tablets, smartwatches, e-readers' },
+  { cat: '📺 Consumer Electronics', items: 'TVs (LED/LCD/CRT), DVD/Blu-ray players, gaming consoles, set-top boxes, cameras' },
+  { cat: '❄️ Large Appliances', items: 'Air conditioners, refrigerators, washing machines, microwave ovens, dishwashers' },
+  { cat: '🔋 Batteries & Power', items: 'Laptop batteries, Li-ion packs, lead-acid batteries, UPS units, inverters, solar batteries' },
+  { cat: '🔌 All Other Electronics', items: 'Printers, scanners, LED/CFL bulbs, EPABX systems, lab equipment, medical monitors' },
+];
+
+const faqs = [
+  { q: 'Is e-waste collection free in Kochi?', a: 'Free collection for 10+ devices anywhere in Ernakulam district. Walk-in drop-off at our Thrippunithura facility is always free regardless of quantity. For 1–9 items: ₹99 pickup fee. Buyback items (working laptops, phones) are always free pickup.' },
+  { q: 'How fast is e-waste collection in Kochi?', a: 'Infopark and Smart City: same-day slots available Mon–Sat 8AM–4PM (book before noon). Kakkanad, Edappally, MG Road: typically same-day or next morning. All other Ernakulam areas: within 24 hours of booking. Emergency corporate pickup: 4-hour SLA available.' },
+  { q: 'What documents do I get when my e-waste is collected?', a: 'At pickup: E-Waste Transfer Manifest (as required by E-Waste Rules 2022), barcode receipt for every device, and a digital pickup confirmation. After destruction: Certificate of Destruction (within 24 hours), KSPCB recycling certificate, and DPDP Act compliance declaration.' },
+  { q: 'Do you collect e-waste from residential areas in Kochi?', a: 'Yes. We service all residential areas in Ernakulam — from apartments in Kakkanad to independent houses in Thrippunithura, Aluva and Perumbavoor. For residential pickup: 1–9 items (₹99 fee), 10+ items (free). We accept old TVs, ACs, fridges, computers and all electronics.' },
+];
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.com/' },
+  { name: 'E-Waste Collection Kochi', url: 'https://ewastekochi.com/e-waste-collection-kochi/' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} faqs={faqs} breadcrumbs={breadcrumbs}>
+  <Navbar currentPath="/e-waste-collection-kochi/" />
+  <main>
+
+    <section style="padding:80px 0 60px;background:var(--bg)">
+      <div class="wrap">
+        <nav aria-label="Breadcrumb" style="font-size:.8rem;color:var(--muted);margin-bottom:20px">
+          <a href="/" style="color:var(--green)">Home</a> › E-Waste Collection Kochi
+        </nav>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px">
+          <span class="badge badge-g">🚚 Free for 10+ Devices</span>
+          <span class="badge badge-b">⚡ Same-Day Infopark</span>
+          <span class="badge badge-g">♻️ KSPCB Authorized</span>
+        </div>
+        <h1 style="font-size:clamp(2rem,5vw,3.8rem);line-height:1.05;margin-bottom:18px;font-weight:800;letter-spacing:-.03em">
+          Free E-Waste <span style="color:var(--green)">Collection</span> in Kochi<br/>
+          <span style="font-size:60%;color:var(--muted);font-family:var(--serif);font-style:italic">Ernakulam's Most Trusted Certified Pickup Service</span>
+        </h1>
+        <p style="font-size:1rem;color:var(--text);max-width:640px;line-height:1.7;margin-bottom:35px;font-family:var(--serif);font-style:italic">
+          KSPCB-authorized e-waste collection across all of Kochi. Free for 10+ devices. Same-day at Infopark. NIST data destruction and Certificate of Destruction included with every corporate collection.
+        </p>
+        <div style="display:flex;gap:15px;flex-wrap:wrap">
+          <a href={contact.whatsappMessage} target="_blank" rel="noopener" class="btn btn-wa btn-lg">💬 Schedule Collection Now</a>
+          <a href={contact.phoneLink} class="btn btn-primary btn-lg">📞 {contact.phoneDisplay}</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING TABLE -->
+    <section class="section-alt">
+      <div class="wrap">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start">
+          <div>
+            <h2 class="sec-title">Collection <em>Pricing</em></h2>
+            <div style="border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-top:20px">
+              {[
+                { qty: '50+ units — corporate', price: 'FREE', color: 'var(--green)', area: 'All Ernakulam' },
+                { qty: '10–49 units', price: 'FREE', color: 'var(--green)', area: 'All Ernakulam' },
+                { qty: '1–9 units (residential)', price: '₹99 flat', color: 'var(--amber)', area: 'Kochi city' },
+                { qty: 'Walk-in drop-off', price: 'FREE', color: 'var(--green)', area: 'Our facility' },
+                { qty: 'Buyback items (₹2K+)', price: 'FREE', color: 'var(--green)', area: 'All Ernakulam' },
+                { qty: 'Pan-Kerala corporate', price: 'Quoted', color: 'var(--muted)', area: 'All Kerala' },
+              ].map((r, i) => (
+                <div style={`display:flex;justify-content:space-between;align-items:center;padding:13px 20px;${i>0?'border-top:1px solid var(--border)':''};${i%2===0?'background:rgba(255,255,255,.01)':''}`}>
+                  <div>
+                    <div style="font-size:.88rem;color:var(--white);font-weight:500">{r.qty}</div>
+                    <div style="font-size:.72rem;color:var(--muted);margin-top:2px">{r.area}</div>
+                  </div>
+                  <div style={`font-size:1.1rem;font-weight:800;color:${r.color}`}>{r.price}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h2 class="sec-title">Service <em>Areas</em> & SLA</h2>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:20px">
+              {areas.map(a => (
+                <a href={`/locations/${a.slug}/`} style="display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 16px;text-decoration:none;transition:border-color .2s">
+                  <div>
+                    <span style="font-size:.88rem;font-weight:600;color:var(--white)">{a.name}</span>
+                    <span style="font-size:.72rem;color:var(--muted);margin-left:8px">{a.type}</span>
+                  </div>
+                  <span style={`font-size:.75rem;font-weight:700;${a.sla==='Same-day'?'color:var(--green)':a.sla==='Next day'?'color:var(--amber)':'color:var(--muted)'}`}>{a.sla}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT WE COLLECT -->
+    <section class="section">
+      <div class="wrap">
+        <h2 class="sec-title" style="margin-bottom:2rem">What We <em>Collect</em></h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px">
+          {acceptedItems.map(item => (
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px">
+              <h3 style="font-size:.92rem;margin-bottom:8px">{item.cat}</h3>
+              <p style="font-size:.8rem;color:var(--muted);line-height:1.55">{item.items}</p>
+            </div>
+          ))}
+        </div>
+        <div style="background:rgba(0,232,150,.05);border:1px solid rgba(0,232,150,.18);border-radius:12px;padding:18px 22px;margin-top:20px;font-size:.88rem;color:var(--text)">
+          <strong style="color:var(--green)">✓ Broken & non-working devices accepted too.</strong> Every device — working or not — is collected free for 10+ units. Non-working electronics still contain valuable materials that must be responsibly recycled.
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ + CTA -->
+    <section class="section-alt">
+      <div class="wrap" style="max-width:860px">
+        <h2 class="sec-title" style="text-align:center;margin-bottom:2rem">Collection <em>FAQs</em></h2>
+        <div class="faq-list">
+          {faqs.map(f => (
+            <div class="faq-item">
+              <button class="faq-q"><span class="faq-qt">{f.q}</span><span class="faq-ic">+</span></button>
+              <div class="faq-a"><p class="faq-at">{f.a}</p></div>
+            </div>
+          ))}
+        </div>
+        <div style="text-align:center;margin-top:40px">
+          <a href={contact.whatsappMessage} target="_blank" rel="noopener" class="btn btn-wa btn-lg">💬 Schedule Free Collection</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>

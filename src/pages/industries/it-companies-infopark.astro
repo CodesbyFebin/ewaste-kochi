@@ -1,0 +1,86 @@
+---
+// industries/it-companies-infopark.astro
+// GSC: pos 26, 12 impressions — needs full content to reach page 1
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { contact } from '../../data/contact.js';
+
+const pageTitle = "ITAD & E-Waste Recycling for IT Companies at Infopark Kochi | Same-Day | EWaste Kochi";
+const pageDesc = "Preferred ITAD partner for IT companies at Infopark Kochi. Same-day certified pickup, NIST 800-88 data destruction, Certificate of Destruction, DPDP Act compliant. Serving Infopark Phase 1, Phase 2, Smart City and Kakkanad campus.";
+
+const faqs = [
+  { q: 'Is same-day ITAD pickup available for Infopark companies?', a: 'Yes. EWaste Kochi provides same-day priority pickup for IT companies in Infopark Phase 1, Phase 2 and Smart City. Book before noon for a same-day afternoon slot. For urgent server decommissions, we offer a 4-hour SLA — call +91-75005-55454.' },
+  { q: 'How does EWaste Kochi handle ITAD for ISO 27001 certified Infopark companies?', a: 'Our CoD and chain-of-custody documentation is specifically designed to satisfy ISO 27001 Annex A.8.10 requirements on data destruction. We work with your IT security team to align documentation format with your ISMS requirements. Several Infopark companies use our CoD for client-facing compliance assurance.' },
+  { q: 'Can clients of Infopark IT companies audit EWaste Kochi\'s ITAD process?', a: 'Yes. We welcome vendor audits from enterprise clients. We can provide our KSPCB authorization certificate, facility tour (scheduled), NIST process documentation, sample CoD and our data breach liability insurance certificate for your due diligence.' },
+];
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.com/' },
+  { name: 'Industries', url: 'https://ewastekochi.com/industries/' },
+  { name: 'IT Companies — Infopark', url: 'https://ewastekochi.com/industries/it-companies-infopark/' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} faqs={faqs} breadcrumbs={breadcrumbs}>
+  <Navbar currentPath="/industries/it-companies-infopark/" />
+  <main>
+    <section style="padding:80px 0 60px;background:var(--bg)">
+      <div class="wrap">
+        <nav aria-label="Breadcrumb" style="font-size:.8rem;color:var(--muted);margin-bottom:20px">
+          <a href="/" style="color:var(--green)">Home</a> › <a href="/industries/" style="color:var(--green)">Industries</a> › IT Companies — Infopark
+        </nav>
+        <div class="badge badge-b" style="margin-bottom:16px">🏢 Preferred ITAD Partner — Infopark Kochi</div>
+        <h1 style="font-size:clamp(2rem,5vw,3.8rem);line-height:1.05;margin-bottom:18px;font-weight:800;letter-spacing:-.03em">
+          ITAD & E-Waste for <span style="color:var(--green)">IT Companies</span><br/>at Infopark Kochi
+        </h1>
+        <p style="font-size:1rem;color:var(--text);max-width:640px;line-height:1.7;margin-bottom:35px;font-family:var(--serif);font-style:italic">
+          Serving 127+ IT companies at Infopark Phase 1, Phase 2, Smart City and Kakkanad campus. Same-day ITAD pickup. NIST/DoD data destruction. ISO 27001-aligned documentation. DPDP Act 2023 compliant.
+        </p>
+        <div style="display:flex;gap:15px;flex-wrap:wrap">
+          <a href={contact.whatsappMessage} target="_blank" rel="noopener" class="btn btn-wa btn-lg">💬 Book Same-Day Pickup</a>
+          <a href="/itad/" class="btn btn-outline btn-lg">Full ITAD Services →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-alt">
+      <div class="wrap">
+        <h2 class="sec-title" style="margin-bottom:1.5rem">Why Infopark Companies <em>Choose</em> EWaste Kochi</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px">
+          {[
+            { icon: '⚡', t: 'Same-Day Service', d: 'Priority pickup for Infopark Phase 1 & 2, Smart City and Kakkanad. Book before noon, pickup that afternoon.' },
+            { icon: '🔒', t: 'ISO 27001 Aligned Docs', d: 'Certificate of Destruction format compatible with ISO 27001 Annex A.8.10 and your enterprise client audit requirements.' },
+            { icon: '🏢', t: 'Multi-Site Coordination', d: 'Multiple Infopark offices? We coordinate simultaneous pickup across phases and produce a single consolidated compliance report.' },
+            { icon: '🌙', t: 'After-Hours Available', d: 'Evening and weekend pickup available to avoid disruption to your IT operations. Schedule around your maintenance windows.' },
+            { icon: '📋', t: 'Client Audit Ready', d: 'Our documentation is accepted by Fortune 500 clients auditing their Indian IT vendors\' data destruction practices.' },
+            { icon: '💰', t: 'Best Buyback Rates', d: 'Corporate laptop refresh? We pay premium rates for Dell, HP, Lenovo and Apple business devices in bulk lots from Infopark clients.' },
+          ].map(c => (
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px">
+              <div style="font-size:1.8rem;margin-bottom:10px">{c.icon}</div>
+              <h3 style="font-size:.93rem;margin-bottom:7px">{c.t}</h3>
+              <p style="font-size:.82rem;color:var(--muted);line-height:1.55">{c.d}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap" style="max-width:860px">
+        <div class="faq-list">
+          {faqs.map(f => (
+            <div class="faq-item">
+              <button class="faq-q"><span class="faq-qt">{f.q}</span><span class="faq-ic">+</span></button>
+              <div class="faq-a"><p class="faq-at">{f.a}</p></div>
+            </div>
+          ))}
+        </div>
+        <div style="text-align:center;margin-top:40px">
+          <a href={contact.whatsappMessage} target="_blank" rel="noopener" class="btn btn-wa btn-lg">💬 Talk to Our Infopark Team</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

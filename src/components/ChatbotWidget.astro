@@ -1,0 +1,21 @@
+---
+import { contact } from '../data/contact.js';
+
+interface Props {
+  pageContext?: string;
+}
+
+const { pageContext = 'homepage' } = Astro.props;
+---
+
+<div
+  id="ew-chat-root"
+  data-page={pageContext}
+  data-phone={contact.phoneDisplay}
+  data-phone-link={contact.phoneLink}
+  data-whatsapp-number={contact.whatsappNumber}
+  data-whatsapp-link={contact.whatsappMessage}
+></div>
+
+<link rel="stylesheet" href="/chatbot-widget.css">
+<script type="module" src="/chatbot-widget.js"></script>

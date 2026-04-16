@@ -1,0 +1,143 @@
+---
+// dpdp-act-kochi.astro
+// GSC target: DPDP Act queries (pos 8.4, 8 impressions)
+// Also targets: "DPDP act 2023 india", "data protection act india ewaste"
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { contact } from '../data/contact.js';
+
+const pageTitle = "DPDP Act 2023 & E-Waste Kochi — Data Destruction Compliance Guide | EWaste Kochi";
+const pageDesc = "India's DPDP Act 2023 requires certified data destruction before retiring IT equipment. Penalties up to ₹250 crore. How Kochi businesses can comply with NIST 800-88 certified destruction and Certificate of Destruction from EWaste Kochi.";
+
+const penalties = [
+  { section: 'Sec 8(7)', obligation: 'Erase personal data when purpose fulfilled', penalty: 'Up to ₹50 Cr', color: 'var(--amber)' },
+  { section: 'Sec 66', obligation: 'Inadequate data security safeguards', penalty: 'Up to ₹250 Cr', color: 'var(--red)' },
+  { section: 'E-Waste Rules', obligation: 'Improper e-waste disposal (non-KSPCB)', penalty: '₹1L/day', color: 'var(--amber)' },
+];
+
+const complianceSteps = [
+  { n: '01', t: 'Classify Device Data', d: 'Identify all data-bearing devices being retired. Classify data sensitivity: low (general files), medium (HR/financial records), high (customer PII, payment data, medical).' },
+  { n: '02', t: 'Choose Destruction Method', d: 'Low sensitivity: NIST Clear (software overwrite). Medium: NIST Purge (cryptographic erase or degauss). High/any SSD: NIST Destroy (physical shredding). Our team advises the right level.' },
+  { n: '03', t: 'Engage Certified Vendor', d: 'Use only a KSPCB-authorized ITAD vendor with NIST 800-88 certification. Verify authorization number. EWaste Kochi: Auth. No. KL/EW/628.' },
+  { n: '04', t: 'Obtain Certificate of Destruction', d: 'Every device must receive a serial-numbered CoD listing the destruction method, date and NIST level. This is your DPDP Act audit evidence.' },
+  { n: '05', t: 'Maintain Audit Records', d: 'Keep CoDs, E-Waste Manifests and compliance declarations for 3+ years. Your DPO should store these in your Data Processing Register as evidence of technical and organizational measures.' },
+];
+
+const faqs = [
+  { q: 'What is the DPDP Act 2023 and how does it affect IT disposal in India?', a: 'India\'s Digital Personal Data Protection Act 2023 makes businesses legally responsible for permanently erasing personal data when IT devices are retired. Simply deleting files or reformatting is not sufficient — certified destruction is required. Non-compliance can attract penalties from ₹50 crore to ₹250 crore under Section 66.' },
+  { q: 'Which Kochi businesses are most affected by DPDP Act data destruction requirements?', a: 'Every business that processes personal data — which includes virtually all companies in Kochi. Highest exposure: IT companies at Infopark (customer databases, employee records), banks on MG Road (customer KYC data), hospitals (patient health records), BPOs and call centres (customer PII), and any company that uses CRM, HR or ERP software.' },
+  { q: 'Does NIST 800-88 data destruction satisfy DPDP Act 2023 requirements?', a: 'Yes. While the DPDP Act doesn\'t mandate a specific standard, NIST SP 800-88 R1 is accepted by Data Protection Board of India auditors, Big 4 accounting firms and courts as satisfying the Act\'s destruction obligation. EWaste Kochi\'s Certificate of Destruction specifically references NIST 800-88 compliance, making it suitable as DPO audit evidence.' },
+  { q: 'What documents does EWaste Kochi provide for DPDP Act compliance?', a: 'Our DPDP compliance package includes: Certificate of Destruction with device serial numbers and NIST level, DPDP Act Data Disposal Declaration signed by our authorized representative, E-Waste Transfer Manifest (KSPCB format), and a process description document suitable for your DPO\'s Technical and Organizational Measures register.' },
+  { q: 'Are startups and small companies in Kochi also subject to DPDP Act data destruction?', a: 'Yes. The DPDP Act applies to any "data fiduciary" — any entity that processes personal data — regardless of company size. A 10-person startup in Infopark with customer email addresses is a data fiduciary. When they retire laptops, they must ensure personal data is properly destroyed. Penalties are scaled by violation severity, but small companies are not exempt.' },
+];
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.com/' },
+  { name: 'DPDP Act Kochi', url: 'https://ewastekochi.com/dpdp-act-kochi/' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} faqs={faqs} breadcrumbs={breadcrumbs}>
+  <Navbar currentPath="/dpdp-act-kochi/" />
+  <main>
+
+    <section style="padding:80px 0 60px;background:radial-gradient(circle at 30% 50%,rgba(245,166,35,.06),transparent),var(--bg)">
+      <div class="wrap">
+        <nav aria-label="Breadcrumb" style="font-size:.8rem;color:var(--muted);margin-bottom:20px">
+          <a href="/" style="color:var(--green)">Home</a> › DPDP Act Kochi
+        </nav>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px">
+          <span class="badge badge-a">⚖️ DPDP Act 2023</span>
+          <span class="badge badge-r">⚠️ Up to ₹250 Cr Penalty</span>
+          <span class="badge badge-g">✓ Compliance Solved</span>
+        </div>
+        <h1 style="font-size:clamp(2rem,5vw,3.8rem);line-height:1.05;margin-bottom:18px;font-weight:800;letter-spacing:-.03em">
+          <span style="color:var(--amber)">DPDP Act 2023</span> & E-Waste<br/>
+          <span style="color:var(--green)">Data Destruction</span> Compliance<br/>
+          <span style="font-size:55%;color:var(--muted)">Kochi · Kerala · India</span>
+        </h1>
+        <p style="font-size:1rem;color:var(--text);max-width:640px;line-height:1.7;margin-bottom:35px;font-family:var(--serif);font-style:italic">
+          India's DPDP Act 2023 requires every business to permanently destroy personal data when retiring IT equipment. Penalties reach ₹250 crore. EWaste Kochi's NIST 800-88 certified destruction and Certificate of Destruction is your compliance solution.
+        </p>
+        <div style="display:flex;gap:15px;flex-wrap:wrap">
+          <a href={contact.whatsappMessage} target="_blank" rel="noopener" class="btn btn-wa btn-lg">💬 Get Compliance Quote</a>
+          <a href="/services/data-destruction-kochi/" class="btn btn-outline btn-lg">Data Destruction →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PENALTY TABLE -->
+    <section class="section-alt">
+      <div class="wrap">
+        <h2 class="sec-title" style="margin-bottom:1.5rem">DPDP Act <em>Penalties</em> You Must Avoid</h2>
+        <div style="border:1px solid rgba(255,71,87,.2);border-radius:14px;overflow:hidden;max-width:700px">
+          <div style="background:rgba(255,71,87,.07);padding:14px 20px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--red);display:grid;grid-template-columns:1fr 2fr 1fr">
+            <span>Section</span><span>Obligation</span><span style="text-align:right">Max Penalty</span>
+          </div>
+          {penalties.map(p => (
+            <div style="padding:14px 20px;border-top:1px solid rgba(255,71,87,.1);display:grid;grid-template-columns:1fr 2fr 1fr;align-items:center">
+              <span style="font-size:.82rem;font-family:var(--mono);color:var(--muted)">{p.section}</span>
+              <span style="font-size:.85rem;color:var(--white)">{p.obligation}</span>
+              <span style={`font-size:1rem;font-weight:800;color:${p.color};text-align:right`}>{p.penalty}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 5-STEP COMPLIANCE -->
+    <section class="section">
+      <div class="wrap">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start">
+          <div>
+            <div class="sec-eyebrow">How to Comply</div>
+            <h2 class="sec-title">5-Step DPDP Act <em>Compliance</em> for IT Disposal</h2>
+            <div style="display:flex;flex-direction:column;gap:20px;margin-top:24px">
+              {complianceSteps.map(s => (
+                <div style="display:flex;gap:16px;align-items:flex-start">
+                  <div style="width:42px;height:42px;border-radius:50%;background:rgba(0,232,150,.1);border:1px solid rgba(0,232,150,.2);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.82rem;font-weight:700;color:var(--green);flex-shrink:0">{s.n}</div>
+                  <div>
+                    <h4 style="font-size:.93rem;margin-bottom:5px;color:var(--white)">{s.t}</h4>
+                    <p style="font-size:.83rem;color:var(--muted);line-height:1.6">{s.d}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style="position:sticky;top:90px">
+            <div style="background:rgba(0,232,150,.04);border:1px solid rgba(0,232,150,.18);border-radius:16px;padding:30px">
+              <div class="sec-eyebrow">EWaste Kochi Compliance Package</div>
+              <h3 style="font-size:1.2rem;margin-bottom:16px">Everything Your DPO Needs</h3>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px">
+                {['Certificate of Destruction — NIST 800-88 level per device','DPDP Act Data Disposal Declaration (signed)','E-Waste Transfer Manifest (KSPCB format)','Chain-of-Custody documentation','Technical & Organizational Measures description','Audit-ready PDF package within 24 hours'].map(item => (
+                  <li style="display:flex;align-items:flex-start;gap:10px;font-size:.85rem;color:var(--text)">
+                    <span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span>{item}
+                  </li>
+                ))}
+              </ul>
+              <a href={contact.whatsappMessage} target="_blank" rel="noopener" class="btn btn-wa" style="width:100%;justify-content:center">💬 Get DPDP Compliance Quote</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section-alt">
+      <div class="wrap" style="max-width:860px">
+        <h2 class="sec-title" style="text-align:center;margin-bottom:2rem">DPDP Act <em>FAQ</em></h2>
+        <div class="faq-list">
+          {faqs.map(f => (
+            <div class="faq-item">
+              <button class="faq-q"><span class="faq-qt">{f.q}</span><span class="faq-ic">+</span></button>
+              <div class="faq-a"><p class="faq-at">{f.a}</p></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>

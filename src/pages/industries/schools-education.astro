@@ -1,0 +1,80 @@
+---
+// industries/schools-education.astro
+// GSC: pos 57, 14 impressions — "it disposal services for education"
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { contact } from '../../data/contact.js';
+
+const pageTitle = "IT Disposal & E-Waste for Schools, Colleges & Education in Kochi | EWaste Kochi";
+const pageDesc = "Certified e-waste and IT disposal services for schools, colleges and educational institutions in Kochi and Kerala. Free collection drives. KSPCB authorized. Student awareness programs. Compliance for CBSE/ICSE/Kerala board schools.";
+
+const faqs = [
+  { q: 'Do you organize free e-waste collection drives for schools in Kochi?', a: 'Yes. EWaste Kochi regularly partners with CBSE, ICSE and Kerala State Board schools across Kochi for annual e-waste collection drives. We provide logistics, collection bins, student participation certificates and awareness session facilitation at no cost for drives collecting 50kg+ of e-waste.' },
+  { q: 'What IT disposal documentation do schools need in Kerala?', a: 'Schools and colleges with government or government-aided status are classified as bulk consumers under E-Waste Rules 2022 and must channel all e-waste to KSPCB-authorized recyclers like EWaste Kochi. We provide E-Waste Transfer Manifests for audit purposes. For data-bearing devices (computer lab PCs, teacher laptops), we provide Certificates of Destruction.' },
+  { q: 'Is IT disposal free for schools and NGOs in Kochi?', a: 'Free pickup for 10+ devices. For schools conducting community drives and NGOs, we offer special arrangements including free pickup for smaller quantities. Contact us to discuss arrangements for your institution.' },
+];
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.com/' },
+  { name: 'Schools & Education', url: 'https://ewastekochi.com/industries/schools-education/' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} faqs={faqs} breadcrumbs={breadcrumbs}>
+  <Navbar currentPath="/industries/schools-education/" />
+  <main>
+    <section style="padding:80px 0 60px;background:var(--bg)">
+      <div class="wrap">
+        <nav aria-label="Breadcrumb" style="font-size:.8rem;color:var(--muted);margin-bottom:20px">
+          <a href="/" style="color:var(--green)">Home</a> › Schools & Education E-Waste
+        </nav>
+        <h1 style="font-size:clamp(2rem,5vw,3.8rem);line-height:1.05;margin-bottom:18px;font-weight:800;letter-spacing:-.03em">
+          IT Disposal Services for <span style="color:var(--green)">Schools & Education</span><br/>in Kochi, Kerala
+        </h1>
+        <p style="font-size:1rem;color:var(--text);max-width:640px;line-height:1.7;margin-bottom:35px;font-family:var(--serif);font-style:italic">
+          Free e-waste drives, certified IT disposal, student awareness programs and KSPCB-compliant documentation for schools, colleges and educational institutions across Kochi and Kerala.
+        </p>
+        <div style="display:flex;gap:15px;flex-wrap:wrap">
+          <a href={contact.whatsappMessage} target="_blank" rel="noopener" class="btn btn-wa btn-lg">💬 Organize a School Drive</a>
+          <a href="/e-waste-collection-kochi/" class="btn btn-outline btn-lg">Collection Services →</a>
+        </div>
+      </div>
+    </section>
+    <section class="section-alt">
+      <div class="wrap">
+        <h2 class="sec-title" style="margin-bottom:2rem">Services for <em>Educational Institutions</em></h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px">
+          {[
+            { icon: '🎒', t: 'School E-Waste Drives', d: 'Annual drives for students to bring home e-waste. Participation certificates, awareness sessions, prizes for highest contributors.' },
+            { icon: '💻', t: 'Computer Lab Disposal', d: 'NIST data wipe or physical destruction for retiring computer lab PCs and teacher laptops. Certificate of Destruction for every device.' },
+            { icon: '🏫', t: 'Campus Clearance', d: 'Full campus e-waste clearance during renovation, upgrades or institution closure. Free for 50+ devices.' },
+            { icon: '📚', t: 'Awareness Workshops', d: 'Free 45-minute e-waste awareness workshops for students — covering hazardous materials, e-waste laws and responsible disposal.' },
+          ].map(c => (
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px">
+              <div style="font-size:1.8rem;margin-bottom:10px">{c.icon}</div>
+              <h3 style="font-size:.93rem;margin-bottom:7px">{c.t}</h3>
+              <p style="font-size:.82rem;color:var(--muted);line-height:1.55">{c.d}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="wrap" style="max-width:860px">
+        <div class="faq-list">
+          {faqs.map(f => (
+            <div class="faq-item">
+              <button class="faq-q"><span class="faq-qt">{f.q}</span><span class="faq-ic">+</span></button>
+              <div class="faq-a"><p class="faq-at">{f.a}</p></div>
+            </div>
+          ))}
+        </div>
+        <div style="text-align:center;margin-top:40px">
+          <a href={contact.whatsappMessage} target="_blank" rel="noopener" class="btn btn-wa btn-lg">💬 Contact Our Education Team</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

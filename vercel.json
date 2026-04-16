@@ -1,0 +1,60 @@
+{
+  "redirects": [
+    { "source": "/electronics-recycling-kochi", "destination": "/recycling/", "permanent": true },
+    { "source": "/electronics-recycling-kochi/", "destination": "/recycling/", "permanent": true },
+    { "source": "/electronics-recycling-kochi.html", "destination": "/recycling/", "permanent": true },
+    { "source": "/privacy-policy.html", "destination": "/privacy-policy/", "permanent": true },
+    { "source": "/terms.html", "destination": "/terms/", "permanent": true },
+    { "source": "/itad-kochi.html", "destination": "/itad/", "permanent": true },
+    { "source": "/blog/:slug.html", "destination": "/blog/:slug/", "permanent": true },
+    { "source": "/services/:slug.html", "destination": "/services/:slug/", "permanent": true },
+    { "source": "/locations/:slug.html", "destination": "/locations/:slug/", "permanent": true },
+    { "source": "/locations/:location/:service.html", "destination": "/locations/:location/:service/", "permanent": true },
+    { "source": "/sell-old-phone-kochi.html", "destination": "/sell-electronics-kochi/", "permanent": true },
+    { "source": "/comparisons/cashify-vs-ewastekochi.html", "destination": "/cashify-vs-ewastekochi/", "permanent": true },
+    { "source": "/blog/ewaste-laws-kerala.html", "destination": "/blog/ewaste-laws-kerala-2026/", "permanent": true },
+    { "source": "/blog/is-formatting-enough-delete-data.html", "destination": "/blog/is-formatting-enough-delete-data/", "permanent": true },
+    { "source": "/blog/dpdp-act-impact-startups.html", "destination": "/blog/dpdp-act-impact-startups/", "permanent": true },
+    { "source": "/blog/laptop-resale-value-2026.html", "destination": "/blog/laptop-resale-value-2026/", "permanent": true },
+    { "source": "/blog/how-to-choose-itad-provider.html", "destination": "/blog/how-to-choose-itad-provider/", "permanent": true },
+    { "source": "/about.html", "destination": "/about/", "permanent": true },
+    { "source": "/faq.html", "destination": "/faq/", "permanent": true },
+    { "source": "/contact.html", "destination": "/contact/", "permanent": true },
+    { "source": "/locations/v2/e-waste-edappally.html", "destination": "/locations/edappally/", "permanent": true },
+    { "source": "/locations/v2/:slug.html", "destination": "/locations/:slug/", "permanent": true },
+    { "source": "/compliance/certificate-verification.html", "destination": "/services/certificate-of-destruction-kochi/", "permanent": true },
+    { "source": "/industries/schools-education-ewaste.html", "destination": "/faq/", "permanent": true },
+    { "source": "/industries/it-companies-infopark.html", "destination": "/locations/infopark-kochi/", "permanent": true },
+    { "source": "/industries/manufacturing-ewaste.html", "destination": "/ewaste/", "permanent": true },
+    { "source": "/industries/startups-itad-kochi.html", "destination": "/itad/", "permanent": true },
+    { "source": "/industries/banks-financial-data-destruction.html", "destination": "/services/data-destruction-kochi/", "permanent": true },
+    { "source": "/services/it-asset-inventory-audit.html", "destination": "/services/it-asset-inventory-audit/", "permanent": true },
+    { "source": "/locations/ewaste-682239", "destination": "/locations/kakkanad/", "permanent": true },
+    { "source": "/locations/ewaste-682239/", "destination": "/locations/kakkanad/", "permanent": true },
+    { "source": "/locations/ewaste-682024", "destination": "/locations/edappally/", "permanent": true },
+    { "source": "/locations/ewaste-682024/", "destination": "/locations/edappally/", "permanent": true },
+    { "source": "/locations/ewaste-682207", "destination": "/locations/maradu/", "permanent": true },
+    { "source": "/locations/ewaste-682207/", "destination": "/locations/maradu/", "permanent": true },
+    { "source": "/locations/ewaste-682075", "destination": "/locations/thrippunithura/", "permanent": true },
+    { "source": "/locations/ewaste-682075/", "destination": "/locations/thrippunithura/", "permanent": true },
+    { "source": "/locations/ewaste-682079", "destination": "/locations/kalamassery/", "permanent": true },
+    { "source": "/locations/ewaste-682079/", "destination": "/locations/kalamassery/", "permanent": true },
+    { "source": "/locations/ewaste-682001", "destination": "/locations/fort-kochi/", "permanent": true },
+    { "source": "/locations/ewaste-682001/", "destination": "/locations/fort-kochi/", "permanent": true },
+    { "source": "/locations/ewaste-682085", "destination": "/locations/aluva/", "permanent": true },
+    { "source": "/locations/ewaste-682002", "destination": "/locations/ernakulam-south/", "permanent": true },
+    { "source": "/locations/ewaste-682002/", "destination": "/locations/ernakulam-south/", "permanent": true },
+    { "source": "/buyback/laptops/:slug.html", "destination": "/sell-electronics-kochi/", "permanent": true },
+    { "source": "/buyback/laptops/:slug", "destination": "/sell-electronics-kochi/", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}

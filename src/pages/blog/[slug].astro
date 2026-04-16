@@ -1,0 +1,95 @@
+---
+// blog/[slug].astro — upgraded to serve GSC-targeted blog posts
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { blogs, getBlogBySlug } from '../../data/blogs.js';
+import { contact } from '../../data/contact.js';
+
+export async function getStaticPaths() {
+  return blogs.map(blog => ({
+    params: { slug: blog.slug },
+    props: { blog },
+  }));
+}
+
+const { blog } = Astro.props;
+
+const pageTitle = `${blog.title} | EWaste Kochi Blog`;
+const pageDesc = blog.excerpt.slice(0, 155).replace(/\.\.\.$/, '');
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.com/' },
+  { name: 'Blog', url: 'https://ewastekochi.com/blog/' },
+  { name: blog.title.slice(0, 50), url: `https://ewastekochi.com/blog/${blog.slug}/` },
+];
+
+const articleSchema = {
+  '@type': 'BlogPosting',
+  headline: blog.title,
+  description: blog.excerpt,
+  datePublished: blog.date,
+  author: { '@type': 'Organization', name: 'EWaste Kochi' },
+  publisher: { '@id': 'https://ewastekochi.com/#organization' },
+  keywords: blog.keywords?.join(', ') || '',
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  schema={articleSchema}
+  breadcrumbs={breadcrumbs}
+  pageType="article"
+  publishedTime={blog.date}
+  keywords={blog.keywords}
+>
+  <Navbar currentPath="/blog/" />
+  <main>
+
+    <article style="max-width:800px;margin:0 auto;padding:60px 24px">
+      <nav aria-label="Breadcrumb" style="font-size:.8rem;color:var(--muted);margin-bottom:24px">
+        <a href="/" style="color:var(--green)">Home</a> › <a href="/blog/" style="color:var(--green)">Blog</a> › {blog.title.slice(0,40)}...
+      </nav>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px">
+        <span class="badge badge-g">{blog.category.toUpperCase()}</span>
+        <span style="font-size:.78rem;color:var(--muted);font-family:var(--mono)">{blog.date}</span>
+        <span style="font-size:.78rem;color:var(--muted)">· {blog.author}</span>
+      </div>
+
+      <h1 style="font-size:clamp(1.8rem,4vw,3rem);line-height:1.1;margin-bottom:20px;font-weight:800;letter-spacing:-.03em;color:var(--white)">{blog.title}</h1>
+      <p style="font-size:1.05rem;color:var(--text);line-height:1.7;margin-bottom:35px;font-family:var(--serif);font-style:italic;border-left:3px solid var(--green);padding-left:16px">{blog.excerpt}</p>
+
+      <div style="font-size:.95rem;color:var(--text);line-height:1.85;" set:html={blog.content} />
+
+      <!-- CTA within article -->
+      <div style="background:rgba(0,232,150,.05);border:1px solid rgba(0,232,150,.18);border-radius:14px;padding:28px;margin-top:50px;text-align:center">
+        <h3 style="font-size:1.2rem;margin-bottom:10px">Need Certified E-Waste or ITAD Services in Kochi?</h3>
+        <p style="color:var(--muted);font-size:.9rem;margin-bottom:20px">EWaste Kochi — KSPCB authorized · NIST 800-88 · Free pickup for 10+ devices</p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+          <a href={contact.whatsappMessage} target="_blank" rel="noopener" class="btn btn-wa">💬 WhatsApp Now</a>
+          <a href="/contact/" class="btn btn-outline">Book Pickup →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Related posts -->
+    <section style="padding:50px 0;background:var(--surface);border-top:1px solid var(--border)">
+      <div class="wrap">
+        <h2 class="sec-title" style="margin-bottom:1.5rem">More From Our <em>Blog</em></h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px">
+          {blogs.filter(b => b.slug !== blog.slug).slice(0,3).map(b => (
+            <a href={`/blog/${b.slug}/`} style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;text-decoration:none;transition:border-color .2s;display:block">
+              <span class="badge badge-g" style="margin-bottom:10px">{b.category}</span>
+              <h3 style="font-size:.92rem;color:var(--white);line-height:1.4;margin-bottom:8px">{b.title}</h3>
+              <p style="font-size:.78rem;color:var(--muted);line-height:1.5">{b.excerpt.slice(0,100)}...</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>

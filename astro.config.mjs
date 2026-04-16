@@ -1,0 +1,66 @@
+import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
+import tailwind from '@astrojs/tailwind';
+import vercel from '@astrojs/vercel';
+
+// https://astro.build/config
+export default defineConfig({
+  site: 'https://ewastekochi.com',
+  output: 'static',
+  trailingSlash: 'always',
+  adapter: vercel({
+    webAnalytics: { enabled: true }
+  }),
+  integrations: [
+    sitemap({
+      changefreq: 'weekly',
+      priority: 0.7,
+      lastmod: new Date(),
+      customPages: [
+        // Pillar pages get highest priority
+        'https://ewastekochi.com/services/e-waste-recycling-kochi',
+        'https://ewastekochi.com/services/itad-kochi',
+        'https://ewastekochi.com/services/data-destruction-kochi',
+        'https://ewastekochi.com/services/hard-drive-shredding-kochi',
+        'https://ewastekochi.com/services/laptop-buyback-kochi',
+        'https://ewastekochi.com/services/battery-recycling-kochi',
+        'https://ewastekochi.com/services/server-recycling-kochi',
+        'https://ewastekochi.com/services/mobile-recycling-kochi',
+        'https://ewastekochi.com/sell-electronics-kochi/',
+        'https://ewastekochi.com/cashify-vs-ewastekochi/',
+        'https://ewastekochi.com/marketplace/',
+        'https://ewastekochi.com/services/hard-drive-destruction-kochi/',
+        'https://ewastekochi.com/services/it-asset-inventory-audit/',
+      ],
+    }),
+    tailwind({
+      applyBaseStyles: false,
+    }),
+  ],
+  build: {
+    format: 'directory',
+  },
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+    },
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ewastekochi.com',
+      },
+    ],
+  },
+  vite: {
+    build: {
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'vendor': [],
+          },
+        },
+      },
+    },
+  },
+});

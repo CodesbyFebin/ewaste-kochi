@@ -1,0 +1,430 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import {
+  blogLibraryConfig,
+  blogLibraryPosts,
+  getBlogLibraryCategory,
+  getBlogLibraryPostsByCategory,
+} from '../../../data/programmaticBlogEngine.js';
+
+export async function getStaticPaths() {
+  return blogLibraryPosts.map((post) => ({
+    params: { category: post.categorySlug, slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const category = getBlogLibraryCategory(post.categorySlug);
+const relatedPosts = getBlogLibraryPostsByCategory(post.categorySlug)
+  .filter((entry) => entry.slug !== post.slug)
+  .slice(0, 4);
+
+const pageSchema = {
+  '@type': 'BlogPosting',
+  headline: post.title,
+  description: post.metaDescription,
+  articleSection: category.name,
+  keywords: post.keywords.join(', '),
+  inLanguage: 'en-IN',
+  author: { '@type': 'Organization', name: 'EWaste Kochi' },
+  publisher: { '@id': 'https://ewastekochi.com/#organization' },
+};
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.com/' },
+  { name: 'SEO Library', url: 'https://ewastekochi.com/blogs/' },
+  { name: category.name, url: `${blogLibraryConfig.host}/blogs/${category.slug}/` },
+  { name: post.title, url: post.canonical },
+];
+---
+
+<BaseLayout
+  title={post.metaTitle}
+  description={post.metaDescription}
+  schema={pageSchema}
+  breadcrumbs={breadcrumbs}
+  canonical={post.canonical}
+  faqs={post.faqs}
+  pageType="article"
+  keywords={post.keywords}
+  chatbotContext={post.pageContext}
+>
+  <Navbar currentPath="/blogs/" />
+
+  <main>
+    <section class="section article-hero">
+      <div class="wrap article-hero-wrap">
+        <div class="article-meta-row">
+          <span class="badge badge-g">{post.categoryName}</span>
+          <span class="article-meta-chip">{post.location.titleLabel}</span>
+          <span class="article-meta-chip">{post.primaryService.shortName}</span>
+        </div>
+        <h1 class="sec-title article-title">{post.title}</h1>
+        <p class="article-sub">{post.summary}</p>
+
+        <div class="article-top-grid">
+          <div class="article-top-card">
+            <span>Primary keyword</span>
+            <strong>{post.keyword}</strong>
+          </div>
+          <div class="article-top-card">
+            <span>Best fit service</span>
+            <strong>{post.primaryService.shortName}</strong>
+          </div>
+          <div class="article-top-card">
+            <span>Secondary support</span>
+            <strong>{post.secondaryService.shortName}</strong>
+          </div>
+          <div class="article-top-card">
+            <span>Cluster</span>
+            <strong>{post.clusterLabel}</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section article-body-section">
+      <div class="wrap article-layout">
+        <article class="article-main">
+          {post.sections.map((section) => (
+            <section class="article-section">
+              <h2>{section.heading}</h2>
+              {section.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+              {section.points?.length ? (
+                <ul class="article-points">
+                  {section.points.map((point) => (
+                    <li>{point}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </section>
+          ))}
+
+          <section class="article-section article-cta-box">
+            <div>
+              <span class="badge badge-g">Conversion path</span>
+              <h2>{post.cta.title}</h2>
+              <p>{post.cta.description}</p>
+            </div>
+            <div class="article-cta-actions">
+              <a class="btn btn-primary" href={post.cta.primaryHref}>{post.cta.primaryLabel} -&gt;</a>
+              <a class="btn btn-outline" href={post.cta.secondaryHref}>{post.cta.secondaryLabel}</a>
+            </div>
+          </section>
+
+          <section class="article-section">
+            <h2>Frequently asked questions</h2>
+            <div class="faq-stack">
+              {post.faqs.map((faq) => (
+                <article class="faq-card">
+                  <h3>{faq.q}</h3>
+                  <p>{faq.a}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        </article>
+
+        <aside class="article-sidebar">
+          <div class="sidebar-card">
+            <h3>Service links</h3>
+            <div class="sidebar-link-stack">
+              {post.serviceLinks.map((link) => (
+                <a href={link.href}>{link.label}</a>
+              ))}
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h3>Location links</h3>
+            <div class="sidebar-link-stack">
+              {post.locationLinks.map((link) => (
+                <a href={link.href}>{link.label}</a>
+              ))}
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h3>Internal links</h3>
+            <div class="sidebar-link-stack">
+              {post.contextualLinks.map((link) => (
+                <a href={link.href}>{link.label}</a>
+              ))}
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h3>Legacy support content</h3>
+            <div class="sidebar-link-stack">
+              {post.legacyLinks.map((link) => (
+                <a href={link.href}>{link.label}</a>
+              ))}
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section-alt">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="sec-eyebrow">Related Pages</p>
+          <h2 class="sec-title">More pages from the {category.name} cluster.</h2>
+        </div>
+
+        <div class="related-grid">
+          {relatedPosts.map((relatedPost) => (
+            <a class="related-card" href={`/blogs/${relatedPost.categorySlug}/${relatedPost.slug}/`}>
+              <span class="badge badge-b">{relatedPost.location.titleLabel}</span>
+              <h3>{relatedPost.title}</h3>
+              <p>{relatedPost.summary}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .article-hero {
+    padding-top: 110px;
+    padding-bottom: 60px;
+    background:
+      radial-gradient(circle at top right, rgba(0, 232, 150, 0.1), transparent 25%),
+      radial-gradient(circle at bottom left, rgba(170, 255, 87, 0.08), transparent 25%);
+  }
+
+  .article-hero-wrap {
+    max-width: 980px;
+  }
+
+  .article-meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .article-meta-chip,
+  .article-top-card,
+  .article-section,
+  .sidebar-card,
+  .faq-card,
+  .related-card {
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+
+  .article-meta-chip {
+    padding: 7px 10px;
+    color: var(--text);
+    font-size: 0.78rem;
+  }
+
+  .article-title {
+    max-width: 920px;
+    margin-bottom: 16px;
+  }
+
+  .article-sub {
+    max-width: 820px;
+    color: var(--text);
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .article-top-grid {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+  }
+
+  .article-top-card {
+    padding: 18px;
+  }
+
+  .article-top-card span {
+    display: block;
+    color: var(--muted);
+    font-size: 0.76rem;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .article-top-card strong {
+    color: var(--white);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .article-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.6fr);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .article-main {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .article-section {
+    padding: 24px;
+  }
+
+  .article-section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 14px;
+  }
+
+  .article-section p {
+    color: var(--text);
+    font-size: 0.94rem;
+    line-height: 1.9;
+    margin-bottom: 14px;
+  }
+
+  .article-points {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .article-points li {
+    position: relative;
+    padding-left: 20px;
+    color: var(--text);
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  .article-points li::before {
+    content: '-';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-size: 1rem;
+  }
+
+  .article-cta-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .article-cta-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .article-sidebar {
+    position: sticky;
+    top: 86px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .sidebar-card {
+    padding: 20px;
+  }
+
+  .sidebar-card h3 {
+    font-size: 0.98rem;
+    margin-bottom: 12px;
+  }
+
+  .sidebar-link-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sidebar-link-stack a,
+  .related-card {
+    text-decoration: none;
+  }
+
+  .sidebar-link-stack a {
+    color: var(--green);
+    font-size: 0.84rem;
+    line-height: 1.5;
+    font-weight: 700;
+  }
+
+  .faq-stack,
+  .related-grid {
+    display: grid;
+    gap: 14px;
+  }
+
+  .faq-card {
+    padding: 18px;
+  }
+
+  .faq-card h3,
+  .related-card h3 {
+    font-size: 0.98rem;
+    margin-bottom: 10px;
+  }
+
+  .faq-card p,
+  .related-card p {
+    color: var(--text);
+    font-size: 0.88rem;
+    line-height: 1.8;
+  }
+
+  .related-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .related-card {
+    padding: 20px;
+    transition: transform 0.18s ease, border-color 0.18s ease;
+  }
+
+  .related-card:hover,
+  .sidebar-card:hover,
+  .article-section:hover {
+    transform: translateY(-3px);
+    border-color: rgba(0, 232, 150, 0.24);
+  }
+
+  .section-head {
+    margin-bottom: 28px;
+  }
+
+  @media (max-width: 960px) {
+    .article-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .article-sidebar {
+      position: static;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .article-hero {
+      padding-top: 90px;
+    }
+  }
+</style>

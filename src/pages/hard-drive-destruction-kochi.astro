@@ -1,0 +1,196 @@
+---
+// hard-drive-destruction-kochi.astro
+// GSC targets: "hard drive destruction service" (pos 22.6, 12 imp)
+//              "hard drive shredding company" (pos 51, 1 imp)
+//              "hard drive disposal" (pos 74, 1 imp)
+//              "secure asset & hard drive recycling" (pos 40.7, 3 imp)
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { contact } from '../data/contact.js';
+
+const pageTitle = "Hard Drive Destruction Service Kochi | Industrial Shredding <5mm | NIST 800-88 | EWaste Kochi";
+const pageDesc = "Industrial hard drive destruction service in Kochi. Physical shredding to <5mm particles — NIST 800-88 Destroy level. HDD, SSD, NVMe, tape. On-site mobile shredding available. Certificate of Destruction for every drive.";
+
+const mediaTypes = [
+  { icon: '💾', name: 'Hard Disk Drives (HDD)', specs: '2.5" & 3.5" SATA, SAS, NL-SAS · All brands · Any capacity' },
+  { icon: '⚡', name: 'Solid State Drives (SSD)', specs: '2.5" SATA SSD, M.2 NVMe, mSATA, enterprise U.2/PCIe' },
+  { icon: '📼', name: 'Backup Tapes', specs: 'LTO-1 through LTO-9 · DLT/SDLT · DAT/DDS · IBM 3592' },
+  { icon: '📱', name: 'Mobile Device Boards', specs: 'Smartphone & tablet PCBs · All NAND flash media' },
+  { icon: '💿', name: 'Optical & Flash Media', specs: 'CD/DVD/Blu-ray · USB drives · SD cards · MicroSD' },
+  { icon: '🖥️', name: 'Complete Devices', specs: 'Thin laptops · Phones · Tablets — whole-device shredding' },
+];
+
+const pricing = [
+  { tier: 'Standard', price: '₹149', per: '/drive', desc: 'In-facility shredding', features: ['Physical shredding <5mm','NIST 800-88 Destroy','Certificate of Destruction','HDD & SSD'] },
+  { tier: 'Witnessed', price: '₹249', per: '/drive', desc: 'You watch live', features: ['In-facility witnessed','Video recording provided','Enhanced CoD','All media types'], featured: true },
+  { tier: 'On-Site', price: '₹349', per: '/drive', desc: 'Mobile unit comes to you', features: ['We come to your premises','Data never leaves building','DPDP compliance report','Min. 50 drives'] },
+];
+
+const faqs = [
+  { q: 'What is a hard drive destruction service?', a: 'A hard drive destruction service uses industrial shredding equipment to physically reduce hard drives, SSDs and other storage media to particles smaller than 5mm — the NIST 800-88 "Destroy" specification. This makes data recovery physically impossible by any known method, including advanced forensic laboratory reconstruction.' },
+  { q: 'Can data be recovered after physical hard drive shredding?', a: 'No. Physical shredding to <5mm particles is absolute. Even the world\'s most advanced data recovery facilities cannot reconstruct data from shredded drives. The magnetic coating on HDD platters and the NAND chips on SSDs are physically broken beyond any recovery threshold. This is why physical destruction is recommended for any drive that held sensitive financial, medical or personal data.' },
+  { q: 'Do you offer on-site hard drive shredding in Kochi?', a: 'Yes. Our mobile shredding unit visits your Kochi premises for on-site destruction — data never leaves your building. Your team can watch every drive go through the shredder. Available Monday–Saturday with 48-hour advance booking. Minimum 50 drives. Ideal for banks, hospitals, government offices and defence contractors in Infopark, Kakkanad and across Ernakulam.' },
+  { q: 'How is an SSD shredded differently from an HDD?', a: 'SSDs contain NAND flash chips where data persists in ways that standard software overwrite cannot fully address due to wear-leveling and over-provisioning. Physical shredding to <5mm particles ensures the chips themselves are broken, preventing any form of chip-level data reconstruction. For enterprise SSDs with sensitive data, we offer <2mm destruction on request.' },
+  { q: 'What does the Certificate of Destruction include?', a: 'Our Certificate of Destruction for hard drive shredding includes: unique certificate number, your company details, a list of every destroyed drive with make/model/serial number, destruction method (NIST 800-88 Destroy), particle size achieved, date and time, our technician ID, and KSPCB authorization number. Digital PDF and physical original within 24 hours.' },
+  { q: 'Is hard drive shredding required for DPDP Act 2023 compliance?', a: 'While the DPDP Act 2023 doesn\'t mandate a specific destruction method, it requires that personal data be permanently destroyed when no longer needed. Physical shredding is the highest-assurance method and is the most defensible evidence that destruction has occurred. Our Certificate of Destruction with NIST 800-88 Destroy notation is accepted by all major auditors as satisfying the DPDP Act\'s destruction obligation.' },
+];
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.com/' },
+  { name: 'Hard Drive Destruction Kochi', url: 'https://ewastekochi.com/hard-drive-destruction-kochi/' },
+];
+
+const serviceSchema = {
+  '@type': 'Service',
+  name: 'Hard Drive Destruction Service Kochi',
+  serviceType: 'Hard Drive Shredding',
+  provider: { '@id': 'https://ewastekochi.com/#organization' },
+  areaServed: { '@type': 'City', name: 'Kochi' },
+  offers: { '@type': 'Offer', price: '149', priceCurrency: 'INR', description: 'Physical shredding <5mm, NIST 800-88 Destroy, Certificate of Destruction' },
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} schema={serviceSchema} faqs={faqs} breadcrumbs={breadcrumbs}>
+  <Navbar currentPath="/hard-drive-destruction-kochi/" />
+  <main>
+
+    <!-- HERO -->
+    <section style="padding:80px 0 60px;background:radial-gradient(circle at 70% 30%,rgba(255,71,87,.06),transparent),var(--bg)">
+      <div class="wrap">
+        <nav aria-label="Breadcrumb" style="font-size:.8rem;color:var(--muted);margin-bottom:20px">
+          <a href="/" style="color:var(--green)">Home</a> › Hard Drive Destruction Kochi
+        </nav>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px">
+          <span class="badge badge-r">⚙️ Industrial Shredder</span>
+          <span class="badge badge-g">NIST 800-88 Destroy</span>
+          <span class="badge badge-b">On-Site Available</span>
+          <span class="badge badge-a">Certificate Every Drive</span>
+        </div>
+        <h1 style="font-size:clamp(2rem,5vw,3.8rem);line-height:1.05;margin-bottom:18px;font-weight:800;letter-spacing:-.03em">
+          Industrial <span style="color:var(--green)">Hard Drive</span><br/>Destruction Service Kochi<br/>
+          <span style="font-size:60%;color:var(--muted)">NIST 800-88 Certified · &lt;5mm Particles</span>
+        </h1>
+        <p style="font-size:1rem;color:var(--text);max-width:620px;line-height:1.7;margin-bottom:35px;font-family:var(--serif);font-style:italic">
+          Physical shredding to &lt;5mm particles — the only method that provides absolute data irrecoverability. HDD, SSD, NVMe, tape and all storage media. Certificate of Destruction with every drive's serial number. On-site mobile service available across Kochi.
+        </p>
+        <div style="display:flex;gap:15px;flex-wrap:wrap">
+          <a href={contact.whatsappMessage} target="_blank" rel="noopener" class="btn btn-wa btn-lg">💬 Book Shredding Service</a>
+          <a href={contact.phoneLink} class="btn btn-primary btn-lg">📞 {contact.phoneDisplay}</a>
+          <a href="/services/data-destruction-kochi/" class="btn btn-outline">Software Wiping →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEDIA TYPES -->
+    <section class="section-alt">
+      <div class="wrap">
+        <div class="sec-eyebrow">All Storage Media Accepted</div>
+        <h2 class="sec-title">What We <em>Shred</em></h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:30px">
+          {mediaTypes.map(m => (
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px">
+              <div style="font-size:2rem;margin-bottom:12px">{m.icon}</div>
+              <h3 style="font-size:.95rem;margin-bottom:6px">{m.name}</h3>
+              <p style="font-size:.8rem;color:var(--muted);line-height:1.5">{m.specs}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- NIST LEVELS EXPLAINER -->
+    <section class="section">
+      <div class="wrap">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start">
+          <div>
+            <div class="sec-eyebrow">Why Physical Destruction?</div>
+            <h2 class="sec-title">The Only <em>Absolute</em> Method</h2>
+            <p style="color:var(--text);line-height:1.75;margin-bottom:24px;font-family:var(--serif)">Software overwrite methods, even NIST 800-88 Purge level, leave theoretical questions about data in SSD over-provisioned space and reallocated HDD sectors. Physical shredding eliminates every question. You cannot recover data from 5mm metal fragments — full stop.</p>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              {[
+                { method: 'Factory Reset / Format', safe: false, note: 'Data easily recoverable' },
+                { method: 'NIST Clear (Software Overwrite)', safe: true, note: 'Good for HDDs, limited for SSDs' },
+                { method: 'NIST Purge (Cryptographic Erase)', safe: true, note: 'Good for SSDs, requires functional drive' },
+                { method: 'NIST Destroy (Physical Shredding)', safe: true, note: 'Absolute — all media types' },
+              ].map(r => (
+                <div style={`display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;border:1px solid ${r.safe?'rgba(0,232,150,.15)':'rgba(255,71,87,.15)'};background:${r.safe?'rgba(0,232,150,.04)':'rgba(255,71,87,.04)'}`}>
+                  <span style={`font-size:1rem;${r.safe?'color:var(--green)':'color:var(--red)'}`}>{r.safe ? '✓' : '✗'}</span>
+                  <div>
+                    <div style="font-size:.88rem;font-weight:600;color:var(--white)">{r.method}</div>
+                    <div style="font-size:.76rem;color:var(--muted)">{r.note}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div class="sec-eyebrow">In-Facility vs On-Site</div>
+            <h2 class="sec-title">Two <em>Service Modes</em></h2>
+            <div style="display:flex;flex-direction:column;gap:20px">
+              <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px">
+                <h3 style="font-size:1rem;margin-bottom:10px">🏭 In-Facility Shredding</h3>
+                <p style="font-size:.85rem;color:var(--text);line-height:1.6;margin-bottom:12px">Drives collected via sealed GPS-tracked transport, shredded at our Thrippunithura facility. Most cost-effective. Witnessed option available — your rep can observe the shredding in person.</p>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;font-size:.82rem;color:var(--muted)">
+                  <li>✓ Minimum 1 drive</li><li>✓ Certificate within 24 hours</li><li>✓ Witnessed option available</li>
+                </ul>
+              </div>
+              <div style="background:rgba(0,232,150,.04);border:1px solid rgba(0,232,150,.18);border-radius:14px;padding:24px">
+                <h3 style="font-size:1rem;margin-bottom:10px;color:var(--green)">🚐 On-Site Mobile Shredding</h3>
+                <p style="font-size:.85rem;color:var(--text);line-height:1.6;margin-bottom:12px">Our mobile shredder comes to your Kochi premises. Data never leaves your building. Staff watch every drive destroyed live. Ideal for banks, hospitals, government.</p>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;font-size:.82rem;color:var(--muted)">
+                  <li>✓ Minimum 50 drives</li><li>✓ Up to 200 drives/hour</li><li>✓ 48-hour advance booking</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section-alt">
+      <div class="wrap">
+        <div class="text-center" style="margin-bottom:40px">
+          <h2 class="sec-title">Hard Drive Shredding <em>Prices</em> in Kochi</h2>
+          <p class="sec-sub">All prices include Certificate of Destruction. Bulk discounts for 50+ drives.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:800px;margin:0 auto">
+          {pricing.map(p => (
+            <div style={`background:var(--card);border:${p.featured?'2px solid var(--green)':'1px solid var(--border)'};border-radius:16px;padding:28px;text-align:center;${p.featured?'background:rgba(0,232,150,.04)':''}`}>
+              {p.featured && <div class="badge badge-g" style="margin-bottom:12px">Most Popular</div>}
+              <div style="font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">{p.tier}</div>
+              <div style="font-size:2.2rem;font-weight:800;color:var(--white);letter-spacing:-.04em">{p.price}<span style="font-size:.9rem;color:var(--muted)">{p.per}</span></div>
+              <div style="font-size:.8rem;color:var(--muted);margin-bottom:20px">{p.desc}</div>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:7px;text-align:left;font-size:.82rem">
+                {p.features.map(f => <li style="color:var(--text);display:flex;align-items:center;gap:7px"><span style="color:var(--green)">✓</span>{f}</li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <p style="text-align:center;font-size:.75rem;color:var(--muted);margin-top:16px">*Bulk pricing for 50+ drives. Pickup included for 20+ drives from Ernakulam. Call for enterprise quotes.</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <div class="wrap" style="max-width:860px">
+        <h2 class="sec-title" style="text-align:center;margin-bottom:2rem">Common <em>Questions</em></h2>
+        <div class="faq-list">
+          {faqs.map(f => (
+            <div class="faq-item">
+              <button class="faq-q"><span class="faq-qt">{f.q}</span><span class="faq-ic">+</span></button>
+              <div class="faq-a"><p class="faq-at">{f.a}</p></div>
+            </div>
+          ))}
+        </div>
+        <div style="text-align:center;margin-top:40px;display:flex;gap:15px;justify-content:center;flex-wrap:wrap">
+          <a href={contact.whatsappMessage} target="_blank" rel="noopener" class="btn btn-wa btn-lg">💬 Book Shredding Service</a>
+          <a href="/services/data-destruction-kochi/" class="btn btn-outline btn-lg">Data Destruction →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>

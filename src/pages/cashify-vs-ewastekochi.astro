@@ -1,0 +1,132 @@
+---
+// cashify-vs-ewastekochi.astro  
+// GSC target: "cashify kochi" (pos 11.0, 7 impressions)
+// Old URL: /comparisons/cashify-vs-ewastekochi.html (18 impressions, pos 10.4)
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { contact } from '../data/contact.js';
+
+const pageTitle = "EWaste Kochi vs Cashify Kochi 2026 — Who Pays More for Old Laptops & Phones?";
+const pageDesc = "Honest comparison: EWaste Kochi vs Cashify for selling old laptops and phones in Kochi 2026. Who pays more? Who offers NIST data destruction? Who is KSPCB authorized in Kerala? Real price examples.";
+
+const comparison = [
+  { feature: 'NIST 800-88 Data Destruction', ewk: '✓ Certified, included free', cashify: '✗ Basic format only', ewkBetter: true },
+  { feature: 'Certificate of Destruction (CoD)', ewk: '✓ Serial-numbered CoD every job', cashify: '✗ Not provided', ewkBetter: true },
+  { feature: 'DPDP Act 2023 Compliance Docs', ewk: '✓ Full compliance documentation', cashify: '✗ Not offered', ewkBetter: true },
+  { feature: 'KSPCB Authorization (Kerala)', ewk: '✓ Auth. No. KL/EW/628', cashify: '✗ Not authorized in Kerala', ewkBetter: true },
+  { feature: 'MacBook Pro M2 Buyback', ewk: '₹42,000–₹52,000', cashify: '₹30,000–₹38,000 (approx)', ewkBetter: true },
+  { feature: 'iPhone 15 Pro Max Buyback', ewk: '₹68,000–₹75,000', cashify: '₹58,000–₹65,000 (approx)', ewkBetter: true },
+  { feature: 'Dell Latitude i7 Buyback', ewk: '₹12,000–₹15,000', cashify: '₹6,000–₹9,000 (approx)', ewkBetter: true },
+  { feature: 'Non-Working Device Buyback', ewk: '✓ All brands accepted', cashify: 'Limited, lower prices', ewkBetter: true },
+  { feature: 'Free Pickup Kochi', ewk: '✓ Free for 10+ devices', cashify: 'Free for select orders', ewkBetter: false },
+  { feature: 'Payment Speed', ewk: 'Same day, instant transfer', cashify: '3–5 business days', ewkBetter: true },
+  { feature: 'Corporate Bulk (50+ devices)', ewk: '✓ Dedicated team, premium price', cashify: 'Standard portal only', ewkBetter: true },
+  { feature: 'E-Waste Rules 2022 Compliance', ewk: '✓ KSPCB manifest issued', cashify: '✗ Not KSPCB compliant', ewkBetter: true },
+];
+
+const faqs = [
+  { q: 'Does EWaste Kochi or Cashify pay more for MacBook in Kochi?', a: 'EWaste Kochi consistently pays more for MacBooks — typically ₹8,000–₹15,000 more per unit than Cashify for current-generation models. For MacBook Pro M2 in good condition, EWaste Kochi pays ₹42,000–₹52,000 vs Cashify\'s approximately ₹30,000–₹38,000.' },
+  { q: 'Is Cashify authorized in Kerala under E-Waste Rules 2022?', a: 'Cashify does not hold KSPCB authorization to process e-waste in Kerala. EWaste Kochi holds KSPCB authorization No. KL/EW/628, making us the only compliant option for businesses that need KSPCB documentation for their corporate compliance records.' },
+  { q: 'Does Cashify provide a Certificate of Destruction?', a: 'No. Cashify does not provide a Certificate of Destruction. EWaste Kochi provides a serial-numbered Certificate of Destruction for every device, satisfying DPDP Act 2023, RBI and SEBI data disposal requirements. For corporate clients, this certificate is essential.' },
+  { q: 'When should I use Cashify instead of EWaste Kochi?', a: 'Cashify may be preferable if: you\'re outside Kochi and Cashify has better local coverage, you have a single consumer device and don\'t need compliance documentation, or Cashify has a special promotion for your specific model. For most Kochi users — especially businesses — EWaste Kochi provides better value and legal protection.' },
+];
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://ewastekochi.com/' },
+  { name: 'EWaste Kochi vs Cashify', url: 'https://ewastekochi.com/cashify-vs-ewastekochi/' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} faqs={faqs} breadcrumbs={breadcrumbs}>
+  <Navbar currentPath="/cashify-vs-ewastekochi/" />
+  <main>
+
+    <section style="padding:80px 0 60px;background:var(--bg)">
+      <div class="wrap">
+        <nav aria-label="Breadcrumb" style="font-size:.8rem;color:var(--muted);margin-bottom:20px">
+          <a href="/" style="color:var(--green)">Home</a> › EWaste Kochi vs Cashify
+        </nav>
+        <div class="badge badge-g" style="margin-bottom:20px">📊 Updated April 2026 · Kochi Prices</div>
+        <h1 style="font-size:clamp(2rem,5vw,3.8rem);line-height:1.05;margin-bottom:20px;font-weight:800">
+          EWaste Kochi vs <span style="color:var(--amber)">Cashify</span> Kochi<br/>
+          <span style="color:var(--green)">Who Pays More</span> for Old Laptops?
+        </h1>
+        <p style="font-size:1.05rem;color:var(--text);max-width:640px;line-height:1.65;margin-bottom:35px;font-family:var(--serif);font-style:italic">
+          Honest 2026 comparison. Real Kochi prices. We show you exactly who pays more for MacBooks, Dell laptops and iPhones — and who offers the compliance documentation Kerala businesses legally need.
+        </p>
+        <div style="display:flex;gap:15px;flex-wrap:wrap">
+          <a href={contact.whatsappMessage} target="_blank" rel="noopener" class="btn btn-wa btn-lg">💬 Get EWaste Kochi Quote</a>
+          <a href="/sell-electronics-kochi/" class="btn btn-outline btn-lg">See All Buyback Prices →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- VERDICT -->
+    <section class="section-alt">
+      <div class="wrap">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-bottom:50px">
+          <div style="background:rgba(0,232,150,.06);border:2px solid var(--green);border-radius:20px;padding:35px;text-align:center">
+            <div style="font-size:2.5rem;margin-bottom:10px">♻️</div>
+            <div style="font-size:1.4rem;font-weight:800;color:var(--white);margin-bottom:8px">EWaste Kochi</div>
+            <div class="badge badge-g" style="margin-bottom:15px">Recommended for Kochi</div>
+            <ul style="list-style:none;text-align:left;display:flex;flex-direction:column;gap:8px;font-size:.85rem;color:var(--text)">
+              {['30–80% higher laptop prices','KSPCB authorized in Kerala','NIST data destruction included','Certificate of Destruction','DPDP Act 2023 compliant','Instant same-day payment'].map(i=><li>✓ {i}</li>)}
+            </ul>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:35px;text-align:center">
+            <div style="font-size:2.5rem;margin-bottom:10px">📱</div>
+            <div style="font-size:1.4rem;font-weight:800;color:var(--muted);margin-bottom:8px">Cashify</div>
+            <div class="badge badge-a" style="margin-bottom:15px">Consumer phones, national reach</div>
+            <ul style="list-style:none;text-align:left;display:flex;flex-direction:column;gap:8px;font-size:.85rem;color:var(--muted)">
+              {['Lower prices for corporate laptops','Not KSPCB authorized (Kerala)','Basic format only (no NIST)','No Certificate of Destruction','No DPDP Act documentation','3–5 day payment'].map(i=><li>– {i}</li>)}
+            </ul>
+          </div>
+        </div>
+
+        <!-- COMPARISON TABLE -->
+        <h2 class="sec-title" style="margin-bottom:1.5rem">Full <em>Feature</em> Comparison</h2>
+        <div style="overflow-x:auto;border:1px solid var(--border);border-radius:16px">
+          <table style="width:100%;border-collapse:collapse;font-size:.87rem">
+            <thead>
+              <tr style="background:rgba(0,232,150,.05)">
+                <th style="padding:14px 20px;text-align:left;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Feature</th>
+                <th style="padding:14px 20px;text-align:center;color:var(--green);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">EWaste Kochi</th>
+                <th style="padding:14px 20px;text-align:center;color:var(--amber);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Cashify</th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparison.map((row, i) => (
+                <tr style={`border-top:1px solid var(--border);${i%2===0?'background:rgba(255,255,255,.01)':''}`}>
+                  <td style="padding:11px 20px;color:var(--white);font-weight:500">{row.feature}</td>
+                  <td style={`padding:11px 20px;text-align:center;${row.ewkBetter?'color:var(--green);font-weight:700':'color:var(--text)'}`}>{row.ewk}</td>
+                  <td style={`padding:11px 20px;text-align:center;${row.ewkBetter?'color:var(--muted)':'color:var(--text)'}`}>{row.cashify}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <div class="wrap" style="max-width:860px">
+        <h2 class="sec-title" style="text-align:center;margin-bottom:2rem">Common <em>Questions</em></h2>
+        <div class="faq-list">
+          {faqs.map(f => (
+            <div class="faq-item">
+              <button class="faq-q"><span class="faq-qt">{f.q}</span><span class="faq-ic">+</span></button>
+              <div class="faq-a"><p class="faq-at">{f.a}</p></div>
+            </div>
+          ))}
+        </div>
+        <div style="text-align:center;margin-top:40px">
+          <a href={contact.whatsappMessage} target="_blank" rel="noopener" class="btn btn-wa btn-lg">💬 Get EWaste Kochi Quote Now</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
