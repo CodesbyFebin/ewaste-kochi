@@ -1,16 +1,12 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
-import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://ewastekochi.com',
   output: 'static',
   trailingSlash: 'always',
-  adapter: vercel({
-    webAnalytics: { enabled: true }
-  }),
   integrations: [
     sitemap({
       changefreq: 'weekly',
